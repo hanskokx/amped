@@ -298,54 +298,11 @@ jobs:
             --title "Amped $version" \
             --generate-notes
 
-  # Publishes release.json to https://www.amped-player.com/release.json by
-  # committing it to the website repository, whose pipeline deploys it.
+  # Deploys the website again, so release.json (made from the latest GitHub
+  # release) lists this one and the download button offers it.
   website:
-    needs: [version, release]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          path: dist
-          merge-multiple: true
-      - name: Write release.json
-        env:
-          VERSION: ${{ needs.version.outputs.version }}
-          BUILD: ${{ needs.version.outputs.build }}
-          PRERELEASE: ${{ inputs.prerelease }}
-          BASE: https://github.com/${{ github.repository }}/releases/download/v${{ needs.version.outputs.version }}
-        run: |
-          cd dist
-          {
-            printf '{\n  "version": "%s",\n  "build": %s,\n  "prerelease": %s,\n' \
-              "$VERSION" "$BUILD" "$PRERELEASE"
-            printf '  "published": "%s",\n  "notes": "https://github.com/%s/releases/tag/v%s",\n  "assets": [\n' \
-              "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "${{ github.repository }}" "$VERSION"
-            first=1
-            for f in *; do
-              [ "$f" = SHA256SUMS ] && continue
-              [ $first = 1 ] || printf ',\n'
-              first=0
-              printf '    {"name": "%s", "url": "%s/%s", "size": %s, "sha256": "%s"}' \
-                "$f" "$BASE" "$f" "$(wc -c < "$f" | tr -d ' ')" "$(sha256sum "$f" | cut -d' ' -f1)"
-            done
-            printf '\n  ]\n}\n'
-          } > ../release.json
-          cat ../release.json
-      - name: Push to the website repository
-        env:
-          SSH_KEY: ${{ secrets.WEBSITE_DEPLOY_KEY }}
-        run: |
-          mkdir -p ~/.ssh
-          printf '%s\n' "$SSH_KEY" > ~/.ssh/website_ed25519
-          chmod 600 ~/.ssh/website_ed25519
-          ssh-keyscan -p 2222 -T 10 git.hadak.org >> ~/.ssh/known_hosts
-          export GIT_SSH_COMMAND="ssh -i $HOME/.ssh/website_ed25519 -o IdentitiesOnly=yes"
-          git clone --depth 1 ssh://git@git.hadak.org:2222/Amped/amped_website.git site
-          cp release.json site/web/release.json
-          cd site
-          git config user.name "Amped release"
-          git config user.email "release@amped-player.com"
-          git add web/release.json
-          git commit -m "Release ${{ needs.version.outputs.version }}"
-          git push origin HEAD:main
+    needs: [release]
+    permissions:
+      contents: read
+    uses: ./.github/workflows/website.yml
+    secrets: inherit
