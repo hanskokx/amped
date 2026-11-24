@@ -1,21 +1,40 @@
 name: Git access to git.hadak.org
 description: >-
-  Lets git (and so pub) clone the private packages hosted on git.hadak.org
-  over SSH, although pubspec.yaml names them by their https address.
+  Lets git (and so pub) clone the private packages hosted on git.hadak.org,
+  which pubspec.yaml names by their https address. Over https with a token
+  when there is one, else over SSH (port 2222 has to be reachable from the
+  runner).
 inputs:
+  token:
+    description: A Forgejo access token that can read the Amped organization.
+    required: false
+    default: ""
   ssh-key:
     description: A private key that can read the Amped organization.
-    required: true
+    required: false
+    default: ""
 runs:
   using: composite
   steps:
     - shell: bash
       env:
+        TOKEN: ${{ inputs.token }}
         SSH_KEY: ${{ inputs.ssh-key }}
       run: |
-        mkdir -p ~/.ssh
-        printf '%s\n' "$SSH_KEY" > ~/.ssh/hadak_ed25519
-        chmod 600 ~/.ssh/hadak_ed25519
-        ssh-keyscan -p 2222 git.hadak.org >> ~/.ssh/known_hosts
-        git config --global core.sshCommand "ssh -i $HOME/.ssh/hadak_ed25519 -o IdentitiesOnly=yes"
-        git config --global url."ssh://git@git.hadak.org:2222/".insteadOf "https://git.hadak.org/"
+        if [ -n "$TOKEN" ]; then
+          echo "::add-mask::$TOKEN"
+          git config --global http.https://git.hadak.org/.extraheader "Authorization: token $TOKEN"
+        elif [ -n "$SSH_KEY" ]; then
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/hadak_ed25519
+          chmod 600 ~/.ssh/hadak_ed25519
+          if ! ssh-keyscan -p 2222 -T 10 git.hadak.org >> ~/.ssh/known_hosts; then
+            echo "::error::git.hadak.org:2222 is not reachable from this runner. Add an INTERNAL_GIT_ACCESS_KEY secret to use https instead."
+            exit 1
+          fi
+          git config --global core.sshCommand "ssh -i $HOME/.ssh/hadak_ed25519 -o IdentitiesOnly=yes"
+          git config --global url."ssh://git@git.hadak.org:2222/".insteadOf "https://git.hadak.org/"
+        else
+          echo "::error::Neither the INTERNAL_GIT_ACCESS_KEY nor the SSH_KEY secret is set."
+          exit 1
+        fi

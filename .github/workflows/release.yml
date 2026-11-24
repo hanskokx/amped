@@ -17,7 +17,7 @@ env:
   # YouTube support is built in unless the YOUTUBE_ENABLED repository
   # variable is explicitly false.
   STRIP_YOUTUBE: ${{ vars.YOUTUBE_ENABLED == 'false' }}
-  ACOUSTID_API_KEY: ${{ vars.ACOUSTID_API_KEY }}
+  ACOUSTID_API_KEY: ${{ secrets.ACOUSTID_API_KEY || vars.ACOUSTID_API_KEY }}
 
 jobs:
   version:
@@ -51,6 +51,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/hadak-git
         with:
+          token: ${{ secrets.INTERNAL_GIT_ACCESS_KEY }}
           ssh-key: ${{ secrets.SSH_KEY }}
       - uses: subosito/flutter-action@v2
         with:
@@ -101,6 +102,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/hadak-git
         with:
+          token: ${{ secrets.INTERNAL_GIT_ACCESS_KEY }}
           ssh-key: ${{ secrets.SSH_KEY }}
       - uses: subosito/flutter-action@v2
         with:
@@ -140,6 +142,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/hadak-git
         with:
+          token: ${{ secrets.INTERNAL_GIT_ACCESS_KEY }}
           ssh-key: ${{ secrets.SSH_KEY }}
       - uses: subosito/flutter-action@v2
         with:
@@ -195,6 +198,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/hadak-git
         with:
+          token: ${{ secrets.INTERNAL_GIT_ACCESS_KEY }}
           ssh-key: ${{ secrets.SSH_KEY }}
       - uses: subosito/flutter-action@v2
         with:
