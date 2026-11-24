@@ -1,0 +1,13 @@
+# Only app.yaml and the built site (build/jaspr) are uploaded.
+.gcloudignore
+.git
+.gitignore
+.gitea
+.claude
+.dart_tool
+lib
+web
+test
+pubspec.*
+analysis_options.yaml
+README.md

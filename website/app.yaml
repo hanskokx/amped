@@ -1,0 +1,27 @@
+# Static site served by App Engine (standard environment). All handlers are
+# static, so no application code runs; the runtime is only a formality.
+runtime: python312
+
+handlers:
+  # release.json changes with every Amped release, so it must not be cached.
+  - url: /release\.json
+    static_files: build/jaspr/release.json
+    upload: build/jaspr/release\.json
+    mime_type: application/json
+    expiration: 0s
+    secure: always
+    http_headers:
+      Access-Control-Allow-Origin: "*"
+      Cache-Control: no-cache
+
+  - url: /
+    static_files: build/jaspr/index.html
+    upload: build/jaspr/index\.html
+    expiration: 5m
+    secure: always
+
+  - url: /(.*)
+    static_files: build/jaspr/\1
+    upload: build/jaspr/(.*)
+    expiration: 1h
+    secure: always

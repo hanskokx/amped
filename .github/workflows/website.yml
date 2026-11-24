@@ -1,0 +1,68 @@
+name: Website
+
+# Builds the Jaspr site in website/ and deploys it to App Engine
+# (https://www.amped-player.com). release.json, which the download button
+# reads, is generated from the latest GitHub release on every deploy, so a
+# new release only needs this workflow run again (the Release workflow does).
+on:
+  push:
+    branches: [main]
+    paths:
+      - website/**
+      - tool/release_json.sh
+      - .github/workflows/website.yml
+  workflow_dispatch:
+  workflow_call:
+
+concurrency:
+  group: website
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: website
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+
+      - run: dart pub get
+
+      - name: Activate Jaspr CLI
+        run: dart pub global activate jaspr_cli 0.24.0-beta.2
+
+      - name: release.json
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: ../tool/release_json.sh "${{ github.repository }}" web/release.json
+
+      - name: Build static site
+        run: dart pub global run jaspr_cli:jaspr build
+
+      - name: Check the deploy secret is available
+        env:
+          KEY: ${{ secrets.APP_ENGINE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -z "$KEY" ]; then
+            echo "::error::Secret APP_ENGINE_SERVICE_ACCOUNT_JSON is not set on this repository."
+            exit 1
+          fi
+
+      - uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.APP_ENGINE_SERVICE_ACCOUNT_JSON }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: amped-515719
+
+      - name: Deploy to App Engine
+        run: gcloud app deploy app.yaml --quiet

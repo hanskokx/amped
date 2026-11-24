@@ -297,3 +297,12 @@ jobs:
             --target "${{ github.sha }}" \
             --title "Amped $version" \
             --generate-notes
+
+  # Deploys the website again, so release.json (made from the latest GitHub
+  # release) lists this one and the download button offers it.
+  website:
+    needs: [release]
+    permissions:
+      contents: read
+    uses: ./.github/workflows/website.yml
+    secrets: inherit
