@@ -105,10 +105,18 @@ jobs:
           token: ${{ secrets.INTERNAL_GIT_ACCESS_KEY }}
           ssh-key: ${{ secrets.SSH_KEY }}
       - uses: subosito/flutter-action@v2
+        if: ${{ matrix.flutter-arch == 'x64' }}
         with:
           channel: stable
-          architecture: ${{ matrix.flutter-arch }}
           cache: true
+      # flutter-action finds no Windows arm64 SDK, so the stable branch is
+      # cloned (it fetches the engine for the machine it runs on).
+      - name: Flutter (arm64)
+        if: ${{ matrix.flutter-arch == 'arm64' }}
+        run: |
+          git clone --depth 1 --branch stable https://github.com/flutter/flutter.git "$RUNNER_TEMP/flutter"
+          cygpath -w "$RUNNER_TEMP/flutter/bin" >> "$GITHUB_PATH"
+          "$RUNNER_TEMP/flutter/bin/flutter" --version
       - name: Take YouTube out
         if: ${{ env.STRIP_YOUTUBE == 'true' }}
         run: dart run tool/strip_youtube.dart
@@ -152,6 +160,22 @@ jobs:
         if: ${{ env.STRIP_YOUTUBE == 'true' }}
         run: dart run tool/strip_youtube.dart
       - run: flutter pub get
+      # The project signs with the author's development certificate. There is
+      # none here (and no paid Apple account), so every target is signed ad
+      # hoc instead: no team, the "-" identity.
+      - name: Sign ad hoc
+        run: |
+          sed -i '' \
+            -e '/DEVELOPMENT_TEAM = /d' \
+            -e '/DevelopmentTeam = /d' \
+            -e 's/ProvisioningStyle = Automatic;/ProvisioningStyle = Manual;/' \
+            -e 's/CODE_SIGN_IDENTITY = "Apple Development";/CODE_SIGN_IDENTITY = "-";/' \
+            -e 's/CODE_SIGN_STYLE = Automatic;/CODE_SIGN_STYLE = Manual;/' \
+            macos/Runner.xcodeproj/project.pbxproj
+          if grep -q 'Apple Development\|DEVELOPMENT_TEAM\|DevelopmentTeam' macos/Runner.xcodeproj/project.pbxproj; then
+            echo "::error::The Xcode project still names a signing team."
+            exit 1
+          fi
       - name: Build (universal)
         run: |
           flutter build macos --release \
@@ -182,7 +206,8 @@ jobs:
               mv "$file.thin" "$file"
             fi
           done
-          codesign --force --deep --sign - arm/Amped.app
+          codesign --force --deep --sign - \
+            --preserve-metadata=entitlements,flags,identifier arm/Amped.app
           lipo -archs "arm/Amped.app/Contents/MacOS/$(basename "$app" .app)"
           dmg arm/Amped.app "Amped-$version-macos-arm64.dmg"
       - uses: actions/upload-artifact@v4
@@ -208,6 +233,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y clang cmake ninja-build pkg-config rpm ruby \
+            flatpak flatpak-builder libfuse2 \
             libgtk-3-dev libx11-dev libxi-dev libsecret-1-dev libmpv-dev mpv \
             libasound2-dev libayatana-appindicator3-dev
           sudo gem install --no-document fpm
@@ -226,12 +252,21 @@ jobs:
             ${{ needs.version.outputs.version }} \
             ${{ needs.version.outputs.build }} \
             build/linux/x64/release/bundle dist
+      - name: AppImage
+        run: |
+          tool/package_appimage.sh \
+            ${{ needs.version.outputs.version }} \
+            build/linux/x64/release/bundle dist
+      - name: Flatpak
+        run: tool/package_flatpak.sh ${{ needs.version.outputs.version }} dist
       - uses: actions/upload-artifact@v4
         with:
           name: linux
           path: |
             dist/*.deb
             dist/*.rpm
+            dist/*.AppImage
+            dist/*.flatpak
           if-no-files-found: error
 
   release:
