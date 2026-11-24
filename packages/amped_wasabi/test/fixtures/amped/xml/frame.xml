@@ -1,0 +1,24 @@
+<!-- The stretchable frame of the resizable windows: a title strip, sides,
+     a bottom bar with a resize grip, and a close button. -->
+<groupdef id="amped.frame">
+  <layer id="frame.fill" image="frame.fill" x="4" y="18" w="-8" relatw="1" h="-46" relath="1"/>
+  <layer id="frame.topleft" image="frame.topleft" x="0" y="0"/>
+  <layer id="frame.top" image="frame.top" x="10" y="0" w="-20" relatw="1" h="18"/>
+  <layer id="frame.topright" image="frame.topright" x="-10" relatx="1" y="0"/>
+  <layer id="frame.left" image="frame.left" x="0" y="18" w="4" h="-46" relath="1"/>
+  <layer id="frame.right" image="frame.right" x="-4" relatx="1" y="18" w="4" h="-46" relath="1"/>
+  <layer id="frame.bottomleft" image="frame.bottomleft" x="0" y="-28" relaty="1"/>
+  <layer id="frame.bottom" image="frame.bottom" x="10" y="-28" relaty="1" w="-20" relatw="1" h="28"/>
+  <layer id="frame.bottomright" image="frame.bottomright" x="-10" relatx="1" y="-28" relaty="1"/>
+  <button id="close" action="CLOSE" x="-16" relatx="1" y="3"
+    image="title.close" hoverimage="title.close.hover" downimage="title.close.down" tooltip="Close"/>
+  <layer id="grip" image="frame.grip" x="-14" relatx="1" y="-14" relaty="1" resize="bottomright"/>
+</groupdef>
+
+<!-- The window title, centered in the title strip and dimmed while the
+     window does not have focus. Place the group symmetrically about the
+     window's center so every window centers its title the same way. -->
+<groupdef id="amped.title">
+  <text id="title" x="0" y="2" w="0" relatw="1" h="14" align="center"
+    color="amped.title" fontsize="11" bold="1" inactivealpha="110" ghost="1"/>
+</groupdef>

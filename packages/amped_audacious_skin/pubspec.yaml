@@ -1,0 +1,23 @@
+name: amped_audacious_skin
+description: >-
+  Audacious skin support for amped. Opens the tarballs Audacious skins ship
+  in, converts their PNG/JPEG bitmaps, and parses their `skin.hints` layout.
+version: 0.1.0
+publish_to: "none"
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  amped_classic_skin:
+    path: ../amped_classic_skin
+  amped_skin:
+    path: ../amped_skin
+  archive: ^4.0.9
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  arcane_analysis: ^1.0.5
+  flutter_test:
+    sdk: flutter

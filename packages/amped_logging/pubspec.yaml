@@ -1,0 +1,22 @@
+name: amped_logging
+description: >-
+  Amped's logging: Arcane's logger with a console interface that masks tokens and secrets.
+version: 0.1.0
+publish_to: "none"
+
+environment:
+  sdk: ^3.12.2
+  flutter: ^3.50.0
+
+dependencies:
+  amped_media_source:
+    path: ../amped_media_source
+  arcane_framework: ^3.0.0-dev.1
+  flutter:
+    sdk: flutter
+  logger: ^2.7.0
+
+dev_dependencies:
+  arcane_analysis: ^1.0.5
+  flutter_test:
+    sdk: flutter

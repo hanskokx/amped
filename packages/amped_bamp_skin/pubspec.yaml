@@ -1,0 +1,26 @@
+name: amped_bamp_skin
+description: >-
+  Bamp skin support for amped. Converts Bamp's layered PNG artwork into the classic file set that amped_classic_skin renders.
+version: 0.1.0
+publish_to: "none"
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  amped_classic_skin:
+    path: ../amped_classic_skin
+  amped_skin:
+    path: ../amped_skin
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  arcane_analysis: ^1.0.5
+  archive: ^4.0.9
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  assets:
+    - assets/bamp/

@@ -1,0 +1,47 @@
+<container id="pl" name="Playlist Editor" default_visible="1">
+
+  <layout id="normal" w="360" h="232" minimum_w="260" minimum_h="110">
+    <group id="amped.frame" x="0" y="0" w="0" relatw="1" h="0" relath="1"/>
+    <!-- Double-clicking the title bar switches to windowshade mode. -->
+    <layer id="titlebar" x="20" y="0" w="-40" relatw="1" h="18" dblclickaction="switch;shade"/>
+    <group id="amped.title" x="20" y="0" w="-40" relatw="1" h="18"/>
+    <sendparams target="title" text="PLAYLIST"/>
+
+    <layer id="well" image="list.well" x="6" y="20" w="-12" relatw="1" h="-50" relath="1"/>
+    <component id="list" param="guid:pl" x="7" y="21" w="-14" relatw="1" h="-52" relath="1" fontsize="13"/>
+
+    <!-- Each opens the same popup menu as the classic playlist's button. -->
+    <button id="add" action="PE_Add" x="8" y="-24" relaty="1"
+      image="btn.add" hoverimage="btn.add.hover" downimage="btn.add.down" tooltip="Add files to the playlist"/>
+    <button id="rem" action="PE_Rem" x="46" y="-24" relaty="1"
+      image="btn.rem" hoverimage="btn.rem.hover" downimage="btn.rem.down" tooltip="Remove files from the playlist"/>
+    <button id="sel" action="PE_Sel" x="84" y="-24" relaty="1"
+      image="btn.sel" hoverimage="btn.sel.hover" downimage="btn.sel.down" tooltip="Select files in the playlist"/>
+    <button id="misc" action="PE_Misc" x="122" y="-24" relaty="1"
+      image="btn.misc" hoverimage="btn.misc.hover" downimage="btn.misc.down" tooltip="Misc actions"/>
+    <button id="listmenu" action="PE_List" x="-66" relatx="1" y="-24" relaty="1"
+      image="btn.list" hoverimage="btn.list.hover" downimage="btn.list.down" tooltip="Manage the playlist"/>
+  </layout>
+
+  <!-- Windowshade mode, like Amped Modern's playlist shade: the current
+       song in a display with a seek bar along its foot, the list menu,
+       then the window buttons. -->
+  <layout id="shade" background="shade.pl.bg">
+    <!-- Double-clicking the shaded window switches back. -->
+    <layer id="titlebar" x="0" y="0" w="0" relatw="1" h="0" relath="1" dblclickaction="switch;normal"/>
+    <button id="menu" action="CONTROLMENU" x="6" y="6"
+      image="title.menu" hoverimage="title.menu.hover" downimage="title.menu.down" tooltip="Main menu"/>
+    <text id="songticker" display="songname" ticker="1" x="29" y="4" w="262" h="13"
+      dblclickaction="switch;normal" color="amped.display" fontsize="12"/>
+    <layer id="seek.track" image="eq.zero" x="28" y="18" w="264" h="1" ghost="1"/>
+    <slider id="seek" action="SEEK" x="26" y="16" w="268" h="5"
+      thumb="shade.seek.thumb" downthumb="shade.seek.thumb" tooltip="Seek"/>
+    <button id="listmenu" action="PE_List" x="301" y="7"
+      image="shade.list" hoverimage="shade.list.hover" downimage="shade.list.down" tooltip="Manage the playlist"/>
+    <button id="unshade" action="SWITCH" param="normal" x="328" y="6"
+      image="title.unshade" hoverimage="title.unshade.hover" downimage="title.unshade.down" tooltip="Normal mode"/>
+    <button id="close" action="CLOSE" x="342" y="6"
+      image="title.close" hoverimage="title.close.hover" downimage="title.close.down" tooltip="Close"/>
+  </layout>
+
+</container>

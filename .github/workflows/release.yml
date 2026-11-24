@@ -1,0 +1,260 @@
+name: Release
+
+# Runs the tests, builds the installers and publishes them as a release of the
+# version in pubspec.yaml (tag v<version>). Start it by hand.
+on:
+  workflow_dispatch:
+    inputs:
+      prerelease:
+        description: Mark the release as a pre-release
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+env:
+  # YouTube support is built in unless the YOUTUBE_ENABLED repository
+  # variable is explicitly false.
+  STRIP_YOUTUBE: ${{ vars.YOUTUBE_ENABLED == 'false' }}
+  ACOUSTID_API_KEY: ${{ vars.ACOUSTID_API_KEY }}
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.read.outputs.version }}
+      build: ${{ steps.read.outputs.build }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: read
+        run: |
+          full=$(sed -n 's/^version: *//p' pubspec.yaml | head -n 1 | tr -d ' "')
+          echo "version=${full%%+*}" >> "$GITHUB_OUTPUT"
+          case "$full" in
+            *+*) echo "build=${full##*+}" >> "$GITHUB_OUTPUT" ;;
+            *) echo "build=1" >> "$GITHUB_OUTPUT" ;;
+          esac
+      - name: The release must not exist yet
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version=${{ steps.read.outputs.version }}
+          if gh release view "v$version" >/dev/null 2>&1; then
+            echo "::error::Release v$version exists; raise the version in pubspec.yaml."
+            exit 1
+          fi
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/hadak-git
+        with:
+          ssh-key: ${{ secrets.SSH_KEY }}
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Linux build packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang cmake ninja-build pkg-config \
+            libgtk-3-dev libx11-dev libxi-dev libsecret-1-dev libmpv-dev mpv \
+            libasound2-dev libayatana-appindicator3-dev
+      - name: Take YouTube out
+        if: ${{ env.STRIP_YOUTUBE == 'true' }}
+        run: dart run tool/strip_youtube.dart
+      - run: flutter pub get
+      - name: App tests
+        run: flutter test
+      - name: Package tests
+        run: |
+          for package in packages/*/; do
+            [ -d "$package/test" ] || continue
+            echo "::group::$package"
+            (cd "$package" && flutter pub get && flutter test)
+            echo "::endgroup::"
+          done
+
+  windows:
+    needs: [version, test]
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: windows-latest
+            flutter-arch: x64
+            build-dir: x64
+            inno-arch: x64compatible
+            label: x64
+          - runner: windows-11-arm
+            flutter-arch: arm64
+            build-dir: arm64
+            inno-arch: arm64
+            label: arm64
+    runs-on: ${{ matrix.runner }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/hadak-git
+        with:
+          ssh-key: ${{ secrets.SSH_KEY }}
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          architecture: ${{ matrix.flutter-arch }}
+          cache: true
+      - name: Take YouTube out
+        if: ${{ env.STRIP_YOUTUBE == 'true' }}
+        run: dart run tool/strip_youtube.dart
+      - run: flutter pub get
+      - name: Build
+        run: |
+          flutter build windows --release \
+            --dart-define=AMPED_GIT_COMMIT=$(git rev-parse --short HEAD) \
+            --dart-define=ACOUSTID_API_KEY="$ACOUSTID_API_KEY"
+      - name: Inno Setup
+        run: choco install innosetup --no-progress -y
+      - name: Installer
+        run: |
+          cd windows/installer
+          "/c/Program Files (x86)/Inno Setup 6/ISCC.exe" \
+            //DAppVersion=${{ needs.version.outputs.version }} \
+            //DArch=${{ matrix.inno-arch }} \
+            //DArchLabel=${{ matrix.label }} \
+            //DSourceDir=..\\..\\build\\windows\\${{ matrix.build-dir }}\\runner\\Release \
+            amped.iss
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-${{ matrix.label }}
+          path: build/installer/*.exe
+          if-no-files-found: error
+
+  macos:
+    needs: [version, test]
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/hadak-git
+        with:
+          ssh-key: ${{ secrets.SSH_KEY }}
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Take YouTube out
+        if: ${{ env.STRIP_YOUTUBE == 'true' }}
+        run: dart run tool/strip_youtube.dart
+      - run: flutter pub get
+      - name: Build (universal)
+        run: |
+          flutter build macos --release \
+            --dart-define=AMPED_GIT_COMMIT=$(git rev-parse --short HEAD) \
+            --dart-define=ACOUSTID_API_KEY="$ACOUSTID_API_KEY"
+      - name: Disk images
+        run: |
+          version=${{ needs.version.outputs.version }}
+          app=$(ls -d build/macos/Build/Products/Release/*.app | head -n 1)
+          mkdir -p dist
+
+          dmg() { # dmg <app> <name>
+            rm -rf dmgroot && mkdir dmgroot
+            cp -R "$1" dmgroot/Amped.app
+            ln -s /Applications dmgroot/Applications
+            hdiutil create -volname Amped -srcfolder dmgroot -ov -format UDZO "dist/$2"
+          }
+
+          lipo -archs "$app/Contents/MacOS/$(basename "$app" .app)"
+          dmg "$app" "Amped-$version-macos-universal.dmg"
+
+          # Apple silicon only: every universal Mach-O file thinned to arm64,
+          # then signed again (ad hoc), as thinning breaks the signatures.
+          rm -rf arm && mkdir arm && cp -R "$app" arm/Amped.app
+          find arm/Amped.app -type f | while read -r file; do
+            if lipo -archs "$file" 2>/dev/null | grep -q x86_64; then
+              lipo -thin arm64 "$file" -output "$file.thin"
+              mv "$file.thin" "$file"
+            fi
+          done
+          codesign --force --deep --sign - arm/Amped.app
+          lipo -archs "arm/Amped.app/Contents/MacOS/$(basename "$app" .app)"
+          dmg arm/Amped.app "Amped-$version-macos-arm64.dmg"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: macos
+          path: dist/*.dmg
+          if-no-files-found: error
+
+  linux:
+    needs: [version, test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/hadak-git
+        with:
+          ssh-key: ${{ secrets.SSH_KEY }}
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Build packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang cmake ninja-build pkg-config rpm ruby \
+            libgtk-3-dev libx11-dev libxi-dev libsecret-1-dev libmpv-dev mpv \
+            libasound2-dev libayatana-appindicator3-dev
+          sudo gem install --no-document fpm
+      - name: Take YouTube out
+        if: ${{ env.STRIP_YOUTUBE == 'true' }}
+        run: dart run tool/strip_youtube.dart
+      - run: flutter pub get
+      - name: Build
+        run: |
+          flutter build linux --release \
+            --dart-define=AMPED_GIT_COMMIT=$(git rev-parse --short HEAD) \
+            --dart-define=ACOUSTID_API_KEY="$ACOUSTID_API_KEY"
+      - name: DEB and RPM
+        run: |
+          tool/package_linux.sh \
+            ${{ needs.version.outputs.version }} \
+            ${{ needs.version.outputs.build }} \
+            build/linux/x64/release/bundle dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux
+          path: |
+            dist/*.deb
+            dist/*.rpm
+          if-no-files-found: error
+
+  release:
+    needs: [version, windows, macos, linux]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version=${{ needs.version.outputs.version }}
+          cd dist
+          sha256sum * > SHA256SUMS
+          ls -l
+          flags=""
+          if [ "${{ inputs.prerelease }}" = "true" ]; then flags="--prerelease"; fi
+          # The notes are collected by GitHub from the pull requests and
+          # commits since the previous release.
+          gh release create "v$version" ./* $flags \
+            --repo "${{ github.repository }}" \
+            --target "${{ github.sha }}" \
+            --title "Amped $version" \
+            --generate-notes

@@ -1,0 +1,17 @@
+name: amped_soundcloud
+description: >-
+  SoundCloud as an Amped source: API client, credentials and the RemoteLibrarySource.
+version: 0.1.0
+publish_to: "none"
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  amped_media_source:
+    path: ../amped_media_source
+  meta: ^1.16.0
+
+dev_dependencies:
+  arcane_analysis: ^1.0.5
+  test: ^1.25.0

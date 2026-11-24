@@ -1,0 +1,2882 @@
+{
+  "@@locale": "en",
+  "appName": "Amped",
+  "@appName": {
+    "description": "The stable product name used in UI and native app metadata."
+  },
+  "playlistEditor": "Playlist Editor",
+  "@playlistEditor": {
+    "description": "Title of the Playlist Editor window and the menu entry that shows or hides it."
+  },
+  "preferences": "Preferences...",
+  "@preferences": {
+    "description": "Menu entry that opens the Preferences window. The trailing ellipsis marks that a window opens."
+  },
+  "menuAmped": "Amped...",
+  "@menuAmped": {
+    "description": "Label of the main menu opened from the app's skin button; the ellipsis follows the classic player menu."
+  },
+  "play": "Play",
+  "@play": {
+    "description": "Transport action and menu entry that starts playback of the current track."
+  },
+  "file": "File...",
+  "@file": {
+    "description": "Menu entry that opens a file chooser to play a file. The trailing ellipsis marks that a dialog opens."
+  },
+  "url": "URL...",
+  "@url": {
+    "description": "Menu entry that asks for a URL to play. The trailing ellipsis marks that a dialog opens."
+  },
+  "folder": "Folder...",
+  "@folder": {
+    "description": "Menu entry that opens a folder chooser to play a folder's contents. The trailing ellipsis marks that a dialog opens."
+  },
+  "skins": "Skins",
+  "@skins": {
+    "description": "Top-level menu that lists installed skins and skin tools."
+  },
+  "options": "Options",
+  "@options": {
+    "description": "Top-level menu holding player options such as always on top and doublesize mode."
+  },
+  "playback": "Playback",
+  "@playback": {
+    "description": "Top-level menu holding the playback controls and modes."
+  },
+  "previous": "Previous",
+  "@previous": {
+    "description": "Transport action and menu entry that jumps to the previous track."
+  },
+  "pause": "Pause",
+  "@pause": {
+    "description": "Transport action and menu entry that pauses or resumes playback."
+  },
+  "stop": "Stop",
+  "@stop": {
+    "description": "Transport action and menu entry that stops playback."
+  },
+  "next": "Next",
+  "@next": {
+    "description": "Transport action and menu entry that jumps to the next track."
+  },
+  "random": "Random",
+  "@random": {
+    "description": "Menu entry that plays a random track from the playlist."
+  },
+  "videoPlay": "Play",
+  "@videoPlay": {
+    "description": "Fullscreen video control that resumes a paused video."
+  },
+  "videoBack15": "Back 15 seconds",
+  "@videoBack15": {
+    "description": "Fullscreen video control that jumps 15 seconds back."
+  },
+  "videoForward15": "Forward 15 seconds",
+  "@videoForward15": {
+    "description": "Fullscreen video control that jumps 15 seconds forward."
+  },
+  "videoAudio": "Audio track",
+  "@videoAudio": {
+    "description": "Fullscreen video control that picks the audio track."
+  },
+  "videoTrackUnsupported": "Unsupported",
+  "@videoTrackUnsupported": {
+    "description": "Badge under a subtitle track the player cannot display."
+  },
+  "alwaysOnTopVideoOnly": "Always on top (Video only)",
+  "@alwaysOnTopVideoOnly": {
+    "description": "Video window menu entry that keeps just the Video window above the other windows."
+  },
+  "videoSubtitles": "Subtitles",
+  "@videoSubtitles": {
+    "description": "Fullscreen video control that picks the subtitle track."
+  },
+  "videoSubtitlesOff": "Off",
+  "@videoSubtitlesOff": {
+    "description": "Subtitle picker entry that shows no subtitles."
+  },
+  "videoSubtitleTrack": "Track {number}",
+  "@videoSubtitleTrack": {
+    "description": "Subtitle picker entry for a track the file gives no name or language.",
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "videoCast": "Cast to a device",
+  "@videoCast": {
+    "description": "Video control that opens the list of Chromecasts to play the video on."
+  },
+  "videoCastSearching": "Looking for devices…",
+  "@videoCastSearching": {
+    "description": "Cast list entry shown while Chromecasts are looked for and none is found yet."
+  },
+  "videoCastNone": "No Chromecast found",
+  "@videoCastNone": {
+    "description": "Cast list entry shown when the search found no Chromecast."
+  },
+  "videoCastSearchAgain": "Search again",
+  "@videoCastSearchAgain": {
+    "description": "Cast list entry that looks for Chromecasts again."
+  },
+  "videoCastStop": "Stop casting",
+  "@videoCastStop": {
+    "description": "Cast list entry that brings the video back to this computer."
+  },
+  "videoCastingTo": "Casting to {device}",
+  "@videoCastingTo": {
+    "description": "Cast list heading while the video plays on a device. {device} is its name.",
+    "placeholders": {
+      "device": {"type": "String"}
+    }
+  },
+  "videoCastUnsupported": "This kind of video can't be cast",
+  "@videoCastUnsupported": {
+    "description": "Cast list message for a video in a format the devices can't play (Matroska, for one)."
+  },
+  "videoCastFailed": "Couldn't cast to the device",
+  "@videoCastFailed": {
+    "description": "Cast list message when the video could not be played on the chosen device."
+  },
+  "videoExitFullscreen": "Exit fullscreen",
+  "@videoExitFullscreen": {
+    "description": "Fullscreen video control that leaves fullscreen."
+  },
+  "videoVolume": "Volume",
+  "@videoVolume": {
+    "description": "Fullscreen video volume slider."
+  },
+  "videoPosition": "Position",
+  "@videoPosition": {
+    "description": "Fullscreen video progress bar."
+  },
+  "fullscreen": "Fullscreen",
+  "@fullscreen": {
+    "description": "Menu entry that shows the video or visualization fullscreen."
+  },
+  "visualizerTitle": "Visualizer",
+  "@visualizerTitle": {
+    "description": "Title of the visualizer view and its menu entry."
+  },
+  "repeat": "Repeat",
+  "@repeat": {
+    "description": "Toggle for repeating the playlist when it reaches the end."
+  },
+  "shuffle": "Shuffle",
+  "@shuffle": {
+    "description": "Toggle for playing the playlist in random order."
+  },
+  "exit": "Exit",
+  "@exit": {
+    "description": "Menu entry that quits the app (Windows and Linux wording; macOS uses Quit)."
+  },
+  "timeElapsed": "Time elapsed",
+  "@timeElapsed": {
+    "description": "Option to show elapsed time in the main window's time display."
+  },
+  "timeRemaining": "Time remaining",
+  "@timeRemaining": {
+    "description": "Option to show remaining time in the main window's time display."
+  },
+  "alwaysOnTop": "Always On Top",
+  "@alwaysOnTop": {
+    "description": "Option that keeps the player windows above other applications."
+  },
+  "playbackNotifications": "Playback Notifications",
+  "@playbackNotifications": {
+    "description": "Menu entry that toggles the now-playing notification shown when the track changes."
+  },
+  "showNotification": "Show Notification",
+  "@showNotification": {
+    "description": "Menu entry that shows the now-playing notification right away."
+  },
+  "nativeNotifications": "Use System Notifications",
+  "@nativeNotifications": {
+    "description": "Preference that sends playback notifications through the operating system instead of drawing them in-app."
+  },
+  "doubleSizeMode": "Doublesize mode",
+  "@doubleSizeMode": {
+    "description": "Option that scales the player windows to twice their size. Named after the classic player's feature."
+  },
+  "mainWindowShade": "Main Window Shade",
+  "@mainWindowShade": {
+    "description": "Menu entry that collapses the main window to a narrow title strip."
+  },
+  "skinBrowser": "Skin Browser...",
+  "@skinBrowser": {
+    "description": "Menu entry that opens the skin browser. The trailing ellipsis marks that a window opens."
+  },
+  "colorThemes": "Color Themes",
+  "@colorThemes": {
+    "description": "Menu that lists the color themes of the active modern skin."
+  },
+  "shareColorThemes": "Share Between Skins",
+  "@shareColorThemes": {
+    "description": "Option that applies the chosen color theme to every skin that has a theme of the same name."
+  },
+  "skinMenu": "Skin",
+  "@skinMenu": {
+    "description": "Menu holding skin options for the active modern skin."
+  },
+  "onlineSkinBrowser": "Online Skin Browser...",
+  "@onlineSkinBrowser": {
+    "description": "Menu entry that opens the online skin browser. The trailing ellipsis marks that a window opens."
+  },
+  "skinBrowserSearchHint": "Search the Webamp skin library",
+  "@skinBrowserSearchHint": {
+    "description": "Placeholder in the search field of the online skin browser."
+  },
+  "skinBrowserInstall": "Download and install",
+  "@skinBrowserInstall": {
+    "description": "Button that downloads the previewed skin and installs it."
+  },
+  "skinBrowserPrevious": "Previous skin",
+  "@skinBrowserPrevious": {
+    "description": "Tooltip of the button that shows the previous skin in the online skin browser."
+  },
+  "skinBrowserNext": "Next skin",
+  "@skinBrowserNext": {
+    "description": "Tooltip of the button that shows the next skin in the online skin browser."
+  },
+  "skinBrowserInstalled": "Installed",
+  "@skinBrowserInstalled": {
+    "description": "Label shown on a skin in the online browser that is already installed."
+  },
+  "skinBrowserNoResults": "No skins found.",
+  "@skinBrowserNoResults": {
+    "description": "Message shown when a search in the online skin browser finds nothing."
+  },
+  "skinBrowserError": "Couldn't reach the skin library: {error}",
+  "@skinBrowserError": {
+    "description": "Message shown when the online skin library can't be reached. {error} is the technical reason.",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "skinBrowserNoPreview": "No preview available",
+  "@skinBrowserNoPreview": {
+    "description": "Message shown in place of a skin's preview image when none exists."
+  },
+  "skinBrowserRetry": "Retry",
+  "@skinBrowserRetry": {
+    "description": "Button that retries loading the online skin library after a failure."
+  },
+  "skinBrowserCredit": "Skins from skins.webamp.org, the classic player Skin Museum.",
+  "@skinBrowserCredit": {
+    "description": "Credit line naming the source of the online skins."
+  },
+  "windows": "Windows",
+  "@windows": {
+    "description": "Top-level menu that shows or hides the player windows."
+  },
+  "skinLayouts": "Layouts",
+  "@skinLayouts": {
+    "description": "Submenu listing the layouts (window modes) a modern skin's main window can take, to switch between them."
+  },
+  "equalizer": "Equalizer",
+  "@equalizer": {
+    "description": "Name of the Equalizer window and its menu entry."
+  },
+  "video": "Video",
+  "@video": {
+    "description": "Name of the Video window and its menu entry."
+  },
+  "library": "Library",
+  "@library": {
+    "description": "Name of the Media Library window in menus."
+  },
+  "visualization": "Visualization",
+  "@visualization": {
+    "description": "Name of the Visualization window and its menu entry."
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Menu entry that opens settings."
+  },
+  "windowShade": "Window Shade",
+  "@windowShade": {
+    "description": "Menu entry that collapses the focused window to a narrow title strip."
+  },
+  "quit": "Quit",
+  "@quit": {
+    "description": "Menu entry that quits the app."
+  },
+  "load": "Load",
+  "@load": {
+    "description": "Equalizer preset menu entry that loads a preset."
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Equalizer preset menu entry that saves a preset."
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "Equalizer preset menu entry that deletes a preset."
+  },
+  "preset": "Preset...",
+  "@preset": {
+    "description": "Menu entry that opens the equalizer preset submenu. The trailing ellipsis follows the classic player menu."
+  },
+  "autoLoadPreset": "Auto-load preset...",
+  "@autoLoadPreset": {
+    "description": "Menu entry for presets that load automatically for matching tracks."
+  },
+  "fromEqf": "From EQF...",
+  "@fromEqf": {
+    "description": "Menu entry that imports equalizer presets from an .eqf file."
+  },
+  "toEqf": "To EQF...",
+  "@toEqf": {
+    "description": "Menu entry that exports equalizer presets to an .eqf file."
+  },
+  "reset": "Reset",
+  "@reset": {
+    "description": "Button that resets the equalizer sliders to their defaults."
+  },
+  "playItems": "Play item(s)",
+  "@playItems": {
+    "description": "Playlist context-menu entry that plays the selected items."
+  },
+  "removeItems": "Remove item(s)",
+  "@removeItems": {
+    "description": "Playlist context-menu entry that removes the selected items from the playlist."
+  },
+  "cropFiles": "Crop files",
+  "@cropFiles": {
+    "description": "Playlist context-menu entry that removes every item except the selected ones."
+  },
+  "editMetadata": "Edit metadata for selection...",
+  "@editMetadata": {
+    "description": "Playlist context-menu entry that edits the tags of the selected files."
+  },
+  "viewFileInfo": "View file info...",
+  "@viewFileInfo": {
+    "description": "Playlist context-menu entry that opens the file info dialog for the selected item."
+  },
+  "playlistEntry": "Playlist entry",
+  "@playlistEntry": {
+    "description": "Title for the playlist entry editor and context-menu group."
+  },
+  "bookmarkItems": "Bookmark item(s)",
+  "@bookmarkItems": {
+    "description": "Playlist context-menu entry that adds the selected items to bookmarks."
+  },
+  "rateItems": "Rate items",
+  "@rateItems": {
+    "description": "Playlist context-menu submenu for rating the selected items."
+  },
+  "noRating": "No rating",
+  "@noRating": {
+    "description": "Entry in the rating menu that clears an item's rating."
+  },
+  "exploreItemsFolder": "Explore item(s) folder",
+  "@exploreItemsFolder": {
+    "description": "Playlist context-menu entry that reveals the selected item's folder in the file manager."
+  },
+  "addFiles": "Add file(s)",
+  "@addFiles": {
+    "description": "Playlist menu entry that adds files. The '(s)' follows the classic player's wording for one or more."
+  },
+  "addFolder": "Add folder",
+  "@addFolder": {
+    "description": "Playlist menu entry that adds the contents of a folder."
+  },
+  "addUrl": "Add URL",
+  "@addUrl": {
+    "description": "Playlist menu entry that adds a URL."
+  },
+  "removeSelected": "Remove selected",
+  "@removeSelected": {
+    "description": "Playlist menu entry that removes the selected items."
+  },
+  "cropSelected": "Crop selected",
+  "@cropSelected": {
+    "description": "Playlist menu entry that keeps only the selected items."
+  },
+  "clearPlaylist": "Clear playlist",
+  "@clearPlaylist": {
+    "description": "Playlist menu entry that removes every item."
+  },
+  "remove": "Remove...",
+  "@remove": {
+    "description": "Playlist menu entry that opens the remove submenu. The trailing ellipsis follows the classic player menu."
+  },
+  "removeAction": "Remove",
+  "@removeAction": {
+    "description": "Confirmation button of a removal dialog."
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Button that dismisses a dialog without making changes."
+  },
+  "tagLookupRetry": "Retry",
+  "@tagLookupRetry": {
+    "description": "Button in the tag lookup dialog that repeats a failed lookup."
+  },
+  "tagLookupPrivacy": "Looking up a song sends its fingerprint and length to AcoustID and the matching recording's ID to MusicBrainz. Nothing else about you or your files is sent.",
+  "@tagLookupPrivacy": {
+    "description": "Privacy notice in the tag lookup dialog. It lists exactly what is sent to AcoustID and MusicBrainz."
+  },
+  "removeMissingFiles": "Remove missing files from playlist",
+  "@removeMissingFiles": {
+    "description": "Playlist menu entry that removes items whose files no longer exist."
+  },
+  "physicallyRemoveFiles": "Physically remove selected file(s)",
+  "@physicallyRemoveFiles": {
+    "description": "Playlist menu entry that deletes the selected files from disk, not just from the playlist."
+  },
+  "selectAll": "Select all",
+  "@selectAll": {
+    "description": "Playlist menu entry that selects every item."
+  },
+  "selectNone": "Select none",
+  "@selectNone": {
+    "description": "Playlist menu entry that clears the selection."
+  },
+  "invertSelection": "Invert selection",
+  "@invertSelection": {
+    "description": "Playlist menu entry that selects what is unselected and the reverse."
+  },
+  "sort": "Sort",
+  "@sort": {
+    "description": "Label of the Sort button and menu in the playlist editor."
+  },
+  "misc": "Misc",
+  "@misc": {
+    "description": "Label of the Misc button and menu in the playlist editor."
+  },
+  "sortByTitle": "Sort list by title",
+  "@sortByTitle": {
+    "description": "Playlist menu entry that sorts the list by track title."
+  },
+  "sortByFilename": "Sort list by filename",
+  "@sortByFilename": {
+    "description": "Playlist menu entry that sorts the list by file name."
+  },
+  "sortByPath": "Sort list by path and filename",
+  "@sortByPath": {
+    "description": "Playlist menu entry that sorts the list by folder path, then file name."
+  },
+  "sortByArtist": "Sort list by artist",
+  "@sortByArtist": {
+    "description": "Playlist menu entry that sorts the list by artist."
+  },
+  "sortByAlbum": "Sort list by album",
+  "@sortByAlbum": {
+    "description": "Playlist menu entry that sorts the list by album."
+  },
+  "sortByArtistAlbum": "Sort list by artist and album",
+  "@sortByArtistAlbum": {
+    "description": "Playlist menu entry that sorts the list by artist, then album."
+  },
+  "reverseList": "Reverse list",
+  "@reverseList": {
+    "description": "Playlist menu entry that reverses the order of the list."
+  },
+  "randomizeList": "Randomize list",
+  "@randomizeList": {
+    "description": "Playlist menu entry that shuffles the order of the list."
+  },
+  "sortingPlaylist": "Sorting playlist...",
+  "@sortingPlaylist": {
+    "description": "Status message shown while the playlist is being sorted."
+  },
+  "sortingReadingTags": "Sorting playlist: reading tags {done}/{total}",
+  "@sortingReadingTags": {
+    "description": "Status message shown while the playlist is sorted and file tags are read. {done} of {total} files are read so far.",
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "fileInfo": "File info",
+  "@fileInfo": {
+    "description": "Name of the file info dialog used in menus."
+  },
+  "fileInfoEllipsis": "File info...",
+  "@fileInfoEllipsis": {
+    "description": "Menu entry that opens the file info dialog. The trailing ellipsis marks that a dialog opens."
+  },
+  "playlistEntryEllipsis": "Playlist entry...",
+  "@playlistEntryEllipsis": {
+    "description": "Menu entry that opens the playlist entry editor. The trailing ellipsis marks that a dialog opens."
+  },
+  "generateHtmlPlaylist": "Generate HTML playlist",
+  "@generateHtmlPlaylist": {
+    "description": "Playlist menu entry that writes the playlist as an HTML page."
+  },
+  "rebuildTitles": "Rebuild titles on selection",
+  "@rebuildTitles": {
+    "description": "Playlist menu entry that re-reads tags and rebuilds the displayed titles of the selected items."
+  },
+  "openPlaylist": "Open playlist...",
+  "@openPlaylist": {
+    "description": "Menu entry that opens a playlist file. The trailing ellipsis marks that a dialog opens."
+  },
+  "savePlaylist": "Save playlist...",
+  "@savePlaylist": {
+    "description": "Menu entry that saves the playlist to a file. The trailing ellipsis marks that a dialog opens."
+  },
+  "newPlaylist": "New playlist (clear)",
+  "@newPlaylist": {
+    "description": "Menu entry that clears the playlist to start a new one."
+  },
+  "mlNewPlaylist": "New playlist",
+  "@mlNewPlaylist": {
+    "description": "Media Library menu entry that creates an empty playlist."
+  },
+  "mlImportPlaylist": "Import playlist from file...",
+  "@mlImportPlaylist": {
+    "description": "Media Library menu entry that imports a playlist file. The trailing ellipsis marks that a dialog opens."
+  },
+  "mlExportPlaylist": "Export playlist...",
+  "@mlExportPlaylist": {
+    "description": "Media Library menu entry that exports a playlist to a file. The trailing ellipsis marks that a dialog opens."
+  },
+  "mlAddMedia": "Add media to Library...",
+  "@mlAddMedia": {
+    "description": "Media Library menu entry that adds folders to the library. The trailing ellipsis marks that a dialog opens."
+  },
+  "mlAddPlaylist": "Add current playlist to Library",
+  "@mlAddPlaylist": {
+    "description": "Media Library menu entry that adds the tracks of the current playlist to the library."
+  },
+  "mlAddMediaTitle": "Add media to Library",
+  "@mlAddMediaTitle": {
+    "description": "Title of the dialog for adding media folders to the library."
+  },
+  "mediaLibraryPreferences": "Media Library",
+  "@mediaLibraryPreferences": {
+    "description": "Preferences page for the Media Library."
+  },
+  "watchFolders": "Watch folders",
+  "@watchFolders": {
+    "description": "Heading of the list of folders that are watched for audio files to add to the Media Library."
+  },
+  "watchFoldersHint": "Audio files in these folders are added to the Local source, and removed from it again when they are deleted.",
+  "@watchFoldersHint": {
+    "description": "Explains what watch folders do."
+  },
+  "watchFoldersEmpty": "No folders are watched.",
+  "@watchFoldersEmpty": {
+    "description": "Shown when the list of watch folders is empty."
+  },
+  "watchFoldersAddTitle": "Watch folder",
+  "@watchFoldersAddTitle": {
+    "description": "Title of the dialog for picking a folder to watch."
+  },
+  "watchFoldersAdd": "Add...",
+  "@watchFoldersAdd": {
+    "description": "Button that picks a folder to watch."
+  },
+  "watchFoldersRemove": "Stop watching",
+  "@watchFoldersRemove": {
+    "description": "Tooltip of the button that removes a folder from the watch folders."
+  },
+  "mlSearch": "Search",
+  "@mlSearch": {
+    "description": "Label of the Media Library search field."
+  },
+  "mlEnqueue": "Enqueue",
+  "@mlEnqueue": {
+    "description": "Media Library button that appends the selected tracks to the playlist."
+  },
+  "mlCancelPrompt": "Press again to cancel",
+  "@mlCancelPrompt": {
+    "description": "Hint shown on the Add media button while a scan runs: pressing it again cancels the scan."
+  },
+  "mlRemoveFromLibrary": "Remove item(s) from Library",
+  "@mlRemoveFromLibrary": {
+    "description": "Media Library menu entry that removes the selected items from the library without deleting files."
+  },
+  "mlAddMediaButton": "Add media...",
+  "@mlAddMediaButton": {
+    "description": "Label of the Media Library button that adds folders. The trailing ellipsis marks that a dialog opens."
+  },
+  "mlAllArtists": "All Artists",
+  "@mlAllArtists": {
+    "description": "First entry of the artist list in the Media Library; selecting it shows every artist."
+  },
+  "mlAllAlbums": "All Albums",
+  "@mlAllAlbums": {
+    "description": "First entry of the album list in the Media Library; selecting it shows every album."
+  },
+  "mlAllPodcasts": "All Podcasts",
+  "@mlAllPodcasts": {
+    "description": "First entry of the podcast list in the Media Library's podcast view; selecting it shows the episodes of every podcast."
+  },
+  "mlColumnNumber": "#",
+  "@mlColumnNumber": {
+    "description": "Heading of the episode number column in the Media Library's podcast view."
+  },
+  "newEpisodeTitle": "{count, plural, =1{New episode} other{{count} new episodes}}",
+  "@newEpisodeTitle": {
+    "description": "Title of the notification that says a podcast has new episodes.",
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "newEpisodeLine": "{podcast}: {episode}",
+  "@newEpisodeLine": {
+    "description": "A line of the new-episode notification: the podcast, then the episode's title.",
+    "placeholders": {
+      "podcast": {"type": "String"},
+      "episode": {"type": "String"}
+    }
+  },
+  "newEpisodeMore": "and {count} more",
+  "@newEpisodeMore": {
+    "description": "Last line of the new-episode notification when there are more episodes than it lists.",
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "sourceRefreshTitle": "Background refresh",
+  "@sourceRefreshTitle": {
+    "description": "Heading of the source settings that say whether and how often a source is looked at again while Amped runs."
+  },
+  "sourceRefreshEnabled": "Refresh in the background",
+  "@sourceRefreshEnabled": {
+    "description": "Switch in a source's settings."
+  },
+  "sourceRefreshHint": "Looks at the source again while Amped runs. New podcast episodes are announced.",
+  "@sourceRefreshHint": {
+    "description": "Explains the background refresh switch."
+  },
+  "sourceRefreshEvery": "Refresh every",
+  "@sourceRefreshEvery": {
+    "description": "Label of the choice of how often a source is refreshed."
+  },
+  "sourceRefreshFirst": "First refresh after starting",
+  "@sourceRefreshFirst": {
+    "description": "Label of the choice of how long after Amped starts a source is first refreshed."
+  },
+  "sourceCompletedTitle": "Count an episode as played",
+  "@sourceCompletedTitle": {
+    "description": "Heading of the podcast source settings that say when an episode counts as played."
+  },
+  "sourceCompletedPercent": "From a percentage played",
+  "@sourceCompletedPercent": {
+    "description": "Choice: an episode counts as played once this share of it was heard."
+  },
+  "sourceCompletedRemaining": "When this much is left",
+  "@sourceCompletedRemaining": {
+    "description": "Choice: an episode counts as played once no more than this much time of it is left."
+  },
+  "sourceCompletedHint": "Played episodes are left out of the number of new episodes, and are not offered for resuming.",
+  "@sourceCompletedHint": {
+    "description": "Explains when an episode counts as played."
+  },
+  "percentValue": "{percent}%",
+  "@percentValue": {
+    "description": "A percentage.",
+    "placeholders": {
+      "percent": {"type": "int"}
+    }
+  },
+  "durationHours": "{count, plural, =1{1 hour} other{{count} hours}}",
+  "@durationHours": {
+    "description": "A length of time in hours.",
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "durationMinutes": "{count, plural, =1{1 minute} other{{count} minutes}}",
+  "@durationMinutes": {
+    "description": "A length of time in minutes.",
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "durationSeconds": "{count, plural, =1{1 second} other{{count} seconds}}",
+  "@durationSeconds": {
+    "description": "A length of time in seconds.",
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "artworkTitle": "Artwork",
+  "@artworkTitle": {
+    "description": "Title of the window that shows a picture from the Media Library."
+  },
+  "mlDetails": "Details",
+  "@mlDetails": {
+    "description": "Heading of the panel with the picture and description of a podcast or episode in the Media Library's podcast view; clicking it folds the panel away or shows it again."
+  },
+  "mlColumnTitle": "Title",
+  "@mlColumnTitle": {
+    "description": "Heading of the title column in the Media Library's list of music."
+  },
+  "mlColumnArtist": "Artist",
+  "@mlColumnArtist": {
+    "description": "Heading of the artist column in the Media Library's list of music."
+  },
+  "mlColumnAlbum": "Album",
+  "@mlColumnAlbum": {
+    "description": "Heading of the album column in the Media Library's list of music."
+  },
+  "mlColumnGenre": "Genre",
+  "@mlColumnGenre": {
+    "description": "Heading of the genre column in the Media Library's list of music."
+  },
+  "mlSectionAudiobooks": "Audiobooks",
+  "@mlSectionAudiobooks": {
+    "description": "Heading of the Media Library's source tree section with the audiobooks of servers."
+  },
+  "mlAllAudiobooks": "All Audiobooks",
+  "@mlAllAudiobooks": {
+    "description": "First entry of the book list in the Media Library's audiobook view; selecting it shows the parts of every book."
+  },
+  "mlColumnBook": "Book",
+  "@mlColumnBook": {
+    "description": "Heading of the column with the audiobook a part belongs to."
+  },
+  "mlColumnAlbums": "Albums",
+  "@mlColumnAlbums": {
+    "description": "Heading of the column with how many albums an artist has, in the Media Library's split panels."
+  },
+  "mlColumnTracks": "Tracks",
+  "@mlColumnTracks": {
+    "description": "Heading of the column with how many tracks an artist or album has, in the Media Library's split panels."
+  },
+  "mlAllWithCount": "All ({count})",
+  "@mlAllWithCount": {
+    "description": "First row of a split panel, standing for everything in it; the count is such as '3 artists'.",
+    "placeholders": {
+      "count": {"type": "String"}
+    }
+  },
+  "mlHideWatched": "Hide watched",
+  "@mlHideWatched": {"description": "Toggle in the Media Library that leaves out the movies, episodes, seasons and shows that were watched."},
+  "mlHideWatchedTip": "Leave out movies and episodes that were watched, and the seasons and shows made of them",
+  "@mlHideWatchedTip": {"description": "Tooltip of the toggle that hides what was watched."},
+  "mlHideListened": "Hide listened to",
+  "@mlHideListened": {"description": "Toggle in the Media Library that leaves out the podcast episodes and audiobook parts that were listened to."},
+  "mlHideListenedTip": "Leave out episodes and parts that were listened to, and the podcasts and books made of them",
+  "@mlHideListenedTip": {"description": "Tooltip of the toggle that hides what was listened to."},
+  "mlCoverSize": "Cover size",
+  "@mlCoverSize": {"description": "Tooltip of the arrow beside the covers button of the Media Library, which opens a slider for how big the covers are."},
+  "mlLayoutCovers": "Artist and album covers beside the tracks",
+  "@mlLayoutCovers": {"description": "Tooltip of the button that shows the Media Library as a grid of covers above the tracks."},
+  "mlLayoutBooksList": "Books beside the parts",
+  "@mlLayoutBooksList": {"description": "Tooltip of the Media Library button that lists the audiobooks beside their parts."},
+  "mlLayoutBooksSplit": "Author, series and book panels above the parts",
+  "@mlLayoutBooksSplit": {"description": "Tooltip of the Media Library button that shows panels of authors, series and books above the parts."},
+  "mlLayoutPodcastsList": "Podcasts beside the episodes",
+  "@mlLayoutPodcastsList": {"description": "Tooltip of the Media Library button that lists the podcasts beside their episodes."},
+  "mlLayoutShowsList": "Shows and seasons beside the episodes",
+  "@mlLayoutShowsList": {"description": "Tooltip of the Media Library button that lists TV shows and seasons beside the episodes."},
+  "mlLayoutShowsSplit": "Show and season panels above the episodes",
+  "@mlLayoutShowsSplit": {"description": "Tooltip of the Media Library button that shows panels of TV shows and seasons above the episodes."},
+  "mlLayoutMovies": "Movies only",
+  "@mlLayoutMovies": {"description": "Tooltip of the Media Library button that lists only the movies."},
+  "mlLayoutMovieCategories": "Category and playlist panels above the movies",
+  "@mlLayoutMovieCategories": {"description": "Tooltip of the Media Library button that shows a server's categories and playlists beside its movies."},
+  "mlColumnAired": "Aired",
+  "@mlColumnAired": {"description": "Heading of the column with when a movie or episode came out, in the Media Library."},
+  "mlColumnAdded": "Added",
+  "@mlColumnAdded": {"description": "Heading of the column with when an item was added to its server, in the Media Library."},
+  "mlColumnLastWatched": "Last watched",
+  "@mlColumnLastWatched": {"description": "Heading of the column with when a movie or episode was last watched, in the Media Library."},
+  "mlVideoSortName": "Name",
+  "@mlVideoSortName": {"description": "Choice of how movies and shows are ordered: by name."},
+  "mlVideoSortWatched": "Recently watched",
+  "@mlVideoSortWatched": {"description": "Choice of how movies and shows are ordered: the last watched first."},
+  "mlVideoSortAired": "Recently aired",
+  "@mlVideoSortAired": {"description": "Choice of how movies and shows are ordered: the newest first."},
+  "mlVideoSortAdded": "Recently added",
+  "@mlVideoSortAdded": {"description": "Choice of how movies and shows are ordered: the last added to the server first."},
+  "mlVideoSortTip": "Order by (click for the next)",
+  "@mlVideoSortTip": {"description": "Tooltip of the button that changes how movies and shows are ordered."},
+  "mlVideoFilterAll": "All",
+  "@mlVideoFilterAll": {"description": "Choice of which movies and shows are listed: all of them."},
+  "mlVideoFilterWatching": "Watching",
+  "@mlVideoFilterWatching": {"description": "Choice of which shows are listed: those with episodes watched and others still to watch."},
+  "mlVideoFilterInProgress": "In progress",
+  "@mlVideoFilterInProgress": {"description": "Choice of which movies are listed: those started and not finished."},
+  "mlVideoFilterUnwatched": "Unwatched",
+  "@mlVideoFilterUnwatched": {"description": "Choice of which movies and shows are listed: those with something not watched yet."},
+  "mlVideoFilterTip": "Show (click for the next)",
+  "@mlVideoFilterTip": {"description": "Tooltip of the button that changes which movies and shows are listed."},
+  "mlColumnCategory": "Category",
+  "@mlColumnCategory": {"description": "Heading of the panel of categories (genres) of movies in the Media Library."},
+  "mlColumnPlaylist": "Playlist",
+  "@mlColumnPlaylist": {"description": "Heading of the panel of a server's playlists in the Media Library."},
+  "mlColumnMovies": "Movies",
+  "@mlColumnMovies": {"description": "Heading of the count of movies in a panel of the Media Library."},
+  "mlCategoryCount": "{count, plural, =1{1 category} other{{count} categories}}",
+  "@mlCategoryCount": {"description": "How many categories.", "placeholders": {"count": {"type": "int"}}},
+  "mlPlaylistCount": "{count, plural, =1{1 playlist} other{{count} playlists}}",
+  "@mlPlaylistCount": {"description": "How many playlists.", "placeholders": {"count": {"type": "int"}}},
+  "mlLayoutBookCovers": "Book covers above the parts",
+  "@mlLayoutBookCovers": {"description": "Tooltip of the Media Library button that shows the audiobooks as a grid of covers above their parts."},
+  "mlLayoutPodcastCovers": "Podcast covers above the episodes",
+  "@mlLayoutPodcastCovers": {"description": "Tooltip of the Media Library button that shows the podcasts as a grid of covers above their episodes."},
+  "mlLayoutMovieCovers": "Category and playlist panels above the movie covers",
+  "@mlLayoutMovieCovers": {"description": "Tooltip of the Media Library button that shows movies as a grid of covers under the category and playlist panels."},
+  "mlLayoutShowCovers": "Covers of the shows, seasons and episodes",
+  "@mlLayoutShowCovers": {"description": "Tooltip of the Media Library button that shows TV shows, their seasons and their episodes as grids of covers."},
+  "mlLayoutEpisodes": "Episodes only",
+  "@mlLayoutEpisodes": {"description": "Tooltip of the Media Library button that lists only the episodes of TV shows."},
+  "mlLayoutTracks": "Tracks only",
+  "@mlLayoutTracks": {
+    "description": "Tooltip of the Media Library button that shows the tracks with no artists or albums beside them."
+  },
+  "mlLayoutBrowser": "Artists and albums beside the tracks",
+  "@mlLayoutBrowser": {
+    "description": "Tooltip of the Media Library button that lists the artists and their albums beside the tracks."
+  },
+  "mlLayoutSplit": "Artist and album panels above the tracks",
+  "@mlLayoutSplit": {
+    "description": "Tooltip of the Media Library button that shows the artists and the albums in two panels above the tracks."
+  },
+  "mlColumnAuthor": "Author",
+  "@mlColumnAuthor": {
+    "description": "Heading of the authors panel of the Media Library's audiobooks."
+  },
+  "mlColumnSeries": "Series",
+  "@mlColumnSeries": {
+    "description": "Heading of the series panel of the Media Library's audiobooks."
+  },
+  "mlColumnBooks": "Books",
+  "@mlColumnBooks": {
+    "description": "Heading of the column with how many books an author or series has."
+  },
+  "mlColumnParts": "Parts",
+  "@mlColumnParts": {
+    "description": "Heading of the column with how many parts (audio files) an author or book has."
+  },
+  "mlAuthorCount": "{count, plural, =1{1 author} other{{count} authors}}",
+  "@mlAuthorCount": {
+    "description": "How many authors, in the first row of the authors panel.",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "mlSeriesCount": "{count, plural, =1{1 series} other{{count} series}}",
+  "@mlSeriesCount": {
+    "description": "How many series, in the first row of the series panel.",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "mlBookCount": "{count, plural, =1{1 book} other{{count} books}}",
+  "@mlBookCount": {
+    "description": "How many books, in the first row of the books panel.",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "mlColumnYear": "Year",
+  "@mlColumnYear": {
+    "description": "Heading of the column with the year an album or book came out, in the Media Library's panels."
+  },
+  "mlColumnPodcast": "Podcast",
+  "@mlColumnPodcast": {
+    "description": "Heading of the column with the podcast an episode belongs to, in the Media Library's podcast view when episodes of several podcasts are listed."
+  },
+  "mlColumnEpisode": "Episode",
+  "@mlColumnEpisode": {
+    "description": "Heading of the episode title column in the Media Library's podcast view."
+  },
+  "mlColumnPublished": "Published",
+  "@mlColumnPublished": {
+    "description": "Heading of the release date column in the Media Library's podcast view."
+  },
+  "mlColumnLength": "Length",
+  "@mlColumnLength": {
+    "description": "Heading of the duration column in the Media Library's podcast view."
+  },
+  "mlColumnProgress": "Played",
+  "@mlColumnProgress": {
+    "description": "Heading of the column with how much of an episode was played, in the Media Library's podcast view."
+  },
+  "resumeTitle": "Resume playback",
+  "@resumeTitle": {
+    "description": "Title of the window that asks whether to continue a podcast episode where it was left off."
+  },
+  "resumePrompt": "You stopped \"{title}\" at {position}. Resume from there?",
+  "@resumePrompt": {
+    "description": "Question of the resume window.",
+    "placeholders": {
+      "title": {"type": "String"},
+      "position": {"type": "String", "example": "12:34"}
+    }
+  },
+  "resumeContinue": "Resume",
+  "@resumeContinue": {
+    "description": "Button of the resume window that continues from where the episode was left off."
+  },
+  "resumeStartOver": "Start over",
+  "@resumeStartOver": {
+    "description": "Button of the resume window that plays the episode from its beginning."
+  },
+  "mlSectionPlaylists": "Playlists",
+  "@mlSectionPlaylists": {
+    "description": "Heading of the Media Library's source tree section with the saved playlists."
+  },
+  "mlSectionStatistics": "Statistics",
+  "@mlSectionStatistics": {
+    "description": "Heading of the Media Library's source tree section with the play statistics."
+  },
+  "mlStatsMostPlayed": "Most played",
+  "@mlStatsMostPlayed": {
+    "description": "Media Library source that lists the songs played most often."
+  },
+  "mlStatsMostPlayedVideos": "Most played videos",
+  "@mlStatsMostPlayedVideos": {
+    "description": "Media Library source that lists the videos played most often."
+  },
+  "mlStatsMostPlayedPodcasts": "Most played podcasts",
+  "@mlStatsMostPlayedPodcasts": {
+    "description": "Media Library source that lists the podcasts played most often (episodes counted per podcast)."
+  },
+  "mlStatsRecentlyPlayed": "Recently played",
+  "@mlStatsRecentlyPlayed": {
+    "description": "Media Library source that lists the songs played last."
+  },
+  "mlStatsNothingPlayed": "Nothing played yet.",
+  "@mlStatsNothingPlayed": {
+    "description": "Shown in a play statistics list when nothing was played yet."
+  },
+  "mlStatsPlays": "{count, plural, =1{1 play} other{{count} plays}}",
+  "@mlStatsPlays": {
+    "description": "How often an item was played, in a play statistics list. {count} is the number of plays.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mlNewPlaylistRow": "New playlist...",
+  "@mlNewPlaylistRow": {
+    "description": "Media Library source tree entry that creates an empty playlist."
+  },
+  "mlNewPlaylistTitle": "New playlist",
+  "@mlNewPlaylistTitle": {
+    "description": "Title of the dialog that asks for the name of a new playlist."
+  },
+  "mlPlaylistCopyName": "{name} copy",
+  "@mlPlaylistCopyName": {
+    "description": "The name of a duplicated saved playlist. {name} is the original's name.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "mlMenuDuplicatePlaylist": "Duplicate",
+  "@mlMenuDuplicatePlaylist": {
+    "description": "Saved playlist context menu entry that makes a copy of the playlist."
+  },
+  "mlMenuAddToPlaylist": "Add to playlist",
+  "@mlMenuAddToPlaylist": {
+    "description": "Media Library context menu submenu that adds the selected tracks to a saved playlist."
+  },
+  "mlMenuNewPlaylist": "New playlist...",
+  "@mlMenuNewPlaylist": {
+    "description": "Entry of the Add to playlist submenu that asks for a name and saves the selected tracks as a new playlist."
+  },
+  "mlSavePlaylistRow": "Save current playlist...",
+  "@mlSavePlaylistRow": {
+    "description": "Row under the saved playlists in the Media Library's source tree; saves the player's playlist as a new saved playlist."
+  },
+  "mlImportPlaylistRow": "Import playlist...",
+  "@mlImportPlaylistRow": {
+    "description": "Row under the saved playlists in the Media Library's source tree; reads playlist files into new saved playlists."
+  },
+  "mlSavePlaylistTitle": "Save playlist",
+  "@mlSavePlaylistTitle": {
+    "description": "Title of the prompt for the name of a new saved playlist."
+  },
+  "mlPlaylistNamePrompt": "Name of the playlist:",
+  "@mlPlaylistNamePrompt": {
+    "description": "Text of the prompt for the name of a saved playlist."
+  },
+  "mlPlaylistDefaultName": "New playlist",
+  "@mlPlaylistDefaultName": {
+    "description": "Name suggested for a saved playlist."
+  },
+  "mlRenamePlaylistTitle": "Rename playlist",
+  "@mlRenamePlaylistTitle": {
+    "description": "Title of the prompt for the new name of a saved playlist."
+  },
+  "mlMenuRenamePlaylist": "Rename...",
+  "@mlMenuRenamePlaylist": {
+    "description": "Context menu item of a saved playlist in the Media Library that renames it."
+  },
+  "mlMenuExportPlaylist": "Export...",
+  "@mlMenuExportPlaylist": {
+    "description": "Context menu item of a saved playlist in the Media Library that writes it to a file."
+  },
+  "mlMenuDeletePlaylist": "Delete playlist",
+  "@mlMenuDeletePlaylist": {
+    "description": "Context menu item of a saved playlist in the Media Library that deletes it."
+  },
+  "mlExportPlaylistTitle": "Export playlist",
+  "@mlExportPlaylistTitle": {
+    "description": "Title of the file dialog that exports a saved playlist."
+  },
+  "mlImportPlaylistTitle": "Import playlists",
+  "@mlImportPlaylistTitle": {
+    "description": "Title of the file dialog that picks playlist files to import."
+  },
+  "mlSavePlaylistButton": "Save current playlist",
+  "@mlSavePlaylistButton": {
+    "description": "Button in the Media Library that saves the player's playlist as a saved playlist."
+  },
+  "mlSourceLocal": "Local",
+  "@mlSourceLocal": {
+    "description": "Name of the source in the Media Library's source tree that holds the music added from this computer."
+  },
+  "mlSectionLocal": "Library",
+  "@mlSectionLocal": {
+    "description": "Heading of the Media Library's source tree section with the local source."
+  },
+  "mlSectionVideos": "Videos",
+  "@mlSectionVideos": {
+    "description": "Heading of the Media Library's source tree section with the videos of each source."
+  },
+  "mlSourceMovies": "{name} - Movies",
+  "@mlSourceMovies": {
+    "description": "Media Library source under Videos: the movies of the server {name}.",
+    "placeholders": {"name": {"type": "String"}}
+  },
+  "mlSourceShows": "{name} - TV shows",
+  "@mlSourceShows": {
+    "description": "Media Library source under Videos: the TV shows of the server {name}.",
+    "placeholders": {"name": {"type": "String"}}
+  },
+  "mlColumnShow": "Show",
+  "@mlColumnShow": {"description": "Heading of the panel of TV shows in the Media Library."},
+  "mlColumnSeason": "Season",
+  "@mlColumnSeason": {"description": "Heading of the panel of seasons in the Media Library."},
+  "mlColumnSeasons": "Seasons",
+  "@mlColumnSeasons": {"description": "Heading of the count of a show's seasons."},
+  "mlColumnEpisodes": "Episodes",
+  "@mlColumnEpisodes": {"description": "Heading of the count of a season's episodes."},
+  "mlShowCount": "{count, plural, =1{1 show} other{{count} shows}}",
+  "@mlShowCount": {"description": "How many TV shows.", "placeholders": {"count": {"type": "int"}}},
+  "mlSeasonCount": "{count, plural, =1{1 season} other{{count} seasons}}",
+  "@mlSeasonCount": {"description": "How many seasons.", "placeholders": {"count": {"type": "int"}}},
+  "mlSourceAllVideos": "All videos",
+  "@mlSourceAllVideos": {
+    "description": "Name of the source in the Media Library's Videos section that lists the videos of all sources."
+  },
+  "mlSectionRemote": "Remote",
+  "@mlSectionRemote": {
+    "description": "Heading of the Media Library's source tree section with the remote sources that were added."
+  },
+  "mlSectionPodcasts": "Podcasts",
+  "@mlSectionPodcasts": {
+    "description": "Heading of the Media Library's source tree section with the podcasts that were added."
+  },
+  "mlSectionNoSources": "None added",
+  "@mlSectionNoSources": {
+    "description": "Shown under a Media Library source tree section that has no sources yet."
+  },
+  "mlSourceUnavailable": "This source can't be browsed yet.",
+  "@mlSourceUnavailable": {
+    "description": "Message in the Media Library's track pane when the selected source has no tracks to list."
+  },
+  "mlEmpty": "The library is empty. Click Add media... to add folders.",
+  "@mlEmpty": {
+    "description": "Message shown when the library has no tracks yet."
+  },
+  "mlScanning": "Scanning{dots} {count} files",
+  "@mlScanning": {
+    "description": "Status shown while the library scans folders. {dots} is an animated trailing dot string, {count} the files found so far.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "dots": {
+        "type": "String"
+      }
+    }
+  },
+  "mlTrackCount": "{count} items",
+  "@mlTrackCount": {
+    "description": "Status showing how many tracks the library list shows. {count} is the number of tracks.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mlMenuPlay": "{count, plural, =1{Play item} other{Play items}}",
+  "@mlMenuPlay": {
+    "description": "Media Library context menu entry that replaces the playlist with the selected tracks and plays them. {count} is how many tracks are selected.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mlMenuEnqueue": "{count, plural, =1{Enqueue item} other{Enqueue items}}",
+  "@mlMenuEnqueue": {
+    "description": "Media Library context menu entry that appends the selected tracks to the playlist. {count} is how many tracks are selected.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mlMenuRemove": "{count, plural, =1{Remove item from Library} other{Remove items from Library}}",
+  "@mlMenuRemove": {
+    "description": "Media Library context menu entry that removes the selected tracks from the library without deleting files. {count} is how many tracks are selected.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mlMenuMarkPlayed": "{count, plural, =1{Mark episode as played} other{Mark episodes as played}}",
+  "@mlMenuMarkPlayed": {
+    "description": "Media Library context menu entry that marks the selected podcast episodes as played.",
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "mlMenuMarkUnplayed": "{count, plural, =1{Mark episode as unplayed} other{Mark episodes as unplayed}}",
+  "@mlMenuMarkUnplayed": {
+    "description": "Media Library context menu entry that marks the selected podcast episodes as not played.",
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "mlMenuMarkBookPlayed": "{count, plural, =1{Mark book as finished} other{Mark books as finished}}",
+  "@mlMenuMarkBookPlayed": {
+    "description": "Media Library context menu entry that marks the selected audiobooks as finished.",
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "mlMenuMarkBookUnplayed": "{count, plural, =1{Mark book as not started} other{Mark books as not started}}",
+  "@mlMenuMarkBookUnplayed": {
+    "description": "Media Library context menu entry that marks the selected audiobooks as not started.",
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "mlMenuRefreshBooks": "Refresh audiobooks",
+  "@mlMenuRefreshBooks": {
+    "description": "Media Library context menu entry that loads an audiobook server's books again."
+  },
+  "mlMenuRefreshPodcast": "Refresh podcast",
+  "@mlMenuRefreshPodcast": {
+    "description": "Media Library context menu entry that loads a podcast's episodes from its server again."
+  },
+  "mlMenuBookmark": "{count, plural, =1{Bookmark item} other{Bookmark items}}",
+  "@mlMenuBookmark": {
+    "description": "Media Library context menu entry that bookmarks the selected tracks. {count} is how many tracks are selected.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mlMenuRate": "{count, plural, =1{Rate item} other{Rate items}}",
+  "@mlMenuRate": {
+    "description": "Media Library context menu entry that opens the rating submenu for the selected tracks. {count} is how many tracks are selected.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mlMenuExplore": "{count, plural, =1{Explore item folder} other{Explore items folders}}",
+  "@mlMenuExplore": {
+    "description": "Media Library context menu entry that shows the selected tracks in the system file manager. {count} is how many tracks are selected.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mlMenuGenerate": "Generate playlist",
+  "@mlMenuGenerate": {
+    "description": "Media Library context menu submenu whose entries enqueue a playlist built from the selected tracks."
+  },
+  "mlGenerateSameArtist": "More by the same artists",
+  "@mlGenerateSameArtist": {
+    "description": "Entry of the Generate playlist submenu: tracks by the artists of the selected tracks."
+  },
+  "mlGenerateSameAlbum": "From the same albums",
+  "@mlGenerateSameAlbum": {
+    "description": "Entry of the Generate playlist submenu: tracks of the albums of the selected tracks."
+  },
+  "mlGenerateSameGenre": "In the same genres",
+  "@mlGenerateSameGenre": {
+    "description": "Entry of the Generate playlist submenu: tracks in the genres of the selected tracks."
+  },
+  "mlGenerateSimilar": "Similar (artist, genre or album)",
+  "@mlGenerateSimilar": {
+    "description": "Entry of the Generate playlist submenu: tracks that share an artist, a genre or an album with the selected tracks, the closest first."
+  },
+  "mlMenuEditMetadata": "{count, plural, =1{Edit metadata for item...} other{Edit metadata for items...}}",
+  "@mlMenuEditMetadata": {
+    "description": "Media Library context menu entry that opens the metadata editor for the selected tracks. The trailing ellipsis marks that a dialog opens. {count} is how many tracks are selected.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mlMenuFileInfo": "{count, plural, =1{View file info...} other{View file info for items...}}",
+  "@mlMenuFileInfo": {
+    "description": "Media Library context menu entry that opens the file info dialog for each selected track in turn. The trailing ellipsis marks that a dialog opens. {count} is how many tracks are selected.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mlArtistCount": "{count, plural, =1{1 artist} other{{count} artists}}",
+  "@mlArtistCount": {
+    "description": "Part of the Media Library status line: how many artists are selected, shown before the album and track counts, e.g. \"1 artist, 3 albums, 16 tracks\". {count} is the number of selected artists.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mlAlbumCount": "{count, plural, =1{1 album} other{{count} albums}}",
+  "@mlAlbumCount": {
+    "description": "Part of the Media Library status line: how many albums are selected, e.g. \"1 artist, 3 albums, 16 tracks\". {count} is the number of selected albums.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mlSelectedTrackCount": "{count, plural, =1{1 track} other{{count} tracks}}",
+  "@mlSelectedTrackCount": {
+    "description": "Part of the Media Library status line: how many tracks are selected, or listed when only an artist or album is selected, e.g. \"1 artist, 3 albums, 16 tracks\". {count} is the number of tracks.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mlClearLibrary": "Clear Library",
+  "@mlClearLibrary": {
+    "description": "Media Library menu entry that removes every track from the library."
+  },
+  "mlOpenLibrary": "Open Media Library",
+  "@mlOpenLibrary": {
+    "description": "Menu entry that opens the Media Library window."
+  },
+  "mlCloseLibrary": "Close Media Library",
+  "@mlCloseLibrary": {
+    "description": "Menu entry that closes the Media Library window."
+  },
+  "mlPreferences": "Media Library Preferences...",
+  "@mlPreferences": {
+    "description": "Menu entry that opens the Media Library preferences. The trailing ellipsis marks that a window opens."
+  },
+  "startStopPlugin": "Start/Stop plug-in",
+  "@startStopPlugin": {
+    "description": "Menu entry that starts or stops the selected visualization plug-in."
+  },
+  "configurePlugin": "Configure plug-in...",
+  "@configurePlugin": {
+    "description": "Menu entry that opens the selected plug-in's configuration. The trailing ellipsis marks that a window opens."
+  },
+  "selectPlugin": "Select plug-in...",
+  "@selectPlugin": {
+    "description": "Menu entry that chooses the visualization plug-in. The trailing ellipsis marks that a window opens."
+  },
+  "mainWindow": "Main Window",
+  "@mainWindow": {
+    "description": "Name of the Main Window in the Windows menu."
+  },
+  "mediaLibrary": "Media Library",
+  "@mediaLibrary": {
+    "description": "Name of the Media Library window in the Windows menu."
+  },
+  "skinWindow": "Skin Window",
+  "@skinWindow": {
+    "description": "Generic name for a window a modern skin defines of its own."
+  },
+  "skinSettings": "Skin Settings…",
+  "@skinSettings": {
+    "description": "Menu entry that opens the active skin's own settings window."
+  },
+  "skinWindows": "Skin Windows",
+  "@skinWindows": {
+    "description": "Heading of the windows the active modern skin defines of its own, in the Options menu and Preferences."
+  },
+  "skinWindowsHint": "Panels this skin brings of its own, such as its color and opacity settings.",
+  "@skinWindowsHint": {
+    "description": "Explains the list of the skin's own windows in Skin Settings."
+  },
+  "skinWindowsHintInactive": "Put this skin on to open the panels it brings of its own.",
+  "@skinWindowsHintInactive": {
+    "description": "Shown instead of the skin's windows while another skin is on."
+  },
+  "modernSettingsWindows": "Windows",
+  "@modernSettingsWindows": {
+    "description": "Tab of Skin Settings that lists the skin's own windows."
+  },
+  "modernSettingsSkinOptions": "Skin options",
+  "@modernSettingsSkinOptions": {
+    "description": "Heading of the switches a skin's own windows carry, listed in Skin Settings."
+  },
+  "thinger": "Thinger",
+  "@thinger": {
+    "description": "Name of the Thinger window, the classic player combined browser, in the Windows menu."
+  },
+  "ampedEqualizerWindow": "Amped Equalizer",
+  "@ampedEqualizerWindow": {
+    "description": "Native window title of the Equalizer window."
+  },
+  "ampedPlaylistWindow": "Amped Playlist Editor",
+  "@ampedPlaylistWindow": {
+    "description": "Native window title of the Playlist Editor window."
+  },
+  "ampedVideoWindow": "Amped Video",
+  "@ampedVideoWindow": {
+    "description": "Native window title of the Video window."
+  },
+  "ampedLibraryWindow": "Amped Library",
+  "@ampedLibraryWindow": {
+    "description": "Native window title of the Media Library window."
+  },
+  "ampedThingerWindow": "Amped Thinger",
+  "@ampedThingerWindow": {
+    "description": "Native window title of the Thinger window."
+  },
+  "ampedVisualizationWindow": "Amped Visualization",
+  "@ampedVisualizationWindow": {
+    "description": "Native window title of the Visualization window."
+  },
+  "ampedAlbumArtWindow": "Amped Album Art",
+  "@ampedAlbumArtWindow": {
+    "description": "Native window title of the Album Art window."
+  },
+  "albumArt": "Album Art",
+  "@albumArt": {
+    "description": "Name of the Album Art window in menus."
+  },
+  "refreshAlbumArt": "Refresh album art",
+  "@refreshAlbumArt": {
+    "description": "Album Art menu entry that reloads the artwork for the current track."
+  },
+  "getAlbumArt": "Get album art",
+  "@getAlbumArt": {
+    "description": "Album Art menu entry that downloads artwork for the current track."
+  },
+  "openAlbumArtFolder": "Open folder",
+  "@openAlbumArtFolder": {
+    "description": "Album Art menu entry that opens the folder holding the artwork in the file manager."
+  },
+  "lockAspectRatio": "Lock aspect ratio",
+  "@lockAspectRatio": {
+    "description": "Album Art option that keeps the window square-proportioned while it is resized."
+  },
+  "ampedPresetsTitle": "Amped EQ Presets",
+  "@ampedPresetsTitle": {
+    "description": "Title of the equalizer presets dialog."
+  },
+  "ampedAutoLoadPresetsTitle": "Amped EQ Auto-load Presets",
+  "@ampedAutoLoadPresetsTitle": {
+    "description": "Title of the equalizer auto-load presets dialog."
+  },
+  "ampedPreferencesTitle": "Amped Preferences",
+  "@ampedPreferencesTitle": {
+    "description": "Title of the Preferences window."
+  },
+  "aboutAmpedTitle": "About Amped",
+  "@aboutAmpedTitle": {
+    "description": "Title of the About dialog."
+  },
+  "configureVisualizationTitle": "Configure Visualization",
+  "@configureVisualizationTitle": {
+    "description": "Title of the visualization plug-in configuration dialog."
+  },
+  "settingsUnavailable": "{page} settings are not available yet.",
+  "@settingsUnavailable": {
+    "description": "Placeholder shown on a Preferences page that is not built yet. {page} is the page name.",
+    "placeholders": {
+      "page": {
+        "type": "String"
+      }
+    }
+  },
+  "generalPreferences": "General Preferences",
+  "@generalPreferences": {
+    "description": "Preferences page for general options."
+  },
+  "fileTypes": "File Types",
+  "@fileTypes": {
+    "description": "Preferences page that chooses which file types open with Amped."
+  },
+  "playlist": "Playlist",
+  "@playlist": {
+    "description": "Preferences page and generic name for the playlist."
+  },
+  "titles": "Titles",
+  "@titles": {
+    "description": "Preferences page for how track titles are formatted."
+  },
+  "stationInfo": "Station Info",
+  "@stationInfo": {
+    "description": "Preferences page for internet radio station information."
+  },
+  "localization": "Localization",
+  "@localization": {
+    "description": "Preferences page for the interface language."
+  },
+  "skinsInstalled": "Installed",
+  "@skinsInstalled": {
+    "description": "Tab of the skins preferences that lists installed skins."
+  },
+  "skinsOnline": "Browser",
+  "@skinsOnline": {
+    "description": "Tab of the skins preferences that shows the online skin browser."
+  },
+  "modernSettings": "Skin Settings",
+  "@modernSettings": {
+    "description": "Tab of the skins preferences for the active modern skin's options and color themes."
+  },
+  "plugins": "Plug-ins",
+  "@plugins": {
+    "description": "Preferences section that lists plug-ins."
+  },
+  "input": "Input",
+  "@input": {
+    "description": "Plug-in category: input plug-ins that decode audio formats."
+  },
+  "output": "Output",
+  "@output": {
+    "description": "Plug-in category: output plug-ins that play audio."
+  },
+  "dspEffect": "DSP/Effect",
+  "@dspEffect": {
+    "description": "Plug-in category: DSP and effect plug-ins that change the audio signal."
+  },
+  "generalPurpose": "General Purpose",
+  "@generalPurpose": {
+    "description": "Plug-in category: general purpose plug-ins."
+  },
+  "modernSkin": "Modern skin",
+  "@modernSkin": {
+    "description": "Label that marks a skin as a modern (Wasabi 3 and 5, Wasabi) skin."
+  },
+  "classicSkin": "Classic skin",
+  "@classicSkin": {
+    "description": "Label that marks a skin as an original bitmap skin."
+  },
+  "bampSkin": "Bamp skin",
+  "@bampSkin": {
+    "description": "Label that marks a skin as one made for Bamp and converted to classic bitmaps."
+  },
+  "audaciousSkin": "Audacious skin",
+  "@audaciousSkin": {
+    "description": "Label that marks a skin as one made for Audacious and converted to classic bitmaps."
+  },
+  "skinInstallHint": "You can also open a .wsz or .wal file with Amped, or drop it on the dock icon or any Amped window.",
+  "@skinInstallHint": {
+    "description": "Instructions for installing a skin archive."
+  },
+  "addEllipsis": "Add...",
+  "@addEllipsis": {
+    "description": "Button that opens a chooser to add an item. The trailing ellipsis marks that a dialog opens."
+  },
+  "visualizationPlugins": "Visualization plug-ins",
+  "@visualizationPlugins": {
+    "description": "Heading of the list of visualization plug-ins."
+  },
+  "configureActivePlugin": "Configure active plug-in",
+  "@configureActivePlugin": {
+    "description": "Button that opens the configuration of the active plug-in."
+  },
+  "start": "Start",
+  "@start": {
+    "description": "Button that starts the selected plug-in."
+  },
+  "ampedTagline": "Crank it up.",
+  "@ampedTagline": {
+    "description": "Tagline shown under the app name in the About dialog."
+  },
+  "macAboutMenu": "About Amped",
+  "@macAboutMenu": {
+    "description": "macOS application menu entry that opens the About dialog."
+  },
+  "macHideMenu": "Hide Amped",
+  "@macHideMenu": {
+    "description": "macOS application menu entry that hides the app."
+  },
+  "macQuitMenu": "Quit Amped",
+  "@macQuitMenu": {
+    "description": "macOS application menu entry that quits the app."
+  },
+  "openAction": "Open",
+  "@openAction": {
+    "description": "Confirmation button of an open dialog."
+  },
+  "close": "Close",
+  "@close": {
+    "description": "Button that closes a window or dialog."
+  },
+  "noPresets": "No presets",
+  "@noPresets": {
+    "description": "Message shown when there are no equalizer presets."
+  },
+  "presetName": "Preset name",
+  "@presetName": {
+    "description": "Label of the field for naming an equalizer preset."
+  },
+  "defaultPreset": "Default",
+  "@defaultPreset": {
+    "description": "Name of the built-in equalizer preset that has no adjustment."
+  },
+  "enterPresetName": "Enter a preset name.",
+  "@enterPresetName": {
+    "description": "Validation message shown when saving a preset without a name."
+  },
+  "pluginNoConfiguration": "This plug-in has no configuration.",
+  "@pluginNoConfiguration": {
+    "description": "Message shown when a plug-in has no configuration dialog."
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "Confirmation button of a dialog."
+  },
+  "defaults": "Defaults",
+  "@defaults": {
+    "description": "Button that restores settings to their default values."
+  },
+  "color": "Color",
+  "@color": {
+    "description": "Label of a color setting."
+  },
+  "red": "Red",
+  "@red": {
+    "description": "Label of the red channel of a color."
+  },
+  "green": "Green",
+  "@green": {
+    "description": "Label of the green channel of a color."
+  },
+  "blue": "Blue",
+  "@blue": {
+    "description": "Label of the blue channel of a color."
+  },
+  "eqPresetClassical": "Classical",
+  "@eqPresetClassical": {
+    "description": "Name of the built-in \"Classical\" equalizer preset, as in the classic player's preset list."
+  },
+  "eqPresetClub": "Club",
+  "@eqPresetClub": {
+    "description": "Name of the built-in \"Club\" equalizer preset, as in the classic player's preset list."
+  },
+  "eqPresetDance": "Dance",
+  "@eqPresetDance": {
+    "description": "Name of the built-in \"Dance\" equalizer preset, as in the classic player's preset list."
+  },
+  "eqPresetFlat": "Flat",
+  "@eqPresetFlat": {
+    "description": "Name of the built-in \"Flat\" equalizer preset, as in the classic player's preset list."
+  },
+  "eqPresetLaptop": "Laptop speakers/headphones",
+  "@eqPresetLaptop": {
+    "description": "Name of the built-in \"Laptop speakers/headphones\" equalizer preset, as in the classic player's preset list."
+  },
+  "eqPresetLargeHall": "Large hall",
+  "@eqPresetLargeHall": {
+    "description": "Name of the built-in \"Large hall\" equalizer preset, as in the classic player's preset list."
+  },
+  "eqPresetParty": "Party",
+  "@eqPresetParty": {
+    "description": "Name of the built-in \"Party\" equalizer preset, as in the classic player's preset list."
+  },
+  "eqPresetPop": "Pop",
+  "@eqPresetPop": {
+    "description": "Name of the built-in \"Pop\" equalizer preset, as in the classic player's preset list."
+  },
+  "eqPresetReggae": "Reggae",
+  "@eqPresetReggae": {
+    "description": "Name of the built-in \"Reggae\" equalizer preset, as in the classic player's preset list."
+  },
+  "eqPresetRock": "Rock",
+  "@eqPresetRock": {
+    "description": "Name of the built-in \"Rock\" equalizer preset, as in the classic player's preset list."
+  },
+  "eqPresetSoft": "Soft",
+  "@eqPresetSoft": {
+    "description": "Name of the built-in \"Soft\" equalizer preset, as in the classic player's preset list."
+  },
+  "eqPresetSka": "Ska",
+  "@eqPresetSka": {
+    "description": "Name of the built-in \"Ska\" equalizer preset, as in the classic player's preset list."
+  },
+  "eqPresetFullBass": "Full Bass",
+  "@eqPresetFullBass": {
+    "description": "Name of the built-in \"Full Bass\" equalizer preset, as in the classic player's preset list."
+  },
+  "eqPresetSoftRock": "Soft Rock",
+  "@eqPresetSoftRock": {
+    "description": "Name of the built-in \"Soft Rock\" equalizer preset, as in the classic player's preset list."
+  },
+  "eqPresetFullTreble": "Full Treble",
+  "@eqPresetFullTreble": {
+    "description": "Name of the built-in \"Full Treble\" equalizer preset, as in the classic player's preset list."
+  },
+  "eqPresetFullBassTreble": "Full Bass & Treble",
+  "@eqPresetFullBassTreble": {
+    "description": "Name of the built-in \"Full Bass & Treble\" equalizer preset, as in the classic player's preset list."
+  },
+  "eqPresetLive": "Live",
+  "@eqPresetLive": {
+    "description": "Name of the built-in \"Live\" equalizer preset, as in the classic player's preset list."
+  },
+  "eqPresetTechno": "Techno",
+  "@eqPresetTechno": {
+    "description": "Name of the built-in \"Techno\" equalizer preset, as in the classic player's preset list."
+  },
+  "eqPresetHall": "Hall",
+  "@eqPresetHall": {
+    "description": "Name of the built-in \"Hall\" equalizer preset, as in the classic player's preset list."
+  },
+  "eqPresetRoom": "Room",
+  "@eqPresetRoom": {
+    "description": "Name of the built-in \"Room\" equalizer preset, as in the classic player's preset list."
+  },
+  "eqPresetArena": "Arena",
+  "@eqPresetArena": {
+    "description": "Name of the built-in \"Arena\" equalizer preset, as in the classic player's preset list."
+  },
+  "eqPresetStudio": "Studio",
+  "@eqPresetStudio": {
+    "description": "Name of the built-in \"Studio\" equalizer preset, as in the classic player's preset list."
+  },
+  "eqPresetStadium": "Stadium",
+  "@eqPresetStadium": {
+    "description": "Name of the built-in \"Stadium\" equalizer preset, as in the classic player's preset list."
+  },
+  "eqPresetSpace": "Space",
+  "@eqPresetSpace": {
+    "description": "Name of the built-in \"Space\" equalizer preset, as in the classic player's preset list."
+  },
+  "addSkinsTitle": "Add Skins",
+  "@addSkinsTitle": {
+    "description": "Title of the dialog for choosing skin files to install."
+  },
+  "audioFiles": "Audio files",
+  "@audioFiles": {
+    "description": "File type filter in file dialogs for audio files."
+  },
+  "videoFiles": "Video files",
+  "@videoFiles": {
+    "description": "File type filter in file dialogs for video files."
+  },
+  "videoAutoOpen": "Show the video window when a video starts",
+  "@videoAutoOpen": {
+    "description": "Video preference: open the video window automatically when a video starts playing."
+  },
+  "videoAutoClose": "Hide the video window when the video stops",
+  "@videoAutoClose": {
+    "description": "Video preference: close the video window automatically when the video stops."
+  },
+  "videoStopOnClose": "Stop playback when the video window is closed",
+  "@videoStopOnClose": {
+    "description": "Video preference: stop playback when the video window is closed."
+  },
+  "videoStopOnCloseHint": "Hold Shift while closing the window to keep playing.",
+  "@videoStopOnCloseHint": {
+    "description": "Hint under the stop-on-close video preference explaining the Shift shortcut."
+  },
+  "playlistFiles": "Playlist files",
+  "@playlistFiles": {
+    "description": "File type filter in file dialogs for playlist files."
+  },
+  "allFiles": "All files (*.*)",
+  "@allFiles": {
+    "description": "File type filter in file dialogs that matches every file. The pattern in parentheses is literal."
+  },
+  "allSupportedTypes": "All supported types",
+  "@allSupportedTypes": {
+    "description": "File type filter in file dialogs that matches every format Amped can play."
+  },
+  "skinFiles": "skins (*.wsz;*.wal)",
+  "@skinFiles": {
+    "description": "File type filter in file dialogs for skin archives. The patterns in parentheses are literal."
+  },
+  "openFilesTitle": "Open file(s)",
+  "@openFilesTitle": {
+    "description": "Title of the dialog for choosing files to open."
+  },
+  "openFolderTitle": "Open folder",
+  "@openFolderTitle": {
+    "description": "Title of the dialog for choosing a folder to open."
+  },
+  "openUrlTitle": "Open URL",
+  "@openUrlTitle": {
+    "description": "Title of the dialog for entering a URL to open."
+  },
+  "addFilesToPlaylistTitle": "Add file(s) to playlist",
+  "@addFilesToPlaylistTitle": {
+    "description": "Title of the dialog for choosing files to add to the playlist."
+  },
+  "addFolderToPlaylistTitle": "Add folder to playlist",
+  "@addFolderToPlaylistTitle": {
+    "description": "Title of the dialog for choosing a folder to add to the playlist."
+  },
+  "addUrlToPlaylistTitle": "Add URL to playlist",
+  "@addUrlToPlaylistTitle": {
+    "description": "Title of the dialog for entering a URL to add to the playlist."
+  },
+  "loadPlaylistTitle": "Load playlist",
+  "@loadPlaylistTitle": {
+    "description": "Title of the dialog for choosing a playlist file to load."
+  },
+  "m3uPlaylistType": "M3U Playlist (*.m3u)",
+  "@m3uPlaylistType": {
+    "description": "Save dialog file type for M3U playlists. The pattern in parentheses is literal."
+  },
+  "plsPlaylistType": "PLS Playlist (*.pls)",
+  "@plsPlaylistType": {
+    "description": "Save dialog file type for PLS playlists. The pattern in parentheses is literal."
+  },
+  "m3u8PlaylistType": "M3U8 Playlist (*.m3u8)",
+  "@m3u8PlaylistType": {
+    "description": "Save dialog file type for M3U8 (UTF-8 M3U) playlists. The pattern in parentheses is literal."
+  },
+  "savePlaylistTitle": "Save playlist",
+  "@savePlaylistTitle": {
+    "description": "Title of the dialog for saving the playlist to a file."
+  },
+  "eqFiles": "EQ files (*.eqf)",
+  "@eqFiles": {
+    "description": "File type filter in file dialogs for equalizer preset files. The pattern in parentheses is literal."
+  },
+  "loadEqFileTitle": "Load EQ file",
+  "@loadEqFileTitle": {
+    "description": "Title of the dialog for choosing an equalizer preset file to load."
+  },
+  "saveEqFileTitle": "Save EQ file",
+  "@saveEqFileTitle": {
+    "description": "Title of the dialog for saving equalizer presets to a file."
+  },
+  "saveAsTypeLabel": "Save as type:",
+  "@saveAsTypeLabel": {
+    "description": "Label of the file type selector in save dialogs."
+  },
+  "enterUrlPrompt": "Enter the URL of a file to play:",
+  "@enterUrlPrompt": {
+    "description": "Prompt above the URL field in the open URL dialog."
+  },
+  "jumpToFileTitle": "Jump to file",
+  "@jumpToFileTitle": {
+    "description": "Title of the Jump to file dialog, which finds a track in the playlist by typing."
+  },
+  "jumpToFileHint": "Search the playlist",
+  "@jumpToFileHint": {
+    "description": "Placeholder in the search field of the Jump to file dialog."
+  },
+  "jumpToFileNoMatches": "No matches",
+  "@jumpToFileNoMatches": {
+    "description": "Message shown in Jump to file when nothing matches."
+  },
+  "fileInfoTitle": "File Info",
+  "@fileInfoTitle": {
+    "description": "Title of the file info dialog."
+  },
+  "basicInfo": "Basic Info",
+  "@basicInfo": {
+    "description": "Tab of the file info dialog with the common tags."
+  },
+  "advancedTab": "Advanced",
+  "@advancedTab": {
+    "description": "Tab of the file info dialog with raw tag details."
+  },
+  "metadataGroup": "Metadata",
+  "@metadataGroup": {
+    "description": "Group heading in the file info dialog for tags."
+  },
+  "formatInfoGroup": "Format Info",
+  "@formatInfoGroup": {
+    "description": "Group heading in the file info dialog for technical format details."
+  },
+  "replayGainGroup": "Replay Gain",
+  "@replayGainGroup": {
+    "description": "Group heading in the file info dialog for ReplayGain loudness values."
+  },
+  "tagTrack": "Track #",
+  "@tagTrack": {
+    "description": "Label of the track number field. The number sign stands for 'number'."
+  },
+  "tagDisc": "Disc #",
+  "@tagDisc": {
+    "description": "Label of the disc number field. The number sign stands for 'number'."
+  },
+  "tagBpm": "BPM",
+  "@tagBpm": {
+    "description": "Label of the beats-per-minute field."
+  },
+  "tagTitle": "Title",
+  "@tagTitle": {
+    "description": "Label of the track title field."
+  },
+  "tagArtist": "Artist",
+  "@tagArtist": {
+    "description": "Label of the artist field."
+  },
+  "tagAlbum": "Album",
+  "@tagAlbum": {
+    "description": "Label of the album field."
+  },
+  "tagAlbumArtist": "Album Artist",
+  "@tagAlbumArtist": {
+    "description": "Label of the album artist field."
+  },
+  "tagYear": "Year",
+  "@tagYear": {
+    "description": "Label of the release year field."
+  },
+  "tagGenre": "Genre",
+  "@tagGenre": {
+    "description": "Label of the genre field."
+  },
+  "tagComment": "Comment",
+  "@tagComment": {
+    "description": "Label of the comment field."
+  },
+  "tagComposer": "Composer",
+  "@tagComposer": {
+    "description": "Label of the composer field."
+  },
+  "tagPublisher": "Publisher",
+  "@tagPublisher": {
+    "description": "Label of the publisher field."
+  },
+  "tagAcoustIdFingerprint": "AcoustID Fingerprint",
+  "@tagAcoustIdFingerprint": {
+    "description": "Label of the field holding the file's AcoustID audio fingerprint."
+  },
+  "genreListTooltip": "Genres",
+  "@genreListTooltip": {
+    "description": "Tooltip of the button that opens the list of standard genres."
+  },
+  "formatMp3": "MPEG audio",
+  "@formatMp3": {
+    "description": "Name of the MP3 container shown in the file info format details."
+  },
+  "formatFlac": "FLAC",
+  "@formatFlac": {
+    "description": "Name of the FLAC format shown in the file info format details."
+  },
+  "formatOggVorbis": "Ogg Vorbis",
+  "@formatOggVorbis": {
+    "description": "Name of the Ogg Vorbis format shown in the file info format details."
+  },
+  "formatOggOpus": "Ogg Opus",
+  "@formatOggOpus": {
+    "description": "Name of the Ogg Opus format shown in the file info format details."
+  },
+  "formatOggSpeex": "Ogg Speex",
+  "@formatOggSpeex": {
+    "description": "Name of the Ogg Speex format shown in the file info format details."
+  },
+  "formatOggFlac": "Ogg FLAC",
+  "@formatOggFlac": {
+    "description": "Name of the Ogg FLAC format shown in the file info format details."
+  },
+  "formatApeTagged": "APE-tagged audio",
+  "@formatApeTagged": {
+    "description": "Name shown in the file info format details for Monkey's Audio, Musepack, WavPack, TTA and TAK files, whose tags are APEv2."
+  },
+  "formatWav": "WAV",
+  "@formatWav": {
+    "description": "Name of the WAV format shown in the file info format details."
+  },
+  "formatUnknown": "Unknown format",
+  "@formatUnknown": {
+    "description": "Shown in the file info format details when the file's format is not recognized."
+  },
+  "formatInfoTags": "Tags: {tags}",
+  "@formatInfoTags": {
+    "description": "Format details line listing the tag formats in the file. {tags} is a comma-separated list such as ID3v2.",
+    "placeholders": {
+      "tags": {
+        "type": "String"
+      }
+    }
+  },
+  "formatInfoNoTags": "Tags: none",
+  "@formatInfoNoTags": {
+    "description": "Format details line shown when the file has no tags."
+  },
+  "formatInfoSize": "Size: {bytes} bytes",
+  "@formatInfoSize": {
+    "description": "Format details line with the file size. {bytes} is the size in bytes.",
+    "placeholders": {
+      "bytes": {
+        "type": "int"
+      }
+    }
+  },
+  "formatInfoLength": "Length: {seconds} seconds",
+  "@formatInfoLength": {
+    "description": "Format details line with the track length. {seconds} is the length in seconds.",
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "formatInfoBitrate": "Bitrate: {kbps} kbps",
+  "@formatInfoBitrate": {
+    "description": "Format details line with the bitrate. {kbps} is kilobits per second.",
+    "placeholders": {
+      "kbps": {
+        "type": "int"
+      }
+    }
+  },
+  "formatInfoSampleRate": "Sample rate: {hz} Hz",
+  "@formatInfoSampleRate": {
+    "description": "Format details line with the sample rate. {hz} is hertz.",
+    "placeholders": {
+      "hz": {
+        "type": "int"
+      }
+    }
+  },
+  "channelsMono": "Mono",
+  "@channelsMono": {
+    "description": "Format details value for a one-channel file."
+  },
+  "channelsStereo": "Stereo",
+  "@channelsStereo": {
+    "description": "Format details value for a two-channel file."
+  },
+  "channelsCount": "{count} channels",
+  "@channelsCount": {
+    "description": "Format details value for a file with another number of channels. {count} is the channel count.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "replayGainTrack": "Track gain: {gain}",
+  "@replayGainTrack": {
+    "description": "Format details line with the track's ReplayGain value. {gain} is the formatted gain, such as -6.2 dB.",
+    "placeholders": {
+      "gain": {
+        "type": "String"
+      }
+    }
+  },
+  "replayGainAlbum": "Album gain: {gain}",
+  "@replayGainAlbum": {
+    "description": "Format details line with the album's ReplayGain value. {gain} is the formatted gain, such as -6.2 dB.",
+    "placeholders": {
+      "gain": {
+        "type": "String"
+      }
+    }
+  },
+  "fileInfoReadError": "Can't read this file's tags: {error}",
+  "@fileInfoReadError": {
+    "description": "Error shown when a file's tags can't be read. {error} is the technical reason.",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "fileInfoWriteError": "Couldn't save the tags: {error}",
+  "@fileInfoWriteError": {
+    "description": "Error shown when tags can't be saved to a file. {error} is the technical reason.",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "fileInfoNoRawTags": "This file has no tags.",
+  "@fileInfoNoRawTags": {
+    "description": "Message shown in the advanced tab when the file has no tags to list."
+  },
+  "artworkTab": "Artwork",
+  "@artworkTab": {
+    "description": "Tab of the file info dialog for cover art."
+  },
+  "id3v1Tab": "ID3v1",
+  "@id3v1Tab": {
+    "description": "Tab of the file info dialog for the ID3v1 tag. ID3v1 is a format name."
+  },
+  "id3v2Tab": "ID3v2",
+  "@id3v2Tab": {
+    "description": "Tab of the file info dialog for the ID3v2 tag. ID3v2 is a format name."
+  },
+  "includeId3v1": "Include ID3v1 tag in file",
+  "@includeId3v1": {
+    "description": "Checkbox that writes an ID3v1 tag into the file when saving."
+  },
+  "includeId3v2": "Include ID3v2 tag in file",
+  "@includeId3v2": {
+    "description": "Checkbox that writes an ID3v2 tag into the file when saving."
+  },
+  "copyToId3v1": "Copy to ID3v1",
+  "@copyToId3v1": {
+    "description": "Button that copies the current fields into the ID3v1 tag."
+  },
+  "copyToId3v2": "Copy to ID3v2",
+  "@copyToId3v2": {
+    "description": "Button that copies the current fields into the ID3v2 tag."
+  },
+  "artworkEditorGroup": "Artwork editor",
+  "@artworkEditorGroup": {
+    "description": "Group heading of the artwork editor in the file info dialog."
+  },
+  "artworkTypeLabel": "Artwork type:",
+  "@artworkTypeLabel": {
+    "description": "Label of the selector that chooses what kind of picture an artwork is."
+  },
+  "loadArtwork": "Load Artwork...",
+  "@loadArtwork": {
+    "description": "Button that loads an image file as artwork. The trailing ellipsis marks that a dialog opens."
+  },
+  "uploadArtwork": "Choose...",
+  "@uploadArtwork": {
+    "description": "Button that opens a chooser to pick an image. The trailing ellipsis marks that a dialog opens."
+  },
+  "downloadArtwork": "Download",
+  "@downloadArtwork": {
+    "description": "Button that downloads artwork for the file."
+  },
+  "artworkStoredInDatabase": "This file can't hold artwork, so the cover was kept in Amped's database.",
+  "@artworkStoredInDatabase": {
+    "description": "Notice shown when the file format can't hold artwork, so the cover is stored in Amped's own database instead."
+  },
+  "artworkNotFound": "No artwork found. Check the Artist and Album fields.",
+  "@artworkNotFound": {
+    "description": "Message shown when an artwork search finds nothing."
+  },
+  "changeArtwork": "Change...",
+  "@changeArtwork": {
+    "description": "Button that replaces the current artwork. The trailing ellipsis marks that a dialog opens."
+  },
+  "saveArtworkAs": "Save As...",
+  "@saveArtworkAs": {
+    "description": "Button that saves the artwork to an image file. The trailing ellipsis marks that a dialog opens."
+  },
+  "deleteArtwork": "Delete",
+  "@deleteArtwork": {
+    "description": "Button that removes the artwork."
+  },
+  "noImage": "(no image)",
+  "@noImage": {
+    "description": "Placeholder shown where artwork would be when there is none."
+  },
+  "artworkDetails": "{type}: {width}x{height}, origin: {origin}, type: {format}",
+  "@artworkDetails": {
+    "description": "Details line under an artwork. {type} is the artwork type, {width} and {height} are pixel sizes, {origin} says where it is stored and {format} is the image format.",
+    "placeholders": {
+      "type": {
+        "type": "String"
+      },
+      "width": {
+        "type": "String"
+      },
+      "height": {
+        "type": "String"
+      },
+      "origin": {
+        "type": "String"
+      },
+      "format": {
+        "type": "String"
+      }
+    }
+  },
+  "artworkOriginEmbedded": "embedded",
+  "@artworkOriginEmbedded": {
+    "description": "Artwork origin value meaning the picture is embedded in the file."
+  },
+  "unknownMime": "unknown",
+  "@unknownMime": {
+    "description": "Shown in artwork details when the image format is unknown."
+  },
+  "imageFiles": "Image Files",
+  "@imageFiles": {
+    "description": "File type filter in file dialogs for image files."
+  },
+  "loadArtworkTitle": "Load Artwork",
+  "@loadArtworkTitle": {
+    "description": "Title of the dialog for choosing an artwork image."
+  },
+  "saveArtworkTitle": "Save Artwork",
+  "@saveArtworkTitle": {
+    "description": "Title of the dialog for saving artwork to an image file."
+  },
+  "jpegFiles": "JPEG Files",
+  "@jpegFiles": {
+    "description": "File type filter in file dialogs for JPEG images."
+  },
+  "pngFiles": "PNG Files",
+  "@pngFiles": {
+    "description": "File type filter in file dialogs for PNG images."
+  },
+  "gifFiles": "GIF Files",
+  "@gifFiles": {
+    "description": "File type filter in file dialogs for GIF images."
+  },
+  "bmpFiles": "BMP Files",
+  "@bmpFiles": {
+    "description": "File type filter in file dialogs for BMP images."
+  },
+  "webpFiles": "WebP Files",
+  "@webpFiles": {
+    "description": "File type filter in file dialogs for WebP images."
+  },
+  "artworkNotAnImage": "That file isn't an image amped can embed.",
+  "@artworkNotAnImage": {
+    "description": "Error shown when the chosen file isn't an image Amped can embed."
+  },
+  "artworkNotEditable": "Pictures can't be stored in this file.",
+  "@artworkNotEditable": {
+    "description": "Error shown when the file's format can't store pictures."
+  },
+  "fileInfoPicturesReadError": "Couldn't read the pictures: {error}",
+  "@fileInfoPicturesReadError": {
+    "description": "Error shown when a file's pictures can't be read. {error} is the technical reason.",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "artworkTypeOther": "Other",
+  "@artworkTypeOther": {
+    "description": "Artwork type choice: other. Matches the ID3v2 picture types."
+  },
+  "artworkTypeFileIcon": "File icon (32x32 PNG)",
+  "@artworkTypeFileIcon": {
+    "description": "Artwork type choice: file icon, a 32x32 PNG. Matches the ID3v2 picture types."
+  },
+  "artworkTypeOtherFileIcon": "Other file icon",
+  "@artworkTypeOtherFileIcon": {
+    "description": "Artwork type choice: other file icon. Matches the ID3v2 picture types."
+  },
+  "artworkTypeFrontCover": "Front cover",
+  "@artworkTypeFrontCover": {
+    "description": "Artwork type choice: front cover. Matches the ID3v2 picture types."
+  },
+  "artworkTypeBackCover": "Back cover",
+  "@artworkTypeBackCover": {
+    "description": "Artwork type choice: back cover. Matches the ID3v2 picture types."
+  },
+  "artworkTypeLeaflet": "Leaflet page",
+  "@artworkTypeLeaflet": {
+    "description": "Artwork type choice: leaflet page. Matches the ID3v2 picture types."
+  },
+  "artworkTypeMedia": "Media (label side)",
+  "@artworkTypeMedia": {
+    "description": "Artwork type choice: media label side. Matches the ID3v2 picture types."
+  },
+  "artworkTypeLeadArtist": "Lead artist",
+  "@artworkTypeLeadArtist": {
+    "description": "Artwork type choice: lead artist. Matches the ID3v2 picture types."
+  },
+  "artworkTypeArtist": "Artist",
+  "@artworkTypeArtist": {
+    "description": "Artwork type choice: artist. Matches the ID3v2 picture types."
+  },
+  "artworkTypeConductor": "Conductor",
+  "@artworkTypeConductor": {
+    "description": "Artwork type choice: conductor. Matches the ID3v2 picture types."
+  },
+  "artworkTypeBand": "Band",
+  "@artworkTypeBand": {
+    "description": "Artwork type choice: band. Matches the ID3v2 picture types."
+  },
+  "artworkTypeComposer": "Composer",
+  "@artworkTypeComposer": {
+    "description": "Artwork type choice: composer. Matches the ID3v2 picture types."
+  },
+  "artworkTypeLyricist": "Lyricist",
+  "@artworkTypeLyricist": {
+    "description": "Artwork type choice: lyricist. Matches the ID3v2 picture types."
+  },
+  "artworkTypeRecordingLocation": "Recording location",
+  "@artworkTypeRecordingLocation": {
+    "description": "Artwork type choice: recording location. Matches the ID3v2 picture types."
+  },
+  "artworkTypeDuringRecording": "During recording",
+  "@artworkTypeDuringRecording": {
+    "description": "Artwork type choice: taken during recording. Matches the ID3v2 picture types."
+  },
+  "artworkTypeDuringPerformance": "During performance",
+  "@artworkTypeDuringPerformance": {
+    "description": "Artwork type choice: taken during performance. Matches the ID3v2 picture types."
+  },
+  "artworkTypeVideoCapture": "Video screen capture",
+  "@artworkTypeVideoCapture": {
+    "description": "Artwork type choice: video screen capture. Matches the ID3v2 picture types."
+  },
+  "artworkTypeBrightFish": "A bright coloured fish",
+  "@artworkTypeBrightFish": {
+    "description": "Artwork type choice: a bright coloured fish (an ID3 standard picture type). Matches the ID3v2 picture types."
+  },
+  "artworkTypeIllustration": "Illustration",
+  "@artworkTypeIllustration": {
+    "description": "Artwork type choice: illustration. Matches the ID3v2 picture types."
+  },
+  "artworkTypeBandLogo": "Band logo",
+  "@artworkTypeBandLogo": {
+    "description": "Artwork type choice: band logo. Matches the ID3v2 picture types."
+  },
+  "artworkTypePublisherLogo": "Publisher logo",
+  "@artworkTypePublisherLogo": {
+    "description": "Artwork type choice: publisher logo. Matches the ID3v2 picture types."
+  },
+  "fileInfoNotEditable": "This field can't be stored in this file type.",
+  "@fileInfoNotEditable": {
+    "description": "Tooltip on a field that the file's format can't store."
+  },
+  "tagNameColumn": "Name",
+  "@tagNameColumn": {
+    "description": "Column heading for the tag name in the advanced tag list."
+  },
+  "tagValueColumn": "Value",
+  "@tagValueColumn": {
+    "description": "Column heading for the tag value in the advanced tag list."
+  },
+  "editMetadataTitle": "Edit Item Metadata",
+  "@editMetadataTitle": {
+    "description": "Title of the dialog that edits tags of the selected files."
+  },
+  "itemsSelected": "{count, plural, =1{1 item selected} other{{count} items selected}}",
+  "@itemsSelected": {
+    "description": "Count of items selected in the metadata editor. {count} is the number of items; singular and plural forms are provided.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "filesUnreadableSkipped": "{count, plural, =1{1 file can't be read and will be left alone.} other{{count} files can't be read and will be left alone.}}",
+  "@filesUnreadableSkipped": {
+    "description": "Warning in the metadata editor about files that can't be read. {count} is the number of files.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "updatingFiles": "Updating {done} of {total}...",
+  "@updatingFiles": {
+    "description": "Progress text while tags are saved to files. {done} of {total} files are done.",
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "updateAction": "Update",
+  "@updateAction": {
+    "description": "Button that saves the edited fields to the selected files."
+  },
+  "fieldNotStorable": "These files can't store this field",
+  "@fieldNotStorable": {
+    "description": "Notice that the selected files can't store a field."
+  },
+  "fieldMultipleValues": "{count} different values, kept unless ticked",
+  "@fieldMultipleValues": {
+    "description": "Hint on a field whose value differs among the selected files. {count} is the number of distinct values.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "fieldSetInSome": "Set in {filled} of {total} files",
+  "@fieldSetInSome": {
+    "description": "Hint on a field that is filled in only for some selected files. {filled} of {total} files have a value.",
+    "placeholders": {
+      "filled": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "fieldNotStorableIn": "{count, plural, =1{Not saved to 1 file that can't store it} other{Not saved to {count} files that can't store it}}",
+  "@fieldNotStorableIn": {
+    "description": "Hint on a field that some selected files can't store. {count} is the number of files; singular and plural forms are provided.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "filesNotUpdated": "{count, plural, =1{1 file couldn't be updated:} other{{count} files couldn't be updated:}}",
+  "@filesNotUpdated": {
+    "description": "Heading above the list of files that couldn't be updated. {count} is the number of files; singular and plural forms are provided.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notifications": "Notifications",
+  "@notifications": {
+    "description": "Preferences page and heading for notification settings."
+  },
+  "notificationsEnabledHint": "Turn this off to disable all notifications, in-app and system.",
+  "@notificationsEnabledHint": {
+    "description": "Hint under the master notifications switch."
+  },
+  "skinNotifications": "Skin Notifications",
+  "@skinNotifications": {
+    "description": "Heading of the group of notification settings taken from the skin."
+  },
+  "notificationShowAlways": "Show always",
+  "@notificationShowAlways": {
+    "description": "Notification option: show the notification whatever the window state."
+  },
+  "notificationShowWindowshade": "Show with windowshade / minimized",
+  "@notificationShowWindowshade": {
+    "description": "Notification option: show the notification when the main window is shaded or minimized."
+  },
+  "notificationShowMinimized": "Show only when minimized",
+  "@notificationShowMinimized": {
+    "description": "Notification option: show the notification only when the main window is minimized."
+  },
+  "notificationDisableFullscreen": "Disable in fullscreen",
+  "@notificationDisableFullscreen": {
+    "description": "Notification option: suppress notifications while a window is fullscreen."
+  },
+  "notificationShowArtwork": "Show now playing artwork",
+  "@notificationShowArtwork": {
+    "description": "Notification option: include the now-playing artwork in the notification."
+  },
+  "notificationFadeIn": "Fade in time",
+  "@notificationFadeIn": {
+    "description": "Label of the setting for how long the notification takes to fade in."
+  },
+  "notificationHold": "Hold time",
+  "@notificationHold": {
+    "description": "Label of the setting for how long the notification stays fully visible."
+  },
+  "notificationFadeOut": "Fade out time",
+  "@notificationFadeOut": {
+    "description": "Label of the setting for how long the notification takes to fade out."
+  },
+  "notificationSeconds": "{seconds} s",
+  "@notificationSeconds": {
+    "description": "Value label of a duration setting. {seconds} is the number of seconds, as text.",
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  },
+  "inAppNotifications": "In-App Notifications",
+  "@inAppNotifications": {
+    "description": "Heading of the group of notification settings for notifications drawn by Amped."
+  },
+  "newEpisodeNotifications": "New episodes",
+  "@newEpisodeNotifications": {
+    "description": "Heading of the notification settings for newly added podcast episodes."
+  },
+  "newEpisodeClickAction": "When you click the notification",
+  "@newEpisodeClickAction": {
+    "description": "Label of the setting for what clicking the notification of new podcast episodes does."
+  },
+  "newEpisodeClickNothing": "Do nothing",
+  "@newEpisodeClickNothing": {
+    "description": "Choice for clicking the new-episode notification: it only goes away."
+  },
+  "newEpisodeClickEnqueue": "Add the new episodes to the playlist",
+  "@newEpisodeClickEnqueue": {
+    "description": "Choice for clicking the new-episode notification: the episodes are added to the end of the playlist."
+  },
+  "newEpisodeClickPlay": "Play the new episodes",
+  "@newEpisodeClickPlay": {
+    "description": "Choice for clicking the new-episode notification: the episodes are added to the playlist and the first one plays."
+  },
+  "notificationPosition": "Notification position",
+  "@notificationPosition": {
+    "description": "Label of the setting for where on the screen notifications appear."
+  },
+  "notificationPositionDisplayed": "Displayed {position}",
+  "@notificationPositionDisplayed": {
+    "description": "Summary of the chosen notification position. {position} is one of the notification position names.",
+    "placeholders": {
+      "position": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationPositionTopLeft": "top left",
+  "@notificationPositionTopLeft": {
+    "description": "Notification position name: top left of the screen. Lowercase because it is inserted into a sentence."
+  },
+  "notificationPositionTopCenter": "top center",
+  "@notificationPositionTopCenter": {
+    "description": "Notification position name: top center of the screen. Lowercase because it is inserted into a sentence."
+  },
+  "notificationPositionTopRight": "top right",
+  "@notificationPositionTopRight": {
+    "description": "Notification position name: top right of the screen. Lowercase because it is inserted into a sentence."
+  },
+  "notificationPositionBottomLeft": "bottom left",
+  "@notificationPositionBottomLeft": {
+    "description": "Notification position name: bottom left of the screen. Lowercase because it is inserted into a sentence."
+  },
+  "notificationPositionBottomCenter": "bottom center",
+  "@notificationPositionBottomCenter": {
+    "description": "Notification position name: bottom center of the screen. Lowercase because it is inserted into a sentence."
+  },
+  "notificationPositionBottomRight": "bottom right",
+  "@notificationPositionBottomRight": {
+    "description": "Notification position name: bottom right of the screen. Lowercase because it is inserted into a sentence."
+  },
+  "lookUpTagsEllipsis": "Look up tags...",
+  "@lookUpTagsEllipsis": {
+    "description": "Button that starts a tag lookup. The trailing ellipsis marks that a dialog opens."
+  },
+  "lookUpTagsTooltip": "Identify this song by its sound (AcoustID) and fetch its tags from MusicBrainz.",
+  "@lookUpTagsTooltip": {
+    "description": "Tooltip of the tag lookup button, explaining what it does."
+  },
+  "tagLookupTitle": "Look Up Tags",
+  "@tagLookupTitle": {
+    "description": "Title of the tag lookup dialog."
+  },
+  "tagLookupSearching": "Fingerprinting the song and searching MusicBrainz...",
+  "@tagLookupSearching": {
+    "description": "Progress message while the song is fingerprinted and searched."
+  },
+  "tagLookupNoMatch": "AcoustID doesn't know this recording, so there are no tags to suggest.",
+  "@tagLookupNoMatch": {
+    "description": "Message shown when AcoustID doesn't recognize the recording."
+  },
+  "tagLookupMissingKey": "Tag lookup isn't available in this build of Amped: it has no AcoustID API key.",
+  "@tagLookupMissingKey": {
+    "description": "Message shown when this build has no AcoustID API key, so lookup can't work."
+  },
+  "tagLookupInvalidKey": "AcoustID didn't accept this build's API key, so tags can't be looked up.",
+  "@tagLookupInvalidKey": {
+    "description": "Message shown when AcoustID rejects this build's API key."
+  },
+  "tagLookupFingerprintFailed": "This file couldn't be fingerprinted: {error}",
+  "@tagLookupFingerprintFailed": {
+    "description": "Message shown when the file couldn't be fingerprinted. {error} is the technical reason.",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "tagLookupBusy": "The lookup service is busy right now. Wait a moment, then try again.",
+  "@tagLookupBusy": {
+    "description": "Message shown when the lookup service is rate-limited or overloaded."
+  },
+  "tagLookupUnreachable": "Couldn't reach the lookup service. Check your internet connection, then try again.",
+  "@tagLookupUnreachable": {
+    "description": "Message shown when the lookup service can't be reached over the network."
+  },
+  "tagLookupPickHint": "Pick the release this file is from. Its tags go into the fields; nothing is saved until you press OK.",
+  "@tagLookupPickHint": {
+    "description": "Instruction above the list of candidate releases in the tag lookup dialog."
+  },
+  "tagLookupUse": "Use these tags",
+  "@tagLookupUse": {
+    "description": "Button that fills the editor fields with the chosen candidate's tags."
+  },
+  "tagLookupMatchLabel": "match",
+  "@tagLookupMatchLabel": {
+    "description": "Small label under the match percentage of a candidate, as in '87% match'. The number is shown separately."
+  },
+  "tagLookupAlbum": "Album: {album}",
+  "@tagLookupAlbum": {
+    "description": "Candidate detail line with the album name. {album} is the album title.",
+    "placeholders": {
+      "album": {
+        "type": "String"
+      }
+    }
+  },
+  "tagLookupReleasedOn": "Released {date}",
+  "@tagLookupReleasedOn": {
+    "description": "Candidate detail line with a full release date. {date} is a date.",
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "yMMMd"
+      }
+    }
+  },
+  "tagLookupReleasedMonth": "Released {date}",
+  "@tagLookupReleasedMonth": {
+    "description": "Candidate detail line with a release month. {date} is a month and year.",
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "yMMM"
+      }
+    }
+  },
+  "tagLookupReleasedYear": "Released {year}",
+  "@tagLookupReleasedYear": {
+    "description": "Candidate detail line with only a release year. {year} is the year.",
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "tagLookupTrackOf": "Track {track} of {total}",
+  "@tagLookupTrackOf": {
+    "description": "Candidate detail line with track position and count. {track} is the track number, {total} the number of tracks.",
+    "placeholders": {
+      "track": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "tagLookupTrack": "Track {track}",
+  "@tagLookupTrack": {
+    "description": "Candidate detail line with only the track number. {track} is the track number.",
+    "placeholders": {
+      "track": {
+        "type": "String"
+      }
+    }
+  },
+  "tagLookupDisc": "Disc {disc}",
+  "@tagLookupDisc": {
+    "description": "Candidate detail line with the disc number. {disc} is the disc number.",
+    "placeholders": {
+      "disc": {
+        "type": "String"
+      }
+    }
+  },
+  "tagLookupApplied": "Filled in from MusicBrainz. Press OK to save them.",
+  "@tagLookupApplied": {
+    "description": "Message shown after a candidate's tags were filled into the editor."
+  },
+  "saved": "Saved",
+  "@saved": {
+    "description": "Status shown after settings or tags were saved."
+  },
+  "applyAction": "Apply",
+  "@applyAction": {
+    "description": "Button that applies the chosen setting, such as a skin."
+  },
+  "skinsSummary": "Active skin: {name}",
+  "@skinsSummary": {
+    "description": "Summary line of the active skin on the skins preferences page. {name} is the skin name.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "skinsSummaryHint": "Choose a skin in Browser. A modern skin also has its options and color themes there.",
+  "@skinsSummaryHint": {
+    "description": "Hint under the active skin summary."
+  },
+  "skinPreview": "Preview",
+  "@skinPreview": {
+    "description": "Heading above a skin's preview image."
+  },
+  "skinNotValid": "{name} is not a skin.",
+  "@skinNotValid": {
+    "description": "Error shown when a chosen file isn't a skin. {name} is the file name.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "skinNoPreview": "No preview is available for this skin.",
+  "@skinNoPreview": {
+    "description": "Message shown when no preview image exists for a skin."
+  },
+  "skinComments": "Comments",
+  "@skinComments": {
+    "description": "Heading of the panel with the comments a skin's author wrote, below the skin preview."
+  },
+  "skinDropTarget": "Drop a .wsz or .wal skin here, or tap to find one",
+  "@skinDropTarget": {
+    "description": "Prompt on the area where a skin file can be dropped or picked."
+  },
+  "modernSettingsOptions": "Options",
+  "@modernSettingsOptions": {
+    "description": "Heading of the skin options group in the modern skin settings."
+  },
+  "modernSettingsColorThemes": "Color Themes",
+  "@modernSettingsColorThemes": {
+    "description": "Heading of the color themes group in the modern skin settings."
+  },
+  "modernSettingsNeedsApply": "Apply this skin to change its options and color themes.",
+  "@modernSettingsNeedsApply": {
+    "description": "Message shown when the skin has to be applied before its settings can be changed."
+  },
+  "modernSettingsNoOptions": "This skin has no options.",
+  "@modernSettingsNoOptions": {
+    "description": "Message shown when a modern skin has no options."
+  },
+  "colorThemeCustom": "Custom",
+  "@colorThemeCustom": {
+    "description": "Name of the user-defined color theme."
+  },
+  "colorThemeClone": "Clone...",
+  "@colorThemeClone": {
+    "description": "Button that copies the selected color theme under a new name. The trailing ellipsis marks that a name is asked."
+  },
+  "colorThemeEdit": "Edit",
+  "@colorThemeEdit": {
+    "description": "Button that edits the selected color theme."
+  },
+  "colorThemeNewName": "Theme name",
+  "@colorThemeNewName": {
+    "description": "Label of the field for naming a color theme."
+  },
+  "colorThemeNoThemes": "This skin has no color themes.",
+  "@colorThemeNoThemes": {
+    "description": "Message shown when a modern skin has no color themes."
+  },
+  "colorThemeRed": "Red",
+  "@colorThemeRed": {
+    "description": "Label of the red slider of a color theme."
+  },
+  "colorThemeGreen": "Green",
+  "@colorThemeGreen": {
+    "description": "Label of the green slider of a color theme."
+  },
+  "colorThemeBlue": "Blue",
+  "@colorThemeBlue": {
+    "description": "Label of the blue slider of a color theme."
+  },
+  "colorThemeGray": "Grayscale",
+  "@colorThemeGray": {
+    "description": "Label of the grayscale setting of a color theme."
+  },
+  "colorThemeGrayNone": "Off",
+  "@colorThemeGrayNone": {
+    "description": "Grayscale setting value: no grayscale conversion."
+  },
+  "colorThemeGrayBrightest": "Brightest channel",
+  "@colorThemeGrayBrightest": {
+    "description": "Grayscale setting value: gray is taken from the brightest color channel."
+  },
+  "colorThemeGrayAverage": "Average of channels",
+  "@colorThemeGrayAverage": {
+    "description": "Grayscale setting value: gray is the average of the color channels."
+  },
+  "colorThemeBoost": "Boost",
+  "@colorThemeBoost": {
+    "description": "Label of the setting that boosts the theme's color intensity."
+  },
+  "remoteLoginTitle": "Sign in to network share",
+  "@remoteLoginTitle": {
+    "description": "Title of the window that asks for the name and password of a network share (SMB, FTP or WebDAV server)."
+  },
+  "remoteLoginPrompt": "Enter the name and password for {server}:",
+  "@remoteLoginPrompt": {
+    "description": "Prompt above the fields of the network share sign-in window.",
+    "placeholders": {
+      "server": {
+        "type": "String",
+        "example": "smb://nas"
+      }
+    }
+  },
+  "remoteLoginFailed": "The server did not accept the sign-in: {error}",
+  "@remoteLoginFailed": {
+    "description": "Shown in the network share sign-in window when the saved or entered name and password were turned down.",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "HTTP 401"
+      }
+    }
+  },
+  "remoteLoginUser": "Name",
+  "@remoteLoginUser": {
+    "description": "Label of the user name field of the network share sign-in window."
+  },
+  "remoteLoginPassword": "Password",
+  "@remoteLoginPassword": {
+    "description": "Label of the password field of the network share sign-in window."
+  },
+  "remoteLoginSignIn": "Sign in",
+  "@remoteLoginSignIn": {
+    "description": "Confirmation button of the network share sign-in window."
+  },
+  "remoteBuffering": "Buffering {percent}% - {speed}/s - {elapsed} elapsed, {remaining} left",
+  "@remoteBuffering": {
+    "description": "Shown in the song title while a track is copied from a network share before it plays, when its size is known. The speed includes its unit, for example 3.1 MB.",
+    "placeholders": {
+      "percent": {"type": "int", "example": "45"},
+      "speed": {"type": "String", "example": "3.1 MB"},
+      "elapsed": {"type": "String", "example": "0:08"},
+      "remaining": {"type": "String", "example": "0:10"}
+    }
+  },
+  "remoteBufferingUnknown": "Buffering {received} - {speed}/s - {elapsed} elapsed",
+  "@remoteBufferingUnknown": {
+    "description": "Shown in the song title while a track is copied from a network share before it plays, when its size is not known. Sizes include their unit, for example 3.1 MB.",
+    "placeholders": {
+      "received": {"type": "String", "example": "12.3 MB"},
+      "speed": {"type": "String", "example": "3.1 MB"},
+      "elapsed": {"type": "String", "example": "0:08"}
+    }
+  },
+  "libraryRemoteSources": "Remote sources",
+  "@libraryRemoteSources": {
+    "description": "Preferences > Library: heading of the list of remote servers."
+  },
+  "libraryNoRemoteSources": "No remote sources added.",
+  "@libraryNoRemoteSources": {
+    "description": "Preferences > Library: shown when no server was added."
+  },
+  "libraryAddNavidrome": "Add Navidrome/Subsonic...",
+  "@libraryAddNavidrome": {
+    "description": "Preferences > Library: button that adds a Navidrome or Subsonic server."
+  },
+  "libraryAddPlex": "Add Plex...",
+  "@libraryAddPlex": {
+    "description": "Preferences > Library: button that adds a Plex server."
+  },
+  "libraryAddJellyfin": "Add Jellyfin...",
+  "@libraryAddJellyfin": {
+    "description": "Preferences > Library: button that adds a Jellyfin server."
+  },
+  "libraryAddPodcast": "Add podcast...",
+  "@libraryAddPodcast": {
+    "description": "Preferences > Library: button that subscribes to a podcast's RSS feed."
+  },
+  "libraryAddAudiobookshelf": "Add Audiobookshelf...",
+  "@libraryAddAudiobookshelf": {
+    "description": "Preferences > Library: button that adds an Audiobookshelf server."
+  },
+  "librarySourceFeedUrl": "RSS feed URL",
+  "@librarySourceFeedUrl": {
+    "description": "Preferences > Library: label of the field for a podcast's RSS feed address."
+  },
+  "librarySourceApiToken": "API token",
+  "@librarySourceApiToken": {
+    "description": "Preferences > Library: label of the field for an Audiobookshelf server's API token."
+  },
+  "librarySourcePodcastSearch": "Search iTunes",
+  "@librarySourcePodcastSearch": {
+    "description": "Preferences > Library: label of the field that searches the iTunes podcast directory."
+  },
+  "librarySourceToken": "Plex token",
+  "@librarySourceToken": {
+    "description": "Preferences > Library: label of the field for a Plex server's X-Plex-Token."
+  },
+  "librarySourcePlexSignIn": "Sign in with Plex",
+  "@librarySourcePlexSignIn": {
+    "description": "Preferences > Library: button that opens plex.tv in the browser to sign in."
+  },
+  "librarySourcePlexWaiting": "Waiting for plex.tv...",
+  "@librarySourcePlexWaiting": {
+    "description": "Preferences > Library: shown while the user approves the sign-in on the Plex website."
+  },
+  "librarySourcePlexUser": "Present as",
+  "@librarySourcePlexUser": {
+    "description": "Preferences > Library > Plex: label of the choice of which Plex Home user to present as."
+  },
+  "librarySourcePlexPin": "PIN",
+  "@librarySourcePlexPin": {
+    "description": "Preferences > Library > Plex: label of the field for the PIN of the chosen Plex Home user."
+  },
+  "libraryEditSource": "Edit",
+  "@libraryEditSource": {
+    "description": "Preferences > Library: button that edits a remote source."
+  },
+  "libraryRemoveSource": "Remove",
+  "@libraryRemoveSource": {
+    "description": "Preferences > Library: button that removes a folder or remote source."
+  },
+  "librarySourceName": "Name",
+  "@librarySourceName": {
+    "description": "Preferences > Library: label of a remote source's name field."
+  },
+  "librarySourceServer": "Server address",
+  "@librarySourceServer": {
+    "description": "Preferences > Library: label of a remote source's address field, such as https://music.example.com."
+  },
+  "librarySourcePasswordKeep": "Leave empty to keep the saved password",
+  "@librarySourcePasswordKeep": {
+    "description": "Preferences > Library: hint of the password field when editing a source."
+  },
+  "librarySourceSave": "Save",
+  "@librarySourceSave": {
+    "description": "Preferences > Library: button that checks the server and saves the source."
+  },
+  "librarySourceChecking": "Connecting...",
+  "@librarySourceChecking": {
+    "description": "Preferences > Library: shown while the server is being contacted."
+  },
+  "librarySourceFailed": "Could not connect: {error}",
+  "@librarySourceFailed": {
+    "description": "Preferences > Library: why the server could not be added.",
+    "placeholders": {
+      "error": {"type": "String", "example": "Wrong username or password."}
+    }
+  },
+  "libraryAddSoundCloud": "Add SoundCloud...",
+  "@libraryAddSoundCloud": {
+    "description": "Preferences > Library: button that adds a SoundCloud profile."
+  },
+  "librarySoundCloudProOnly": "SoundCloud Pro subscribers only",
+  "@librarySoundCloudProOnly": {
+    "description": "Preferences > Library: heading of the notice on the SoundCloud form saying the feature needs a SoundCloud Pro subscription."
+  },
+  "librarySoundCloudInstructions": "SoundCloud only gives application keys to Pro subscribers (Artist Pro), so you bring your own key:\n1. Subscribe to SoundCloud Pro, then open soundcloud.com/you/apps (or follow developers.soundcloud.com/docs/building-with-ai).\n2. Register a new application, with any name and description.\n3. Copy its Client ID and Client Secret into the fields below.\n4. Enter the address of the profile whose public tracks and likes you want to browse, such as https://soundcloud.com/artist. To browse your own library instead, tick the sign-in option and add the redirect URI it shows to the application.\nThe secret is kept in your system's secure storage.",
+  "@librarySoundCloudInstructions": {
+    "description": "Preferences > Library: how to register a SoundCloud application and get an API key. Lines are separated by newlines."
+  },
+  "librarySoundCloudProfile": "Profile URL",
+  "@librarySoundCloudProfile": {
+    "description": "Preferences > Library: label of the SoundCloud profile address field, such as https://soundcloud.com/artist."
+  },
+  "librarySoundCloudClientId": "Client ID",
+  "@librarySoundCloudClientId": {
+    "description": "Preferences > Library: label of the SoundCloud application's client id field."
+  },
+  "librarySoundCloudClientSecret": "Client Secret",
+  "@librarySoundCloudClientSecret": {
+    "description": "Preferences > Library: label of the SoundCloud application's client secret field."
+  },
+  "librarySoundCloudSecretKeep": "Leave empty to keep the saved secret",
+  "@librarySoundCloudSecretKeep": {
+    "description": "Preferences > Library: hint of the client secret field when editing a SoundCloud source."
+  },
+  "librarySoundCloudBrowserSignIn": "Sign in with SoundCloud in my browser (my own tracks and likes)",
+  "@librarySoundCloudBrowserSignIn": {
+    "description": "Preferences > Library: checkbox on the SoundCloud form. Ticked, the library of the signed-in user is shown instead of a profile's public tracks."
+  },
+  "librarySoundCloudRedirectHint": "For this, add {address} as a redirect URI of your SoundCloud application first. Your browser opens to approve the sign-in when you save.",
+  "@librarySoundCloudRedirectHint": {
+    "description": "Preferences > Library: shown under the browser sign-in checkbox of the SoundCloud form. {address} is a web address on this computer.",
+    "placeholders": {
+      "address": {"type": "String", "example": "http://127.0.0.1:53682/callback"}
+    }
+  },
+  "librarySourceWaitingForBrowser": "Waiting for the browser...",
+  "@librarySourceWaitingForBrowser": {
+    "description": "Preferences > Library: shown on the save button while the user approves a sign-in in their browser."
+  }
+}

@@ -1,0 +1,30 @@
+<!-- The track-change notifier: the frame around the cover and what is
+     playing. Amped shows it itself (no script). -->
+<container id="notifier" name="Notifier" default_visible="0">
+
+  <layout id="normal" w="360" h="110" noparent="1" ontop="1" noactivation="1" nodock="1" move="0">
+    <layer id="frame.fill" image="frame.fill" x="4" y="18" w="-8" relatw="1" h="-46" relath="1"/>
+    <layer id="frame.topleft" image="frame.topleft" x="0" y="0"/>
+    <layer id="frame.top" image="frame.top" x="10" y="0" w="-20" relatw="1" h="18"/>
+    <layer id="frame.topright" image="frame.topright" x="-10" relatx="1" y="0"/>
+    <layer id="frame.left" image="frame.left" x="0" y="18" w="4" h="-46" relath="1"/>
+    <layer id="frame.right" image="frame.right" x="-4" relatx="1" y="18" w="4" h="-46" relath="1"/>
+    <layer id="frame.bottomleft" image="frame.bottomleft" x="0" y="-28" relaty="1"/>
+    <layer id="frame.bottom" image="frame.bottom" x="10" y="-28" relaty="1" w="-20" relatw="1" h="28"/>
+    <layer id="frame.bottomright" image="frame.bottomright" x="-10" relatx="1" y="-28" relaty="1"/>
+    <layer id="well" image="frame.black" x="6" y="20" w="-12" relatw="1" h="-50" relath="1"/>
+
+    <text id="status" display="notifierstatus" x="20" y="2" w="-40" relatw="1" h="14" align="center"
+      color="amped.title" fontsize="11" bold="1" ghost="1"/>
+    <albumart id="cover" x="12" y="24" w="56" h="56" move="0"/>
+    <text id="position" display="playlistposition" x="78" y="22" w="-88" relatw="1" h="12"
+      color="amped.display.dim" fontsize="10" ghost="1"/>
+    <text id="title" display="tracktitle" x="78" y="34" w="-88" relatw="1" h="18"
+      color="amped.display" fontsize="14" bold="1" ghost="1"/>
+    <text id="artist" display="songartist" x="78" y="52" w="-88" relatw="1" h="14"
+      color="amped.accent" fontsize="11" ghost="1"/>
+    <text id="album" display="songalbum" x="78" y="66" w="-88" relatw="1" h="14"
+      color="amped.display.dim" fontsize="11" ghost="1"/>
+  </layout>
+
+</container>

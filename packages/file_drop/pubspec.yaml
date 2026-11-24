@@ -1,0 +1,25 @@
+name: file_drop
+description: >-
+  Native file drops onto windows created with Flutter's windowing API: drag
+  files from Finder onto a window and receive their paths.
+version: 0.1.0
+publish_to: "none"
+
+environment:
+  sdk: ^3.12.2
+  flutter: ">=3.47.0"
+
+dependencies:
+  code_assets: ^2.1.0
+  ffi: ^2.1.0
+  flutter:
+    sdk: flutter
+  hooks: ^2.0.2
+  native_toolchain_c: ^0.19.5
+  window_dock:
+    path: ../window_dock
+
+dev_dependencies:
+  arcane_analysis: ^1.0.5
+  flutter_test:
+    sdk: flutter

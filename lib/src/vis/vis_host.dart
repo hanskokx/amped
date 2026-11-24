@@ -10,6 +10,7 @@ import "package:flutter/services.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
 import "../player/player_state.dart";
+import "vis_plugins.dart";
 
 /// Runs the selected visualization plug-in module (`vis_start`/`vis_stop`
 /// and the plug-in thread in VIS.cpp): each frame it hands the module what
@@ -251,6 +252,7 @@ class VisHost extends ChangeNotifier implements VisContext {
     VisWorker? worker;
     try {
       worker = await VisWorker.start(
+        plugins: createVisPlugins,
         pluginId: plugin.id,
         module: module,
         config: plugin.saveConfig(),

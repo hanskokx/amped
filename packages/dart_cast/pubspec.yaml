@@ -1,0 +1,13 @@
+name: dart_cast
+description: dart_cast 0.7.4 (https://pub.dev/packages/dart_cast, MIT) with one patch - CastMedia.contentType - so tracks go to a Chromecast as audio. Drop this copy when upstream has it.
+version: 0.7.4+amped.1
+publish_to: none
+
+environment:
+  sdk: ^3.7.0
+
+dependencies:
+  cryptography: ^2.9.0
+  http: ^1.2.0
+  multicast_dns: ^0.3.2+6
+  protobuf: ^6.0.0

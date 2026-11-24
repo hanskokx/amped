@@ -1,0 +1,27 @@
+name: window_dock
+description: >-
+  classic-style docking and snapping for multi-window Flutter desktop apps built
+  on Flutter's native windowing API: snap-to-window, snap-to-screen, attached
+  window groups, and the native window control (move, frameless,
+  always-on-top) the framework does not expose yet.
+version: 0.1.0
+publish_to: "none"
+
+environment:
+  sdk: ^3.12.2
+  flutter: ">=3.47.0"
+
+dependencies:
+  amped_logging:
+    path: ../amped_logging
+  code_assets: ^2.1.0
+  ffi: ^2.1.0
+  flutter:
+    sdk: flutter
+  hooks: ^2.0.2
+  native_toolchain_c: ^0.19.5
+
+dev_dependencies:
+  arcane_analysis: ^1.0.5
+  flutter_test:
+    sdk: flutter

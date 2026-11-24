@@ -4,6 +4,9 @@ Pictures of skins, drawn by the native renderer the file manager previews use.
 
 ## Use
 
+This package is part of the Amped app repository, in `packages/skin_preview`, and the
+app depends on it by path:
+
 ```yaml
 dependencies:
   skin_preview:

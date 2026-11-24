@@ -1,0 +1,28 @@
+<!-- The color themes of the skin. Each one changes the whole skin through
+     the General gamma group (value is red,green,blue from -4096, none, to
+     4095, double; gray turns the colors to gray first). The theme to use is
+     chosen from the Skins > Color Themes menu. -->
+<elements>
+<gammaset id="Default"/>
+<gammaset id="Amber">
+  <gammagroup id="General" value="1400,300,-3000"/>
+</gammaset>
+<gammaset id="Crimson">
+  <gammagroup id="General" value="1200,-2200,-2200"/>
+</gammaset>
+<gammaset id="Forest">
+  <gammagroup id="General" value="-2600,900,-2000"/>
+</gammaset>
+<gammaset id="Graphite">
+  <gammagroup id="General" value="0,0,0" gray="1"/>
+</gammaset>
+<gammaset id="Ice">
+  <gammagroup id="General" value="-1500,300,1200"/>
+</gammaset>
+<gammaset id="Orchid">
+  <gammagroup id="General" value="900,-2200,1200"/>
+</gammaset>
+<gammaset id="Night">
+  <gammagroup id="General" value="-1800,-1800,-1800"/>
+</gammaset>
+</elements>

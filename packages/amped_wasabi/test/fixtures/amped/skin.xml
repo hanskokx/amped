@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- amped's built-in modern skin. The art is drawn by tool/gen_art.py;
+     tool/build.sh renders it and packs the skin into a .wal. -->
+<WasabiXML version="1.35">
+  <skininfo>
+    <version>1.0</version>
+    <name>Amped</name>
+    <comment>The built-in modern skin of amped.</comment>
+    <author>amped</author>
+    <screenshot>screenshot.png</screenshot>
+  </skininfo>
+
+  <include file="xml/elements.xml"/>
+  <include file="xml/colorthemes.xml"/>
+  <include file="xml/frame.xml"/>
+  <include file="xml/main.xml"/>
+  <include file="xml/eq.xml"/>
+  <include file="xml/pl.xml"/>
+  <include file="xml/video.xml"/>
+  <include file="xml/library.xml"/>
+  <include file="xml/vis.xml"/>
+  <include file="xml/albumart.xml"/>
+  <include file="xml/notifier.xml"/>
+</WasabiXML>

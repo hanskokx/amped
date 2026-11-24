@@ -1,0 +1,118 @@
+<container id="main" name="Main Window" default_visible="1">
+
+  <layout id="normal" background="main.bg">
+    <!-- Double-clicking the title bar switches to windowshade mode. -->
+    <layer id="titlebar" x="0" y="0" w="0" relatw="1" h="18" dblclickaction="switch;shade"/>
+    <button id="menu" action="CONTROLMENU" x="6" y="3"
+      image="title.menu" hoverimage="title.menu.hover" downimage="title.menu.down" tooltip="Main menu"/>
+    <!-- Centered on the window (x + w/2 = 180), like amped.title. -->
+    <text id="title" x="44" y="2" w="272" h="14" align="center" text="AMPED"
+      color="amped.title" fontsize="11" bold="1" inactivealpha="110" ghost="1"/>
+    <button id="minimize" action="MINIMIZE" x="314" y="3"
+      image="title.minimize" hoverimage="title.minimize.hover" downimage="title.minimize.down" tooltip="Minimize"/>
+    <button id="shade" action="SWITCH" param="shade" x="328" y="3"
+      image="title.shade" hoverimage="title.shade.hover" downimage="title.shade.down" tooltip="Windowshade mode"/>
+    <button id="close" action="CLOSE" x="342" y="3"
+      image="title.close" hoverimage="title.close.hover" downimage="title.close.down" tooltip="Close"/>
+
+    <!-- The display -->
+    <text id="time" display="time" x="14" y="26" w="110" h="32"
+      color="amped.display" fontsize="34" tooltip="Elapsed / remaining time"/>
+    <text id="songticker" display="songname" ticker="1" showlen="1" x="14" y="60" w="232" h="16"
+      color="amped.display" fontsize="14"/>
+    <vis id="vis" x="254" y="28" w="92" h="48"
+      colorband1="191,244,255" colorband2="176,240,255" colorband3="161,236,255" colorband4="146,232,255"
+      colorband5="131,228,255" colorband6="127,227,255" colorband7="118,214,240" colorband8="109,201,226"
+      colorband9="100,188,212" colorband10="91,175,198" colorband11="82,162,184" colorband12="73,149,170"
+      colorband13="64,136,156" colorband14="55,123,142" colorband15="46,110,128" colorband16="46,107,122"
+      colorbandpeak="255,181,71"
+      colorosc1="127,227,255" colorosc2="118,214,240" colorosc3="100,188,212" colorosc4="82,162,184" colorosc5="64,136,156"/>
+
+    <!-- Seek bar -->
+    <layer id="seek.track" image="seek.track" x="8" y="88" w="344" h="6"/>
+    <slider id="seek" action="SEEK" x="8" y="86" w="344" h="10"
+      thumb="seek.thumb" downthumb="seek.thumb.down" tooltip="Seek"/>
+
+    <!-- Transport -->
+    <button id="prev" action="PREV" x="8" y="104"
+      image="btn.prev" hoverimage="btn.prev.hover" downimage="btn.prev.down" tooltip="Previous"/>
+    <button id="play" action="PLAY" x="38" y="104"
+      image="btn.play" hoverimage="btn.play.hover" downimage="btn.play.down" tooltip="Play"/>
+    <button id="pause" action="PAUSE" x="68" y="104"
+      image="btn.pause" hoverimage="btn.pause.hover" downimage="btn.pause.down" tooltip="Pause"/>
+    <button id="stop" action="STOP" x="98" y="104"
+      image="btn.stop" hoverimage="btn.stop.hover" downimage="btn.stop.down" tooltip="Stop"/>
+    <button id="next" action="NEXT" x="128" y="104"
+      image="btn.next" hoverimage="btn.next.hover" downimage="btn.next.down" tooltip="Next"/>
+    <button id="eject" action="EJECT" x="160" y="104"
+      image="btn.eject" hoverimage="btn.eject.hover" downimage="btn.eject.down" tooltip="Open file(s)"/>
+
+    <!-- Volume -->
+    <layer id="volume.track" image="volume.track" x="192" y="113" w="80" h="4"/>
+    <slider id="volume" action="VOLUME" x="192" y="108" w="80" h="14"
+      thumb="volume.thumb" downthumb="volume.thumb" tooltip="Volume"/>
+
+    <!-- Options and windows -->
+    <button id="shuffle" action="SHUFFLE" x="280" y="104"
+      image="toggle.shuffle" hoverimage="toggle.shuffle.hover" downimage="toggle.shuffle.down"
+      activeimage="toggle.shuffle.active" tooltip="Shuffle"/>
+    <button id="repeat" action="REPEAT" x="280" y="118"
+      image="toggle.repeat" hoverimage="toggle.repeat.hover" downimage="toggle.repeat.down"
+      activeimage="toggle.repeat.active" tooltip="Repeat"/>
+    <button id="eqbutton" action="TOGGLE" param="guid:eq" x="318" y="104"
+      image="toggle.eq" hoverimage="toggle.eq.hover" downimage="toggle.eq.down"
+      activeimage="toggle.eq.active" tooltip="Equalizer"/>
+    <button id="plbutton" action="TOGGLE" param="guid:pl" x="318" y="118"
+      image="toggle.pl" hoverimage="toggle.pl.hover" downimage="toggle.pl.down"
+      activeimage="toggle.pl.active" tooltip="Playlist"/>
+  </layout>
+
+  <!-- Windowshade mode, like classic's main window shade: the title, a
+       display with the vis, the time and a seek bar along its foot, the
+       transport, then the window buttons. -->
+  <layout id="shade" background="shade.main.bg">
+    <!-- Double-clicking the shaded window switches back. -->
+    <layer id="titlebar" x="0" y="0" w="0" relatw="1" h="0" relath="1" dblclickaction="switch;normal"/>
+    <button id="menu" action="CONTROLMENU" x="6" y="6"
+      image="title.menu" hoverimage="title.menu.hover" downimage="title.menu.down" tooltip="Main menu"/>
+    <text id="title" x="22" y="6" w="56" h="13" align="center" text="AMPED"
+      color="amped.title" fontsize="10" bold="1" inactivealpha="110" ghost="1"/>
+
+    <!-- The display -->
+    <vis id="vis" x="84" y="5" w="50" h="10"
+      colorband1="191,244,255" colorband2="176,240,255" colorband3="161,236,255" colorband4="146,232,255"
+      colorband5="131,228,255" colorband6="127,227,255" colorband7="118,214,240" colorband8="109,201,226"
+      colorband9="100,188,212" colorband10="91,175,198" colorband11="82,162,184" colorband12="73,149,170"
+      colorband13="64,136,156" colorband14="55,123,142" colorband15="46,110,128" colorband16="46,107,122"
+      colorbandpeak="255,181,71"
+      colorosc1="127,227,255" colorosc2="118,214,240" colorosc3="100,188,212" colorosc4="82,162,184" colorosc5="64,136,156"/>
+    <text id="time" display="time" x="136" y="4" w="50" h="13" align="right"
+      color="amped.display" fontsize="12" tooltip="Elapsed / remaining time"/>
+    <layer id="seek.track" image="eq.zero" x="84" y="18" w="102" h="1" ghost="1"/>
+    <slider id="seek" action="SEEK" x="82" y="16" w="106" h="5"
+      thumb="shade.seek.thumb" downthumb="shade.seek.thumb" tooltip="Seek"/>
+
+    <!-- Transport -->
+    <button id="prev" action="PREV" x="199" y="6"
+      image="shade.prev" hoverimage="shade.prev.hover" downimage="shade.prev.down" tooltip="Previous"/>
+    <button id="play" action="PLAY" x="214" y="6"
+      image="shade.play" hoverimage="shade.play.hover" downimage="shade.play.down" tooltip="Play"/>
+    <button id="pause" action="PAUSE" x="229" y="6"
+      image="shade.pause" hoverimage="shade.pause.hover" downimage="shade.pause.down" tooltip="Pause"/>
+    <button id="stop" action="STOP" x="244" y="6"
+      image="shade.stop" hoverimage="shade.stop.hover" downimage="shade.stop.down" tooltip="Stop"/>
+    <button id="next" action="NEXT" x="259" y="6"
+      image="shade.next" hoverimage="shade.next.hover" downimage="shade.next.down" tooltip="Next"/>
+    <button id="eject" action="EJECT" x="277" y="6"
+      image="shade.eject" hoverimage="shade.eject.hover" downimage="shade.eject.down" tooltip="Open file(s)"/>
+
+    <!-- Window buttons, where the normal layout has them. -->
+    <button id="minimize" action="MINIMIZE" x="314" y="6"
+      image="title.minimize" hoverimage="title.minimize.hover" downimage="title.minimize.down" tooltip="Minimize"/>
+    <button id="unshade" action="SWITCH" param="normal" x="328" y="6"
+      image="title.unshade" hoverimage="title.unshade.hover" downimage="title.unshade.down" tooltip="Normal mode"/>
+    <button id="close" action="CLOSE" x="342" y="6"
+      image="title.close" hoverimage="title.close.hover" downimage="title.close.down" tooltip="Close"/>
+  </layout>
+
+</container>

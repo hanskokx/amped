@@ -9,50 +9,35 @@ environment:
 
 dependencies:
   amped_audacious_skin:
-    git:
-      url: https://git.hadak.org/Amped/amped_audacious_skin.git
+    path: packages/amped_audacious_skin
   amped_audiobookshelf:
-    git:
-      url: https://git.hadak.org/Amped/amped_audiobookshelf.git
+    path: packages/amped_audiobookshelf
   amped_bamp_skin:
-    git:
-      url: https://git.hadak.org/Amped/amped_bamp_skin.git
+    path: packages/amped_bamp_skin
   amped_classic_skin:
-    git:
-      url: https://git.hadak.org/Amped/amped_classic_skin.git
+    path: packages/amped_classic_skin
   amped_jellyfin:
-    git:
-      url: https://git.hadak.org/Amped/amped_jellyfin.git
+    path: packages/amped_jellyfin
   amped_l10n:
-    git:
-      url: https://git.hadak.org/Amped/amped_l10n.git
+    path: packages/amped_l10n
   amped_logging:
-    git:
-      url: https://git.hadak.org/Amped/amped_logging.git
+    path: packages/amped_logging
   amped_media_source:
-    git:
-      url: https://git.hadak.org/Amped/amped_media_source.git
+    path: packages/amped_media_source
   amped_plex:
-    git:
-      url: https://git.hadak.org/Amped/amped_plex.git
+    path: packages/amped_plex
   amped_podcast:
-    git:
-      url: https://git.hadak.org/Amped/amped_podcast.git
+    path: packages/amped_podcast
   amped_skin:
-    git:
-      url: https://git.hadak.org/Amped/amped_skin.git
+    path: packages/amped_skin
   amped_soundcloud:
-    git:
-      url: https://git.hadak.org/Amped/amped_soundcloud.git
+    path: packages/amped_soundcloud
   amped_subsonic:
-    git:
-      url: https://git.hadak.org/Amped/amped_subsonic.git
+    path: packages/amped_subsonic
   amped_vis:
-    git:
-      url: https://git.hadak.org/Amped/amped_vis.git
+    path: packages/amped_vis
   amped_wasabi:
-    git:
-      url: https://git.hadak.org/Amped/amped_wasabi.git
+    path: packages/amped_wasabi
   amped_youtube:
     git:
       url: https://git.hadak.org/Amped/amped_youtube.git
@@ -67,13 +52,11 @@ dependencies:
     git:
       url: https://github.com/hanskokx/flutter_custom_cursor.git
   dart_cast:
-    git:
-      url: https://git.hadak.org/Amped/dart_cast.git
+    path: packages/dart_cast
   dbus: ^0.8.0
   ffi: ^2.2.0
   file_drop:
-    git:
-      url: https://git.hadak.org/Amped/file_drop.git
+    path: packages/file_drop
   flutter:
     sdk: flutter
   flutter_secure_storage: ^11.2.0
@@ -85,19 +68,20 @@ dependencies:
   package_info_plus: ^10.2.2
   path_provider: ^2.1.5
   pcm_decoder:
-    git:
-      url: https://git.hadak.org/Amped/pcm_decoder.git
+    path: packages/pcm_decoder
   shared_preferences: ^2.5.5
   skin_preview:
     path: packages/skin_preview
   smb_connect: ^0.0.9
   sqlite3: ^3.9.1
   svg_flutter: ^0.0.1
+  tiny_fullscreen_vis:
+    git:
+      url: https://git.hadak.org/Amped/tiny_fullscreen_vis.git
   tray_manager: ^0.9.0
   url_launcher: ^6.3.3
   window_dock:
-    git:
-      url: https://git.hadak.org/Amped/window_dock.git
+    path: packages/window_dock
   xml: ^6.6.1
 
 dev_dependencies:

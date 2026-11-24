@@ -1,0 +1,24 @@
+name: amped_vis
+description: >-
+  Visualizations for the amped desktop app: the classic
+  spectrum analyzer and oscilloscope, the original visualization plug-in API,
+  and ports of the original plug-ins.
+version: 0.1.0
+publish_to: "none"
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  amped_logging:
+    path: ../amped_logging
+  amped_vis_api:
+    git:
+      url: https://git.hadak.org/Amped/amped_vis_api.git
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  arcane_analysis: ^1.0.5
+  flutter_test:
+    sdk: flutter

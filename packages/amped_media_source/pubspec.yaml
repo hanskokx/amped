@@ -1,0 +1,16 @@
+name: amped_media_source
+description: >-
+  The contract external sources implement (tracks, locations, sign-in helpers) plus what they share.
+version: 0.1.0
+publish_to: "none"
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  crypto: ^3.0.8
+  meta: ^1.16.0
+
+dev_dependencies:
+  arcane_analysis: ^1.0.5
+  test: ^1.25.0

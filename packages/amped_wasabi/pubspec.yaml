@@ -1,0 +1,32 @@
+name: amped_wasabi
+description: >-
+  Wasabi 3 / Wasabi 5 "modern" (Wasabi, `.wal`) skin support for the amped
+  desktop app: the skin XML, its bitmaps and fonts, and widgets that render a
+  skin's layouts the way the original Wasabi widgets draw them.
+version: 0.1.0
+publish_to: "none"
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  amped_logging:
+    path: ../amped_logging
+  amped_maki:
+    git:
+      url: https://git.hadak.org/Amped/amped_maki.git
+  amped_skin:
+    path: ../amped_skin
+  amped_vis:
+    path: ../amped_vis
+  archive: ^4.0.9
+  custom_cursor:
+    git:
+      url: https://github.com/hanskokx/flutter_custom_cursor.git
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  arcane_analysis: ^1.0.5
+  flutter_test:
+    sdk: flutter

@@ -1,0 +1,7 @@
+name: amped_youtube
+description: A stand-in for amped_youtube that knows no YouTube links, for builds without YouTube.
+version: 0.0.0
+publish_to: "none"
+
+environment:
+  sdk: ^3.12.2

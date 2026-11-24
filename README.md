@@ -4,16 +4,19 @@ Crank it up.
 
 Amped is a desktop music player written in Flutter, for macOS, Windows and
 Linux. It plays from files, streams and network shares, and from Plex,
-Jellyfin, Subsonic/Navidrome, SoundCloud, Audiobookshelf, podcasts and
-YouTube; and it wears skins: classic bitmap skins, Audacious and Bamp skins,
+Jellyfin, Subsonic/Navidrome, SoundCloud, Audiobookshelf and podcasts; and it
+wears skins: classic bitmap skins, Audacious and Bamp skins,
 and modern (Wasabi) skins.
 
 ## Building
 
-Amped's parts live in their own repositories in the
-[Amped organization](https://git.hadak.org/Amped) (the skin engines, the
-media sources, window docking, logging, ...). `flutter pub get` fetches them
-from git; nothing else has to be checked out.
+Most of Amped's parts (the skin engines, the media sources, window docking,
+logging, ...) are packages in [`packages/`](packages). A few are kept in
+repositories on private servers, so they are not accessible at this time,
+among them `amped_maki`, `amped_vis_api` and `tiny_fullscreen_vis`. That may
+change in the future. Until then, `flutter pub get` only succeeds for those
+with access to them, and the release builds on GitHub are made by a workflow
+that has it.
 
 ```shell
 flutter pub get
@@ -77,17 +80,6 @@ saved network share logins, libmpv for audio and video playback):
 sudo apt-get install libgtk-3-dev libx11-dev libxi-dev libsecret-1-dev libmpv-dev mpv
 ```
 
-## YouTube (yt-dlp)
-
-YouTube links are resolved with [yt-dlp](https://github.com/yt-dlp/yt-dlp),
-which every build bundles. It is downloaded and checksum-verified
-automatically the first time you build (network needed once; it is cached in
-the `binaries` folder of the `amped_ytdlp` package). See the
-[amped_ytdlp](https://git.hadak.org/Amped/amped_ytdlp) README for how it is
-bundled and how to update it. On macOS the Runner's **Bundle yt-dlp** build
-phase runs `macos/bundle_yt_dlp.sh`, which finds that package wherever pub put
-it.
-
 ## Network shares
 
 Amped plays from SMB (`smb://`) and WebDAV (`webdav://`, `webdavs://`) shares.
@@ -119,9 +111,3 @@ Linux and Windows, pass it at build time:
 ```shell
 flutter build linux --dart-define=AMPED_GIT_COMMIT=$(git rev-parse --short HEAD)
 ```
-
-## Native skin previews
-
-`native/skin_preview` is the C renderer behind the Quick Look, Explorer and
-freedesktop skin previews. The `packages/skin_preview` package, which draws
-the in-app previews, compiles the same source.

@@ -1,0 +1,23 @@
+<container id="vis" name="Visualization" default_visible="0">
+
+  <layout id="normal" w="360" h="232" minimum_w="200" minimum_h="110">
+    <group id="amped.frame" x="0" y="0" w="0" relatw="1" h="0" relath="1"/>
+    <group id="amped.title" x="20" y="0" w="-40" relatw="1" h="18"/>
+    <sendparams target="title" text="VISUALIZER"/>
+    <layer id="screen" image="frame.black" x="6" y="20" w="-12" relatw="1" h="-50" relath="1"/>
+    <component id="content" param="guid:avs" x="6" y="20" w="-12" relatw="1" h="-50" relath="1"/>
+    <!-- The base skin's controls under the picture. -->
+    <button id="visprev" action="VIS_PREV" x="6" y="-26" relaty="1"
+      image="vis.prev" hoverimage="vis.prev.hover" downimage="vis.prev.down" tooltip="Previous visualization"/>
+    <button id="visnext" action="VIS_NEXT" x="64" y="-26" relaty="1"
+      image="vis.next" hoverimage="vis.next.hover" downimage="vis.next.down" tooltip="Next visualization"/>
+    <button id="visrandom" action="VIS_RANDOM" x="122" y="-26" relaty="1"
+      image="vis.random" hoverimage="vis.random.hover" downimage="vis.random.down"
+      activeimage="vis.random.active" tooltip="Random visualization"/>
+    <button id="visfs" action="VIS_FS" x="194" y="-26" relaty="1"
+      image="vis.fullscreen" hoverimage="vis.fullscreen.hover" downimage="vis.fullscreen.down" tooltip="Fullscreen"/>
+    <button id="vismenu" action="VIS_MENU" x="248" y="-26" relaty="1"
+      image="vis.options" hoverimage="vis.options.hover" downimage="vis.options.down" tooltip="Options"/>
+  </layout>
+
+</container>

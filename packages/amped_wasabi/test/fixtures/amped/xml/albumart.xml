@@ -1,0 +1,11 @@
+<container id="albumart" name="Album Art" default_visible="0">
+
+  <layout id="normal" w="275" h="290" minimum_w="120" minimum_h="120">
+    <group id="amped.frame" x="0" y="0" w="0" relatw="1" h="0" relath="1"/>
+    <group id="amped.title" x="20" y="0" w="-40" relatw="1" h="18"/>
+    <sendparams target="title" text="ALBUM ART"/>
+    <layer id="screen" image="frame.black" x="6" y="20" w="-12" relatw="1" h="-26" relath="1"/>
+    <albumart id="art" x="6" y="20" w="-12" relatw="1" h="-26" relath="1"/>
+  </layout>
+
+</container>

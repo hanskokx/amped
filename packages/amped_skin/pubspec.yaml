@@ -1,0 +1,18 @@
+name: amped_skin
+description: >-
+  What the skin packages and the app share: the windows a skin draws and the
+  facts about them that do not depend on a skin's format.
+version: 0.1.0
+publish_to: "none"
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  arcane_analysis: ^1.0.5
+  flutter_test:
+    sdk: flutter

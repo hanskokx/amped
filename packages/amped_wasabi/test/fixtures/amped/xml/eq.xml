@@ -1,0 +1,87 @@
+<container id="eq" name="Equalizer" default_visible="1">
+
+  <layout id="normal" background="eq.bg">
+    <!-- Double-clicking the title bar switches to windowshade mode. -->
+    <layer id="titlebar" x="0" y="0" w="0" relatw="1" h="18" dblclickaction="switch;shade"/>
+    <!-- Centered on the window (x + w/2 = 180), like amped.title. -->
+    <text id="title" x="44" y="2" w="272" h="14" align="center" text="EQUALIZER"
+      color="amped.title" fontsize="11" bold="1" inactivealpha="110" ghost="1"/>
+    <button id="close" action="CLOSE" x="342" y="3"
+      image="title.close" hoverimage="title.close.hover" downimage="title.close.down" tooltip="Close"/>
+
+    <button id="on" action="EQ_TOGGLE" x="8" y="23"
+      image="toggle.on" hoverimage="toggle.on.hover" downimage="toggle.on.down"
+      activeimage="toggle.on.active" tooltip="Turn the equalizer on or off"/>
+    <button id="auto" action="EQ_AUTO" x="44" y="23"
+      image="toggle.auto" hoverimage="toggle.auto.hover" downimage="toggle.auto.down"
+      activeimage="toggle.auto.active" tooltip="Load presets automatically"/>
+    <button id="presets" action="MENU" param="presets" x="80" y="21"
+      image="btn.presets" hoverimage="btn.presets.hover" downimage="btn.presets.down" tooltip="Presets"/>
+    <eqvis id="graph" x="136" y="22" w="216" h="14"
+      colortop="255,181,71" colormiddle="127,227,255" colorbottom="46,107,122" colorpreamp="46,107,122"/>
+
+    <layer id="eq.zero" image="eq.zero" x="12" y="83" w="336" h="1"/>
+    <layer id="eq.preamp.track" image="eq.track" x="21" y="48"/>
+    <slider id="preamp" action="EQ_PREAMP" orientation="vertical" x="16" y="48" w="14" h="70"
+      thumb="eq.thumb" downthumb="eq.thumb" tooltip="Preamp"/>
+    <layer id="eq.track1" image="eq.track" x="69" y="48"/>
+    <slider id="eq1" action="EQ_BAND" param="1" orientation="vertical" x="64" y="48" w="14" h="70"
+      thumb="eq.thumb" downthumb="eq.thumb"/>
+    <layer id="eq.track2" image="eq.track" x="97" y="48"/>
+    <slider id="eq2" action="EQ_BAND" param="2" orientation="vertical" x="92" y="48" w="14" h="70"
+      thumb="eq.thumb" downthumb="eq.thumb"/>
+    <layer id="eq.track3" image="eq.track" x="125" y="48"/>
+    <slider id="eq3" action="EQ_BAND" param="3" orientation="vertical" x="120" y="48" w="14" h="70"
+      thumb="eq.thumb" downthumb="eq.thumb"/>
+    <layer id="eq.track4" image="eq.track" x="153" y="48"/>
+    <slider id="eq4" action="EQ_BAND" param="4" orientation="vertical" x="148" y="48" w="14" h="70"
+      thumb="eq.thumb" downthumb="eq.thumb"/>
+    <layer id="eq.track5" image="eq.track" x="181" y="48"/>
+    <slider id="eq5" action="EQ_BAND" param="5" orientation="vertical" x="176" y="48" w="14" h="70"
+      thumb="eq.thumb" downthumb="eq.thumb"/>
+    <layer id="eq.track6" image="eq.track" x="209" y="48"/>
+    <slider id="eq6" action="EQ_BAND" param="6" orientation="vertical" x="204" y="48" w="14" h="70"
+      thumb="eq.thumb" downthumb="eq.thumb"/>
+    <layer id="eq.track7" image="eq.track" x="237" y="48"/>
+    <slider id="eq7" action="EQ_BAND" param="7" orientation="vertical" x="232" y="48" w="14" h="70"
+      thumb="eq.thumb" downthumb="eq.thumb"/>
+    <layer id="eq.track8" image="eq.track" x="265" y="48"/>
+    <slider id="eq8" action="EQ_BAND" param="8" orientation="vertical" x="260" y="48" w="14" h="70"
+      thumb="eq.thumb" downthumb="eq.thumb"/>
+    <layer id="eq.track9" image="eq.track" x="293" y="48"/>
+    <slider id="eq9" action="EQ_BAND" param="9" orientation="vertical" x="288" y="48" w="14" h="70"
+      thumb="eq.thumb" downthumb="eq.thumb"/>
+    <layer id="eq.track10" image="eq.track" x="321" y="48"/>
+    <slider id="eq10" action="EQ_BAND" param="10" orientation="vertical" x="316" y="48" w="14" h="70"
+      thumb="eq.thumb" downthumb="eq.thumb"/>
+  </layout>
+
+  <!-- Windowshade mode, like classic's equalizer shade: volume and
+       balance, then the window buttons. -->
+  <layout id="shade" background="shade.eq.bg">
+    <!-- Double-clicking the shaded window switches back. -->
+    <layer id="titlebar" x="0" y="0" w="0" relatw="1" h="0" relath="1" dblclickaction="switch;normal"/>
+    <button id="menu" action="CONTROLMENU" x="6" y="6"
+      image="title.menu" hoverimage="title.menu.hover" downimage="title.menu.down" tooltip="Main menu"/>
+
+    <!-- Volume -->
+    <layer id="volume.icon" image="shade.speaker" x="28" y="6" ghost="1"/>
+    <layer id="volume.track" image="volume.track" x="47" y="11" w="129" h="4"/>
+    <slider id="volume" action="VOLUME" x="45" y="7" w="133" h="11"
+      thumb="shade.volume.thumb" downthumb="shade.volume.thumb" tooltip="Volume"/>
+
+    <!-- Balance, with a mark at the center. -->
+    <text id="balance.label" x="194" y="6" w="22" h="13" text="BAL" align="center"
+      color="amped.title" fontsize="8" bold="1" ghost="1"/>
+    <layer id="balance.track" image="volume.track" x="220" y="11" w="72" h="4"/>
+    <layer id="balance.center" image="eq.zero" x="256" y="9" w="1" h="8" ghost="1"/>
+    <slider id="balance" action="PAN" x="218" y="7" w="76" h="11"
+      thumb="shade.volume.thumb" downthumb="shade.volume.thumb" tooltip="Balance"/>
+
+    <button id="unshade" action="SWITCH" param="normal" x="328" y="6"
+      image="title.unshade" hoverimage="title.unshade.hover" downimage="title.unshade.down" tooltip="Normal mode"/>
+    <button id="close" action="CLOSE" x="342" y="6"
+      image="title.close" hoverimage="title.close.hover" downimage="title.close.down" tooltip="Close"/>
+  </layout>
+
+</container>

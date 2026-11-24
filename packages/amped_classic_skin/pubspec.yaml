@@ -1,0 +1,29 @@
+name: amped_classic_skin
+description: >-
+  Classic skin loading, decoding, and rendering helpers used by the
+  amped desktop app. Kept as a separate package so a future "modern" skin
+  codepath can live alongside the classic one.
+version: 0.1.0
+publish_to: "none"
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  amped_skin:
+    path: ../amped_skin
+  amped_vis:
+    path: ../amped_vis
+  archive: ^4.0.9
+  custom_cursor:
+    git:
+      url: https://github.com/hanskokx/flutter_custom_cursor.git
+  flutter:
+    sdk: flutter
+  material_ui: ^1.0.0
+  path: ^1.9.0
+
+dev_dependencies:
+  arcane_analysis: ^1.0.5
+  flutter_test:
+    sdk: flutter

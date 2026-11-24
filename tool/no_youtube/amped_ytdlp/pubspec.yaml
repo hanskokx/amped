@@ -1,0 +1,7 @@
+name: amped_ytdlp
+description: A stand-in for amped_ytdlp that runs nothing, for builds without YouTube.
+version: 0.0.0
+publish_to: "none"
+
+environment:
+  sdk: ^3.12.2

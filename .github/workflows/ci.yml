@@ -1,0 +1,39 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/hadak-git
+        with:
+          ssh-key: ${{ secrets.SSH_KEY }}
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Linux build packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang cmake ninja-build pkg-config \
+            libgtk-3-dev libx11-dev libxi-dev libsecret-1-dev libmpv-dev mpv \
+            libasound2-dev libayatana-appindicator3-dev
+      - name: Take YouTube out (YOUTUBE_ENABLED is false)
+        if: ${{ vars.YOUTUBE_ENABLED == 'false' }}
+        run: dart run tool/strip_youtube.dart
+      - run: flutter pub get
+      - name: App tests
+        run: flutter test
+      - name: Package tests
+        run: |
+          for package in packages/*/; do
+            [ -d "$package/test" ] || continue
+            echo "::group::$package"
+            (cd "$package" && flutter pub get && flutter test)
+            echo "::endgroup::"
+          done

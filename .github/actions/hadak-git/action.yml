@@ -1,0 +1,21 @@
+name: Git access to git.hadak.org
+description: >-
+  Lets git (and so pub) clone the private packages hosted on git.hadak.org
+  over SSH, although pubspec.yaml names them by their https address.
+inputs:
+  ssh-key:
+    description: A private key that can read the Amped organization.
+    required: true
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      env:
+        SSH_KEY: ${{ inputs.ssh-key }}
+      run: |
+        mkdir -p ~/.ssh
+        printf '%s\n' "$SSH_KEY" > ~/.ssh/hadak_ed25519
+        chmod 600 ~/.ssh/hadak_ed25519
+        ssh-keyscan -p 2222 git.hadak.org >> ~/.ssh/known_hosts
+        git config --global core.sshCommand "ssh -i $HOME/.ssh/hadak_ed25519 -o IdentitiesOnly=yes"
+        git config --global url."ssh://git@git.hadak.org:2222/".insteadOf "https://git.hadak.org/"

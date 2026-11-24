@@ -1,0 +1,11 @@
+<container id="library" name="Media Library" default_visible="0">
+
+  <layout id="normal" w="360" h="232" minimum_w="200" minimum_h="110">
+    <group id="amped.frame" x="0" y="0" w="0" relatw="1" h="0" relath="1"/>
+    <group id="amped.title" x="20" y="0" w="-40" relatw="1" h="18"/>
+    <sendparams target="title" text="MEDIA LIBRARY"/>
+    <layer id="screen" image="frame.black" x="6" y="20" w="-12" relatw="1" h="-50" relath="1"/>
+    <component id="content" param="guid:ml" x="6" y="20" w="-12" relatw="1" h="-50" relath="1"/>
+  </layout>
+
+</container>

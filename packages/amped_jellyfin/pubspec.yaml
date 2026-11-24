@@ -1,0 +1,16 @@
+name: amped_jellyfin
+description: >-
+  Jellyfin as an Amped source: client and the RemoteLibrarySource.
+version: 0.1.0
+publish_to: "none"
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  amped_media_source:
+    path: ../amped_media_source
+
+dev_dependencies:
+  arcane_analysis: ^1.0.5
+  test: ^1.25.0
