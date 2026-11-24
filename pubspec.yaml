@@ -91,6 +91,45 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+# hanskokx/media-kit windows-arm64-workarounds = PR branch fix/windows-view-null-guard + temporary ARM64 ANGLE/libmpv fixes.
+# Switch back to the upstream ref once those are fixed.
+dependency_overrides:
+  media_kit:
+    git:
+      url: https://github.com/hanskokx/media-kit
+      ref: windows-arm64-workarounds
+      path: media_kit
+  media_kit_video:
+    git:
+      url: https://github.com/hanskokx/media-kit
+      ref: windows-arm64-workarounds
+      path: media_kit_video
+  media_kit_libs_android_video:
+    git:
+      url: https://github.com/hanskokx/media-kit
+      ref: windows-arm64-workarounds
+      path: libs/android/media_kit_libs_android_video
+  media_kit_libs_ios_video:
+    git:
+      url: https://github.com/hanskokx/media-kit
+      ref: windows-arm64-workarounds
+      path: libs/ios/media_kit_libs_ios_video
+  media_kit_libs_linux:
+    git:
+      url: https://github.com/hanskokx/media-kit
+      ref: windows-arm64-workarounds
+      path: libs/linux/media_kit_libs_linux
+  media_kit_libs_macos_video:
+    git:
+      url: https://github.com/hanskokx/media-kit
+      ref: windows-arm64-workarounds
+      path: libs/macos/media_kit_libs_macos_video
+  media_kit_libs_windows_video:
+    git:
+      url: https://github.com/hanskokx/media-kit
+      ref: windows-arm64-workarounds
+      path: libs/windows/media_kit_libs_windows_video
+
 flutter:
   generate: true
   uses-material-design: true

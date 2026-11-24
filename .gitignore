@@ -46,3 +46,6 @@ app.*.map.json
 
 # Secrets
 .env
+
+# Local dependency overrides (e.g. ssh git URLs)
+pubspec_overrides.yaml
