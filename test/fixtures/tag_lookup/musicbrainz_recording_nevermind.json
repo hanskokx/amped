@@ -1,0 +1,2018 @@
+{
+ "title": "Smells Like Teen Spirit",
+ "video": false,
+ "releases": [
+  {
+   "release-group": {
+    "disambiguation": "",
+    "secondary-type-ids": [],
+    "primary-type": "Album",
+    "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+    "artist-credit": [
+     {
+      "joinphrase": "",
+      "name": "Nirvana",
+      "artist": {
+       "sort-name": "Nirvana",
+       "disambiguation": "1980s–1990s US grunge band",
+       "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+       "country": "US",
+       "id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+       "type": "Group",
+       "name": "Nirvana"
+      }
+     }
+    ],
+    "id": "1b022e01-4da6-387b-8658-8678046e4cef",
+    "first-release-date": "1991-09-24",
+    "releases": [],
+    "genres": [],
+    "title": "Nevermind",
+    "secondary-types": []
+   },
+   "country": null,
+   "status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+   "barcode": null,
+   "quality": "normal",
+   "disambiguation": "",
+   "media": [
+    {
+     "track-offset": 17,
+     "title": "",
+     "track-count": 75,
+     "tracks": [
+      {
+       "title": "Smells Like Teen Spirit (Live In Amsterdam)",
+       "number": "5",
+       "artist-credit": [
+        {
+         "name": "Nirvana",
+         "joinphrase": "",
+         "artist": {
+          "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+          "disambiguation": "1980s–1990s US grunge band",
+          "sort-name": "Nirvana",
+          "type": "Group",
+          "id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+          "country": "US",
+          "name": "Nirvana"
+         }
+        }
+       ],
+       "id": "c375a7f4-583f-410e-8f50-5453eda838c4",
+       "position": 18,
+       "length": 290000
+      }
+     ],
+     "format": "Digital Media",
+     "format-id": "907a28d9-b3b2-3ef6-89a8-7b18d91d4794",
+     "position": 1,
+     "id": "33c80f29-1389-4f95-8581-d2236d0819a3"
+    }
+   ],
+   "packaging": null,
+   "text-representation": {
+    "script": null,
+    "language": null
+   },
+   "date": "1991-09-24",
+   "artist-credit": [
+    {
+     "name": "Nirvana",
+     "joinphrase": "",
+     "artist": {
+      "genres": [
+       {
+        "disambiguation": "",
+        "id": "00055e8b-b951-46e2-af1e-58b5624e7952",
+        "name": "acoustic rock",
+        "count": 8
+       },
+       {
+        "count": 1,
+        "name": "alternative metal",
+        "id": "7983ff25-ddf9-411e-a7f9-6cca238bff79",
+        "disambiguation": ""
+       },
+       {
+        "name": "alternative pop",
+        "disambiguation": "",
+        "id": "d3ebe947-7c03-43f5-b333-09379881b0f6",
+        "count": 1
+       },
+       {
+        "count": 30,
+        "name": "alternative rock",
+        "disambiguation": "",
+        "id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18"
+       },
+       {
+        "count": 1,
+        "disambiguation": "",
+        "id": "608b0471-7531-4854-a348-e698c69cb699",
+        "name": "ambient"
+       },
+       {
+        "name": "conscious hip hop",
+        "id": "c0e73bb6-37a4-485e-aaea-11c63b40c9f3",
+        "disambiguation": "",
+        "count": 1
+       },
+       {
+        "disambiguation": "",
+        "id": "89255676-1f14-4dd8-bbad-fca839d6aff4",
+        "name": "electronic",
+        "count": 1
+       },
+       {
+        "id": "68c81274-5770-4e7b-a4bf-ab0d7d425d99",
+        "disambiguation": "",
+        "name": "experimental",
+        "count": 1
+       },
+       {
+        "id": "3f08faa9-6c3e-4b6d-b4b8-08eea45954e2",
+        "disambiguation": "",
+        "name": "grunge",
+        "count": 68
+       },
+       {
+        "name": "hard rock",
+        "disambiguation": "",
+        "id": "51cb9f91-e6a2-41bf-891f-e78e3f1e52ab",
+        "count": 1
+       },
+       {
+        "count": 1,
+        "id": "52faa157-6bad-4d86-a0ab-d4dec7d2513c",
+        "disambiguation": "",
+        "name": "hip hop"
+       },
+       {
+        "count": 1,
+        "name": "instrumental hip hop",
+        "id": "24695813-4a26-4872-bc95-b3378e0ae1b4",
+        "disambiguation": ""
+       },
+       {
+        "name": "new age",
+        "disambiguation": "",
+        "id": "6c76d9ec-0924-4fc9-bb22-91a695ca09d6",
+        "count": 1
+       },
+       {
+        "count": 12,
+        "name": "noise rock",
+        "disambiguation": "",
+        "id": "8e5474b7-f445-49a7-866d-0f8e34b0a519"
+       },
+       {
+        "name": "pigfuck",
+        "disambiguation": "",
+        "id": "4a3546b4-ec9f-431f-8532-55434f1038ea",
+        "count": 1
+       },
+       {
+        "disambiguation": "",
+        "id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+        "name": "pop",
+        "count": 1
+       },
+       {
+        "count": 1,
+        "id": "aec382b7-b635-470c-9051-2f84e0b5ea1e",
+        "disambiguation": "",
+        "name": "post-hardcore"
+       },
+       {
+        "count": 1,
+        "disambiguation": "",
+        "id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+        "name": "psychedelic pop"
+       },
+       {
+        "count": 1,
+        "name": "psytrance",
+        "id": "b3cccf71-e843-4546-87fa-728055ba3147",
+        "disambiguation": ""
+       },
+       {
+        "count": 2,
+        "id": "8cc9b280-230b-4a3a-b1e2-8acab0744dd3",
+        "disambiguation": "",
+        "name": "punk"
+       },
+       {
+        "name": "punk rock",
+        "id": "bd7e1d40-43b1-4ba5-97b3-05b891466962",
+        "disambiguation": "",
+        "count": 1
+       },
+       {
+        "count": 26,
+        "name": "rock",
+        "disambiguation": "",
+        "id": "0e3fc579-2d24-4f20-9dae-736e1ec78798"
+       },
+       {
+        "count": 3,
+        "disambiguation": "",
+        "id": "66544dbb-08a8-44c2-a21a-4d251481d2b6",
+        "name": "sludge metal"
+       },
+       {
+        "count": 1,
+        "name": "underground hip hop",
+        "disambiguation": "",
+        "id": "03a8749c-93e6-4b71-8204-b33de116d8fd"
+       }
+      ],
+      "name": "Nirvana",
+      "country": "US",
+      "id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+      "type": "Group",
+      "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+      "sort-name": "Nirvana",
+      "disambiguation": "1980s–1990s US grunge band"
+     }
+    }
+   ],
+   "id": "a29d92bd-5691-4515-a0e2-9476d86cad40",
+   "genres": [],
+   "title": "Nevermind (30th Anniversary Super Deluxe)",
+   "release-events": [
+    {
+     "area": null,
+     "date": "1991-09-24"
+    }
+   ],
+   "packaging-id": null,
+   "status": "Official"
+  },
+  {
+   "release-group": {
+    "genres": [],
+    "first-release-date": "1991-09-24",
+    "id": "1b022e01-4da6-387b-8658-8678046e4cef",
+    "releases": [],
+    "secondary-types": [],
+    "title": "Nevermind",
+    "primary-type": "Album",
+    "secondary-type-ids": [],
+    "disambiguation": "",
+    "artist-credit": [
+     {
+      "artist": {
+       "sort-name": "Nirvana",
+       "disambiguation": "1980s–1990s US grunge band",
+       "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+       "name": "Nirvana",
+       "id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+       "country": "US",
+       "type": "Group"
+      },
+      "joinphrase": "",
+      "name": "Nirvana"
+     }
+    ],
+    "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc"
+   },
+   "barcode": "602438461882",
+   "quality": "normal",
+   "status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+   "country": "US",
+   "artist-credit": [
+    {
+     "artist": {
+      "id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+      "country": "US",
+      "type": "Group",
+      "genres": [
+       {
+        "name": "acoustic rock",
+        "disambiguation": "",
+        "id": "00055e8b-b951-46e2-af1e-58b5624e7952",
+        "count": 8
+       },
+       {
+        "name": "alternative metal",
+        "id": "7983ff25-ddf9-411e-a7f9-6cca238bff79",
+        "disambiguation": "",
+        "count": 1
+       },
+       {
+        "count": 1,
+        "disambiguation": "",
+        "id": "d3ebe947-7c03-43f5-b333-09379881b0f6",
+        "name": "alternative pop"
+       },
+       {
+        "count": 30,
+        "id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+        "disambiguation": "",
+        "name": "alternative rock"
+       },
+       {
+        "count": 1,
+        "name": "ambient",
+        "id": "608b0471-7531-4854-a348-e698c69cb699",
+        "disambiguation": ""
+       },
+       {
+        "name": "conscious hip hop",
+        "disambiguation": "",
+        "id": "c0e73bb6-37a4-485e-aaea-11c63b40c9f3",
+        "count": 1
+       },
+       {
+        "count": 1,
+        "name": "electronic",
+        "disambiguation": "",
+        "id": "89255676-1f14-4dd8-bbad-fca839d6aff4"
+       },
+       {
+        "count": 1,
+        "id": "68c81274-5770-4e7b-a4bf-ab0d7d425d99",
+        "disambiguation": "",
+        "name": "experimental"
+       },
+       {
+        "count": 68,
+        "name": "grunge",
+        "id": "3f08faa9-6c3e-4b6d-b4b8-08eea45954e2",
+        "disambiguation": ""
+       },
+       {
+        "count": 1,
+        "id": "51cb9f91-e6a2-41bf-891f-e78e3f1e52ab",
+        "disambiguation": "",
+        "name": "hard rock"
+       },
+       {
+        "count": 1,
+        "name": "hip hop",
+        "id": "52faa157-6bad-4d86-a0ab-d4dec7d2513c",
+        "disambiguation": ""
+       },
+       {
+        "name": "instrumental hip hop",
+        "disambiguation": "",
+        "id": "24695813-4a26-4872-bc95-b3378e0ae1b4",
+        "count": 1
+       },
+       {
+        "count": 1,
+        "disambiguation": "",
+        "id": "6c76d9ec-0924-4fc9-bb22-91a695ca09d6",
+        "name": "new age"
+       },
+       {
+        "count": 12,
+        "name": "noise rock",
+        "id": "8e5474b7-f445-49a7-866d-0f8e34b0a519",
+        "disambiguation": ""
+       },
+       {
+        "count": 1,
+        "id": "4a3546b4-ec9f-431f-8532-55434f1038ea",
+        "disambiguation": "",
+        "name": "pigfuck"
+       },
+       {
+        "count": 1,
+        "name": "pop",
+        "id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+        "disambiguation": ""
+       },
+       {
+        "count": 1,
+        "id": "aec382b7-b635-470c-9051-2f84e0b5ea1e",
+        "disambiguation": "",
+        "name": "post-hardcore"
+       },
+       {
+        "disambiguation": "",
+        "id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+        "name": "psychedelic pop",
+        "count": 1
+       },
+       {
+        "id": "b3cccf71-e843-4546-87fa-728055ba3147",
+        "disambiguation": "",
+        "name": "psytrance",
+        "count": 1
+       },
+       {
+        "count": 2,
+        "name": "punk",
+        "disambiguation": "",
+        "id": "8cc9b280-230b-4a3a-b1e2-8acab0744dd3"
+       },
+       {
+        "id": "bd7e1d40-43b1-4ba5-97b3-05b891466962",
+        "disambiguation": "",
+        "name": "punk rock",
+        "count": 1
+       },
+       {
+        "disambiguation": "",
+        "id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+        "name": "rock",
+        "count": 26
+       },
+       {
+        "name": "sludge metal",
+        "disambiguation": "",
+        "id": "66544dbb-08a8-44c2-a21a-4d251481d2b6",
+        "count": 3
+       },
+       {
+        "id": "03a8749c-93e6-4b71-8204-b33de116d8fd",
+        "disambiguation": "",
+        "name": "underground hip hop",
+        "count": 1
+       }
+      ],
+      "name": "Nirvana",
+      "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+      "sort-name": "Nirvana",
+      "disambiguation": "1980s–1990s US grunge band"
+     },
+     "joinphrase": "",
+     "name": "Nirvana"
+    }
+   ],
+   "text-representation": {
+    "script": "Latn",
+    "language": "eng"
+   },
+   "date": "2021-11-11",
+   "disambiguation": "30th anniversary super deluxe",
+   "packaging": null,
+   "media": [
+    {
+     "id": "3354b443-9681-38d8-b1b2-0497bdd0ba4e",
+     "format-id": "9712d52a-4509-3d4b-a1a2-67c88c643e31",
+     "position": 2,
+     "format": "CD",
+     "tracks": [
+      {
+       "length": 289813,
+       "id": "168a738d-7af1-4ffe-bbf4-d96d072e3841",
+       "position": 5,
+       "number": "5",
+       "artist-credit": [
+        {
+         "name": "Nirvana",
+         "joinphrase": "",
+         "artist": {
+          "name": "Nirvana",
+          "id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+          "country": "US",
+          "type": "Group",
+          "sort-name": "Nirvana",
+          "disambiguation": "1980s–1990s US grunge band",
+          "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b"
+         }
+        }
+       ],
+       "title": "Smells Like Teen Spirit"
+      }
+     ],
+     "track-count": 17,
+     "title": "Live in Amsterdam, Netherlands (Paradiso November 25, 1991)",
+     "track-offset": 4
+    }
+   ],
+   "packaging-id": null,
+   "status": "Official",
+   "release-events": [
+    {
+     "date": "2021-11-11",
+     "area": {
+      "iso-3166-1-codes": [
+       "US"
+      ],
+      "type-id": null,
+      "disambiguation": "",
+      "sort-name": "United States",
+      "type": null,
+      "id": "489ce91b-6658-3307-9877-795b68554c98",
+      "name": "United States"
+     }
+    }
+   ],
+   "title": "Nevermind",
+   "genres": [],
+   "id": "b3cb9b1c-fe5c-43be-aba8-49609a8df2ac"
+  },
+  {
+   "release-group": {
+    "artist-credit": [
+     {
+      "artist": {
+       "type": "Group",
+       "id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+       "country": "US",
+       "name": "Nirvana",
+       "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+       "disambiguation": "1980s–1990s US grunge band",
+       "sort-name": "Nirvana"
+      },
+      "joinphrase": "",
+      "name": "Nirvana"
+     }
+    ],
+    "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+    "primary-type": "Album",
+    "secondary-type-ids": [],
+    "disambiguation": "",
+    "secondary-types": [],
+    "title": "Nevermind",
+    "genres": [],
+    "first-release-date": "1991-09-24",
+    "id": "1b022e01-4da6-387b-8658-8678046e4cef",
+    "releases": []
+   },
+   "country": "US",
+   "status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+   "quality": "normal",
+   "barcode": "602438625314",
+   "media": [
+    {
+     "track-count": 16,
+     "title": "Live 1991 / 1992",
+     "track-offset": 13,
+     "id": "998be5d5-b0cc-3b99-bba8-61e07e5253a5",
+     "position": 2,
+     "format-id": "9712d52a-4509-3d4b-a1a2-67c88c643e31",
+     "tracks": [
+      {
+       "id": "5784ba02-252e-4cda-8bb8-9a1bbcee27a6",
+       "position": 14,
+       "length": 290000,
+       "title": "Smells Like Teen Spirit (live in Amsterdam, Netherlands)",
+       "number": "14",
+       "artist-credit": [
+        {
+         "name": "Nirvana",
+         "joinphrase": "",
+         "artist": {
+          "disambiguation": "1980s–1990s US grunge band",
+          "sort-name": "Nirvana",
+          "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+          "type": "Group",
+          "country": "US",
+          "id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+          "name": "Nirvana"
+         }
+        }
+       ]
+      }
+     ],
+     "format": "CD"
+    }
+   ],
+   "packaging": null,
+   "disambiguation": "",
+   "date": "2021-11-12",
+   "text-representation": {
+    "language": "eng",
+    "script": "Latn"
+   },
+   "artist-credit": [
+    {
+     "joinphrase": "",
+     "name": "Nirvana",
+     "artist": {
+      "name": "Nirvana",
+      "genres": [
+       {
+        "name": "acoustic rock",
+        "id": "00055e8b-b951-46e2-af1e-58b5624e7952",
+        "disambiguation": "",
+        "count": 8
+       },
+       {
+        "count": 1,
+        "name": "alternative metal",
+        "id": "7983ff25-ddf9-411e-a7f9-6cca238bff79",
+        "disambiguation": ""
+       },
+       {
+        "disambiguation": "",
+        "id": "d3ebe947-7c03-43f5-b333-09379881b0f6",
+        "name": "alternative pop",
+        "count": 1
+       },
+       {
+        "id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+        "disambiguation": "",
+        "name": "alternative rock",
+        "count": 30
+       },
+       {
+        "name": "ambient",
+        "id": "608b0471-7531-4854-a348-e698c69cb699",
+        "disambiguation": "",
+        "count": 1
+       },
+       {
+        "count": 1,
+        "name": "conscious hip hop",
+        "id": "c0e73bb6-37a4-485e-aaea-11c63b40c9f3",
+        "disambiguation": ""
+       },
+       {
+        "count": 1,
+        "disambiguation": "",
+        "id": "89255676-1f14-4dd8-bbad-fca839d6aff4",
+        "name": "electronic"
+       },
+       {
+        "count": 1,
+        "name": "experimental",
+        "id": "68c81274-5770-4e7b-a4bf-ab0d7d425d99",
+        "disambiguation": ""
+       },
+       {
+        "count": 68,
+        "id": "3f08faa9-6c3e-4b6d-b4b8-08eea45954e2",
+        "disambiguation": "",
+        "name": "grunge"
+       },
+       {
+        "count": 1,
+        "name": "hard rock",
+        "id": "51cb9f91-e6a2-41bf-891f-e78e3f1e52ab",
+        "disambiguation": ""
+       },
+       {
+        "name": "hip hop",
+        "disambiguation": "",
+        "id": "52faa157-6bad-4d86-a0ab-d4dec7d2513c",
+        "count": 1
+       },
+       {
+        "count": 1,
+        "name": "instrumental hip hop",
+        "id": "24695813-4a26-4872-bc95-b3378e0ae1b4",
+        "disambiguation": ""
+       },
+       {
+        "count": 1,
+        "disambiguation": "",
+        "id": "6c76d9ec-0924-4fc9-bb22-91a695ca09d6",
+        "name": "new age"
+       },
+       {
+        "name": "noise rock",
+        "disambiguation": "",
+        "id": "8e5474b7-f445-49a7-866d-0f8e34b0a519",
+        "count": 12
+       },
+       {
+        "id": "4a3546b4-ec9f-431f-8532-55434f1038ea",
+        "disambiguation": "",
+        "name": "pigfuck",
+        "count": 1
+       },
+       {
+        "count": 1,
+        "name": "pop",
+        "disambiguation": "",
+        "id": "911c7bbb-172d-4df8-9478-dbff4296e791"
+       },
+       {
+        "count": 1,
+        "name": "post-hardcore",
+        "id": "aec382b7-b635-470c-9051-2f84e0b5ea1e",
+        "disambiguation": ""
+       },
+       {
+        "name": "psychedelic pop",
+        "disambiguation": "",
+        "id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+        "count": 1
+       },
+       {
+        "count": 1,
+        "id": "b3cccf71-e843-4546-87fa-728055ba3147",
+        "disambiguation": "",
+        "name": "psytrance"
+       },
+       {
+        "count": 2,
+        "id": "8cc9b280-230b-4a3a-b1e2-8acab0744dd3",
+        "disambiguation": "",
+        "name": "punk"
+       },
+       {
+        "count": 1,
+        "name": "punk rock",
+        "id": "bd7e1d40-43b1-4ba5-97b3-05b891466962",
+        "disambiguation": ""
+       },
+       {
+        "name": "rock",
+        "id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+        "disambiguation": "",
+        "count": 26
+       },
+       {
+        "count": 3,
+        "name": "sludge metal",
+        "id": "66544dbb-08a8-44c2-a21a-4d251481d2b6",
+        "disambiguation": ""
+       },
+       {
+        "name": "underground hip hop",
+        "id": "03a8749c-93e6-4b71-8204-b33de116d8fd",
+        "disambiguation": "",
+        "count": 1
+       }
+      ],
+      "type": "Group",
+      "id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+      "country": "US",
+      "disambiguation": "1980s–1990s US grunge band",
+      "sort-name": "Nirvana",
+      "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b"
+     }
+    }
+   ],
+   "id": "e4379cac-551f-4f9f-9f28-9f42c9ab4e94",
+   "genres": [],
+   "title": "Nevermind",
+   "release-events": [
+    {
+     "date": "2021-11-12",
+     "area": {
+      "sort-name": "United States",
+      "disambiguation": "",
+      "iso-3166-1-codes": [
+       "US"
+      ],
+      "type-id": null,
+      "id": "489ce91b-6658-3307-9877-795b68554c98",
+      "type": null,
+      "name": "United States"
+     }
+    }
+   ],
+   "status": "Official",
+   "packaging-id": null
+  },
+  {
+   "media": [
+    {
+     "format-id": "907a28d9-b3b2-3ef6-89a8-7b18d91d4794",
+     "position": 2,
+     "id": "bc612c91-c8bf-338e-9b7c-c8f1f41fa887",
+     "tracks": [
+      {
+       "number": "5",
+       "artist-credit": [
+        {
+         "joinphrase": "",
+         "name": "Nirvana",
+         "artist": {
+          "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+          "sort-name": "Nirvana",
+          "disambiguation": "1980s–1990s US grunge band",
+          "name": "Nirvana",
+          "id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+          "country": "US",
+          "type": "Group"
+         }
+        }
+       ],
+       "title": "Smells Like Teen Spirit",
+       "length": 289813,
+       "id": "58e19acb-2d33-4f60-b3cc-1dab65b309ef",
+       "position": 5
+      }
+     ],
+     "format": "Digital Media",
+     "title": "Live in Amsterdam, Netherlands (Paradiso, November 25, 1991)",
+     "track-count": 17,
+     "track-offset": 4
+    }
+   ],
+   "packaging": "None",
+   "disambiguation": "30th Anniversary Super Deluxe",
+   "artist-credit": [
+    {
+     "name": "Nirvana",
+     "joinphrase": "",
+     "artist": {
+      "type": "Group",
+      "id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+      "country": "US",
+      "name": "Nirvana",
+      "genres": [
+       {
+        "id": "00055e8b-b951-46e2-af1e-58b5624e7952",
+        "disambiguation": "",
+        "name": "acoustic rock",
+        "count": 8
+       },
+       {
+        "count": 1,
+        "name": "alternative metal",
+        "id": "7983ff25-ddf9-411e-a7f9-6cca238bff79",
+        "disambiguation": ""
+       },
+       {
+        "count": 1,
+        "id": "d3ebe947-7c03-43f5-b333-09379881b0f6",
+        "disambiguation": "",
+        "name": "alternative pop"
+       },
+       {
+        "id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+        "disambiguation": "",
+        "name": "alternative rock",
+        "count": 30
+       },
+       {
+        "count": 1,
+        "name": "ambient",
+        "disambiguation": "",
+        "id": "608b0471-7531-4854-a348-e698c69cb699"
+       },
+       {
+        "count": 1,
+        "name": "conscious hip hop",
+        "disambiguation": "",
+        "id": "c0e73bb6-37a4-485e-aaea-11c63b40c9f3"
+       },
+       {
+        "disambiguation": "",
+        "id": "89255676-1f14-4dd8-bbad-fca839d6aff4",
+        "name": "electronic",
+        "count": 1
+       },
+       {
+        "disambiguation": "",
+        "id": "68c81274-5770-4e7b-a4bf-ab0d7d425d99",
+        "name": "experimental",
+        "count": 1
+       },
+       {
+        "count": 68,
+        "disambiguation": "",
+        "id": "3f08faa9-6c3e-4b6d-b4b8-08eea45954e2",
+        "name": "grunge"
+       },
+       {
+        "disambiguation": "",
+        "id": "51cb9f91-e6a2-41bf-891f-e78e3f1e52ab",
+        "name": "hard rock",
+        "count": 1
+       },
+       {
+        "count": 1,
+        "name": "hip hop",
+        "disambiguation": "",
+        "id": "52faa157-6bad-4d86-a0ab-d4dec7d2513c"
+       },
+       {
+        "name": "instrumental hip hop",
+        "id": "24695813-4a26-4872-bc95-b3378e0ae1b4",
+        "disambiguation": "",
+        "count": 1
+       },
+       {
+        "name": "new age",
+        "id": "6c76d9ec-0924-4fc9-bb22-91a695ca09d6",
+        "disambiguation": "",
+        "count": 1
+       },
+       {
+        "name": "noise rock",
+        "id": "8e5474b7-f445-49a7-866d-0f8e34b0a519",
+        "disambiguation": "",
+        "count": 12
+       },
+       {
+        "id": "4a3546b4-ec9f-431f-8532-55434f1038ea",
+        "disambiguation": "",
+        "name": "pigfuck",
+        "count": 1
+       },
+       {
+        "count": 1,
+        "name": "pop",
+        "disambiguation": "",
+        "id": "911c7bbb-172d-4df8-9478-dbff4296e791"
+       },
+       {
+        "disambiguation": "",
+        "id": "aec382b7-b635-470c-9051-2f84e0b5ea1e",
+        "name": "post-hardcore",
+        "count": 1
+       },
+       {
+        "name": "psychedelic pop",
+        "disambiguation": "",
+        "id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+        "count": 1
+       },
+       {
+        "count": 1,
+        "id": "b3cccf71-e843-4546-87fa-728055ba3147",
+        "disambiguation": "",
+        "name": "psytrance"
+       },
+       {
+        "name": "punk",
+        "id": "8cc9b280-230b-4a3a-b1e2-8acab0744dd3",
+        "disambiguation": "",
+        "count": 2
+       },
+       {
+        "id": "bd7e1d40-43b1-4ba5-97b3-05b891466962",
+        "disambiguation": "",
+        "name": "punk rock",
+        "count": 1
+       },
+       {
+        "count": 26,
+        "name": "rock",
+        "disambiguation": "",
+        "id": "0e3fc579-2d24-4f20-9dae-736e1ec78798"
+       },
+       {
+        "count": 3,
+        "id": "66544dbb-08a8-44c2-a21a-4d251481d2b6",
+        "disambiguation": "",
+        "name": "sludge metal"
+       },
+       {
+        "count": 1,
+        "id": "03a8749c-93e6-4b71-8204-b33de116d8fd",
+        "disambiguation": "",
+        "name": "underground hip hop"
+       }
+      ],
+      "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+      "disambiguation": "1980s–1990s US grunge band",
+      "sort-name": "Nirvana"
+     }
+    }
+   ],
+   "date": "2021-11-12",
+   "text-representation": {
+    "language": "eng",
+    "script": "Latn"
+   },
+   "genres": [
+    {
+     "count": 1,
+     "name": "alternative rock",
+     "id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+     "disambiguation": ""
+    },
+    {
+     "id": "3f08faa9-6c3e-4b6d-b4b8-08eea45954e2",
+     "disambiguation": "",
+     "name": "grunge",
+     "count": 1
+    },
+    {
+     "name": "rock",
+     "id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+     "disambiguation": "",
+     "count": 1
+    }
+   ],
+   "id": "5565020e-80a9-4a45-8869-e4b7338422d4",
+   "status": "Official",
+   "packaging-id": "119eba76-b343-3e02-a292-f0f00644bb9b",
+   "title": "Nevermind",
+   "release-events": [
+    {
+     "area": {
+      "id": "525d4e18-3d00-31b9-a58b-a146a916de8f",
+      "type": null,
+      "name": "[Worldwide]",
+      "type-id": null,
+      "iso-3166-1-codes": [
+       "XW"
+      ],
+      "sort-name": "[Worldwide]",
+      "disambiguation": ""
+     },
+     "date": "2021-11-12"
+    }
+   ],
+   "release-group": {
+    "releases": [],
+    "id": "1b022e01-4da6-387b-8658-8678046e4cef",
+    "first-release-date": "1991-09-24",
+    "genres": [],
+    "title": "Nevermind",
+    "secondary-types": [],
+    "secondary-type-ids": [],
+    "disambiguation": "",
+    "primary-type": "Album",
+    "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+    "artist-credit": [
+     {
+      "artist": {
+       "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+       "disambiguation": "1980s–1990s US grunge band",
+       "sort-name": "Nirvana",
+       "type": "Group",
+       "country": "US",
+       "id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+       "name": "Nirvana"
+      },
+      "joinphrase": "",
+      "name": "Nirvana"
+     }
+    ]
+   },
+   "country": "XW",
+   "quality": "normal",
+   "barcode": "602438888900",
+   "status-id": "4e304316-386d-3409-af2e-78857eec5cfe"
+  },
+  {
+   "title": "Nevermind",
+   "release-events": [
+    {
+     "date": "2021-11-12",
+     "area": {
+      "id": "89a675c2-3e37-3518-b83c-418bad59a85a",
+      "type": null,
+      "name": "Europe",
+      "iso-3166-1-codes": [
+       "XE"
+      ],
+      "type-id": null,
+      "sort-name": "Europe",
+      "disambiguation": ""
+     }
+    }
+   ],
+   "packaging-id": "e724a489-a7e8-30a1-a17c-30dfd6831202",
+   "status": "Official",
+   "id": "ac15e3b4-676a-4b15-a1fc-cf105671355f",
+   "genres": [
+    {
+     "name": "alternative rock",
+     "id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+     "disambiguation": "",
+     "count": 1
+    },
+    {
+     "disambiguation": "",
+     "id": "3f08faa9-6c3e-4b6d-b4b8-08eea45954e2",
+     "name": "grunge",
+     "count": 1
+    },
+    {
+     "count": 1,
+     "disambiguation": "",
+     "id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+     "name": "rock"
+    }
+   ],
+   "text-representation": {
+    "language": "eng",
+    "script": "Latn"
+   },
+   "date": "2021-11-12",
+   "artist-credit": [
+    {
+     "artist": {
+      "disambiguation": "1980s–1990s US grunge band",
+      "sort-name": "Nirvana",
+      "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+      "type": "Group",
+      "id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+      "country": "US",
+      "name": "Nirvana",
+      "genres": [
+       {
+        "count": 8,
+        "id": "00055e8b-b951-46e2-af1e-58b5624e7952",
+        "disambiguation": "",
+        "name": "acoustic rock"
+       },
+       {
+        "id": "7983ff25-ddf9-411e-a7f9-6cca238bff79",
+        "disambiguation": "",
+        "name": "alternative metal",
+        "count": 1
+       },
+       {
+        "count": 1,
+        "id": "d3ebe947-7c03-43f5-b333-09379881b0f6",
+        "disambiguation": "",
+        "name": "alternative pop"
+       },
+       {
+        "name": "alternative rock",
+        "disambiguation": "",
+        "id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+        "count": 30
+       },
+       {
+        "count": 1,
+        "name": "ambient",
+        "id": "608b0471-7531-4854-a348-e698c69cb699",
+        "disambiguation": ""
+       },
+       {
+        "disambiguation": "",
+        "id": "c0e73bb6-37a4-485e-aaea-11c63b40c9f3",
+        "name": "conscious hip hop",
+        "count": 1
+       },
+       {
+        "disambiguation": "",
+        "id": "89255676-1f14-4dd8-bbad-fca839d6aff4",
+        "name": "electronic",
+        "count": 1
+       },
+       {
+        "name": "experimental",
+        "disambiguation": "",
+        "id": "68c81274-5770-4e7b-a4bf-ab0d7d425d99",
+        "count": 1
+       },
+       {
+        "name": "grunge",
+        "disambiguation": "",
+        "id": "3f08faa9-6c3e-4b6d-b4b8-08eea45954e2",
+        "count": 68
+       },
+       {
+        "disambiguation": "",
+        "id": "51cb9f91-e6a2-41bf-891f-e78e3f1e52ab",
+        "name": "hard rock",
+        "count": 1
+       },
+       {
+        "name": "hip hop",
+        "id": "52faa157-6bad-4d86-a0ab-d4dec7d2513c",
+        "disambiguation": "",
+        "count": 1
+       },
+       {
+        "id": "24695813-4a26-4872-bc95-b3378e0ae1b4",
+        "disambiguation": "",
+        "name": "instrumental hip hop",
+        "count": 1
+       },
+       {
+        "name": "new age",
+        "disambiguation": "",
+        "id": "6c76d9ec-0924-4fc9-bb22-91a695ca09d6",
+        "count": 1
+       },
+       {
+        "name": "noise rock",
+        "id": "8e5474b7-f445-49a7-866d-0f8e34b0a519",
+        "disambiguation": "",
+        "count": 12
+       },
+       {
+        "count": 1,
+        "id": "4a3546b4-ec9f-431f-8532-55434f1038ea",
+        "disambiguation": "",
+        "name": "pigfuck"
+       },
+       {
+        "disambiguation": "",
+        "id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+        "name": "pop",
+        "count": 1
+       },
+       {
+        "name": "post-hardcore",
+        "disambiguation": "",
+        "id": "aec382b7-b635-470c-9051-2f84e0b5ea1e",
+        "count": 1
+       },
+       {
+        "name": "psychedelic pop",
+        "disambiguation": "",
+        "id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+        "count": 1
+       },
+       {
+        "name": "psytrance",
+        "id": "b3cccf71-e843-4546-87fa-728055ba3147",
+        "disambiguation": "",
+        "count": 1
+       },
+       {
+        "count": 2,
+        "id": "8cc9b280-230b-4a3a-b1e2-8acab0744dd3",
+        "disambiguation": "",
+        "name": "punk"
+       },
+       {
+        "count": 1,
+        "name": "punk rock",
+        "id": "bd7e1d40-43b1-4ba5-97b3-05b891466962",
+        "disambiguation": ""
+       },
+       {
+        "name": "rock",
+        "id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+        "disambiguation": "",
+        "count": 26
+       },
+       {
+        "count": 3,
+        "disambiguation": "",
+        "id": "66544dbb-08a8-44c2-a21a-4d251481d2b6",
+        "name": "sludge metal"
+       },
+       {
+        "name": "underground hip hop",
+        "disambiguation": "",
+        "id": "03a8749c-93e6-4b71-8204-b33de116d8fd",
+        "count": 1
+       }
+      ]
+     },
+     "name": "Nirvana",
+     "joinphrase": ""
+    }
+   ],
+   "disambiguation": "30th Anniversary",
+   "packaging": "Gatefold Cover",
+   "media": [
+    {
+     "track-offset": 13,
+     "title": "Live 1991/1992",
+     "track-count": 16,
+     "tracks": [
+      {
+       "title": "Smells Like Teen Spirit (live in Amsterdam, Netherlands)",
+       "number": "14",
+       "artist-credit": [
+        {
+         "joinphrase": "",
+         "name": "Nirvana",
+         "artist": {
+          "disambiguation": "1980s–1990s US grunge band",
+          "sort-name": "Nirvana",
+          "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+          "type": "Group",
+          "id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+          "country": "US",
+          "name": "Nirvana"
+         }
+        }
+       ],
+       "id": "1aae2183-b858-43af-9109-34773fd213be",
+       "position": 14,
+       "length": 289000
+      }
+     ],
+     "format": "CD",
+     "id": "436559db-b052-4191-90e9-3d526880ce66",
+     "format-id": "9712d52a-4509-3d4b-a1a2-67c88c643e31",
+     "position": 2
+    }
+   ],
+   "status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+   "barcode": "602438625314",
+   "quality": "normal",
+   "country": "XE",
+   "release-group": {
+    "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+    "artist-credit": [
+     {
+      "artist": {
+       "name": "Nirvana",
+       "type": "Group",
+       "id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+       "country": "US",
+       "disambiguation": "1980s–1990s US grunge band",
+       "sort-name": "Nirvana",
+       "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b"
+      },
+      "joinphrase": "",
+      "name": "Nirvana"
+     }
+    ],
+    "disambiguation": "",
+    "secondary-type-ids": [],
+    "primary-type": "Album",
+    "title": "Nevermind",
+    "secondary-types": [],
+    "releases": [],
+    "id": "1b022e01-4da6-387b-8658-8678046e4cef",
+    "first-release-date": "1991-09-24",
+    "genres": []
+   }
+  },
+  {
+   "packaging": "Box",
+   "media": [
+    {
+     "id": "2b1e407c-be2e-3ad8-a56d-334a7bc4dbdb",
+     "position": 2,
+     "format-id": "9712d52a-4509-3d4b-a1a2-67c88c643e31",
+     "tracks": [
+      {
+       "artist-credit": [
+        {
+         "artist": {
+          "type": "Group",
+          "id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+          "country": "US",
+          "name": "Nirvana",
+          "disambiguation": "1980s–1990s US grunge band",
+          "sort-name": "Nirvana",
+          "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b"
+         },
+         "name": "Nirvana",
+         "joinphrase": ""
+        }
+       ],
+       "number": "5",
+       "title": "Smells Like Teen Spirit",
+       "length": 290000,
+       "position": 5,
+       "id": "b405aa92-ca7b-4f71-bbe7-3f5850fa003d"
+      }
+     ],
+     "format": "CD",
+     "track-count": 17,
+     "title": "Live in Amsterdam, Netherlands (Paradiso, November 25, 1991)",
+     "track-offset": 4
+    }
+   ],
+   "disambiguation": "30th Anniversary Super Deluxe",
+   "date": "2021-12-11",
+   "text-representation": {
+    "script": "Latn",
+    "language": "eng"
+   },
+   "artist-credit": [
+    {
+     "artist": {
+      "type": "Group",
+      "id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+      "country": "US",
+      "name": "Nirvana",
+      "genres": [
+       {
+        "count": 8,
+        "name": "acoustic rock",
+        "disambiguation": "",
+        "id": "00055e8b-b951-46e2-af1e-58b5624e7952"
+       },
+       {
+        "name": "alternative metal",
+        "id": "7983ff25-ddf9-411e-a7f9-6cca238bff79",
+        "disambiguation": "",
+        "count": 1
+       },
+       {
+        "count": 1,
+        "disambiguation": "",
+        "id": "d3ebe947-7c03-43f5-b333-09379881b0f6",
+        "name": "alternative pop"
+       },
+       {
+        "name": "alternative rock",
+        "id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+        "disambiguation": "",
+        "count": 30
+       },
+       {
+        "count": 1,
+        "id": "608b0471-7531-4854-a348-e698c69cb699",
+        "disambiguation": "",
+        "name": "ambient"
+       },
+       {
+        "disambiguation": "",
+        "id": "c0e73bb6-37a4-485e-aaea-11c63b40c9f3",
+        "name": "conscious hip hop",
+        "count": 1
+       },
+       {
+        "name": "electronic",
+        "id": "89255676-1f14-4dd8-bbad-fca839d6aff4",
+        "disambiguation": "",
+        "count": 1
+       },
+       {
+        "count": 1,
+        "name": "experimental",
+        "id": "68c81274-5770-4e7b-a4bf-ab0d7d425d99",
+        "disambiguation": ""
+       },
+       {
+        "count": 68,
+        "disambiguation": "",
+        "id": "3f08faa9-6c3e-4b6d-b4b8-08eea45954e2",
+        "name": "grunge"
+       },
+       {
+        "count": 1,
+        "disambiguation": "",
+        "id": "51cb9f91-e6a2-41bf-891f-e78e3f1e52ab",
+        "name": "hard rock"
+       },
+       {
+        "count": 1,
+        "id": "52faa157-6bad-4d86-a0ab-d4dec7d2513c",
+        "disambiguation": "",
+        "name": "hip hop"
+       },
+       {
+        "name": "instrumental hip hop",
+        "disambiguation": "",
+        "id": "24695813-4a26-4872-bc95-b3378e0ae1b4",
+        "count": 1
+       },
+       {
+        "count": 1,
+        "disambiguation": "",
+        "id": "6c76d9ec-0924-4fc9-bb22-91a695ca09d6",
+        "name": "new age"
+       },
+       {
+        "count": 12,
+        "name": "noise rock",
+        "disambiguation": "",
+        "id": "8e5474b7-f445-49a7-866d-0f8e34b0a519"
+       },
+       {
+        "count": 1,
+        "disambiguation": "",
+        "id": "4a3546b4-ec9f-431f-8532-55434f1038ea",
+        "name": "pigfuck"
+       },
+       {
+        "count": 1,
+        "name": "pop",
+        "id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+        "disambiguation": ""
+       },
+       {
+        "count": 1,
+        "id": "aec382b7-b635-470c-9051-2f84e0b5ea1e",
+        "disambiguation": "",
+        "name": "post-hardcore"
+       },
+       {
+        "name": "psychedelic pop",
+        "id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+        "disambiguation": "",
+        "count": 1
+       },
+       {
+        "name": "psytrance",
+        "disambiguation": "",
+        "id": "b3cccf71-e843-4546-87fa-728055ba3147",
+        "count": 1
+       },
+       {
+        "id": "8cc9b280-230b-4a3a-b1e2-8acab0744dd3",
+        "disambiguation": "",
+        "name": "punk",
+        "count": 2
+       },
+       {
+        "count": 1,
+        "name": "punk rock",
+        "disambiguation": "",
+        "id": "bd7e1d40-43b1-4ba5-97b3-05b891466962"
+       },
+       {
+        "count": 26,
+        "name": "rock",
+        "disambiguation": "",
+        "id": "0e3fc579-2d24-4f20-9dae-736e1ec78798"
+       },
+       {
+        "count": 3,
+        "id": "66544dbb-08a8-44c2-a21a-4d251481d2b6",
+        "disambiguation": "",
+        "name": "sludge metal"
+       },
+       {
+        "count": 1,
+        "id": "03a8749c-93e6-4b71-8204-b33de116d8fd",
+        "disambiguation": "",
+        "name": "underground hip hop"
+       }
+      ],
+      "disambiguation": "1980s–1990s US grunge band",
+      "sort-name": "Nirvana",
+      "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b"
+     },
+     "name": "Nirvana",
+     "joinphrase": ""
+    }
+   ],
+   "id": "813b5197-1b76-4241-b3e8-a49db532841e",
+   "genres": [],
+   "release-events": [
+    {
+     "area": {
+      "type": null,
+      "id": "489ce91b-6658-3307-9877-795b68554c98",
+      "name": "United States",
+      "type-id": null,
+      "iso-3166-1-codes": [
+       "US"
+      ],
+      "disambiguation": "",
+      "sort-name": "United States"
+     },
+     "date": "2021-12-11"
+    }
+   ],
+   "title": "Nevermind",
+   "status": "Official",
+   "packaging-id": "c1668fc7-8944-4a00-bc3e-46e8d861d211",
+   "release-group": {
+    "disambiguation": "",
+    "secondary-type-ids": [],
+    "primary-type": "Album",
+    "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+    "artist-credit": [
+     {
+      "artist": {
+       "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+       "disambiguation": "1980s–1990s US grunge band",
+       "sort-name": "Nirvana",
+       "type": "Group",
+       "id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+       "country": "US",
+       "name": "Nirvana"
+      },
+      "name": "Nirvana",
+      "joinphrase": ""
+     }
+    ],
+    "releases": [],
+    "id": "1b022e01-4da6-387b-8658-8678046e4cef",
+    "first-release-date": "1991-09-24",
+    "genres": [],
+    "title": "Nevermind",
+    "secondary-types": []
+   },
+   "country": "US",
+   "status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+   "quality": "normal",
+   "barcode": "602438461882"
+  },
+  {
+   "genres": [],
+   "id": "af67f638-b9ff-4b76-9135-f9588ccdd281",
+   "status": "Official",
+   "packaging-id": "e724a489-a7e8-30a1-a17c-30dfd6831202",
+   "release-events": [
+    {
+     "date": "2021",
+     "area": {
+      "name": "[Worldwide]",
+      "type": null,
+      "id": "525d4e18-3d00-31b9-a58b-a146a916de8f",
+      "iso-3166-1-codes": [
+       "XW"
+      ],
+      "type-id": null,
+      "disambiguation": "",
+      "sort-name": "[Worldwide]"
+     }
+    }
+   ],
+   "title": "Nevermind",
+   "packaging": "Gatefold Cover",
+   "media": [
+    {
+     "id": "9db9e27a-6123-3d69-b006-6fc85e0f083d",
+     "format-id": "9712d52a-4509-3d4b-a1a2-67c88c643e31",
+     "position": 2,
+     "tracks": [
+      {
+       "position": 14,
+       "id": "ada6e9ec-cad3-4b6d-9a10-0960b59bcee8",
+       "length": 289800,
+       "title": "Smells Like Teen Spirit (live at the Paradiso, Amsterdam 1991)",
+       "artist-credit": [
+        {
+         "artist": {
+          "name": "Nirvana",
+          "type": "Group",
+          "country": "US",
+          "id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+          "disambiguation": "1980s–1990s US grunge band",
+          "sort-name": "Nirvana",
+          "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b"
+         },
+         "name": "Nirvana",
+         "joinphrase": ""
+        }
+       ],
+       "number": "14"
+      }
+     ],
+     "format": "CD",
+     "title": "Live 1991/1992",
+     "track-count": 16,
+     "track-offset": 13
+    }
+   ],
+   "disambiguation": "30th Anniversary 2-CD Deluxe Edition",
+   "artist-credit": [
+    {
+     "name": "Nirvana",
+     "joinphrase": "",
+     "artist": {
+      "country": "US",
+      "id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+      "type": "Group",
+      "genres": [
+       {
+        "id": "00055e8b-b951-46e2-af1e-58b5624e7952",
+        "disambiguation": "",
+        "name": "acoustic rock",
+        "count": 8
+       },
+       {
+        "name": "alternative metal",
+        "disambiguation": "",
+        "id": "7983ff25-ddf9-411e-a7f9-6cca238bff79",
+        "count": 1
+       },
+       {
+        "disambiguation": "",
+        "id": "d3ebe947-7c03-43f5-b333-09379881b0f6",
+        "name": "alternative pop",
+        "count": 1
+       },
+       {
+        "id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+        "disambiguation": "",
+        "name": "alternative rock",
+        "count": 30
+       },
+       {
+        "disambiguation": "",
+        "id": "608b0471-7531-4854-a348-e698c69cb699",
+        "name": "ambient",
+        "count": 1
+       },
+       {
+        "count": 1,
+        "name": "conscious hip hop",
+        "disambiguation": "",
+        "id": "c0e73bb6-37a4-485e-aaea-11c63b40c9f3"
+       },
+       {
+        "name": "electronic",
+        "disambiguation": "",
+        "id": "89255676-1f14-4dd8-bbad-fca839d6aff4",
+        "count": 1
+       },
+       {
+        "count": 1,
+        "name": "experimental",
+        "disambiguation": "",
+        "id": "68c81274-5770-4e7b-a4bf-ab0d7d425d99"
+       },
+       {
+        "count": 68,
+        "disambiguation": "",
+        "id": "3f08faa9-6c3e-4b6d-b4b8-08eea45954e2",
+        "name": "grunge"
+       },
+       {
+        "count": 1,
+        "id": "51cb9f91-e6a2-41bf-891f-e78e3f1e52ab",
+        "disambiguation": "",
+        "name": "hard rock"
+       },
+       {
+        "count": 1,
+        "name": "hip hop",
+        "id": "52faa157-6bad-4d86-a0ab-d4dec7d2513c",
+        "disambiguation": ""
+       },
+       {
+        "count": 1,
+        "name": "instrumental hip hop",
+        "id": "24695813-4a26-4872-bc95-b3378e0ae1b4",
+        "disambiguation": ""
+       },
+       {
+        "disambiguation": "",
+        "id": "6c76d9ec-0924-4fc9-bb22-91a695ca09d6",
+        "name": "new age",
+        "count": 1
+       },
+       {
+        "id": "8e5474b7-f445-49a7-866d-0f8e34b0a519",
+        "disambiguation": "",
+        "name": "noise rock",
+        "count": 12
+       },
+       {
+        "disambiguation": "",
+        "id": "4a3546b4-ec9f-431f-8532-55434f1038ea",
+        "name": "pigfuck",
+        "count": 1
+       },
+       {
+        "name": "pop",
+        "id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+        "disambiguation": "",
+        "count": 1
+       },
+       {
+        "count": 1,
+        "id": "aec382b7-b635-470c-9051-2f84e0b5ea1e",
+        "disambiguation": "",
+        "name": "post-hardcore"
+       },
+       {
+        "count": 1,
+        "name": "psychedelic pop",
+        "disambiguation": "",
+        "id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58"
+       },
+       {
+        "name": "psytrance",
+        "id": "b3cccf71-e843-4546-87fa-728055ba3147",
+        "disambiguation": "",
+        "count": 1
+       },
+       {
+        "count": 2,
+        "id": "8cc9b280-230b-4a3a-b1e2-8acab0744dd3",
+        "disambiguation": "",
+        "name": "punk"
+       },
+       {
+        "disambiguation": "",
+        "id": "bd7e1d40-43b1-4ba5-97b3-05b891466962",
+        "name": "punk rock",
+        "count": 1
+       },
+       {
+        "count": 26,
+        "id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+        "disambiguation": "",
+        "name": "rock"
+       },
+       {
+        "name": "sludge metal",
+        "id": "66544dbb-08a8-44c2-a21a-4d251481d2b6",
+        "disambiguation": "",
+        "count": 3
+       },
+       {
+        "name": "underground hip hop",
+        "disambiguation": "",
+        "id": "03a8749c-93e6-4b71-8204-b33de116d8fd",
+        "count": 1
+       }
+      ],
+      "name": "Nirvana",
+      "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+      "sort-name": "Nirvana",
+      "disambiguation": "1980s–1990s US grunge band"
+     }
+    }
+   ],
+   "date": "2021",
+   "text-representation": {
+    "language": "eng",
+    "script": "Latn"
+   },
+   "country": "XW",
+   "quality": "normal",
+   "barcode": "602438625314",
+   "status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+   "release-group": {
+    "title": "Nevermind",
+    "secondary-types": [],
+    "releases": [],
+    "first-release-date": "1991-09-24",
+    "id": "1b022e01-4da6-387b-8658-8678046e4cef",
+    "genres": [],
+    "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+    "artist-credit": [
+     {
+      "artist": {
+       "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+       "disambiguation": "1980s–1990s US grunge band",
+       "sort-name": "Nirvana",
+       "type": "Group",
+       "country": "US",
+       "id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+       "name": "Nirvana"
+      },
+      "joinphrase": "",
+      "name": "Nirvana"
+     }
+    ],
+    "disambiguation": "",
+    "secondary-type-ids": [],
+    "primary-type": "Album"
+   }
+  }
+ ],
+ "id": "a10a1bb0-c828-495b-9436-5010d5e4a14b",
+ "first-release-date": "1991-09-24",
+ "length": 289813,
+ "genres": [
+  {
+   "count": 1,
+   "disambiguation": "",
+   "id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+   "name": "alternative rock"
+  },
+  {
+   "count": 2,
+   "id": "3f08faa9-6c3e-4b6d-b4b8-08eea45954e2",
+   "disambiguation": "",
+   "name": "grunge"
+  },
+  {
+   "name": "rock",
+   "disambiguation": "",
+   "id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+   "count": 1
+  }
+ ],
+ "artist-credit": [
+  {
+   "artist": {
+    "sort-name": "Nirvana",
+    "disambiguation": "1980s–1990s US grunge band",
+    "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+    "id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+    "country": "US",
+    "type": "Group",
+    "genres": [
+     {
+      "count": 8,
+      "id": "00055e8b-b951-46e2-af1e-58b5624e7952",
+      "disambiguation": "",
+      "name": "acoustic rock"
+     },
+     {
+      "name": "alternative metal",
+      "disambiguation": "",
+      "id": "7983ff25-ddf9-411e-a7f9-6cca238bff79",
+      "count": 1
+     },
+     {
+      "count": 1,
+      "id": "d3ebe947-7c03-43f5-b333-09379881b0f6",
+      "disambiguation": "",
+      "name": "alternative pop"
+     },
+     {
+      "id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+      "disambiguation": "",
+      "name": "alternative rock",
+      "count": 30
+     },
+     {
+      "disambiguation": "",
+      "id": "608b0471-7531-4854-a348-e698c69cb699",
+      "name": "ambient",
+      "count": 1
+     },
+     {
+      "count": 1,
+      "name": "conscious hip hop",
+      "disambiguation": "",
+      "id": "c0e73bb6-37a4-485e-aaea-11c63b40c9f3"
+     },
+     {
+      "count": 1,
+      "name": "electronic",
+      "id": "89255676-1f14-4dd8-bbad-fca839d6aff4",
+      "disambiguation": ""
+     },
+     {
+      "id": "68c81274-5770-4e7b-a4bf-ab0d7d425d99",
+      "disambiguation": "",
+      "name": "experimental",
+      "count": 1
+     },
+     {
+      "id": "3f08faa9-6c3e-4b6d-b4b8-08eea45954e2",
+      "disambiguation": "",
+      "name": "grunge",
+      "count": 68
+     },
+     {
+      "disambiguation": "",
+      "id": "51cb9f91-e6a2-41bf-891f-e78e3f1e52ab",
+      "name": "hard rock",
+      "count": 1
+     },
+     {
+      "name": "hip hop",
+      "disambiguation": "",
+      "id": "52faa157-6bad-4d86-a0ab-d4dec7d2513c",
+      "count": 1
+     },
+     {
+      "count": 1,
+      "id": "24695813-4a26-4872-bc95-b3378e0ae1b4",
+      "disambiguation": "",
+      "name": "instrumental hip hop"
+     },
+     {
+      "count": 1,
+      "name": "new age",
+      "disambiguation": "",
+      "id": "6c76d9ec-0924-4fc9-bb22-91a695ca09d6"
+     },
+     {
+      "disambiguation": "",
+      "id": "8e5474b7-f445-49a7-866d-0f8e34b0a519",
+      "name": "noise rock",
+      "count": 12
+     },
+     {
+      "disambiguation": "",
+      "id": "4a3546b4-ec9f-431f-8532-55434f1038ea",
+      "name": "pigfuck",
+      "count": 1
+     },
+     {
+      "disambiguation": "",
+      "id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+      "name": "pop",
+      "count": 1
+     },
+     {
+      "id": "aec382b7-b635-470c-9051-2f84e0b5ea1e",
+      "disambiguation": "",
+      "name": "post-hardcore",
+      "count": 1
+     },
+     {
+      "disambiguation": "",
+      "id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+      "name": "psychedelic pop",
+      "count": 1
+     },
+     {
+      "name": "psytrance",
+      "disambiguation": "",
+      "id": "b3cccf71-e843-4546-87fa-728055ba3147",
+      "count": 1
+     },
+     {
+      "count": 2,
+      "name": "punk",
+      "disambiguation": "",
+      "id": "8cc9b280-230b-4a3a-b1e2-8acab0744dd3"
+     },
+     {
+      "name": "punk rock",
+      "disambiguation": "",
+      "id": "bd7e1d40-43b1-4ba5-97b3-05b891466962",
+      "count": 1
+     },
+     {
+      "name": "rock",
+      "disambiguation": "",
+      "id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+      "count": 26
+     },
+     {
+      "name": "sludge metal",
+      "disambiguation": "",
+      "id": "66544dbb-08a8-44c2-a21a-4d251481d2b6",
+      "count": 3
+     },
+     {
+      "name": "underground hip hop",
+      "disambiguation": "",
+      "id": "03a8749c-93e6-4b71-8204-b33de116d8fd",
+      "count": 1
+     }
+    ],
+    "name": "Nirvana"
+   },
+   "name": "Nirvana",
+   "joinphrase": ""
+  }
+ ],
+ "disambiguation": "live, 1991-11-25: Paradiso, Amsterdam, Netherlands"
+}

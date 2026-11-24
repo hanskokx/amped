@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Amped
+Comment=Crank it up.
+Exec=amped %F
+Icon=org.hadak.amped
+Terminal=false
+Categories=AudioVideo;Audio;Player;
+StartupWMClass=org.hadak.amped

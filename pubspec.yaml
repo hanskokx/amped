@@ -1,0 +1,118 @@
+name: amped
+description: "Crank it up."
+publish_to: "none"
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.14.0
+  flutter: ^3.50.0
+
+dependencies:
+  amped_audacious_skin:
+    git:
+      url: https://git.hadak.org/Amped/amped_audacious_skin.git
+  amped_audiobookshelf:
+    git:
+      url: https://git.hadak.org/Amped/amped_audiobookshelf.git
+  amped_bamp_skin:
+    git:
+      url: https://git.hadak.org/Amped/amped_bamp_skin.git
+  amped_classic_skin:
+    git:
+      url: https://git.hadak.org/Amped/amped_classic_skin.git
+  amped_jellyfin:
+    git:
+      url: https://git.hadak.org/Amped/amped_jellyfin.git
+  amped_l10n:
+    git:
+      url: https://git.hadak.org/Amped/amped_l10n.git
+  amped_logging:
+    git:
+      url: https://git.hadak.org/Amped/amped_logging.git
+  amped_media_source:
+    git:
+      url: https://git.hadak.org/Amped/amped_media_source.git
+  amped_plex:
+    git:
+      url: https://git.hadak.org/Amped/amped_plex.git
+  amped_podcast:
+    git:
+      url: https://git.hadak.org/Amped/amped_podcast.git
+  amped_skin:
+    git:
+      url: https://git.hadak.org/Amped/amped_skin.git
+  amped_soundcloud:
+    git:
+      url: https://git.hadak.org/Amped/amped_soundcloud.git
+  amped_subsonic:
+    git:
+      url: https://git.hadak.org/Amped/amped_subsonic.git
+  amped_vis:
+    git:
+      url: https://git.hadak.org/Amped/amped_vis.git
+  amped_wasabi:
+    git:
+      url: https://git.hadak.org/Amped/amped_wasabi.git
+  amped_youtube:
+    git:
+      url: https://git.hadak.org/Amped/amped_youtube.git
+  amped_ytdlp:
+    git:
+      url: https://git.hadak.org/Amped/amped_ytdlp.git
+  archive: ^4.7.1
+  audio_metadata_reader: ^1.8.1
+  chromaprint_dart: ^1.0.0
+  crypto: ^3.0.8
+  custom_cursor:
+    git:
+      url: https://github.com/hanskokx/flutter_custom_cursor.git
+  dart_cast:
+    git:
+      url: https://git.hadak.org/Amped/dart_cast.git
+  dbus: ^0.8.0
+  ffi: ^2.2.0
+  file_drop:
+    git:
+      url: https://git.hadak.org/Amped/file_drop.git
+  flutter:
+    sdk: flutter
+  flutter_secure_storage: ^11.2.0
+  flutter_soloud: ^5.2.2
+  material_ui: ^1.0.0
+  media_kit: ^1.2.6
+  media_kit_libs_video: ^1.0.7
+  media_kit_video: ^2.0.1
+  package_info_plus: ^10.2.2
+  path_provider: ^2.1.5
+  pcm_decoder:
+    git:
+      url: https://git.hadak.org/Amped/pcm_decoder.git
+  shared_preferences: ^2.5.5
+  skin_preview:
+    path: packages/skin_preview
+  smb_connect: ^0.0.9
+  sqlite3: ^3.9.1
+  svg_flutter: ^0.0.1
+  tray_manager: ^0.9.0
+  url_launcher: ^6.3.3
+  window_dock:
+    git:
+      url: https://git.hadak.org/Amped/window_dock.git
+  xml: ^6.6.1
+
+dev_dependencies:
+  arcane_analysis: ^1.0.5
+  flutter_driver:
+    sdk: flutter
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  generate: true
+  uses-material-design: true
+  assets:
+    - assets/icons/
+    - assets/images/
+    - assets/images/logos/
+    - assets/skins/
+    - assets/plugins/

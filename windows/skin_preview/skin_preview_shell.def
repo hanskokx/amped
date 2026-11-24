@@ -1,0 +1,4 @@
+LIBRARY amped_skin_preview
+EXPORTS
+  DllGetClassObject PRIVATE
+  DllCanUnloadNow PRIVATE

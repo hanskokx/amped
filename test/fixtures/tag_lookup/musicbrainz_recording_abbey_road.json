@@ -1,0 +1,275 @@
+{
+ "length": 191000,
+ "releases": [
+  {
+   "date": "1969",
+   "id": "885ddfe3-e68d-4a8e-8570-2975318db1df",
+   "title": "Abbey Road",
+   "quality": "normal",
+   "artist-credit": [
+    {
+     "name": "The Beatles",
+     "artist": {
+      "genres": [
+       {
+        "count": 2,
+        "disambiguation": "",
+        "name": "britpop",
+        "id": "f1c9b874-7ef2-4e79-9419-c0bcb5f33a30"
+       },
+       {
+        "count": 5,
+        "name": "classic rock",
+        "disambiguation": "",
+        "id": "93244085-20e5-4f16-9067-1d19143b3810"
+       },
+       {
+        "count": 3,
+        "id": "65c97e89-b42b-45c2-a70e-0eca1b8f0ff7",
+        "name": "experimental rock",
+        "disambiguation": ""
+       },
+       {
+        "disambiguation": "",
+        "name": "folk rock",
+        "id": "445dc48f-5233-4b4f-987f-867ff9ade836",
+        "count": 3
+       },
+       {
+        "disambiguation": "",
+        "name": "mainstream rock",
+        "id": "caec8f8d-d862-4b62-9942-5622c2c18446",
+        "count": 2
+       },
+       {
+        "id": "c979d6c8-fa9e-47c3-86d6-754a7f89ea18",
+        "name": "merseybeat",
+        "disambiguation": "",
+        "count": 19
+       },
+       {
+        "count": 32,
+        "disambiguation": "",
+        "name": "pop",
+        "id": "911c7bbb-172d-4df8-9478-dbff4296e791"
+       },
+       {
+        "id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+        "name": "pop rock",
+        "disambiguation": "",
+        "count": 27
+       },
+       {
+        "id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+        "name": "psychedelic pop",
+        "disambiguation": "",
+        "count": 19
+       },
+       {
+        "count": 10,
+        "id": "146ef761-5ad9-48b4-b0b3-483104f7da48",
+        "name": "psychedelic rock",
+        "disambiguation": ""
+       },
+       {
+        "id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+        "name": "rock",
+        "disambiguation": "",
+        "count": 51
+       },
+       {
+        "disambiguation": "",
+        "name": "rock and roll",
+        "id": "e4581b76-a842-440b-9b0f-1aa7a00a5c57",
+        "count": 5
+       }
+      ],
+      "sort-name": "Beatles, The",
+      "name": "The Beatles",
+      "country": "GB",
+      "disambiguation": "UK rock band, “The Fab Four”",
+      "type": "Group",
+      "id": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+      "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b"
+     },
+     "joinphrase": ""
+    }
+   ],
+   "text-representation": {
+    "language": null,
+    "script": null
+   },
+   "packaging-id": null,
+   "release-events": [
+    {
+     "date": "1969",
+     "area": null
+    }
+   ],
+   "genres": [],
+   "media": [
+    {
+     "format-id": "49b49ca7-d2d8-4d36-a7dd-d61363ee3697",
+     "format": "8-Track Cartridge",
+     "id": "9fa41d44-a366-3dad-b8f2-ff928f77e741",
+     "track-offset": 4,
+     "tracks": [
+      {
+       "length": 191000,
+       "number": "5",
+       "artist-credit": [
+        {
+         "artist": {
+          "type": "Group",
+          "id": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+          "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+          "name": "The Beatles",
+          "disambiguation": "UK rock band, “The Fab Four”",
+          "country": "GB",
+          "sort-name": "Beatles, The"
+         },
+         "name": "The Beatles",
+         "joinphrase": ""
+        }
+       ],
+       "title": "Here Comes The Sun",
+       "position": 5,
+       "id": "dd01ce66-d757-42fd-ae68-b377a1204bc1"
+      }
+     ],
+     "position": 1,
+     "track-count": 12,
+     "title": ""
+    }
+   ],
+   "packaging": null,
+   "status-id": null,
+   "barcode": null,
+   "release-group": {
+    "id": "9162580e-5df4-32de-80cc-f45a8d8a9b1d",
+    "secondary-type-ids": [],
+    "primary-type": "Album",
+    "releases": [],
+    "title": "Abbey Road",
+    "first-release-date": "1969-09-26",
+    "artist-credit": [
+     {
+      "name": "The Beatles",
+      "artist": {
+       "type": "Group",
+       "id": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+       "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+       "sort-name": "Beatles, The",
+       "name": "The Beatles",
+       "disambiguation": "UK rock band, “The Fab Four”",
+       "country": "GB"
+      },
+      "joinphrase": ""
+     }
+    ],
+    "disambiguation": "",
+    "secondary-types": [],
+    "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+    "genres": []
+   },
+   "country": null,
+   "disambiguation": "",
+   "status": null
+  }
+ ],
+ "genres": [],
+ "title": "Here Comes The Sun",
+ "first-release-date": "1969",
+ "id": "73361485-b84f-459f-9549-b1ba20bc50d2",
+ "video": false,
+ "disambiguation": "",
+ "artist-credit": [
+  {
+   "joinphrase": "",
+   "name": "The Beatles",
+   "artist": {
+    "type": "Group",
+    "id": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+    "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+    "name": "The Beatles",
+    "country": "GB",
+    "disambiguation": "UK rock band, “The Fab Four”",
+    "genres": [
+     {
+      "id": "f1c9b874-7ef2-4e79-9419-c0bcb5f33a30",
+      "name": "britpop",
+      "disambiguation": "",
+      "count": 2
+     },
+     {
+      "disambiguation": "",
+      "name": "classic rock",
+      "id": "93244085-20e5-4f16-9067-1d19143b3810",
+      "count": 5
+     },
+     {
+      "count": 3,
+      "name": "experimental rock",
+      "disambiguation": "",
+      "id": "65c97e89-b42b-45c2-a70e-0eca1b8f0ff7"
+     },
+     {
+      "count": 3,
+      "id": "445dc48f-5233-4b4f-987f-867ff9ade836",
+      "disambiguation": "",
+      "name": "folk rock"
+     },
+     {
+      "count": 2,
+      "name": "mainstream rock",
+      "disambiguation": "",
+      "id": "caec8f8d-d862-4b62-9942-5622c2c18446"
+     },
+     {
+      "count": 19,
+      "id": "c979d6c8-fa9e-47c3-86d6-754a7f89ea18",
+      "name": "merseybeat",
+      "disambiguation": ""
+     },
+     {
+      "count": 32,
+      "name": "pop",
+      "disambiguation": "",
+      "id": "911c7bbb-172d-4df8-9478-dbff4296e791"
+     },
+     {
+      "count": 27,
+      "id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+      "name": "pop rock",
+      "disambiguation": ""
+     },
+     {
+      "count": 19,
+      "name": "psychedelic pop",
+      "disambiguation": "",
+      "id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58"
+     },
+     {
+      "count": 10,
+      "disambiguation": "",
+      "name": "psychedelic rock",
+      "id": "146ef761-5ad9-48b4-b0b3-483104f7da48"
+     },
+     {
+      "count": 51,
+      "id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+      "name": "rock",
+      "disambiguation": ""
+     },
+     {
+      "name": "rock and roll",
+      "disambiguation": "",
+      "id": "e4581b76-a842-440b-9b0f-1aa7a00a5c57",
+      "count": 5
+     }
+    ],
+    "sort-name": "Beatles, The"
+   }
+  }
+ ]
+}
