@@ -91,43 +91,43 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-# hanskokx/media-kit windows-arm64-workarounds = PR branch fix/windows-view-null-guard + temporary ARM64 ANGLE/libmpv fixes.
-# Switch back to the upstream ref once those are fixed.
+# media_kit at an upstream commit that has the Windows and ARM64 fixes, until
+# a release does. Switch back to the released packages then.
 dependency_overrides:
   media_kit:
     git:
-      url: https://github.com/hanskokx/media-kit
-      ref: windows-arm64-workarounds
+      url: https://github.com/media-kit/media-kit
+      ref: 16ea5564266ae7e6a53df62c6cff4ba69e9288d9
       path: media_kit
   media_kit_video:
     git:
-      url: https://github.com/hanskokx/media-kit
-      ref: windows-arm64-workarounds
+      url: https://github.com/media-kit/media-kit
+      ref: 16ea5564266ae7e6a53df62c6cff4ba69e9288d9
       path: media_kit_video
   media_kit_libs_android_video:
     git:
-      url: https://github.com/hanskokx/media-kit
-      ref: windows-arm64-workarounds
+      url: https://github.com/media-kit/media-kit
+      ref: 16ea5564266ae7e6a53df62c6cff4ba69e9288d9
       path: libs/android/media_kit_libs_android_video
   media_kit_libs_ios_video:
     git:
-      url: https://github.com/hanskokx/media-kit
-      ref: windows-arm64-workarounds
+      url: https://github.com/media-kit/media-kit
+      ref: 16ea5564266ae7e6a53df62c6cff4ba69e9288d9
       path: libs/ios/media_kit_libs_ios_video
   media_kit_libs_linux:
     git:
-      url: https://github.com/hanskokx/media-kit
-      ref: windows-arm64-workarounds
+      url: https://github.com/media-kit/media-kit
+      ref: 16ea5564266ae7e6a53df62c6cff4ba69e9288d9
       path: libs/linux/media_kit_libs_linux
   media_kit_libs_macos_video:
     git:
-      url: https://github.com/hanskokx/media-kit
-      ref: windows-arm64-workarounds
+      url: https://github.com/media-kit/media-kit
+      ref: 16ea5564266ae7e6a53df62c6cff4ba69e9288d9
       path: libs/macos/media_kit_libs_macos_video
   media_kit_libs_windows_video:
     git:
-      url: https://github.com/hanskokx/media-kit
-      ref: windows-arm64-workarounds
+      url: https://github.com/media-kit/media-kit
+      ref: 16ea5564266ae7e6a53df62c6cff4ba69e9288d9
       path: libs/windows/media_kit_libs_windows_video
 
 flutter:
