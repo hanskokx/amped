@@ -1,0 +1,42 @@
+# Flatpak manifest. It packs the AppDir the release workflow has already
+# built (the Flutter bundle and libmpv with its libraries), so nothing is
+# compiled here.
+app-id: org.hadak.amped
+runtime: org.gnome.Platform
+runtime-version: "48"
+sdk: org.gnome.Sdk
+command: amped
+finish-args:
+  - --share=ipc
+  - --share=network
+  - --socket=x11
+  - --socket=wayland
+  - --socket=pulseaudio
+  - --device=dri
+  # The music is wherever the user keeps it.
+  - --filesystem=home
+  - --filesystem=/media
+  - --filesystem=/run/media
+  # Saved logins (libsecret), notifications, the tray icon, media keys.
+  - --talk-name=org.freedesktop.secrets
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --own-name=org.mpris.MediaPlayer2.amped
+modules:
+  - name: amped
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /app/amped /app/bin /app/lib
+      - cp -R AppDir/usr/bin/. /app/amped/
+      - cp -R AppDir/usr/lib/. /app/lib/
+      - ln -s /app/amped/amped /app/bin/amped
+      - install -Dm644 org.hadak.amped.desktop /app/share/applications/org.hadak.amped.desktop
+      - install -Dm644 org.hadak.amped.png /app/share/icons/hicolor/512x512/apps/org.hadak.amped.png
+    sources:
+      - type: dir
+        path: AppDir
+        dest: AppDir
+      - type: file
+        path: org.hadak.amped.desktop
+      - type: file
+        path: org.hadak.amped.png

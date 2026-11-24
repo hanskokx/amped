@@ -1,44 +1,41 @@
 #!/bin/sh
-# Packs the Linux release bundle into an AppImage, and leaves the AppDir
-# (with libmpv and the libraries it needs copied in) for package_flatpak.sh.
-# GTK and libsecret come from the host, as with the .deb. Needs
-# linuxdeploy and appimagetool on the PATH (the release workflow fetches them).
+# Builds an AppImage, and leaves the AppDir it was made from in <out>/AppDir
+# (the Flatpak is built from that too). libmpv, which the player loads at run
+# time, is bundled with what it needs.
 #
 #   tool/package_appimage.sh 0.1.0 build/linux/x64/release/bundle out-dir
 set -eu
 version=$1
 bundle=$2
 out=$3
-
 here=$(cd "$(dirname "$0")/.." && pwd)
+tools=$(mktemp -d)
+trap 'rm -rf "$tools"' EXIT
+
+base=https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous
+curl -fsSL -o "$tools/linuxdeploy" "$base/linuxdeploy-x86_64.AppImage"
+curl -fsSL -o "$tools/linuxdeploy-plugin-appimage" \
+  https://github.com/linuxdeploy/linuxdeploy-plugin-appimage/releases/download/continuous/linuxdeploy-plugin-appimage-x86_64.AppImage
+chmod +x "$tools/linuxdeploy" "$tools/linuxdeploy-plugin-appimage"
+
+mkdir -p "$out"
 appdir="$out/AppDir"
 rm -rf "$appdir"
-mkdir -p "$appdir/opt/amped" "$appdir/usr/bin" "$appdir/usr/lib" \
-  "$appdir/usr/share/applications" \
-  "$appdir/usr/share/icons/hicolor/512x512/apps"
-cp -R "$bundle"/. "$appdir/opt/amped/"
-ln -s ../../opt/amped/amped "$appdir/usr/bin/amped"
-cp "$here/linux/org.hadak.amped.desktop" "$appdir/usr/share/applications/"
-cp "$here/linux/org.hadak.amped.png" \
-  "$appdir/usr/share/icons/hicolor/512x512/apps/org.hadak.amped.png"
+mkdir -p "$appdir/usr/bin"
+cp -R "$bundle"/. "$appdir/usr/bin/"
 
-# libmpv and its dependencies are not on every system, so they travel along.
-mpv=$(ldconfig -p | awk '/libmpv\.so\.[0-9]+ / {print $NF; exit}')
-[ -n "$mpv" ] || { echo "libmpv not found" >&2; exit 1; }
+mpv=$(ldconfig -p | awk '/libmpv\.so\.[0-9]+ /{print $NF; exit}')
+[ -n "$mpv" ] || { echo "libmpv is not installed" >&2; exit 1; }
 
+# AppImages cannot be run directly on a runner without FUSE.
 export APPIMAGE_EXTRACT_AND_RUN=1
-(cd "$out" && linuxdeploy --appdir AppDir \
-  --executable "$appdir/opt/amped/amped" \
+export PATH="$tools:$PATH"
+export LINUXDEPLOY_OUTPUT_VERSION="$version"
+export ARCH=x86_64
+(cd "$out" && "$tools/linuxdeploy" --appdir AppDir \
+  --executable AppDir/usr/bin/amped \
   --library "$mpv" \
-  --desktop-file "$appdir/usr/share/applications/org.hadak.amped.desktop" \
-  --icon-file "$here/linux/org.hadak.amped.png")
-
-cat > "$appdir/AppRun" <<'RUN'
-#!/bin/sh
-here=$(dirname "$(readlink -f "$0")")
-export LD_LIBRARY_PATH="$here/usr/lib:$here/opt/amped/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
-exec "$here/opt/amped/amped" "$@"
-RUN
-chmod +x "$appdir/AppRun"
-
-ARCH=x86_64 appimagetool "$appdir" "$out/Amped-$version-linux-x86_64.AppImage"
+  --desktop-file "$here/linux/org.hadak.amped.desktop" \
+  --icon-file "$here/linux/org.hadak.amped.png" \
+  --output appimage)
+ls "$out"

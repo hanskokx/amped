@@ -8,8 +8,11 @@
 // changed in place (it is meant for a CI checkout).
 import "dart:io";
 
+/// The text of [file] with LF line ends (a Windows checkout has CRLF).
+String _read(File file) => file.readAsStringSync().replaceAll("\r\n", "\n");
+
 void main() {
-  var pubspec = File("pubspec.yaml").readAsStringSync();
+  var pubspec = _read(File("pubspec.yaml"));
   for (final name in ["amped_youtube", "amped_ytdlp"]) {
     final dependency = RegExp(
       "^  $name:\n(?:    .*\n)+",
@@ -28,7 +31,7 @@ void main() {
 
   // macOS: no "Bundle yt-dlp" build phase.
   final project = File("macos/Runner.xcodeproj/project.pbxproj");
-  var text = project.readAsStringSync();
+  var text = _read(project);
   text = text.replaceAll(
     RegExp(r"^\t+[0-9A-F]+ /\* Bundle yt-dlp \*/,\n", multiLine: true),
     "",

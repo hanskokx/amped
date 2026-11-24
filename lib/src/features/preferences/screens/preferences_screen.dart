@@ -1,4 +1,3 @@
-import "package:amped_l10n/amped_l10n.dart";
 import "package:material_ui/material_ui.dart";
 
 import "../../../app/amped_shell.dart";
@@ -13,8 +12,7 @@ import "pages/vis_page.dart";
 import "pages/watch_folders_page.dart";
 import "preferences_sidebar.dart";
 
-/// The Preferences dialog with the original's page tree. Only some pages
-/// have been implemented so far.
+/// The Preferences dialog with the original's page tree.
 class PreferencesScreen extends StatelessWidget {
   const PreferencesScreen({required this.shell, super.key});
 
@@ -26,7 +24,6 @@ class PreferencesScreen extends StatelessWidget {
     return ListenableBuilder(
       listenable: navigation,
       builder: (context, _) {
-        final localizations = AppLocalizations.of(context);
         final page = navigation.page;
         return Row(
           children: [
@@ -67,9 +64,6 @@ class PreferencesScreen extends StatelessWidget {
                             LibraryPreferencesPage(shell: shell),
                           PreferencesPage.notifications =>
                             NotificationPreferencesPage(shell: shell),
-                          _ => _UnavailablePage(
-                            label: candidate.label(localizations),
-                          ),
                         },
                       )
                     else
@@ -82,16 +76,4 @@ class PreferencesScreen extends StatelessWidget {
       },
     );
   }
-}
-
-/// The placeholder for a Preferences page that isn't implemented yet.
-class _UnavailablePage extends StatelessWidget {
-  const _UnavailablePage({required this.label});
-
-  final String label;
-
-  @override
-  Widget build(BuildContext context) => Center(
-    child: Text(AppLocalizations.of(context).settingsUnavailable(label)),
-  );
 }
