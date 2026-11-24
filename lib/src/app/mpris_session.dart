@@ -1,4 +1,3 @@
-import "dart:async";
 import "dart:io";
 import "dart:math" as math;
 
@@ -167,7 +166,7 @@ class MprisSession implements MediaSession {
       }
     }
     if (previous != null && previous.path != _artFile?.path) {
-      unawaited(_delete(previous));
+      await _delete(previous);
     }
     if (!await _ready) return;
     await _object.emitPropertiesChanged(
