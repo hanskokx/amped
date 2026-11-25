@@ -15,6 +15,7 @@ if release=$(gh api "repos/$repo/releases/latest" 2>"$out.err"); then
     version: (.tag_name | ltrimstr("v")),
     published: .published_at,
     notes: .html_url,
+    body: (.body // ""),
     assets: [.assets[] | select(.name != "SHA256SUMS") | {
       name,
       url: .browser_download_url,

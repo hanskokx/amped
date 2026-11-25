@@ -2086,6 +2086,30 @@ abstract class AppLocalizations {
   /// **'Amped Preferences'**
   String get ampedPreferencesTitle;
 
+  /// Title of the window that announces a new release of Amped.
+  ///
+  /// In en, this message translates to:
+  /// **'Update available'**
+  String get updateTitle;
+
+  /// Heading of the update window.
+  ///
+  /// In en, this message translates to:
+  /// **'Amped {version} is available.'**
+  String updateAvailable(String version);
+
+  /// Button of the update window that dismisses it.
+  ///
+  /// In en, this message translates to:
+  /// **'Ignore'**
+  String get updateIgnore;
+
+  /// Button of the update window that opens the page to download the new release from.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to downloads'**
+  String get updateDownload;
+
   /// Title of the About dialog.
   ///
   /// In en, this message translates to:

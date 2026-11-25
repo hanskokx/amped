@@ -8,6 +8,7 @@ import "package:amped_l10n/amped_l10n.dart";
 import "package:amped_logging/amped_logging.dart";
 import "package:amped_media_source/amped_media_source.dart";
 import "package:amped_skin/amped_skin.dart";
+import "package:amped_update_checker/amped_update_checker.dart";
 import "package:amped_wasabi/amped_wasabi.dart";
 import "package:amped_youtube/amped_youtube.dart" show YouTubeLink;
 import "package:amped_ytdlp/amped_ytdlp.dart" show YtDlp;
@@ -47,6 +48,7 @@ import "amped_menus.dart";
 import "cover_art.dart";
 import "dialog_manager.dart";
 import "dialog_requests.dart";
+
 import "episode_click_action.dart";
 import "file_actions.dart";
 import "library_actions.dart";
@@ -662,7 +664,15 @@ class AmpedShell extends ChangeNotifier {
     );
   }
 
+  /// Looks for a newer release at start and every hour after.
+  late final UpdateChecker _updates = UpdateChecker(
+    releaseUrl: Uri.parse("https://www.amped-player.com/release.json"),
+    interval: const Duration(hours: 1),
+  );
+
   void _init() {
+    _updates.updates.listen(requests.showUpdate);
+    _updates.start();
     skins.followShades(isShaded);
     RemoteFiles.shared.prompt = requests.promptRemoteLogin;
     SourceLocation.resolver = sources.resolve;
@@ -740,6 +750,7 @@ class AmpedShell extends ChangeNotifier {
     albumArt.dispose();
     onlineArt.dispose();
     watchFolders.dispose();
+    _updates.dispose();
     sources.dispose();
     library.dispose();
     videoLibrary.dispose();

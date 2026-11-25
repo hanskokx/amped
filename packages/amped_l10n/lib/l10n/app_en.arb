@@ -1387,6 +1387,25 @@
   "@ampedPreferencesTitle": {
     "description": "Title of the Preferences window."
   },
+  "updateTitle": "Update available",
+  "@updateTitle": {
+    "description": "Title of the window that announces a new release of Amped."
+  },
+  "updateAvailable": "Amped {version} is available.",
+  "@updateAvailable": {
+    "description": "Heading of the update window.",
+    "placeholders": {
+      "version": {"type": "String", "example": "1.2.0"}
+    }
+  },
+  "updateIgnore": "Ignore",
+  "@updateIgnore": {
+    "description": "Button of the update window that dismisses it."
+  },
+  "updateDownload": "Go to downloads",
+  "@updateDownload": {
+    "description": "Button of the update window that opens the page to download the new release from."
+  },
   "aboutAmpedTitle": "About Amped",
   "@aboutAmpedTitle": {
     "description": "Title of the About dialog."

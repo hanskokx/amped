@@ -24,6 +24,7 @@ import "file_info_page.dart";
 import "playlist_search_page.dart";
 import "remote_login_page.dart";
 import "resume_page.dart";
+import "update_page.dart";
 
 /// The contents of a native-framed dialog window.
 class DialogWindowContent extends StatelessWidget {
@@ -76,6 +77,11 @@ class DialogWindowContent extends StatelessWidget {
         title: shell.requests.resumeRequest?.title ?? "",
         position: shell.requests.resumeRequest?.position ?? Duration.zero,
         onAnswer: (resume) => shell.requests.answerResume(resume: resume),
+      ),
+      AmpedDialog.update => UpdatePage(
+        key: ObjectKey(shell.requests.update),
+        release: shell.requests.update,
+        onAnswer: (download) => shell.requests.answerUpdate(download: download),
       ),
       AmpedDialog.fileInfo => FileInfoPage(
         key: ValueKey(shell.requests.fileInfoPath),
