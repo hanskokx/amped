@@ -1,0 +1,834 @@
+:root {
+  --bg: #0e0b16;
+  --card: rgba(255, 255, 255, 0.045);
+  --line: rgba(255, 255, 255, 0.09);
+  --text: #eee9f7;
+  --muted: #9d95b3;
+  --accent: #8b4dff;
+  --accent-soft: #b58cff;
+  --hot: #ffb23e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, sans-serif;
+  line-height: 1.55;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--accent-soft);
+}
+
+/* An arrow leaving a box after every link that opens in a new tab, in the
+   link's own color. */
+a[target='_blank']::after {
+  content: '';
+  display: inline-block;
+  width: 0.75em;
+  height: 0.75em;
+  margin-left: 0.35em;
+  background: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 14v6H4V6h6M14 3h7v7M21 3l-10 10'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.wrap {
+  width: min(1100px, 100% - 48px);
+  margin-inline: auto;
+}
+
+/* --- Top bar -------------------------------------------------------------- */
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 18px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  font-weight: 800;
+  font-size: 1.15rem;
+  text-decoration: none;
+}
+
+.top nav {
+  display: flex;
+  gap: 24px;
+}
+
+.top nav a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.top nav a:hover {
+  color: var(--text);
+}
+
+/* --- Hero ----------------------------------------------------------------- */
+
+.glow {
+  position: absolute;
+  z-index: -1;
+  top: -180px;
+  left: 50%;
+  width: min(1200px, 100%);
+  height: 900px;
+  transform: translateX(-50%);
+  background:
+    radial-gradient(closest-side at 30% 40%, rgba(139, 77, 255, 0.34), transparent),
+    radial-gradient(closest-side at 74% 55%, rgba(255, 130, 50, 0.16), transparent);
+  animation: drift 14s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 48px;
+  padding-block: 40px 72px;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(3rem, 8vw, 5.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+
+/* The words of a headline whose colors shift. */
+.shine {
+  background: linear-gradient(100deg, var(--accent-soft), var(--hot), var(--accent-soft));
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: shine 7s linear infinite;
+}
+
+.hero .shine {
+  display: block;
+}
+
+.lead {
+  max-width: 32em;
+  color: var(--muted);
+  font-size: 1.2rem;
+}
+
+/* download.js fills this in. */
+#download {
+  margin-top: 28px;
+}
+
+.button {
+  display: inline-block;
+  padding: 14px 32px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), #6a2ee0);
+  box-shadow: 0 10px 30px rgba(139, 77, 255, 0.35);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.18s, box-shadow 0.18s;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 38px rgba(139, 77, 255, 0.5);
+}
+
+.meta,
+details {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+details {
+  margin-top: 12px;
+}
+
+summary {
+  width: fit-content;
+  cursor: pointer;
+}
+
+summary:hover {
+  color: var(--text);
+}
+
+details ul {
+  padding: 0;
+  list-style: none;
+}
+
+/* Logo, architecture, then the file, in columns. */
+details li {
+  display: grid;
+  grid-template-columns: 18px 5.6em minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  padding-block: 3px;
+}
+
+/* A gap between one system's files and the next's. */
+details li.next-system {
+  margin-top: 12px;
+}
+
+details li a {
+  overflow-wrap: anywhere;
+}
+
+.logo {
+  width: 18px;
+  height: 18px;
+}
+
+.logo.macos {
+  color: #d9d4e8;
+}
+
+.logo.windows {
+  color: #6fbcff;
+}
+
+.logo.linux {
+  color: var(--text);
+}
+
+.badge {
+  padding: 1px 0;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: var(--card);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+}
+
+@media (max-width: 860px) {
+  summary {
+    margin-inline: auto;
+  }
+
+  /* The list is centered; its columns stay lined up. */
+  details ul {
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
+    text-align: left;
+  }
+}
+
+/* --- Install help --------------------------------------------------------- */
+
+.install-help {
+  width: min(540px, 100% - 32px);
+  max-height: calc(100% - 32px);
+  padding: 0;
+  overflow-y: auto;
+  border: 1px solid rgba(181, 140, 255, 0.45);
+  border-radius: 18px;
+  background: #1a1527;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+  color: var(--text);
+  text-align: left;
+}
+
+.install-help::backdrop {
+  background: rgba(5, 3, 10, 0.72);
+  backdrop-filter: blur(3px);
+}
+
+.install-help > div {
+  padding: 28px;
+}
+
+.install-help h2 {
+  margin: 0 0 8px;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.install-help p {
+  color: var(--muted);
+}
+
+.install-help ol {
+  padding-left: 1.4em;
+}
+
+.install-help li {
+  margin-block: 8px;
+}
+
+.install-help li::marker {
+  color: var(--accent-soft);
+  font-weight: 700;
+}
+
+.install-help .caution {
+  font-size: 0.9rem;
+}
+
+.install-help form {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.install-help button {
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+/* --- Players -------------------------------------------------------------- */
+
+.stage {
+  perspective: 1200px;
+  justify-self: center;
+  width: 100%;
+}
+
+.tilt {
+  transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition: transform 0.25s ease-out;
+}
+
+.player {
+  position: relative;
+  line-height: 0;
+  filter: drop-shadow(0 30px 45px rgba(0, 0, 0, 0.6));
+  animation: float 7s ease-in-out infinite;
+}
+
+.player picture {
+  display: block;
+}
+
+.player img,
+.player canvas {
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+.player canvas {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+
+.hero .stage {
+  max-width: 400px;
+}
+
+/* --- Sources ticker ------------------------------------------------------- */
+
+.ticker {
+  overflow: hidden;
+  border-block: 1px solid var(--line);
+  padding-block: 16px;
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.ticker ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.ticker li::before {
+  content: '♪ ';
+  color: var(--accent);
+}
+
+.ticker .copy {
+  display: none;
+}
+
+/* The scrolling version needs a second copy of the list to loop on. */
+.animate .ticker ul {
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  gap: 0;
+  width: max-content;
+  animation: scroll 34s linear infinite;
+}
+
+.animate .ticker li {
+  padding-right: 40px;
+}
+
+.animate .ticker .copy {
+  display: list-item;
+}
+
+.animate .ticker:hover ul {
+  animation-play-state: paused;
+}
+
+/* --- Internet radio ------------------------------------------------------- */
+
+.radio {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center;
+  gap: 32px;
+  margin-bottom: 96px;
+  padding: 48px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--card);
+}
+
+.radio h2 {
+  margin: 0 0 8px;
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.radio p {
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+.radio .button {
+  margin-top: 28px;
+}
+
+/* Rings spreading from a transmitter. */
+.on-air {
+  position: relative;
+  display: grid;
+  place-items: center;
+  justify-self: center;
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 1;
+}
+
+.on-air i {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--accent-soft);
+  border-radius: 50%;
+  animation: broadcast 3s ease-out infinite;
+}
+
+/* Where each ring rests when nothing moves. */
+.on-air i:nth-child(1) {
+  scale: 0.55;
+  opacity: 0.55;
+}
+
+.on-air i:nth-child(2) {
+  scale: 0.775;
+  opacity: 0.35;
+  animation-delay: -1s;
+}
+
+.on-air i:nth-child(3) {
+  opacity: 0.18;
+  animation-delay: -2s;
+}
+
+.on-air span {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 4px;
+  width: 38%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--hot), var(--accent));
+  box-shadow: 0 0 40px rgba(139, 77, 255, 0.55);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+/* A broadcast mast: a dot sending waves both ways. */
+.on-air span::before {
+  content: '';
+  width: 42px;
+  height: 42px;
+  background: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='9' r='2' fill='black'/%3E%3Cpath d='M8.5 12.5a5 5 0 0 1 0-7M15.5 5.5a5 5 0 0 1 0 7M5.7 15.3a9 9 0 0 1 0-12.6M18.3 2.7a9 9 0 0 1 0 12.6M12 11l-4 11M12 11l4 11M9.5 18h5'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* --- Sections ------------------------------------------------------------- */
+
+section h2 {
+  margin: 0 0 8px;
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.skins {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  align-items: center;
+  gap: 48px;
+  padding-block: 96px;
+}
+
+.skins > div > p {
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+.skins .stage {
+  max-width: 480px;
+}
+
+/* Side by side, the picture goes on the left. In the markup it follows the
+   text, which is the order narrow screens stack them in. */
+@media (min-width: 861px) {
+  .skins > :last-child {
+    order: -1;
+  }
+}
+
+.skin-formats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+/* The link sits at the bottom, level with its neighbor's. */
+.skin-formats .feature {
+  display: flex;
+  flex-direction: column;
+}
+
+.skin-formats .more {
+  margin-top: auto;
+  padding-top: 14px;
+  align-self: flex-start;
+}
+
+/* Links out to other sites. */
+.more {
+  display: inline-block;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.more:hover {
+  text-decoration: underline;
+}
+
+.skin-formats h3 {
+  margin: 0 0 6px;
+}
+
+.skin-formats p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.make-your-own {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px 40px;
+  margin-block: 18px 96px;
+  padding: 28px;
+  border: 1px solid rgba(181, 140, 255, 0.45);
+  border-radius: 16px;
+  background: linear-gradient(120deg, rgba(139, 77, 255, 0.18), rgba(255, 178, 62, 0.08));
+}
+
+.make-your-own > div {
+  flex: 1 1 380px;
+}
+
+.make-your-own h3 {
+  margin: 0 0 4px;
+  font-size: 1.4rem;
+}
+
+.make-your-own p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.make-your-own .more {
+  margin-top: 14px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chips li {
+  padding: 4px 14px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: var(--card);
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.85rem;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 32px;
+}
+
+.feature {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--card);
+}
+
+.feature h3 {
+  margin: 14px 0 4px;
+}
+
+.feature p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.feature:hover {
+  border-color: rgba(181, 140, 255, 0.55);
+}
+
+/* A little equalizer on each card, which dances when pointed at. */
+.bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 22px;
+}
+
+.bars i {
+  width: 5px;
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(var(--hot), var(--accent));
+  transform-origin: bottom;
+  transform: scaleY(0.45);
+}
+
+.bars i:nth-child(2) {
+  transform: scaleY(0.9);
+}
+
+.bars i:nth-child(3) {
+  transform: scaleY(0.65);
+}
+
+.bars i:nth-child(4) {
+  transform: scaleY(0.3);
+}
+
+.animate .feature:hover .bars i {
+  animation: bounce 0.7s ease-in-out infinite alternate;
+}
+
+.animate .feature:hover .bars i:nth-child(2) {
+  animation-delay: -0.5s;
+}
+
+.animate .feature:hover .bars i:nth-child(3) {
+  animation-delay: -0.25s;
+}
+
+.animate .feature:hover .bars i:nth-child(4) {
+  animation-delay: -0.6s;
+}
+
+.formats {
+  padding-block: 96px 0;
+  text-align: center;
+}
+
+.formats .chips {
+  justify-content: center;
+  max-width: 760px;
+  margin: 24px auto 0;
+}
+
+.closing {
+  padding-block: 112px 72px;
+  text-align: center;
+}
+
+.closing .button {
+  margin-top: 20px;
+}
+
+footer {
+  border-top: 1px solid var(--line);
+  padding-block: 32px 48px;
+  color: var(--muted);
+  text-align: center;
+}
+
+footer a {
+  margin-inline: 10px;
+}
+
+.animate .reveal {
+  opacity: 0;
+  translate: 0 28px;
+  transition:
+    opacity 0.7s ease,
+    translate 0.7s ease,
+    border-color 0.2s;
+}
+
+.animate .reveal.seen {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* --- Motion --------------------------------------------------------------- */
+
+@keyframes float {
+  50% {
+    translate: 0 -12px;
+  }
+}
+
+@keyframes drift {
+  to {
+    transform: translateX(-50%) translateY(40px) scale(1.08);
+  }
+}
+
+@keyframes shine {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes broadcast {
+  from {
+    scale: 0.4;
+    opacity: 0.75;
+  }
+  to {
+    scale: 1;
+    opacity: 0;
+  }
+}
+
+@keyframes bounce {
+  from {
+    transform: scaleY(0.2);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media (max-width: 860px) {
+  .hero,
+  .skins {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    text-align: center;
+  }
+
+  .lead {
+    margin-inline: auto;
+  }
+
+  .skins {
+    padding-block: 64px;
+  }
+
+  .features,
+  .skin-formats {
+    grid-template-columns: 1fr;
+  }
+
+  .make-your-own {
+    margin-bottom: 64px;
+  }
+
+  .radio {
+    grid-template-columns: 1fr;
+    margin-bottom: 64px;
+    padding: 28px 22px;
+    text-align: center;
+  }
+
+  .radio .chips {
+    justify-content: center;
+  }
+
+  /* Keeps the label and its new-tab icon on one line. */
+  .radio .button {
+    padding-inline: 12px;
+    font-size: 0.9rem;
+  }
+}
