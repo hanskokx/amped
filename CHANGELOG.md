@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.3
+
+- Modern skins' flat color images now show. This fixes skins whose beat
+  visualizers, such as D-Reliction's, stayed blank.
+
 ## 0.1.2
 
 - In the Amped Modern skin, clicking the lightning bolt in the main window's

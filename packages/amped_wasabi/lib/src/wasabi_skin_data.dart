@@ -1152,6 +1152,31 @@ class WasabiSkinData {
       if (id == null || file == null) continue;
       final bitmapKey = aliases[id.toLowerCase()] ?? id.toLowerCase();
       if (bitmaps.containsKey(bitmapKey)) continue;
+      if (file.trim().toLowerCase() == r"$solid") {
+        // A flat color the player draws itself, 1x1 unless sized; what
+        // shows it stretches it over its own box.
+        final value = node["color"]?.trim() ?? "";
+        final color =
+            _colorLiteral(value) ??
+            colors[aliases[value.toLowerCase()] ?? value.toLowerCase()];
+        if (color == null) continue;
+        final width = int.tryParse(node["w"] ?? "") ?? 1;
+        final height = int.tryParse(node["h"] ?? "") ?? 1;
+        final image = await wasabiSolidImage(width, height, color);
+        if (image != null) {
+          bitmaps[bitmapKey] = WasabiBitmap(
+            image,
+            ui.Rect.fromLTWH(
+              0,
+              0,
+              image.width.toDouble(),
+              image.height.toDouble(),
+            ),
+            gammaGroup: _named(node["gammagroup"]),
+          );
+        }
+        continue;
+      }
       if (file.trim().toLowerCase() == r"$gradient") {
         final width = int.tryParse(node["w"] ?? "") ?? 1;
         final height = int.tryParse(node["h"] ?? "") ?? 1;

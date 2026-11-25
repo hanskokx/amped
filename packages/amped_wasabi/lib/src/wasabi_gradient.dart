@@ -68,6 +68,26 @@ Uint8List? renderWasabiGradient({
   return out;
 }
 
+/// A `$solid` image: a bitmap element of one [color].
+Future<ui.Image?> wasabiSolidImage(int width, int height, ui.Color color) {
+  final rgb = color.toARGB32() & 0xFFFFFF;
+  return wasabiGradientImage(
+    width,
+    height,
+    // One stop fills the picture with its color.
+    renderWasabiGradient(
+      width: width,
+      height: height,
+      mode: "linear",
+      x1: 0,
+      y1: 0,
+      x2: 0,
+      y2: 0,
+      points: "0=${rgb >> 16},${rgb >> 8 & 0xFF},${rgb & 0xFF}",
+    ),
+  );
+}
+
 /// The image of [renderWasabiGradient]'s pixels.
 Future<ui.Image?> wasabiGradientImage(
   int width,
