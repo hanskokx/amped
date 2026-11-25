@@ -1,8 +1,10 @@
 import "dart:async";
 import "dart:collection";
 
+import "package:amped_update_checker/amped_update_checker.dart";
 import "package:flutter/widgets.dart"
     show ImageConfiguration, ImageProvider, ImageStream, ImageStreamListener;
+import "package:url_launcher/url_launcher.dart";
 
 import "../player/player_state.dart";
 import "../remote/remote_credentials.dart";
@@ -154,6 +156,36 @@ class DialogRequests {
       _dialogs.close(AmpedDialog.resume);
     }
   }
+
+  /// The release the update dialog announces.
+  UpdateInfo? update;
+
+  /// Opens the update dialog on [release], or puts it in the open one.
+  void showUpdate(UpdateInfo release) {
+    update = release;
+    if (_dialogs.windows.containsKey(AmpedDialog.update)) {
+      _dialogs.close(AmpedDialog.update);
+    }
+    _dialogs.open(AmpedDialog.update);
+  }
+
+  /// The update dialog was answered: [download] opens the downloads, else
+  /// it is ignored.
+  void answerUpdate({required bool download}) {
+    final release = update;
+    if (download && release != null) {
+      unawaited(launchUrl(release.downloadUrl ?? latestReleaseUrl));
+    }
+    if (_dialogs.windows.containsKey(AmpedDialog.update)) {
+      _dialogs.close(AmpedDialog.update);
+    }
+  }
+
+  /// Where the latest release can be downloaded, when the release.json
+  /// has no address of its own.
+  static final Uri latestReleaseUrl = Uri.parse(
+    "https://github.com/hanskokx/amped/releases/latest",
+  );
 
   /// The files the Edit Item Metadata dialog edits.
   List<String> editMetadataPaths = const [];

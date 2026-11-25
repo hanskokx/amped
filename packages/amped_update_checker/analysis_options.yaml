@@ -1,0 +1,11 @@
+analyzer:
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    - web/**
+    - windows/**
+    - macos/**
+    - linux/**
+    - lib/src/generated/**
+include: package:arcane_analysis/analysis_options.yaml

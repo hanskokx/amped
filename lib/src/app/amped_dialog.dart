@@ -23,6 +23,9 @@ enum AmpedDialog {
   /// Whether to continue an episode where it was left off.
   resume(Size(420, 170)),
 
+  /// A new release of Amped, with its release notes.
+  update(Size(460, 380)),
+
   /// A picture from the Media Library, in a window like the Album Art
   /// window's but of its own. Drawn in the skin.
   artwork(Size(300, 320)),

@@ -1263,6 +1263,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ampedPreferencesTitle => 'Amped Preferences';
 
   @override
+  String get updateTitle => 'Update available';
+
+  @override
+  String updateAvailable(String version) {
+    return 'Amped $version is available.';
+  }
+
+  @override
+  String get updateIgnore => 'Ignore';
+
+  @override
+  String get updateDownload => 'Go to downloads';
+
+  @override
   String get aboutAmpedTitle => 'About Amped';
 
   @override

@@ -211,6 +211,7 @@ class DialogManager {
         AmpedDialog.editMetadata => localizations.editMetadataTitle,
         AmpedDialog.remoteLogin => localizations.remoteLoginTitle,
         AmpedDialog.resume => localizations.resumeTitle,
+        AmpedDialog.update => localizations.updateTitle,
         AmpedDialog.artwork => localizations.artworkTitle,
       },
       delegate: delegate,

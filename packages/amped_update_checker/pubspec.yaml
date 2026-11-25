@@ -1,0 +1,22 @@
+name: amped_update_checker
+description: >-
+  Checks a release.json (the desktop_updater format) at start and on an
+  interval, and reports a release newer than the running app.
+version: 0.1.0
+publish_to: "none"
+
+environment:
+  sdk: ^3.12.2
+  flutter: ^3.50.0
+
+dependencies:
+  amped_logging:
+    path: ../amped_logging
+  flutter:
+    sdk: flutter
+  package_info_plus: ^10.2.2
+
+dev_dependencies:
+  arcane_analysis: ^1.0.5
+  flutter_test:
+    sdk: flutter

@@ -34,6 +34,8 @@ dependencies:
     path: packages/amped_soundcloud
   amped_subsonic:
     path: packages/amped_subsonic
+  amped_update_checker:
+    path: packages/amped_update_checker
   amped_vis:
     path: packages/amped_vis
   amped_wasabi:
