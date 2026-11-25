@@ -2,6 +2,9 @@
 
 ## 0.1.3
 
+- The tray icon can now appear when Amped is installed as a Flatpak.
+- The log now says whether the tray icon was set up, to help find out why it's
+  missing on some systems.
 - Modern skins' flat color images now show. This fixes skins whose beat
   visualizers, such as D-Reliction's, stayed blank.
 
@@ -13,9 +16,6 @@
 - With a modern skin that has a panel about itself, like Amped Modern's
   animated credits, the About window shows it on a **Skin** tab.
 - The About window has a fixed size that fits everything in it.
-- The tray icon can now appear when Amped is installed as a Flatpak.
-- The log now says whether the tray icon was set up, to help find out why it's
-  missing on some systems.
 
 ## 0.1.1
 
