@@ -1,10 +1,10 @@
-import 'dart:convert';
-import 'dart:io';
+import "dart:convert";
+import "dart:io";
 
-import 'hls_alt_audio_proxy.dart';
-import 'hls_parser.dart';
-import 'ts_alt_audio_remuxer.dart';
-import '../utils/logger.dart';
+import "../utils/logger.dart";
+import "hls_alt_audio_proxy.dart";
+import "hls_parser.dart";
+import "ts_alt_audio_remuxer.dart";
 
 /// Handles fetching an HLS playlist and streaming its segments as a
 /// continuous MPEG-TS byte stream.
@@ -65,7 +65,7 @@ class HlsStreamHandler {
 
       return HlsParser.totalDuration(content);
     } catch (e) {
-      CastLogger.debug('HlsStreamHandler: duration probe failed: $e');
+      CastLogger.debug("HlsStreamHandler: duration probe failed: $e");
       return null;
     }
   }
@@ -133,7 +133,7 @@ class HlsStreamHandler {
       );
     } catch (e, stack) {
       CastLogger.error(
-        'HlsStreamHandler: failed to stream TS playlist: $e\n$stack',
+        "HlsStreamHandler: failed to stream TS playlist: $e\n$stack",
       );
       try {
         response.statusCode = HttpStatus.badGateway;
@@ -182,44 +182,44 @@ class HlsStreamHandler {
       if (skipped >= segments.length) {
         // Seek past the end — nothing left to send.
         response.statusCode = HttpStatus.ok;
-        response.headers.contentType = ContentType('video', 'mp2t');
+        response.headers.contentType = ContentType("video", "mp2t");
         await response.close();
         return;
       }
       CastLogger.info(
-        'HlsStreamHandler: time seek to ${target.toStringAsFixed(1)}s — '
-        'skipping $skipped/${segments.length} segments, starting at '
-        '${startSeconds.toStringAsFixed(1)}s',
+        "HlsStreamHandler: time seek to ${target.toStringAsFixed(1)}s — "
+        "skipping $skipped/${segments.length} segments, starting at "
+        "${startSeconds.toStringAsFixed(1)}s",
       );
     }
 
     final segmentUrls = segments.skip(skipped).map((s) => s.url);
 
     response.statusCode = HttpStatus.ok;
-    response.headers.contentType = ContentType('video', 'mp2t');
+    response.headers.contentType = ContentType("video", "mp2t");
     // The stream is generated on demand: byte ranges cannot be honoured, but
     // time-based seeking can, so advertise exactly that.
-    response.headers.set('Accept-Ranges', 'none');
-    response.headers.set('Access-Control-Allow-Origin', '*');
+    response.headers.set("Accept-Ranges", "none");
+    response.headers.set("Access-Control-Allow-Origin", "*");
     if (total != null) {
       final totalSeconds = total.inMilliseconds / 1000.0;
       response.headers.set(
-        'TimeSeekRange.dlna.org',
-        'npt=${startSeconds.toStringAsFixed(3)}-'
-            '${totalSeconds.toStringAsFixed(3)}/'
-            '${totalSeconds.toStringAsFixed(3)}',
+        "TimeSeekRange.dlna.org",
+        "npt=${startSeconds.toStringAsFixed(3)}-"
+            "${totalSeconds.toStringAsFixed(3)}/"
+            "${totalSeconds.toStringAsFixed(3)}",
       );
       response.headers.set(
-        'X-Seek-Range',
-        'npt=${startSeconds.toStringAsFixed(3)}-'
-            '${totalSeconds.toStringAsFixed(3)}',
+        "X-Seek-Range",
+        "npt=${startSeconds.toStringAsFixed(3)}-"
+            "${totalSeconds.toStringAsFixed(3)}",
       );
     }
 
     for (final segmentUrl in segmentUrls) {
       try {
         final segUri = Uri.parse(segmentUrl);
-        final segRequest = await _httpClient.openUrl('GET', segUri);
+        final segRequest = await _httpClient.openUrl("GET", segUri);
         for (final entry in headers.entries) {
           segRequest.headers.set(entry.key, entry.value);
         }
@@ -261,14 +261,14 @@ class HlsStreamHandler {
       return;
     }
     CastLogger.info(
-      'HlsStreamHandler: streaming ${plan.segments.length} alt-audio '
-      'segments as concatenated muxed TS',
+      "HlsStreamHandler: streaming ${plan.segments.length} alt-audio "
+      "segments as concatenated muxed TS",
     );
 
     response.statusCode = HttpStatus.ok;
-    response.headers.contentType = ContentType('video', 'mp2t');
-    response.headers.set('Accept-Ranges', 'none');
-    response.headers.set('Access-Control-Allow-Origin', '*');
+    response.headers.contentType = ContentType("video", "mp2t");
+    response.headers.set("Accept-Ranges", "none");
+    response.headers.set("Access-Control-Allow-Origin", "*");
 
     final muxer = HlsAltAudioSegmentMuxer(planner: planner);
     for (var i = 0; i < plan.segments.length; i++) {
@@ -277,7 +277,7 @@ class HlsStreamHandler {
         response.add(muxed.bytes);
       } catch (e) {
         CastLogger.warning(
-          'HlsStreamHandler: skipping segment $i — mux failed: $e',
+          "HlsStreamHandler: skipping segment $i — mux failed: $e",
         );
         // Skip the segment rather than abort the whole response —
         // matches the behaviour of [_streamConcatenated].
@@ -289,7 +289,7 @@ class HlsStreamHandler {
   /// Fetches a URL and returns the body as a string.
   Future<String> _fetchString(String url, Map<String, String> headers) async {
     final uri = Uri.parse(url);
-    final request = await _httpClient.openUrl('GET', uri);
+    final request = await _httpClient.openUrl("GET", uri);
     for (final entry in headers.entries) {
       request.headers.set(entry.key, entry.value);
     }

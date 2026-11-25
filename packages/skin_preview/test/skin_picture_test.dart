@@ -1,7 +1,7 @@
 import "dart:io";
 
-import "package:test/test.dart";
 import "package:skin_preview/skin_preview.dart";
+import "package:test/test.dart";
 
 void main() {
   test(

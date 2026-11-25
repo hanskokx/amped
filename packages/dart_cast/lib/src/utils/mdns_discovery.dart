@@ -1,11 +1,11 @@
-import 'dart:async';
-import 'dart:io';
+import "dart:async";
+import "dart:io";
 
-import 'package:multicast_dns/multicast_dns.dart';
+import "package:multicast_dns/multicast_dns.dart";
 
-import '../core/cast_device.dart';
-import '../protocols/airplay/airplay_features.dart';
-import 'logger.dart';
+import "../core/cast_device.dart";
+import "../protocols/airplay/airplay_features.dart";
+import "logger.dart";
 
 /// Represents a discovered mDNS service with its TXT records.
 ///
@@ -35,21 +35,21 @@ class MdnsServiceInfo {
   /// Uses the Chromecast `fn` TXT field if present, otherwise falls back
   /// to the mDNS service [name].
   String get friendlyName {
-    if (txtRecords.containsKey('fn')) return txtRecords['fn']!;
+    if (txtRecords.containsKey("fn")) return txtRecords["fn"]!;
     // Strip mDNS service suffix from name (e.g., "My TV._airplay._tcp.local" → "My TV")
-    final dotIndex = name.indexOf('._');
+    final dotIndex = name.indexOf("._");
     return dotIndex > 0 ? name.substring(0, dotIndex) : name;
   }
 
   /// Unique device identifier.
   ///
   /// Uses Chromecast `id` or AirPlay `deviceid` TXT field.
-  String get deviceId => txtRecords['id'] ?? txtRecords['deviceid'] ?? '';
+  String get deviceId => txtRecords["id"] ?? txtRecords["deviceid"] ?? "";
 
   /// Device model string.
   ///
   /// Uses Chromecast `md` or AirPlay `model` TXT field.
-  String get model => txtRecords['md'] ?? txtRecords['model'] ?? '';
+  String get model => txtRecords["md"] ?? txtRecords["model"] ?? "";
 
   /// Whether the given AirPlay features bitmask indicates video support.
   ///
@@ -100,10 +100,10 @@ class MdnsDiscovery {
   MdnsDiscovery._();
 
   /// mDNS service type for Chromecast devices.
-  static const String chromecastServiceType = '_googlecast._tcp.local';
+  static const String chromecastServiceType = "_googlecast._tcp.local";
 
   /// mDNS service type for AirPlay devices.
-  static const String airplayServiceType = '_airplay._tcp.local';
+  static const String airplayServiceType = "_airplay._tcp.local";
 
   /// Discover mDNS services of the given [serviceType] using the
   /// `multicast_dns` package.
@@ -111,13 +111,13 @@ class MdnsDiscovery {
   /// Yields [MdnsServiceInfo] entries as they are found on the local network.
   /// The stream completes after all discovered PTR records have been resolved.
   static Stream<MdnsServiceInfo> discover(String serviceType) async* {
-    CastLogger.info('mDNS: starting discovery for $serviceType');
+    CastLogger.info("mDNS: starting discovery for $serviceType");
     final client = MDnsClient();
     try {
       await client.start();
-      CastLogger.debug('mDNS: client started, querying PTR records');
+      CastLogger.debug("mDNS: client started, querying PTR records");
     } catch (e) {
-      CastLogger.error('mDNS discovery failed to start: $e');
+      CastLogger.error("mDNS discovery failed to start: $e");
       return;
     }
 
@@ -131,7 +131,7 @@ class MdnsDiscovery {
         if (round > 0) {
           await Future<void>.delayed(const Duration(seconds: 2));
           CastLogger.debug(
-            'mDNS: re-querying PTR records (round ${round + 1})',
+            "mDNS: re-querying PTR records (round ${round + 1})",
           );
         }
 
@@ -173,10 +173,10 @@ class MdnsDiscovery {
                         )) {
                       // The multicast_dns package joins TXT strings with writeln(),
                       // producing newline-separated key=value pairs.
-                      for (final line in txt.text.split('\n')) {
+                      for (final line in txt.text.split("\n")) {
                         final trimmed = line.trim();
                         if (trimmed.isEmpty) continue;
-                        final eqIndex = trimmed.indexOf('=');
+                        final eqIndex = trimmed.indexOf("=");
                         if (eqIndex > 0) {
                           txtRecords[trimmed.substring(0, eqIndex)] = trimmed
                               .substring(eqIndex + 1);

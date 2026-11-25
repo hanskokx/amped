@@ -1,10 +1,10 @@
-import 'dart:async';
+import "dart:async";
 
-import '../../core/cast_device.dart';
-import '../../core/discovery_provider.dart';
-import '../../utils/logger.dart';
-import '../../utils/mdns_discovery.dart';
-import 'airplay_features.dart';
+import "../../core/cast_device.dart";
+import "../../core/discovery_provider.dart";
+import "../../utils/logger.dart";
+import "../../utils/mdns_discovery.dart";
+import "airplay_features.dart";
 
 /// Discovers AirPlay devices via mDNS (_airplay._tcp.local).
 ///
@@ -34,7 +34,7 @@ class AirPlayDiscoveryProvider implements DeviceDiscoveryProvider {
     _devices.clear();
     _controller = StreamController<List<CastDevice>>();
 
-    CastLogger.info('AirPlay: starting mDNS discovery');
+    CastLogger.info("AirPlay: starting mDNS discovery");
     final stream = _mdnsLookup(MdnsDiscovery.airplayServiceType);
     _subscription = stream.listen(
       (info) {
@@ -43,7 +43,7 @@ class AirPlayDiscoveryProvider implements DeviceDiscoveryProvider {
         // AirPlay 1, so bit 0 is not a reliable indicator of video support.
         // Computer filtering is handled by DiscoveryManager._shouldFilter().
         final featuresStr =
-            info.txtRecords['features'] ?? info.txtRecords['ft'] ?? '';
+            info.txtRecords["features"] ?? info.txtRecords["ft"] ?? "";
         final features = AirPlayFeatures.parse(featuresStr);
         final device = info.toAirplayDevice();
         if (!_devices.containsKey(device.id)) {
@@ -57,7 +57,7 @@ class AirPlayDiscoveryProvider implements DeviceDiscoveryProvider {
         }
       },
       onError: (Object error) {
-        CastLogger.error('AirPlay: discovery error: $error');
+        CastLogger.error("AirPlay: discovery error: $error");
         if (_controller?.isClosed == false) {
           _controller!.addError(error);
         }

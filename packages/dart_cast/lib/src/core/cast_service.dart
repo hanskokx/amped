@@ -1,10 +1,10 @@
-import 'dart:async';
+import "dart:async";
 
-import 'cast_device.dart';
-import 'cast_session.dart';
-import 'discovery_manager.dart';
-import 'discovery_provider.dart';
-import '../utils/logger.dart';
+import "../utils/logger.dart";
+import "cast_device.dart";
+import "cast_session.dart";
+import "discovery_manager.dart";
+import "discovery_provider.dart";
 
 /// Factory function for creating protocol-specific sessions.
 typedef SessionFactory = CastSession Function(CastDevice device);
@@ -66,7 +66,7 @@ class CastService {
   /// Sets [lastDevice] to the connected device for later [reconnect].
   Future<CastSession> connect(CastDevice device) async {
     CastLogger.info(
-      'CastService: connecting to ${device.name} (${device.protocol})',
+      "CastService: connecting to ${device.name} (${device.protocol})",
     );
 
     // Auto-disconnect previous session
@@ -75,7 +75,7 @@ class CastService {
         await _activeSession!.disconnect();
       } catch (e) {
         CastLogger.warning(
-          'CastService: error disconnecting previous session: $e',
+          "CastService: error disconnecting previous session: $e",
         );
       }
     }
@@ -84,7 +84,7 @@ class CastService {
     await session.connect();
     _activeSession = session;
     _lastDevice = device;
-    CastLogger.info('CastService: connected to ${device.name}');
+    CastLogger.info("CastService: connected to ${device.name}");
     return session;
   }
 
@@ -118,7 +118,7 @@ class CastService {
       try {
         await _activeSession!.disconnect();
       } catch (e) {
-        CastLogger.warning('CastService: error during dispose disconnect: $e');
+        CastLogger.warning("CastService: error during dispose disconnect: $e");
       }
       _activeSession = null;
     }
@@ -129,8 +129,8 @@ class CastService {
       return _sessionFactory(device);
     }
     throw StateError(
-      'No sessionFactory provided. Supply a sessionFactory in the '
-      'CastService constructor or use protocol-specific session classes.',
+      "No sessionFactory provided. Supply a sessionFactory in the "
+      "CastService constructor or use protocol-specific session classes.",
     );
   }
 }

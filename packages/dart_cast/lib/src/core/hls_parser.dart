@@ -5,16 +5,16 @@ class HlsParser {
   HlsParser._();
 
   /// Tags where the URI appears on the next line (Pattern A).
-  static const _nextLineUriTags = ['#EXT-X-STREAM-INF:', '#EXTINF:'];
+  static const _nextLineUriTags = ["#EXT-X-STREAM-INF:", "#EXTINF:"];
 
   /// Tags where the URI is a quoted attribute (Pattern B).
   static const _attributeUriTags = [
-    '#EXT-X-KEY:',
-    '#EXT-X-MAP:',
-    '#EXT-X-MEDIA:',
-    '#EXT-X-I-FRAME-STREAM-INF:',
-    '#EXT-X-SESSION-KEY:',
-    '#EXT-X-SESSION-DATA:',
+    "#EXT-X-KEY:",
+    "#EXT-X-MAP:",
+    "#EXT-X-MEDIA:",
+    "#EXT-X-I-FRAME-STREAM-INF:",
+    "#EXT-X-SESSION-KEY:",
+    "#EXT-X-SESSION-DATA:",
   ];
 
   /// Regex matching `URI="<value>"` attribute in a tag line.
@@ -25,8 +25,8 @@ class HlsParser {
   /// Returns true if it contains `#EXT-X-STREAM-INF` or
   /// `#EXT-X-I-FRAME-STREAM-INF`.
   static bool isMasterPlaylist(String content) {
-    return content.contains('#EXT-X-STREAM-INF') ||
-        content.contains('#EXT-X-I-FRAME-STREAM-INF');
+    return content.contains("#EXT-X-STREAM-INF") ||
+        content.contains("#EXT-X-I-FRAME-STREAM-INF");
   }
 
   /// Resolves [url] against [baseUrl] per RFC 3986.
@@ -35,19 +35,19 @@ class HlsParser {
   /// relative-path references.
   static String resolveUrl(String url, String baseUrl) {
     // Absolute URL — has scheme
-    if (url.startsWith('http://') || url.startsWith('https://')) {
+    if (url.startsWith("http://") || url.startsWith("https://")) {
       return url;
     }
 
     final base = Uri.parse(baseUrl);
 
     // Protocol-relative
-    if (url.startsWith('//')) {
-      return '${base.scheme}:$url';
+    if (url.startsWith("//")) {
+      return "${base.scheme}:$url";
     }
 
     // Absolute path
-    if (url.startsWith('/')) {
+    if (url.startsWith("/")) {
       return '${base.scheme}://${base.host}${base.hasPort ? ':${base.port}' : ''}$url';
     }
 
@@ -84,7 +84,7 @@ class HlsParser {
     String proxyBaseUrl,
     String token,
   ) {
-    final lines = content.split('\n');
+    final lines = content.split("\n");
     final result = <String>[];
     var expectUri = false;
     var expectSegment = false; // true between #EXTINF and its URI
@@ -101,12 +101,12 @@ class HlsParser {
       if (_isNextLineUriTag(line)) {
         result.add(line);
         expectUri = true;
-        expectSegment = line.startsWith('#EXTINF:');
+        expectSegment = line.startsWith("#EXTINF:");
         continue;
       }
 
       // #EXT-X-BYTERANGE can appear between #EXTINF and the segment URI
-      if (line.startsWith('#EXT-X-BYTERANGE:') && expectUri) {
+      if (line.startsWith("#EXT-X-BYTERANGE:") && expectUri) {
         result.add(line);
         continue;
       }
@@ -118,7 +118,7 @@ class HlsParser {
       }
 
       // Non-tag, non-empty line while expecting URI — this is a segment/variant URI
-      if (expectUri && !line.startsWith('#')) {
+      if (expectUri && !line.startsWith("#")) {
         final resolved = resolveUrl(line.trim(), baseUrl);
         if (expectSegment) {
           segmentIndex++;
@@ -139,7 +139,7 @@ class HlsParser {
       expectSegment = false;
     }
 
-    return result.join('\n');
+    return result.join("\n");
   }
 
   static bool _isNextLineUriTag(String line) {
@@ -179,7 +179,7 @@ class HlsParser {
   /// Parses `#EXTINF` lines and collects the next-line URIs,
   /// resolving them against [baseUrl].
   static List<String> extractSegmentUrls(String content, String baseUrl) {
-    final lines = content.split('\n');
+    final lines = content.split("\n");
     final segments = <String>[];
     var expectUri = false;
 
@@ -187,25 +187,25 @@ class HlsParser {
       final trimmed = line.trim();
       if (trimmed.isEmpty) continue;
 
-      if (trimmed.startsWith('#EXTINF:')) {
+      if (trimmed.startsWith("#EXTINF:")) {
         expectUri = true;
         continue;
       }
 
       // #EXT-X-BYTERANGE can appear between #EXTINF and the segment URI
-      if (trimmed.startsWith('#EXT-X-BYTERANGE:') && expectUri) {
+      if (trimmed.startsWith("#EXT-X-BYTERANGE:") && expectUri) {
         continue;
       }
 
-      if (expectUri && !trimmed.startsWith('#')) {
+      if (expectUri && !trimmed.startsWith("#")) {
         segments.add(resolveUrl(trimmed, baseUrl));
         expectUri = false;
         continue;
       }
 
-      if (trimmed.startsWith('#')) {
+      if (trimmed.startsWith("#")) {
         // Other tags reset expectUri unless it's a byterange
-        if (!trimmed.startsWith('#EXT-X-BYTERANGE:')) {
+        if (!trimmed.startsWith("#EXT-X-BYTERANGE:")) {
           expectUri = false;
         }
         continue;
@@ -227,7 +227,7 @@ class HlsParser {
     String content,
     String baseUrl,
   ) {
-    final lines = content.split('\n');
+    final lines = content.split("\n");
     final segments = <({String url, double duration})>[];
     var expectUri = false;
     var pendingDuration = 0.0;
@@ -236,19 +236,19 @@ class HlsParser {
       final trimmed = line.trim();
       if (trimmed.isEmpty) continue;
 
-      if (trimmed.startsWith('#EXTINF:')) {
+      if (trimmed.startsWith("#EXTINF:")) {
         expectUri = true;
         // "#EXTINF:10.5,title" — the duration ends at the comma.
-        final value = trimmed.substring('#EXTINF:'.length).split(',').first;
+        final value = trimmed.substring("#EXTINF:".length).split(",").first;
         pendingDuration = double.tryParse(value.trim()) ?? 0.0;
         continue;
       }
 
-      if (trimmed.startsWith('#EXT-X-BYTERANGE:') && expectUri) {
+      if (trimmed.startsWith("#EXT-X-BYTERANGE:") && expectUri) {
         continue;
       }
 
-      if (expectUri && !trimmed.startsWith('#')) {
+      if (expectUri && !trimmed.startsWith("#")) {
         segments.add((
           url: resolveUrl(trimmed, baseUrl),
           duration: pendingDuration,
@@ -258,8 +258,8 @@ class HlsParser {
         continue;
       }
 
-      if (trimmed.startsWith('#')) {
-        if (!trimmed.startsWith('#EXT-X-BYTERANGE:')) {
+      if (trimmed.startsWith("#")) {
+        if (!trimmed.startsWith("#EXT-X-BYTERANGE:")) {
           expectUri = false;
         }
         continue;
@@ -276,7 +276,7 @@ class HlsParser {
   /// Only a playlist ending in `#EXT-X-ENDLIST` has a total duration that
   /// will not change, so only those can be advertised to a renderer.
   static bool isCompletePlaylist(String content) =>
-      content.contains('#EXT-X-ENDLIST');
+      content.contains("#EXT-X-ENDLIST");
 
   /// Total duration of a media playlist, or null when it cannot be trusted.
   ///
@@ -288,10 +288,10 @@ class HlsParser {
     if (!isCompletePlaylist(content)) return null;
 
     var seconds = 0.0;
-    for (final line in content.split('\n')) {
+    for (final line in content.split("\n")) {
       final trimmed = line.trim();
-      if (!trimmed.startsWith('#EXTINF:')) continue;
-      final value = trimmed.substring('#EXTINF:'.length).split(',').first;
+      if (!trimmed.startsWith("#EXTINF:")) continue;
+      final value = trimmed.substring("#EXTINF:".length).split(",").first;
       seconds += double.tryParse(value.trim()) ?? 0.0;
     }
 
@@ -308,14 +308,14 @@ class HlsParser {
   /// playlist is video-only and audio lives in a separate playlist.
   static List<({String url, int bandwidth, String? audioGroup})>
   extractVariants(String content, String baseUrl) {
-    final lines = content.split('\n');
+    final lines = content.split("\n");
     final variants = <({String url, int bandwidth, String? audioGroup})>[];
 
     for (var i = 0; i < lines.length; i++) {
       final line = lines[i].trim();
-      if (line.startsWith('#EXT-X-STREAM-INF:')) {
+      if (line.startsWith("#EXT-X-STREAM-INF:")) {
         // Extract BANDWIDTH
-        final bwMatch = RegExp(r'BANDWIDTH=(\d+)').firstMatch(line);
+        final bwMatch = RegExp(r"BANDWIDTH=(\d+)").firstMatch(line);
         final bandwidth = bwMatch != null ? int.parse(bwMatch.group(1)!) : 0;
 
         // Extract AUDIO group reference, if present.
@@ -326,7 +326,7 @@ class HlsParser {
         for (var j = i + 1; j < lines.length; j++) {
           final nextLine = lines[j].trim();
           if (nextLine.isEmpty) continue;
-          if (nextLine.startsWith('#')) continue;
+          if (nextLine.startsWith("#")) continue;
           variants.add((
             url: resolveUrl(nextLine, baseUrl),
             bandwidth: bandwidth,
@@ -354,23 +354,23 @@ class HlsParser {
 
     final groupRe = RegExp(r'GROUP-ID="([^"]*)"');
     final nameRe = RegExp(r'NAME="([^"]*)"');
-    final defaultRe = RegExp(r'DEFAULT=(YES|NO)');
+    final defaultRe = RegExp(r"DEFAULT=(YES|NO)");
 
-    for (final raw in content.split('\n')) {
+    for (final raw in content.split("\n")) {
       final line = raw.trim();
-      if (!line.startsWith('#EXT-X-MEDIA:')) continue;
-      if (!line.contains('TYPE=AUDIO')) continue;
+      if (!line.startsWith("#EXT-X-MEDIA:")) continue;
+      if (!line.contains("TYPE=AUDIO")) continue;
 
       final groupId = groupRe.firstMatch(line)?.group(1);
       final name = nameRe.firstMatch(line)?.group(1);
       final uriMatch = _uriAttributeRegex.firstMatch(line);
       final uri =
           uriMatch != null ? resolveUrl(uriMatch.group(1)!, baseUrl) : null;
-      final isDefault = defaultRe.firstMatch(line)?.group(1) == 'YES';
+      final isDefault = defaultRe.firstMatch(line)?.group(1) == "YES";
 
       renditions.add((
-        groupId: groupId ?? '',
-        name: name ?? '',
+        groupId: groupId ?? "",
+        name: name ?? "",
         uri: uri,
         isDefault: isDefault,
       ));
@@ -385,7 +385,7 @@ class HlsParser {
     String token,
     String originalUrl,
   ) {
-    return '$proxyBaseUrl/stream/$token?url=${Uri.encodeComponent(originalUrl)}';
+    return "$proxyBaseUrl/stream/$token?url=${Uri.encodeComponent(originalUrl)}";
   }
 
   /// Constructs a segment proxy URL whose *path* ends in `.ts`, satisfying
@@ -397,7 +397,7 @@ class HlsParser {
     String originalUrl,
     int segmentIndex,
   ) {
-    return '$proxyBaseUrl/stream/$token/seg$segmentIndex.ts'
-        '?url=${Uri.encodeComponent(originalUrl)}';
+    return "$proxyBaseUrl/stream/$token/seg$segmentIndex.ts"
+        "?url=${Uri.encodeComponent(originalUrl)}";
   }
 }

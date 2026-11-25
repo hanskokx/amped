@@ -1,15 +1,15 @@
-import 'dart:async' show Timer, unawaited;
-import 'dart:io';
+import "dart:async" show Timer, unawaited;
+import "dart:io";
 
-import '../../core/cast_device.dart';
-import '../../core/cast_media.dart';
-import '../../core/cast_session.dart';
-import '../../core/media_proxy.dart';
-import '../../core/media_transformer.dart';
-import '../../utils/logger.dart';
-import '../../utils/network_utils.dart';
-import 'dlna_controller.dart';
-import 'dlna_device.dart';
+import "../../core/cast_device.dart";
+import "../../core/cast_media.dart";
+import "../../core/cast_session.dart";
+import "../../core/media_proxy.dart";
+import "../../core/media_transformer.dart";
+import "../../utils/logger.dart";
+import "../../utils/network_utils.dart";
+import "dlna_controller.dart";
+import "dlna_device.dart";
 
 /// A DLNA casting session that controls playback on a DLNA renderer.
 ///
@@ -80,32 +80,32 @@ class DlnaSession extends CastSession {
     CastDevice device, {
     DlnaHttpClient? httpClient,
   }) {
-    final avTransportUrl = device.metadata['avTransportControlUrl'];
-    final renderingControlUrl = device.metadata['renderingControlUrl'];
+    final avTransportUrl = device.metadata["avTransportControlUrl"];
+    final renderingControlUrl = device.metadata["renderingControlUrl"];
 
     if (avTransportUrl == null || avTransportUrl.isEmpty) {
       throw ArgumentError(
         'CastDevice "${device.name}" is missing the DLNA AVTransport control URL '
-        'in its metadata. This usually means the device was not discovered by '
-        'DlnaDiscoveryProvider, or the device description XML did not contain '
-        'an AVTransport service. '
+        "in its metadata. This usually means the device was not discovered by "
+        "DlnaDiscoveryProvider, or the device description XML did not contain "
+        "an AVTransport service. "
         'Expected metadata key: "avTransportControlUrl". '
-        'Available metadata keys: ${device.metadata.keys.toList()}',
+        "Available metadata keys: ${device.metadata.keys.toList()}",
       );
     }
 
     final connectionManagerControlUrl =
-        device.metadata['connectionManagerControlUrl'];
+        device.metadata["connectionManagerControlUrl"];
 
     final description = DlnaDeviceDescription(
       friendlyName: device.name,
       udn: device.id,
-      manufacturer: device.metadata['manufacturer'],
-      modelName: device.metadata['modelName'],
+      manufacturer: device.metadata["manufacturer"],
+      modelName: device.metadata["modelName"],
       avTransportControlUrl: avTransportUrl,
       renderingControlUrl: renderingControlUrl,
       connectionManagerControlUrl: connectionManagerControlUrl,
-      locationUrl: 'http://${device.address.address}:${device.port}',
+      locationUrl: "http://${device.address.address}:${device.port}",
     );
 
     return DlnaSession(
@@ -119,20 +119,20 @@ class DlnaSession extends CastSession {
   @override
   Future<void> connect() async {
     CastLogger.info(
-      'DLNA: connecting to ${device.name} at ${device.address.address}:${device.port}',
+      "DLNA: connecting to ${device.name} at ${device.address.address}:${device.port}",
     );
     stateMachine.transitionTo(SessionState.connecting);
     // For DLNA, "connect" simply means we verified the device is reachable.
     // There is no persistent connection — each action is an HTTP POST.
     stateMachine.transitionTo(SessionState.connected);
-    CastLogger.info('DLNA: connected to ${device.name}');
+    CastLogger.info("DLNA: connected to ${device.name}");
   }
 
   @override
   Future<void> loadMedia(CastMedia media) async {
     if (_isLoadingMedia) {
       CastLogger.warning(
-        'DLNA: loadMedia called while already loading — ignoring',
+        "DLNA: loadMedia called while already loading — ignoring",
       );
       return;
     }
@@ -151,7 +151,7 @@ class DlnaSession extends CastSession {
   }
 
   Future<void> _loadMediaInternal(CastMedia media) async {
-    CastLogger.info('DLNA: loadMedia called, state=${stateMachine.state}');
+    CastLogger.info("DLNA: loadMedia called, state=${stateMachine.state}");
     stateMachine.transitionTo(SessionState.loading);
     _currentMedia = media;
 
@@ -167,15 +167,15 @@ class DlnaSession extends CastSession {
     // Use 01700000 (STREAMING + BACKGROUND + CONNECTION_STALL + V1.5) —
     // same as VLC and MiniDLNA. Include DLNA.ORG_PN profile name so the
     // renderer knows the codec without probing the stream.
-    const dlnaFlags = '01700000000000000000000000000000';
+    const dlnaFlags = "01700000000000000000000000000000";
 
     // Piped-TS routes are generated on the fly: there is no Content-Length and
     // byte ranges cannot be served. DLNA.ORG_OP is "<time-seek><byte-seek>",
     // so those routes must advertise 10 (time seek only) rather than 01.
     // Claiming byte-range seek on a stream that answers `Accept-Ranges: none`
     // is what made this TV stop playback the moment a seek was issued.
-    const opByteSeek = 'DLNA.ORG_OP=01';
-    const opTimeSeek = 'DLNA.ORG_OP=10';
+    const opByteSeek = "DLNA.ORG_OP=01";
+    const opTimeSeek = "DLNA.ORG_OP=10";
     var isPipedStream = false;
     Duration? probedDuration;
 
@@ -197,33 +197,33 @@ class DlnaSession extends CastSession {
         headers: media.httpHeaders,
       );
       protocolInfo =
-          'http-get:*:video/mp2t:DLNA.ORG_PN=MPEG_TS_HD_NA_ISO;$opTimeSeek;DLNA.ORG_CI=0;DLNA.ORG_FLAGS=$dlnaFlags';
+          "http-get:*:video/mp2t:DLNA.ORG_PN=MPEG_TS_HD_NA_ISO;$opTimeSeek;DLNA.ORG_CI=0;DLNA.ORG_FLAGS=$dlnaFlags";
     } else if (transformed.effectiveType == CastMediaType.hls) {
       // Transformer wrapped media in HLS → pipe as TS stream for DLNA
       isPipedStream = true;
       probedDuration = await _proxy.probeHlsDuration(proxyUrl);
       proxyUrl = _proxy.registerHlsAsStream(proxyUrl);
       protocolInfo =
-          'http-get:*:video/mp2t:DLNA.ORG_PN=MPEG_TS_HD_NA_ISO;$opTimeSeek;DLNA.ORG_CI=0;DLNA.ORG_FLAGS=$dlnaFlags';
+          "http-get:*:video/mp2t:DLNA.ORG_PN=MPEG_TS_HD_NA_ISO;$opTimeSeek;DLNA.ORG_CI=0;DLNA.ORG_FLAGS=$dlnaFlags";
     } else if (transformed.effectiveType == CastMediaType.mpegTs) {
       protocolInfo =
-          'http-get:*:video/mp2t:DLNA.ORG_PN=MPEG_TS_HD_NA_ISO;$opByteSeek;DLNA.ORG_CI=0;DLNA.ORG_FLAGS=$dlnaFlags';
+          "http-get:*:video/mp2t:DLNA.ORG_PN=MPEG_TS_HD_NA_ISO;$opByteSeek;DLNA.ORG_CI=0;DLNA.ORG_FLAGS=$dlnaFlags";
     } else if (transformed.effectiveType == CastMediaType.mkv) {
       protocolInfo =
-          'http-get:*:video/x-matroska:$opByteSeek;DLNA.ORG_CI=0;DLNA.ORG_FLAGS=$dlnaFlags';
+          "http-get:*:video/x-matroska:$opByteSeek;DLNA.ORG_CI=0;DLNA.ORG_FLAGS=$dlnaFlags";
     } else {
       protocolInfo =
-          'http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_HP_HD_AAC;$opByteSeek;DLNA.ORG_CI=0;DLNA.ORG_FLAGS=$dlnaFlags';
+          "http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_HP_HD_AAC;$opByteSeek;DLNA.ORG_CI=0;DLNA.ORG_FLAGS=$dlnaFlags";
     }
 
     _currentProxyUrl = proxyUrl;
     _currentProtocolInfo = protocolInfo;
 
     CastLogger.info(
-      'DLNA: loading media, effectiveType=${transformed.effectiveType.name}',
+      "DLNA: loading media, effectiveType=${transformed.effectiveType.name}",
     );
-    CastLogger.debug('DLNA: proxy URL = $proxyUrl');
-    CastLogger.debug('DLNA: protocolInfo=$protocolInfo');
+    CastLogger.debug("DLNA: proxy URL = $proxyUrl");
+    CastLogger.debug("DLNA: protocolInfo=$protocolInfo");
 
     // Register subtitle in both SRT and VTT formats so the TV can pick
     // whichever it supports. Many DLNA TVs only support SRT, others VTT.
@@ -250,7 +250,7 @@ class DlnaSession extends CastSession {
             : null;
     if (isPipedStream) {
       CastLogger.info(
-        'DLNA: piped TS route, seek mode=time, '
+        "DLNA: piped TS route, seek mode=time, "
         'duration=${durationStr ?? 'unknown'}',
       );
     }
@@ -260,7 +260,7 @@ class DlnaSession extends CastSession {
 
     // Send SetAVTransportURI with proxy URL (not original URL)
     await _sendAvTransport(
-      'SetAVTransportURI',
+      "SetAVTransportURI",
       DlnaSoapBuilder.buildSetAVTransportURI(
         proxyUrl,
         title: media.title,
@@ -282,7 +282,7 @@ class DlnaSession extends CastSession {
     }
 
     // Send Play
-    await _sendAvTransport('Play', DlnaSoapBuilder.buildPlay());
+    await _sendAvTransport("Play", DlnaSoapBuilder.buildPlay());
 
     stateMachine.transitionTo(SessionState.playing);
 
@@ -291,7 +291,7 @@ class DlnaSession extends CastSession {
     if (media.startPosition != null && media.startPosition! > Duration.zero) {
       _pendingSeekPosition = media.startPosition;
       CastLogger.info(
-        'DLNA: deferred seek to ${media.startPosition!.inSeconds}s (waiting for TV to load)',
+        "DLNA: deferred seek to ${media.startPosition!.inSeconds}s (waiting for TV to load)",
       );
     }
 
@@ -301,8 +301,8 @@ class DlnaSession extends CastSession {
 
   @override
   Future<void> play() async {
-    CastLogger.info('DLNA: Play');
-    await _sendAvTransport('Play', DlnaSoapBuilder.buildPlay());
+    CastLogger.info("DLNA: Play");
+    await _sendAvTransport("Play", DlnaSoapBuilder.buildPlay());
     if (stateMachine.canTransitionTo(SessionState.playing)) {
       stateMachine.transitionTo(SessionState.playing);
     }
@@ -310,8 +310,8 @@ class DlnaSession extends CastSession {
 
   @override
   Future<void> pause() async {
-    CastLogger.info('DLNA: Pause');
-    await _sendAvTransport('Pause', DlnaSoapBuilder.buildPause());
+    CastLogger.info("DLNA: Pause");
+    await _sendAvTransport("Pause", DlnaSoapBuilder.buildPause());
     if (stateMachine.canTransitionTo(SessionState.paused)) {
       stateMachine.transitionTo(SessionState.paused);
     }
@@ -319,9 +319,9 @@ class DlnaSession extends CastSession {
 
   @override
   Future<void> stop() async {
-    CastLogger.info('DLNA: Stop');
+    CastLogger.info("DLNA: Stop");
     _stopPolling();
-    await _sendAvTransport('Stop', DlnaSoapBuilder.buildStop());
+    await _sendAvTransport("Stop", DlnaSoapBuilder.buildStop());
     if (stateMachine.canTransitionTo(SessionState.idle)) {
       stateMachine.transitionTo(SessionState.idle);
     }
@@ -329,7 +329,7 @@ class DlnaSession extends CastSession {
 
   @override
   Future<void> seek(Duration position) async {
-    CastLogger.info('DLNA: Seek to ${position.inSeconds}s');
+    CastLogger.info("DLNA: Seek to ${position.inSeconds}s");
 
     if (_isPipedStream) {
       // A piped TS has no length and no byte offsets, so a renderer cannot
@@ -343,7 +343,7 @@ class DlnaSession extends CastSession {
       return;
     }
 
-    await _sendAvTransport('Seek', DlnaSoapBuilder.buildSeek(position));
+    await _sendAvTransport("Seek", DlnaSoapBuilder.buildSeek(position));
     // Update position immediately so the UI reflects the seek without
     // waiting for the next polling cycle.
     updatePosition(position);
@@ -356,14 +356,14 @@ class DlnaSession extends CastSession {
     if (baseUrl == null || protocolInfo == null) return;
 
     final seconds = position.inMilliseconds / 1000.0;
-    final separator = baseUrl.contains('?') ? '&' : '?';
-    final seekUrl = '$baseUrl${separator}t=${seconds.toStringAsFixed(3)}';
+    final separator = baseUrl.contains("?") ? "&" : "?";
+    final seekUrl = "$baseUrl${separator}t=${seconds.toStringAsFixed(3)}";
 
-    CastLogger.info('DLNA: restarting piped stream at ${position.inSeconds}s');
+    CastLogger.info("DLNA: restarting piped stream at ${position.inSeconds}s");
 
-    await _sendAvTransport('Stop', DlnaSoapBuilder.buildStop());
+    await _sendAvTransport("Stop", DlnaSoapBuilder.buildStop());
     await _sendAvTransport(
-      'SetAVTransportURI',
+      "SetAVTransportURI",
       DlnaSoapBuilder.buildSetAVTransportURI(
         seekUrl,
         title: _currentTitle,
@@ -374,12 +374,12 @@ class DlnaSession extends CastSession {
                 : null,
       ),
     );
-    await _sendAvTransport('Play', DlnaSoapBuilder.buildPlay());
+    await _sendAvTransport("Play", DlnaSoapBuilder.buildPlay());
   }
 
   @override
   Future<void> setVolume(double volume) async {
-    CastLogger.info('DLNA: SetVolume ${volume.toStringAsFixed(2)}');
+    CastLogger.info("DLNA: SetVolume ${volume.toStringAsFixed(2)}");
     final intVolume = (volume.clamp(0.0, 1.0) * 100).round();
     final controlUrl = description.renderingControlUrl;
     if (controlUrl == null) return;
@@ -387,7 +387,7 @@ class DlnaSession extends CastSession {
     await _httpClient.sendAction(
       controlUrl,
       DlnaServiceType.renderingControl,
-      'SetVolume',
+      "SetVolume",
       DlnaSoapBuilder.buildSetVolume(intVolume),
     );
     updateVolume(volume);
@@ -409,34 +409,34 @@ class DlnaSession extends CastSession {
 
     // Re-send SetAVTransportURI with proxy URL and proxied subtitle
     await _sendAvTransport(
-      'SetAVTransportURI',
+      "SetAVTransportURI",
       DlnaSoapBuilder.buildSetAVTransportURI(
         _currentProxyUrl!,
         title: media.title,
         subtitleUrl: subtitleProxyUrl,
-        protocolInfo: _currentProtocolInfo ?? 'http-get:*:video/mp4:*',
+        protocolInfo: _currentProtocolInfo ?? "http-get:*:video/mp4:*",
       ),
     );
 
     // Resume playback
-    await _sendAvTransport('Play', DlnaSoapBuilder.buildPlay());
+    await _sendAvTransport("Play", DlnaSoapBuilder.buildPlay());
   }
 
   @override
   Future<void> disconnect() async {
-    CastLogger.info('DLNA: disconnecting from ${device.name}');
+    CastLogger.info("DLNA: disconnecting from ${device.name}");
     _stopPolling();
 
     // Try to stop playback
     try {
-      await _sendAvTransport('Stop', DlnaSoapBuilder.buildStop());
+      await _sendAvTransport("Stop", DlnaSoapBuilder.buildStop());
     } catch (e) {
-      CastLogger.warning('DLNA: error sending Stop during disconnect: $e');
+      CastLogger.warning("DLNA: error sending Stop during disconnect: $e");
     }
 
     await _proxy.stop();
     stateMachine.transitionTo(SessionState.disconnected);
-    CastLogger.info('DLNA: disconnected from ${device.name}');
+    CastLogger.info("DLNA: disconnected from ${device.name}");
   }
 
   /// Disposes of resources used by this session.
@@ -465,13 +465,13 @@ class DlnaSession extends CastSession {
       final response = await _httpClient.sendAction(
         controlUrl,
         DlnaServiceType.connectionManager,
-        'GetProtocolInfo',
+        "GetProtocolInfo",
         DlnaSoapBuilder.buildGetProtocolInfo(),
       );
       final protocols = DlnaSoapParser.parseProtocolInfo(response);
       return protocols.any((p) => p.contains(mimeType));
     } catch (e) {
-      CastLogger.warning('DLNA: failed to query GetProtocolInfo: $e');
+      CastLogger.warning("DLNA: failed to query GetProtocolInfo: $e");
       return false;
     }
   }
@@ -483,18 +483,18 @@ class DlnaSession extends CastSession {
     if (controlUrl == null) {
       throw StateError(
         'No AVTransport control URL available for "${device.name}". '
-        'Use DlnaSession.fromDevice() to auto-extract URLs from discovery metadata, '
-        'or ensure DlnaDeviceDescription has avTransportControlUrl set.',
+        "Use DlnaSession.fromDevice() to auto-extract URLs from discovery metadata, "
+        "or ensure DlnaDeviceDescription has avTransportControlUrl set.",
       );
     }
 
     // Non-polling actions get logged at info level
     final isPolling =
-        action == 'GetPositionInfo' ||
-        action == 'GetTransportInfo' ||
-        action == 'GetVolume';
+        action == "GetPositionInfo" ||
+        action == "GetTransportInfo" ||
+        action == "GetVolume";
     if (!isPolling) {
-      CastLogger.debug('DLNA: $action → $controlUrl');
+      CastLogger.debug("DLNA: $action → $controlUrl");
     }
 
     final response = await _httpClient.sendAction(
@@ -505,8 +505,8 @@ class DlnaSession extends CastSession {
     );
 
     if (!isPolling) {
-      CastLogger.info('DLNA: $action response (${response.length} chars)');
-      CastLogger.debug('DLNA: $action response body: $response');
+      CastLogger.info("DLNA: $action response (${response.length} chars)");
+      CastLogger.debug("DLNA: $action response body: $response");
     }
     return response;
   }
@@ -527,12 +527,12 @@ class DlnaSession extends CastSession {
     try {
       // Get position info
       final positionResponse = await _sendAvTransport(
-        'GetPositionInfo',
+        "GetPositionInfo",
         DlnaSoapBuilder.buildGetPositionInfo(),
       );
       final posInfo = DlnaSoapParser.parsePositionInfo(positionResponse);
       CastLogger.debug(
-        'DLNA: poll position=${posInfo.position.inSeconds}s, duration=${posInfo.duration.inSeconds}s',
+        "DLNA: poll position=${posInfo.position.inSeconds}s, duration=${posInfo.duration.inSeconds}s",
       );
       updatePosition(posInfo.position + _pipedStartOffset);
       // Only trust the device's duration when we have nothing better.
@@ -549,10 +549,10 @@ class DlnaSession extends CastSession {
 
       // Get transport info for state detection
       final transportResponse = await _sendAvTransport(
-        'GetTransportInfo',
+        "GetTransportInfo",
         DlnaSoapBuilder.buildGetTransportInfo(),
       );
-      CastLogger.debug('DLNA: GetTransportInfo response: $transportResponse');
+      CastLogger.debug("DLNA: GetTransportInfo response: $transportResponse");
       final transportState = DlnaSoapParser.parseTransportInfo(
         transportResponse,
       );
@@ -566,17 +566,17 @@ class DlnaSession extends CastSession {
           final volumeResponse = await _httpClient.sendAction(
             controlUrl,
             DlnaServiceType.renderingControl,
-            'GetVolume',
+            "GetVolume",
             DlnaSoapBuilder.buildGetVolume(),
           );
           final intVolume = DlnaSoapParser.parseVolume(volumeResponse);
           updateVolume(intVolume / 100.0);
         } catch (e) {
-          CastLogger.debug('DLNA: volume polling failed: $e');
+          CastLogger.debug("DLNA: volume polling failed: $e");
         }
       }
     } catch (e) {
-      CastLogger.debug('DLNA: polling failed: $e');
+      CastLogger.debug("DLNA: polling failed: $e");
     } finally {
       _isPolling = false;
     }
@@ -584,10 +584,10 @@ class DlnaSession extends CastSession {
 
   void _handleTransportState(String transportState) {
     CastLogger.debug(
-      'DLNA: transport state: $transportState (current: $state)',
+      "DLNA: transport state: $transportState (current: $state)",
     );
     switch (transportState) {
-      case 'PLAYING':
+      case "PLAYING":
         if (state != SessionState.playing &&
             stateMachine.canTransitionTo(SessionState.playing)) {
           stateMachine.transitionTo(SessionState.playing);
@@ -596,24 +596,21 @@ class DlnaSession extends CastSession {
         if (_pendingSeekPosition != null) {
           final pos = _pendingSeekPosition!;
           _pendingSeekPosition = null;
-          CastLogger.info('DLNA: executing deferred seek to ${pos.inSeconds}s');
+          CastLogger.info("DLNA: executing deferred seek to ${pos.inSeconds}s");
           seek(pos);
         }
-        break;
-      case 'PAUSED_PLAYBACK':
+      case "PAUSED_PLAYBACK":
         if (state != SessionState.paused &&
             stateMachine.canTransitionTo(SessionState.paused)) {
           stateMachine.transitionTo(SessionState.paused);
         }
-        break;
-      case 'STOPPED':
-        CastLogger.info('DLNA: device reported STOPPED, transitioning to idle');
+      case "STOPPED":
+        CastLogger.info("DLNA: device reported STOPPED, transitioning to idle");
         if (state != SessionState.idle &&
             stateMachine.canTransitionTo(SessionState.idle)) {
           stateMachine.transitionTo(SessionState.idle);
           _stopPolling();
         }
-        break;
     }
   }
 }

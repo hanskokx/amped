@@ -1,15 +1,15 @@
-import 'dart:async';
-import 'dart:io';
+import "dart:async";
+import "dart:io";
 
-import '../../core/cast_device.dart';
-import '../../core/discovery_provider.dart';
-import '../../utils/logger.dart';
-import 'dlna_device.dart';
-import 'ssdp_discovery.dart';
+import "../../core/cast_device.dart";
+import "../../core/discovery_provider.dart";
+import "../../utils/logger.dart";
+import "dlna_device.dart";
+import "ssdp_discovery.dart";
 
 /// Function type for creating a UDP socket for SSDP discovery.
 typedef RawDatagramSocketFactory =
-    Future<RawDatagramSocket> Function(dynamic host, int port);
+    Future<RawDatagramSocket> Function(InternetAddress host, int port);
 
 /// Function type for fetching a URL and returning its body.
 typedef HttpFetcher = Future<String> Function(String url);
@@ -55,7 +55,7 @@ class DlnaDiscoveryProvider implements DeviceDiscoveryProvider {
 
   Future<void> _doDiscovery(Duration timeout) async {
     try {
-      CastLogger.info('DLNA: binding UDP socket for SSDP discovery');
+      CastLogger.info("DLNA: binding UDP socket for SSDP discovery");
       _socket = await _socketFactory(InternetAddress.anyIPv4, 0);
       _socket!.broadcastEnabled = true;
       _socket!.multicastLoopback = false;
@@ -76,7 +76,7 @@ class DlnaDiscoveryProvider implements DeviceDiscoveryProvider {
       final address = InternetAddress(SsdpConstants.multicastAddress);
 
       CastLogger.info(
-        'DLNA: sending M-SEARCH to ${SsdpConstants.multicastAddress}:${SsdpConstants.multicastPort}',
+        "DLNA: sending M-SEARCH to ${SsdpConstants.multicastAddress}:${SsdpConstants.multicastPort}",
       );
       _socket!.send(data, address, SsdpConstants.multicastPort);
 
@@ -89,17 +89,17 @@ class DlnaDiscoveryProvider implements DeviceDiscoveryProvider {
 
       // Close after timeout
       Timer(timeout, () {
-        CastLogger.info('DLNA: discovery timeout reached, closing');
+        CastLogger.info("DLNA: discovery timeout reached, closing");
         _controller?.close();
       });
     } catch (e) {
-      CastLogger.error('DLNA: discovery failed: $e');
+      CastLogger.error("DLNA: discovery failed: $e");
       _controller?.addError(e);
-      _controller?.close();
+      await _controller?.close();
     }
   }
 
-  void _handleResponse(String data) async {
+  Future<void> _handleResponse(String data) async {
     final response = SsdpMessage.parseResponse(data);
     final location = response.location;
     if (location == null) return;
@@ -111,7 +111,7 @@ class DlnaDiscoveryProvider implements DeviceDiscoveryProvider {
     if (_devices.containsKey(uuid)) return;
 
     CastLogger.debug(
-      'DLNA: SSDP response from $uuid, fetching description at $location',
+      "DLNA: SSDP response from $uuid, fetching description at $location",
     );
 
     try {
@@ -128,7 +128,7 @@ class DlnaDiscoveryProvider implements DeviceDiscoveryProvider {
       }
     } catch (e) {
       CastLogger.warning(
-        'DLNA: failed to fetch description for $uuid at $location: $e',
+        "DLNA: failed to fetch description for $uuid at $location: $e",
       );
     }
   }

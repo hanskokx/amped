@@ -1,4 +1,4 @@
-import 'cast_device.dart';
+import "cast_device.dart";
 
 /// Abstract interface for protocol-specific device discovery.
 ///

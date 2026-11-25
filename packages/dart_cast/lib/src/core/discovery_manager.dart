@@ -1,9 +1,9 @@
-import 'dart:async';
+import "dart:async";
 
-import 'cast_device.dart';
-import 'discovery_provider.dart';
-import '../utils/network_utils.dart';
-import '../utils/logger.dart';
+import "../utils/logger.dart";
+import "../utils/network_utils.dart";
+import "cast_device.dart";
+import "discovery_provider.dart";
 
 /// Manages device discovery across multiple protocol providers.
 ///
@@ -35,7 +35,7 @@ class DiscoveryManager {
   }) {
     assert(
       _providers.isNotEmpty,
-      'No discovery providers registered. Pass providers to DiscoveryManager or CastService.',
+      "No discovery providers registered. Pass providers to DiscoveryManager or CastService.",
     );
 
     // Stop any previous discovery
@@ -53,8 +53,8 @@ class DiscoveryManager {
             : _providers.where((p) => protocols.contains(p.protocol)).toList();
 
     CastLogger.info(
-      'Discovery: starting with ${matchingProviders.length} provider(s), '
-      'timeout=${timeout.inSeconds}s',
+      "Discovery: starting with ${matchingProviders.length} provider(s), "
+      "timeout=${timeout.inSeconds}s",
     );
 
     for (var i = 0; i < matchingProviders.length; i++) {
@@ -74,7 +74,7 @@ class DiscoveryManager {
         },
         onError: (Object error) {
           CastLogger.warning(
-            'Discovery: provider ${provider.protocol} error: $error',
+            "Discovery: provider ${provider.protocol} error: $error",
           );
         },
       );
@@ -120,19 +120,19 @@ class DiscoveryManager {
     // Filter out self (same IP as this device)
     if (_localAddress != null && device.address.address == _localAddress) {
       CastLogger.debug(
-        'Filtering self-device: ${device.name} (${device.address.address})',
+        "Filtering self-device: ${device.name} (${device.address.address})",
       );
       return true;
     }
 
     // Filter out macOS/laptop AirPlay receivers — they're computers, not cast targets
-    final model = device.metadata['model']?.toLowerCase() ?? '';
+    final model = device.metadata["model"]?.toLowerCase() ?? "";
     if (device.protocol == CastProtocol.airplay) {
-      const computerModels = ['macbook', 'imac', 'macpro', 'macmini', 'mac'];
+      const computerModels = ["macbook", "imac", "macpro", "macmini", "mac"];
       for (final prefix in computerModels) {
         if (model.contains(prefix)) {
           CastLogger.debug(
-            'Filtering computer AirPlay receiver: ${device.name} ($model)',
+            "Filtering computer AirPlay receiver: ${device.name} ($model)",
           );
           return true;
         }
@@ -151,7 +151,7 @@ class DiscoveryManager {
   /// Stops all active discovery scans.
   void stopDiscovery() {
     if (_activeProviders.isNotEmpty) {
-      CastLogger.info('Discovery: stopping');
+      CastLogger.info("Discovery: stopping");
     }
     _timeoutTimer?.cancel();
     _timeoutTimer = null;

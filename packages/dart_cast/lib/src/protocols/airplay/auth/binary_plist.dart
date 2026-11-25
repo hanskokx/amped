@@ -1,5 +1,5 @@
-import 'dart:convert';
-import 'dart:typed_data';
+import "dart:convert";
+import "dart:typed_data";
 
 /// Decodes Apple binary plist format (`bplist00`) into Dart objects.
 ///
@@ -22,7 +22,7 @@ class BinaryPlistDecoder {
       return result;
     }
     throw ArgumentError(
-      'Binary plist root object is not a dict: ${result.runtimeType}',
+      "Binary plist root object is not a dict: ${result.runtimeType}",
     );
   }
 
@@ -52,11 +52,11 @@ class BinaryPlistDecoder {
     // Validate header
     if (_data.length < 40) {
       // 8 header + 32 trailer minimum
-      throw ArgumentError('Binary plist too short: ${_data.length} bytes');
+      throw ArgumentError("Binary plist too short: ${_data.length} bytes");
     }
 
     final header = ascii.decode(_data.sublist(0, 8), allowInvalid: true);
-    if (header != 'bplist00') {
+    if (header != "bplist00") {
       throw ArgumentError('Not a binary plist: invalid header "$header"');
     }
 
@@ -69,7 +69,7 @@ class BinaryPlistDecoder {
     _offsetTableOffset = _readUint64BE(trailerOffset + 24);
 
     if (_numObjects == 0) {
-      throw ArgumentError('Binary plist has no objects');
+      throw ArgumentError("Binary plist has no objects");
     }
 
     return _readObject(_topObjectIndex);
@@ -120,7 +120,7 @@ class BinaryPlistDecoder {
         return _readDict(offset, objectInfo);
       default:
         throw ArgumentError(
-          'Unsupported binary plist object type: 0x${objectType.toRadixString(16)} at offset $offset',
+          "Unsupported binary plist object type: 0x${objectType.toRadixString(16)} at offset $offset",
         );
     }
   }
@@ -155,7 +155,7 @@ class BinaryPlistDecoder {
     } else if (byteCount == 8) {
       return _byteData.getFloat64(offset + 1, Endian.big);
     }
-    throw ArgumentError('Unsupported real size: $byteCount bytes');
+    throw ArgumentError("Unsupported real size: $byteCount bytes");
   }
 
   /// Reads a date (Core Foundation absolute time as float64).
@@ -334,7 +334,7 @@ class BinaryPlistEncoder {
       }
       return refIndex;
     }
-    throw ArgumentError('Unsupported plist type: ${obj.runtimeType}');
+    throw ArgumentError("Unsupported plist type: ${obj.runtimeType}");
   }
 
   int _addObject(Object? obj) {
@@ -364,7 +364,7 @@ class BinaryPlistEncoder {
     final offsets = <int>[];
 
     // Write header: bplist00
-    objectData.add(ascii.encode('bplist00'));
+    objectData.add(ascii.encode("bplist00"));
 
     for (int i = 0; i < numObjects; i++) {
       offsets.add(objectData.length);
@@ -426,7 +426,7 @@ class BinaryPlistEncoder {
       _writeArray(obj, builder, objectRefSize);
       return;
     }
-    throw ArgumentError('Unsupported plist type: ${obj.runtimeType}');
+    throw ArgumentError("Unsupported plist type: ${obj.runtimeType}");
   }
 
   /// Writes an integer object.

@@ -1,5 +1,5 @@
-import 'cast_media.dart';
-import 'media_proxy.dart';
+import "cast_media.dart";
+import "media_proxy.dart";
 
 /// Result of transforming media for casting.
 class TransformedMedia {
@@ -75,7 +75,7 @@ class DefaultMediaTransformer implements MediaTransformer {
             ? proxy.registerFile(media.url)
             : proxy.registerMedia(media.url, headers: media.httpHeaders);
 
-    var effectiveType = media.type;
+    final effectiveType = media.type;
 
     // Wrap remote MPEG-TS in HLS for devices that need it (like Chromecast).
     // Local files are served directly — use TsHlsMediaTransformer for

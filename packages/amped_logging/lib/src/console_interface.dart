@@ -14,7 +14,6 @@ class ConsoleInterface extends LoggingInterface {
   final void Function(String text)? output;
 
   /// What [log] writes for [message] and [metadata].
-  @visibleForTesting
   static String format(String message, Map<String, Object?>? metadata) {
     final Map<String, Object?> rest = {...?metadata}
       ..remove("module")

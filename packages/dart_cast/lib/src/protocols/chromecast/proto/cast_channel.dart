@@ -10,7 +10,7 @@
 // ignore_for_file: camel_case_types
 library;
 
-import 'package:protobuf/protobuf.dart';
+import "package:protobuf/protobuf.dart";
 
 // ---------------------------------------------------------------------------
 // Enums
@@ -20,7 +20,7 @@ import 'package:protobuf/protobuf.dart';
 class CastMessage_ProtocolVersion extends ProtobufEnum {
   // ignore: constant_identifier_names
   static const CastMessage_ProtocolVersion CASTV2_1_0 =
-      CastMessage_ProtocolVersion._(0, 'CASTV2_1_0');
+      CastMessage_ProtocolVersion._(0, "CASTV2_1_0");
 
   static const List<CastMessage_ProtocolVersion> values = [CASTV2_1_0];
 
@@ -37,12 +37,12 @@ class CastMessage_PayloadType extends ProtobufEnum {
   // ignore: constant_identifier_names
   static const CastMessage_PayloadType STRING = CastMessage_PayloadType._(
     0,
-    'STRING',
+    "STRING",
   );
   // ignore: constant_identifier_names
   static const CastMessage_PayloadType BINARY = CastMessage_PayloadType._(
     1,
-    'BINARY',
+    "BINARY",
   );
 
   static const List<CastMessage_PayloadType> values = [STRING, BINARY];
@@ -92,31 +92,31 @@ class CastMessage extends GeneratedMessage {
 
   static final BuilderInfo _i =
       BuilderInfo(
-          'CastMessage',
-          package: const PackageName('extensions.api.cast_channel'),
+          "CastMessage",
+          package: const PackageName("extensions.api.cast_channel"),
           createEmptyInstance: CastMessage._,
         )
         ..e<CastMessage_ProtocolVersion>(
           1,
-          'protocolVersion',
+          "protocolVersion",
           PbFieldType.QE,
           defaultOrMaker: CastMessage_ProtocolVersion.CASTV2_1_0,
           valueOf: CastMessage_ProtocolVersion.valueOf,
           enumValues: CastMessage_ProtocolVersion.values,
         )
-        ..aQS(2, 'sourceId')
-        ..aQS(3, 'destinationId')
-        ..aQS(4, 'namespace')
+        ..aQS(2, "sourceId")
+        ..aQS(3, "destinationId")
+        ..aQS(4, "namespace")
         ..e<CastMessage_PayloadType>(
           5,
-          'payloadType',
+          "payloadType",
           PbFieldType.QE,
           defaultOrMaker: CastMessage_PayloadType.STRING,
           valueOf: CastMessage_PayloadType.valueOf,
           enumValues: CastMessage_PayloadType.values,
         )
-        ..aOS(6, 'payloadUtf8')
-        ..a<List<int>>(7, 'payloadBinary', PbFieldType.OY);
+        ..aOS(6, "payloadUtf8")
+        ..a<List<int>>(7, "payloadBinary", PbFieldType.OY);
 
   @override
   BuilderInfo get info_ => _i;

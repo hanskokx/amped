@@ -1,22 +1,22 @@
-import 'dart:async';
-import 'dart:io';
-import 'dart:math';
-import 'dart:typed_data';
+import "dart:async";
+import "dart:io";
+import "dart:math";
+import "dart:typed_data";
 
-import '../../core/cast_exceptions.dart';
-import '../../core/cast_media.dart';
-import '../../core/cast_session.dart';
-import '../../core/media_proxy.dart';
-import '../../core/media_transformer.dart';
-import '../../utils/logger.dart';
-import 'airplay_client.dart';
-import 'airplay_features.dart';
-import 'airplay_media_controller.dart';
-import 'auth/airplay_auth.dart';
-import 'auth/airplay_transient_auth.dart';
-import 'auth/hap_credentials.dart';
-import 'auth/hap_session.dart';
-import 'plist_codec.dart';
+import "../../core/cast_exceptions.dart";
+import "../../core/cast_media.dart";
+import "../../core/cast_session.dart";
+import "../../core/media_proxy.dart";
+import "../../core/media_transformer.dart";
+import "../../utils/logger.dart";
+import "airplay_client.dart";
+import "airplay_features.dart";
+import "airplay_media_controller.dart";
+import "auth/airplay_auth.dart";
+import "auth/airplay_transient_auth.dart";
+import "auth/hap_credentials.dart";
+import "auth/hap_session.dart";
+import "plist_codec.dart";
 
 /// AirPlay 1 cast session with playback control and position polling.
 ///
@@ -76,7 +76,7 @@ class AirPlaySession extends CastSession {
   @override
   Future<void> connect() async {
     CastLogger.info(
-      'AirPlay: connecting to ${device.name} at ${device.address.address}:${device.port}',
+      "AirPlay: connecting to ${device.name} at ${device.address.address}:${device.port}",
     );
     stateMachine.transitionTo(SessionState.connecting);
 
@@ -86,15 +86,15 @@ class AirPlaySession extends CastSession {
       final probe = await _client!.probeDeviceInfo();
       final features = _parseFeatures();
       CastLogger.info(
-        'AirPlay: ${device.name} features=$features '
-        '(v2=${features.isV2Protocol}, videoV1=${features.supportsVideoV1}, '
-        'videoV2=${features.supportsVideoV2}, '
-        'transient=${features.supportsTransientPairing})',
+        "AirPlay: ${device.name} features=$features "
+        "(v2=${features.isV2Protocol}, videoV1=${features.supportsVideoV1}, "
+        "videoV2=${features.supportsVideoV2}, "
+        "transient=${features.supportsTransientPairing})",
       );
       if (probe.properties.isEmpty && !probe.authRequired) {
         CastLogger.warning(
-          'AirPlay: ${device.name} answered neither /info nor /server-info '
-          'with 200 — continuing with mDNS-advertised capabilities only',
+          "AirPlay: ${device.name} answered neither /info nor /server-info "
+          "with 200 — continuing with mDNS-advertised capabilities only",
         );
       }
 
@@ -104,13 +104,13 @@ class AirPlaySession extends CastSession {
       }
 
       CastLogger.info(
-        'AirPlay: connected to ${device.name} (AirPlay 1, plain)',
+        "AirPlay: connected to ${device.name} (AirPlay 1, plain)",
       );
       stateMachine.transitionTo(SessionState.connected);
     } on NeedsPairingException {
       rethrow;
     } catch (e) {
-      CastLogger.error('AirPlay: connection failed to ${device.name}: $e');
+      CastLogger.error("AirPlay: connection failed to ${device.name}: $e");
       _client?.close();
       _client = null;
       stateMachine.transitionTo(SessionState.disconnected);
@@ -134,14 +134,14 @@ class AirPlaySession extends CastSession {
       stateMachine.transitionTo(SessionState.disconnected);
       throw NeedsPairingException(
         'AirPlay device "${device.name}" requires pairing. '
-        'Call pairSetup(pin) first.',
+        "Call pairSetup(pin) first.",
       );
     }
 
     Socket? rawSocket;
     StreamController<Uint8List>? socketBroadcast;
     try {
-      CastLogger.info('AirPlay: opening raw socket for pairing + HAP session');
+      CastLogger.info("AirPlay: opening raw socket for pairing + HAP session");
       rawSocket = await Socket.connect(device.address.address, device.port);
 
       // Wrap the socket's single-subscription stream in a broadcast controller.
@@ -149,14 +149,14 @@ class AirPlaySession extends CastSession {
       socketBroadcast = StreamController<Uint8List>.broadcast();
       rawSocket.listen(
         (data) => socketBroadcast!.add(Uint8List.fromList(data)),
-        onError: (e) => socketBroadcast!.addError(e),
+        onError: (Object e) => socketBroadcast!.addError(e),
         onDone: () => socketBroadcast!.close(),
       );
 
       final Uint8List sharedSecret;
       if (useTransient) {
         CastLogger.info(
-          'AirPlay: using transient pairing (no PIN, no stored credentials)',
+          "AirPlay: using transient pairing (no PIN, no stored credentials)",
         );
         final transient = AirPlayTransientPairing.withSocket(
           rawSocket,
@@ -177,13 +177,13 @@ class AirPlaySession extends CastSession {
           dataStream: socketBroadcast.stream,
         );
         CastLogger.info(
-          'AirPlay: attempting pair-verify with stored credentials',
+          "AirPlay: attempting pair-verify with stored credentials",
         );
         sharedSecret = await pairVerify.execute(credentials!);
         await pairVerify.releaseSocket();
       }
 
-      CastLogger.info('AirPlay: pairing successful, creating HAP session');
+      CastLogger.info("AirPlay: pairing successful, creating HAP session");
 
       // Derive encryption keys and create HAP session on the SAME socket
       // using the SAME broadcast stream for reading
@@ -204,11 +204,11 @@ class AirPlaySession extends CastSession {
         features: features,
       );
 
-      CastLogger.info('AirPlay: HAP encrypted session established');
+      CastLogger.info("AirPlay: HAP encrypted session established");
       stateMachine.transitionTo(SessionState.connected);
     } on AirPlayAuthException catch (e) {
       // Auth failure — credentials may be stale, need re-pairing
-      CastLogger.error('AirPlay: pairing failed: $e');
+      CastLogger.error("AirPlay: pairing failed: $e");
       rawSocket?.destroy();
       _client?.close();
       _client = null;
@@ -218,7 +218,7 @@ class AirPlaySession extends CastSession {
       );
     } catch (e) {
       // Network error — don't discard credentials
-      CastLogger.error('AirPlay: pairing network error: $e');
+      CastLogger.error("AirPlay: pairing network error: $e");
       rawSocket?.destroy();
       _client?.close();
       _client = null;
@@ -249,15 +249,15 @@ class AirPlaySession extends CastSession {
     try {
       // Trigger PIN display on TV (skip if already triggered externally)
       if (triggerPinDisplay) {
-        CastLogger.info('AirPlay: triggering PIN display on TV');
+        CastLogger.info("AirPlay: triggering PIN display on TV");
         pairSetup.startPinDisplay(); // Fire-and-forget — TV may not respond
       }
 
       // Run pair-setup SRP flow with the user-entered PIN
-      CastLogger.info('AirPlay: starting SRP pair-setup with PIN');
+      CastLogger.info("AirPlay: starting SRP pair-setup with PIN");
       credentials = await pairSetup.pairSetup(pin: pin, clientId: id);
 
-      CastLogger.info('AirPlay: pair-setup complete, credentials stored');
+      CastLogger.info("AirPlay: pair-setup complete, credentials stored");
       return credentials!;
     } finally {
       pairSetup.close();
@@ -272,7 +272,7 @@ class AirPlaySession extends CastSession {
   Future<void> loadMedia(CastMedia media) async {
     if (_isLoadingMedia) {
       CastLogger.warning(
-        'AirPlay: loadMedia called while already loading — ignoring',
+        "AirPlay: loadMedia called while already loading — ignoring",
       );
       return;
     }
@@ -320,17 +320,17 @@ class AirPlaySession extends CastSession {
 
       // Start playback on the device via encrypted channel if available
       CastLogger.info(
-        'AirPlay: sending /play with URL: ${playUrl.substring(0, playUrl.length.clamp(0, 80))}... '
-        '(start=${startSeconds}s)',
+        "AirPlay: sending /play with URL: ${playUrl.substring(0, playUrl.length.clamp(0, 80))}... "
+        "(start=${startSeconds}s)",
       );
       if (_mediaController != null) {
-        CastLogger.info('AirPlay: using AirPlayMediaController for /play');
+        CastLogger.info("AirPlay: using AirPlayMediaController for /play");
         await _mediaController!.play(
           playUrl,
           startPositionSeconds: startSeconds,
         );
       } else {
-        CastLogger.info('AirPlay: using plain HTTP for /play');
+        CastLogger.info("AirPlay: using plain HTTP for /play");
         // AirPlay 1 has no absolute-seek parameter on /play; seek after load.
         await _client!.play(playUrl, startPosition: 0.0);
         if (startSeconds > 0) {
@@ -341,7 +341,7 @@ class AirPlaySession extends CastSession {
       // Start polling for playback state
       _startPolling();
     } catch (e) {
-      CastLogger.error('AirPlay: loadMedia failed: $e');
+      CastLogger.error("AirPlay: loadMedia failed: $e");
       if (stateMachine.canTransitionTo(SessionState.idle)) {
         stateMachine.transitionTo(SessionState.idle);
       }
@@ -380,7 +380,7 @@ class AirPlaySession extends CastSession {
   @override
   Future<void> play() async {
     _ensureClient();
-    CastLogger.info('AirPlay: Play (resume)');
+    CastLogger.info("AirPlay: Play (resume)");
     if (_mediaController != null) {
       await _mediaController!.resume();
     } else {
@@ -395,7 +395,7 @@ class AirPlaySession extends CastSession {
   @override
   Future<void> pause() async {
     _ensureClient();
-    CastLogger.info('AirPlay: Pause');
+    CastLogger.info("AirPlay: Pause");
     if (_mediaController != null) {
       await _mediaController!.pause();
     } else {
@@ -410,7 +410,7 @@ class AirPlaySession extends CastSession {
   @override
   Future<void> stop() async {
     _ensureClient();
-    CastLogger.info('AirPlay: Stop');
+    CastLogger.info("AirPlay: Stop");
     _stopPolling();
     if (_mediaController != null) {
       await _mediaController!.stop();
@@ -428,7 +428,7 @@ class AirPlaySession extends CastSession {
   Future<void> seek(Duration position) async {
     _ensureClient();
     final seconds = position.inMilliseconds / 1000.0;
-    CastLogger.info('AirPlay: Seek to ${seconds.toStringAsFixed(1)}s');
+    CastLogger.info("AirPlay: Seek to ${seconds.toStringAsFixed(1)}s");
     if (_mediaController != null) {
       await _mediaController!.seek(seconds);
     } else {
@@ -491,7 +491,7 @@ class AirPlaySession extends CastSession {
   /// Disconnects from the device, stopping playback and cleaning up.
   @override
   Future<void> disconnect() async {
-    CastLogger.info('AirPlay: disconnecting from ${device.name}');
+    CastLogger.info("AirPlay: disconnecting from ${device.name}");
     _stopPolling();
 
     try {
@@ -501,7 +501,7 @@ class AirPlaySession extends CastSession {
         await _client!.stop();
       }
     } catch (e) {
-      CastLogger.warning('AirPlay: error sending Stop during disconnect: $e');
+      CastLogger.warning("AirPlay: error sending Stop during disconnect: $e");
     }
 
     await _mediaController?.dispose();
@@ -512,7 +512,7 @@ class AirPlaySession extends CastSession {
     _client = null;
     await _proxy.stop();
     stateMachine.transitionTo(SessionState.disconnected);
-    CastLogger.info('AirPlay: disconnected from ${device.name}');
+    CastLogger.info("AirPlay: disconnected from ${device.name}");
   }
 
   /// Disposes all resources.
@@ -567,11 +567,11 @@ class AirPlaySession extends CastSession {
       _pollFailures++;
       if (_pollFailures == 1 || _pollFailures % 10 == 0) {
         CastLogger.warning(
-          'AirPlay: playback-info polling failed '
-          '($_pollFailures consecutive): $e',
+          "AirPlay: playback-info polling failed "
+          "($_pollFailures consecutive): $e",
         );
       } else {
-        CastLogger.debug('AirPlay: playback-info polling failed: $e');
+        CastLogger.debug("AirPlay: playback-info polling failed: $e");
       }
     } finally {
       _isPolling = false;
@@ -618,7 +618,7 @@ class AirPlaySession extends CastSession {
   void _ensureClient() {
     if (_client == null) {
       throw StateError(
-        'AirPlaySession is not connected. Call connect() first.',
+        "AirPlaySession is not connected. Call connect() first.",
       );
     }
   }
@@ -626,7 +626,7 @@ class AirPlaySession extends CastSession {
   /// Parses AirPlay feature flags from device metadata.
   AirPlayFeatures _parseFeatures() {
     final featuresStr =
-        device.metadata['features'] ?? device.metadata['ft'] ?? '';
+        device.metadata["features"] ?? device.metadata["ft"] ?? "";
     return AirPlayFeatures.parse(featuresStr);
   }
 
@@ -636,9 +636,9 @@ class AirPlaySession extends CastSession {
     final bytes = List<int>.generate(16, (_) => random.nextInt(256));
     bytes[6] = (bytes[6] & 0x0f) | 0x40;
     bytes[8] = (bytes[8] & 0x3f) | 0x80;
-    final hex = bytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
-    return '${hex.substring(0, 8)}-${hex.substring(8, 12)}-'
-        '${hex.substring(12, 16)}-${hex.substring(16, 20)}-'
-        '${hex.substring(20, 32)}';
+    final hex = bytes.map((b) => b.toRadixString(16).padLeft(2, "0")).join();
+    return "${hex.substring(0, 8)}-${hex.substring(8, 12)}-"
+        "${hex.substring(12, 16)}-${hex.substring(16, 20)}-"
+        "${hex.substring(20, 32)}";
   }
 }

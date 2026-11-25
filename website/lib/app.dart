@@ -8,12 +8,21 @@ class App extends StatelessComponent {
   static const _releases = 'https://github.com/hanskokx/amped/releases/latest';
 
   static const _features = [
-    ('Every source', 'Local files, streams and network shares, plus Plex, '
-        'Jellyfin, Subsonic/Navidrome, SoundCloud, Audiobookshelf and podcasts.'),
-    ('Skins', 'Classic bitmap skins, Audacious and Bamp skins, and modern '
-        '(Wasabi) skins. Wear what you like.'),
-    ('Every format', 'MP3, FLAC, Ogg, Opus, WAV, Monkey\'s Audio, Musepack, '
-        'WavPack and more, plus video and playlists.'),
+    (
+      'Every source',
+      'Local files, streams and network shares, plus Plex, '
+          'Jellyfin, Subsonic/Navidrome, SoundCloud, Audiobookshelf and podcasts.',
+    ),
+    (
+      'Skins',
+      'Classic bitmap skins, Audacious and Bamp skins, and modern '
+          '(Wasabi) skins. Wear what you like.',
+    ),
+    (
+      'Every format',
+      'MP3, FLAC, Ogg, Opus, WAV, Monkey\'s Audio, Musepack, '
+          'WavPack and more, plus video and playlists.',
+    ),
     ('Desktop native', 'Built with Flutter for macOS, Windows and Linux.'),
   ];
 
@@ -25,8 +34,10 @@ class App extends StatelessComponent {
         h1([Component.text('Amped')]),
         p(classes: 'tagline', [Component.text('Crank it up.')]),
         p([
-          Component.text('A desktop music player for macOS, Windows and Linux '
-              'that plays from anywhere and wears any skin.'),
+          Component.text(
+            'A desktop music player for macOS, Windows and Linux '
+            'that plays from anywhere and wears any skin.',
+          ),
         ]),
         // download.js swaps this for the installers that fit the visitor's OS.
         div(id: 'download', [

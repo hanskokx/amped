@@ -27,13 +27,13 @@
 /// Referer, User-Agent etc.) so authorised CDN sources keep working.
 library;
 
-import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
+import "dart:async";
+import "dart:convert";
+import "dart:io";
 
-import 'hls_parser.dart';
-import 'ts_alt_audio_remuxer.dart';
-import '../utils/logger.dart';
+import "../utils/logger.dart";
+import "hls_parser.dart";
+import "ts_alt_audio_remuxer.dart";
 
 /// Snapshot of the upstream HLS structure captured at registration
 /// time. Owned by a [MediaProxy] route; the proxy uses this to answer
@@ -104,15 +104,15 @@ class HlsAltAudioPlanner {
     final masterContent = await _fetchString(masterUrl, headers);
     if (!HlsParser.isMasterPlaylist(masterContent)) {
       CastLogger.debug(
-        'HlsAltAudioPlanner: $masterUrl is not a master playlist — '
-        'alt-audio remuxer skipped',
+        "HlsAltAudioPlanner: $masterUrl is not a master playlist — "
+        "alt-audio remuxer skipped",
       );
       return null;
     }
 
     final variants = HlsParser.extractVariants(masterContent, masterUrl);
     if (variants.isEmpty) {
-      CastLogger.debug('HlsAltAudioPlanner: no variants in master — skipped');
+      CastLogger.debug("HlsAltAudioPlanner: no variants in master — skipped");
       return null;
     }
 
@@ -120,7 +120,7 @@ class HlsAltAudioPlanner {
     final audioGroup = variant.audioGroup;
     if (audioGroup == null || audioGroup.isEmpty) {
       CastLogger.debug(
-        'HlsAltAudioPlanner: variant has no AUDIO group — not alt-audio HLS',
+        "HlsAltAudioPlanner: variant has no AUDIO group — not alt-audio HLS",
       );
       return null;
     }
@@ -136,7 +136,7 @@ class HlsAltAudioPlanner {
     if (usableRenditions.isEmpty) {
       CastLogger.debug(
         'HlsAltAudioPlanner: AUDIO group "$audioGroup" has no renditions '
-        'with URIs — not alt-audio HLS',
+        "with URIs — not alt-audio HLS",
       );
       return null;
     }
@@ -146,9 +146,9 @@ class HlsAltAudioPlanner {
       preferredAudioLanguage,
     );
     CastLogger.debug(
-      'HlsAltAudioPlanner: picked variant bandwidth=${variant.bandwidth} '
+      "HlsAltAudioPlanner: picked variant bandwidth=${variant.bandwidth} "
       '+ audio rendition "${pickedRendition.name}" '
-      '(group=${pickedRendition.groupId})',
+      "(group=${pickedRendition.groupId})",
     );
 
     // Fetch the two playlists in parallel.
@@ -163,15 +163,15 @@ class HlsAltAudioPlanner {
 
     if (videoSegments.isEmpty) {
       CastLogger.warning(
-        'HlsAltAudioPlanner: variant playlist has 0 segments — abort',
+        "HlsAltAudioPlanner: variant playlist has 0 segments — abort",
       );
       return null;
     }
     if (audioSegments.length != videoSegments.length) {
       CastLogger.warning(
-        'HlsAltAudioPlanner: audio rendition has ${audioSegments.length} '
-        'segments but video has ${videoSegments.length} — segments will '
-        'be paired by index (mismatch may cause AV drift)',
+        "HlsAltAudioPlanner: audio rendition has ${audioSegments.length} "
+        "segments but video has ${videoSegments.length} — segments will "
+        "be paired by index (mismatch may cause AV drift)",
       );
     }
 
@@ -193,7 +193,7 @@ class HlsAltAudioPlanner {
     // CODECS — keep whatever the master advertised. The synthesised
     // single muxed stream genuinely carries both codecs, so this is
     // accurate.
-    final codecs = _extractCodecs(masterContent) ?? 'avc1.4D4028,mp4a.40.2';
+    final codecs = _extractCodecs(masterContent) ?? "avc1.4D4028,mp4a.40.2";
     final resolution = _extractResolution(masterContent);
 
     return HlsAltAudioPlan(
@@ -226,7 +226,7 @@ class HlsAltAudioPlanner {
 
   static List<double> _extractDurations(String mediaPlaylist) {
     final out = <double>[];
-    final re = RegExp(r'^#EXTINF:([0-9]+(?:\.[0-9]+)?)', multiLine: true);
+    final re = RegExp(r"^#EXTINF:([0-9]+(?:\.[0-9]+)?)", multiLine: true);
     for (final m in re.allMatches(mediaPlaylist)) {
       out.add(double.tryParse(m.group(1)!) ?? 6.0);
     }
@@ -240,13 +240,13 @@ class HlsAltAudioPlanner {
   }
 
   static String? _extractResolution(String masterPlaylist) {
-    final re = RegExp(r'RESOLUTION=(\d+x\d+)');
+    final re = RegExp(r"RESOLUTION=(\d+x\d+)");
     final m = re.firstMatch(masterPlaylist);
     return m?.group(1);
   }
 
   Future<String> _fetchString(String url, Map<String, String> headers) async {
-    final req = await _http.openUrl('GET', Uri.parse(url));
+    final req = await _http.openUrl("GET", Uri.parse(url));
     for (final e in headers.entries) {
       req.headers.set(e.key, e.value);
     }
@@ -256,7 +256,7 @@ class HlsAltAudioPlanner {
   }
 
   Future<List<int>> _fetchBytes(String url, Map<String, String> headers) async {
-    final req = await _http.openUrl('GET', Uri.parse(url));
+    final req = await _http.openUrl("GET", Uri.parse(url));
     for (final e in headers.entries) {
       req.headers.set(e.key, e.value);
     }
@@ -292,13 +292,13 @@ class HlsAltAudioPlaylistRenderer {
     required String variantPlaylistUrl,
   }) {
     final resolution =
-        plan.resolution != null ? ',RESOLUTION=${plan.resolution}' : '';
-    return '#EXTM3U\n'
-        '#EXT-X-VERSION:3\n'
-        '#EXT-X-INDEPENDENT-SEGMENTS\n'
-        '#EXT-X-STREAM-INF:BANDWIDTH=${plan.bandwidth},'
+        plan.resolution != null ? ",RESOLUTION=${plan.resolution}" : "";
+    return "#EXTM3U\n"
+        "#EXT-X-VERSION:3\n"
+        "#EXT-X-INDEPENDENT-SEGMENTS\n"
+        "#EXT-X-STREAM-INF:BANDWIDTH=${plan.bandwidth},"
         'CODECS="${plan.codecs}"$resolution\n'
-        '$variantPlaylistUrl\n';
+        "$variantPlaylistUrl\n";
   }
 
   /// Synthetic variant playlist whose segments are the proxy's
@@ -309,19 +309,19 @@ class HlsAltAudioPlaylistRenderer {
   }) {
     final buf =
         StringBuffer()
-          ..writeln('#EXTM3U')
-          ..writeln('#EXT-X-VERSION:3')
-          ..writeln('#EXT-X-PLAYLIST-TYPE:VOD');
+          ..writeln("#EXTM3U")
+          ..writeln("#EXT-X-VERSION:3")
+          ..writeln("#EXT-X-PLAYLIST-TYPE:VOD");
     final maxTarget = plan.segments
         .map((s) => s.durationSec.ceil())
         .fold<int>(0, (a, b) => b > a ? b : a);
-    buf.writeln('#EXT-X-TARGETDURATION:${maxTarget == 0 ? 6 : maxTarget}');
-    buf.writeln('#EXT-X-MEDIA-SEQUENCE:0');
+    buf.writeln("#EXT-X-TARGETDURATION:${maxTarget == 0 ? 6 : maxTarget}");
+    buf.writeln("#EXT-X-MEDIA-SEQUENCE:0");
     for (var i = 0; i < plan.segments.length; i++) {
-      buf.writeln('#EXTINF:${plan.segments[i].durationSec},');
+      buf.writeln("#EXTINF:${plan.segments[i].durationSec},");
       buf.writeln(muxedSegmentUrlFor(i));
     }
-    buf.writeln('#EXT-X-ENDLIST');
+    buf.writeln("#EXT-X-ENDLIST");
     return buf.toString();
   }
 }
@@ -340,8 +340,8 @@ class HlsAltAudioSegmentMuxer {
   }) async {
     if (segmentIndex < 0 || segmentIndex >= plan.segments.length) {
       throw RangeError(
-        'segmentIndex $segmentIndex out of range '
-        '(0..${plan.segments.length - 1})',
+        "segmentIndex $segmentIndex out of range "
+        "(0..${plan.segments.length - 1})",
       );
     }
     final pair = plan.segments[segmentIndex];
@@ -357,7 +357,7 @@ class HlsAltAudioSegmentMuxer {
       audioSegment: byteResults[1],
     );
     CastLogger.debug(
-      'HlsAltAudioSegmentMuxer: segment $segmentIndex muxed → $muxed',
+      "HlsAltAudioSegmentMuxer: segment $segmentIndex muxed → $muxed",
     );
     return muxed;
   }

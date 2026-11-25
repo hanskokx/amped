@@ -66,8 +66,7 @@ abstract final class AmpedClassicSkinLoader {
   /// The archive the fallback base skin comes from: the first skin archive in
   /// the assets by name, or null when there is none.
   static String? _baseSkinAsset(AssetManifest manifest) {
-    final archives = manifest.listAssets().where(_isSkinAsset).toList()
-      ..sort();
+    final archives = manifest.listAssets().where(_isSkinAsset).toList()..sort();
     return archives.isEmpty ? null : archives.first;
   }
 

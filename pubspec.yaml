@@ -1,7 +1,7 @@
 name: amped
 description: "Crank it up."
 publish_to: "none"
-version: 0.1.1+1
+version: 0.1.2+1
 
 environment:
   sdk: ^3.14.0
@@ -102,11 +102,6 @@ dependency_overrides:
       url: https://github.com/media-kit/media-kit
       ref: 7d27e41f17d7d6917a12a9779a4ed6623155ef41
       path: media_kit
-  media_kit_video:
-    git:
-      url: https://github.com/media-kit/media-kit
-      ref: 7d27e41f17d7d6917a12a9779a4ed6623155ef41
-      path: media_kit_video
   media_kit_libs_android_video:
     git:
       url: https://github.com/media-kit/media-kit
@@ -132,6 +127,11 @@ dependency_overrides:
       url: https://github.com/media-kit/media-kit
       ref: 7d27e41f17d7d6917a12a9779a4ed6623155ef41
       path: libs/windows/media_kit_libs_windows_video
+  media_kit_video:
+    git:
+      url: https://github.com/media-kit/media-kit
+      ref: 7d27e41f17d7d6917a12a9779a4ed6623155ef41
+      path: media_kit_video
 
 flutter:
   generate: true

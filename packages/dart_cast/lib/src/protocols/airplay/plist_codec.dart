@@ -1,7 +1,7 @@
-import 'dart:convert';
-import 'dart:typed_data';
+import "dart:convert";
+import "dart:typed_data";
 
-import 'auth/binary_plist.dart';
+import "auth/binary_plist.dart";
 
 /// Parses Apple plist responses from AirPlay devices.
 ///
@@ -17,7 +17,7 @@ class PlistCodec {
 
   /// Content type AirPlay 2 uses for binary plists.
   static const String binaryPlistContentType =
-      'application/x-apple-binary-plist';
+      "application/x-apple-binary-plist";
 
   /// Magic bytes at the start of every binary plist.
   static const List<int> binaryPlistMagic = [
@@ -40,12 +40,12 @@ class PlistCodec {
   /// body is empty or cannot be decoded either way.
   static Map<String, dynamic> parsePlist(
     List<int> body, {
-    String contentType = '',
+    String contentType = "",
   }) {
     if (body.isEmpty) return {};
 
     final looksBinary =
-        contentType.toLowerCase().contains('binary-plist') ||
+        contentType.toLowerCase().contains("binary-plist") ||
         isBinaryPlist(body);
 
     if (looksBinary) {
@@ -74,7 +74,7 @@ class PlistCodec {
 
     try {
       final dictMatch = RegExp(
-        r'<plist[^>]*>\s*<dict>(.*)</dict>\s*</plist>',
+        r"<plist[^>]*>\s*<dict>(.*)</dict>\s*</plist>",
         dotAll: true,
       ).firstMatch(xml);
       if (dictMatch == null) return {};
@@ -93,7 +93,7 @@ class PlistCodec {
     int i = 0;
     while (i < tokens.length) {
       final token = tokens[i];
-      if (token.tag == 'key') {
+      if (token.tag == "key") {
         if (i + 1 < tokens.length) {
           result[token.value!] = _tokenValue(tokens, i + 1);
           // Skip past the value token(s)
@@ -115,20 +115,20 @@ class PlistCodec {
     final token = tokens[index];
 
     switch (token.tag) {
-      case 'real':
-        return double.tryParse(token.value ?? '') ?? 0.0;
-      case 'integer':
-        return int.tryParse(token.value ?? '') ?? 0;
-      case 'string':
-        return token.value ?? '';
-      case 'true':
+      case "real":
+        return double.tryParse(token.value ?? "") ?? 0.0;
+      case "integer":
+        return int.tryParse(token.value ?? "") ?? 0;
+      case "string":
+        return token.value ?? "";
+      case "true":
         return true;
-      case 'false':
+      case "false":
         return false;
-      case 'dict':
-        return _parseDict(token.value ?? '');
-      case 'array':
-        return _parseArray(token.value ?? '');
+      case "dict":
+        return _parseDict(token.value ?? "");
+      case "array":
+        return _parseArray(token.value ?? "");
       default:
         return null;
     }
@@ -168,14 +168,14 @@ class PlistCodec {
       }
       if (pos >= content.length) break;
 
-      if (content[pos] != '<') {
+      if (content[pos] != "<") {
         pos++;
         continue;
       }
 
       // Self-closing boolean tags
       final boolMatch = RegExp(
-        r'<(true|false)\s*/>',
+        r"<(true|false)\s*/>",
       ).matchAsPrefix(content, pos);
       if (boolMatch != null) {
         tokens.add(_Token(boolMatch.group(1)!, null));
@@ -185,7 +185,7 @@ class PlistCodec {
 
       // Simple value tags: key, real, integer, string
       final simpleMatch = RegExp(
-        r'<(key|real|integer|string)>(.*?)</\1>',
+        r"<(key|real|integer|string)>(.*?)</\1>",
         dotAll: true,
       ).matchAsPrefix(content, pos);
       if (simpleMatch != null) {
@@ -195,7 +195,7 @@ class PlistCodec {
       }
 
       // Block tags: dict, array — need to find matching close tag
-      final blockOpen = RegExp(r'<(dict|array)>').matchAsPrefix(content, pos);
+      final blockOpen = RegExp(r"<(dict|array)>").matchAsPrefix(content, pos);
       if (blockOpen != null) {
         final tag = blockOpen.group(1)!;
         final innerStart = blockOpen.end;
@@ -203,7 +203,7 @@ class PlistCodec {
         if (closeIndex != -1) {
           final inner = content.substring(innerStart, closeIndex);
           tokens.add(_Token(tag, inner));
-          pos = closeIndex + '</$tag>'.length;
+          pos = closeIndex + "</$tag>".length;
           continue;
         }
       }
@@ -218,8 +218,8 @@ class PlistCodec {
   /// Finds the index of the matching `</tag>` for a given open tag,
   /// handling nesting.
   static int _findMatchingClose(String content, int start, String tag) {
-    final openTag = '<$tag>';
-    final closeTag = '</$tag>';
+    final openTag = "<$tag>";
+    final closeTag = "</$tag>";
     int depth = 1;
     int pos = start;
 
@@ -243,7 +243,7 @@ class PlistCodec {
   }
 
   static bool _isWhitespace(String ch) =>
-      ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r';
+      ch == " " || ch == "\t" || ch == "\n" || ch == "\r";
 
   /// Parses an AirPlay `/playback-info` XML plist response.
   static PlaybackInfo parsePlaybackInfo(String xml) =>
@@ -255,27 +255,27 @@ class PlistCodec {
   /// first — as the XML-only path must — throws or yields an all-zero result.
   static PlaybackInfo parsePlaybackInfoBytes(
     List<int> body, {
-    String contentType = '',
+    String contentType = "",
   }) => _playbackInfoFromMap(parsePlist(body, contentType: contentType));
 
   static PlaybackInfo _playbackInfoFromMap(Map<String, dynamic> map) {
     PlaybackError? error;
-    final rawError = map['error'];
+    final rawError = map["error"];
     if (rawError is Map) {
       error = PlaybackError(
-        code: (rawError['code'] as num?)?.toInt(),
-        domain: rawError['domain'] as String?,
+        code: (rawError["code"] as num?)?.toInt(),
+        domain: rawError["domain"] as String?,
       );
     }
 
     return PlaybackInfo(
-      duration: (map['duration'] as num?)?.toDouble() ?? 0.0,
-      position: (map['position'] as num?)?.toDouble() ?? 0.0,
-      rate: (map['rate'] as num?)?.toDouble() ?? 0.0,
-      readyToPlay: map['readyToPlay'] as bool? ?? false,
-      playbackBufferEmpty: map['playbackBufferEmpty'] as bool? ?? false,
-      playbackLikelyToKeepUp: map['playbackLikelyToKeepUp'] as bool? ?? false,
-      hasDuration: map.containsKey('duration'),
+      duration: (map["duration"] as num?)?.toDouble() ?? 0.0,
+      position: (map["position"] as num?)?.toDouble() ?? 0.0,
+      rate: (map["rate"] as num?)?.toDouble() ?? 0.0,
+      readyToPlay: map["readyToPlay"] as bool? ?? false,
+      playbackBufferEmpty: map["playbackBufferEmpty"] as bool? ?? false,
+      playbackLikelyToKeepUp: map["playbackLikelyToKeepUp"] as bool? ?? false,
+      hasDuration: map.containsKey("duration"),
       error: error,
     );
   }
@@ -284,9 +284,9 @@ class PlistCodec {
   static ServerInfo parseServerInfo(String xml) {
     final map = parseXmlPlist(xml);
     return ServerInfo(
-      deviceId: map['deviceid'] as String? ?? '',
-      features: (map['features'] as int?) ?? 0,
-      model: map['model'] as String? ?? '',
+      deviceId: map["deviceid"] as String? ?? "",
+      features: (map["features"] as int?) ?? 0,
+      model: map["model"] as String? ?? "",
     );
   }
 }
@@ -356,8 +356,8 @@ class PlaybackInfo {
 
   @override
   String toString() =>
-      'PlaybackInfo(duration: $duration, position: $position, rate: $rate, '
-      'readyToPlay: $readyToPlay'
+      "PlaybackInfo(duration: $duration, position: $position, rate: $rate, "
+      "readyToPlay: $readyToPlay"
       '${error != null ? ', error: $error' : ''})';
 }
 
@@ -380,7 +380,7 @@ class ServerInfo {
 
   @override
   String toString() =>
-      'ServerInfo(deviceId: $deviceId, features: $features, model: $model)';
+      "ServerInfo(deviceId: $deviceId, features: $features, model: $model)";
 }
 
 /// Internal token representation for plist parsing.

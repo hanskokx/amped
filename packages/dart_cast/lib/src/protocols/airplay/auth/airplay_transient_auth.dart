@@ -1,11 +1,11 @@
-import 'dart:io';
-import 'dart:typed_data';
+import "dart:io";
+import "dart:typed_data";
 
-import '../../../utils/logger.dart';
-import 'airplay_auth.dart';
-import 'hap_srp.dart';
-import 'socket_http.dart';
-import 'tlv8.dart';
+import "../../../utils/logger.dart";
+import "airplay_auth.dart";
+import "hap_srp.dart";
+import "socket_http.dart";
+import "tlv8.dart";
 
 /// AirPlay 2 *transient* pairing (`X-Apple-HKP: 4`).
 ///
@@ -24,17 +24,17 @@ import 'tlv8.dart';
 /// Reference: `pyatv/protocols/airplay/auth/hap_transient.py`.
 class AirPlayTransientPairing {
   /// The fixed SRP password used by transient pairing.
-  static const String transientPin = '3939';
+  static const String transientPin = "3939";
 
   /// `Flags` TLV value requesting transient pairing.
   static const int transientPairingFlag = 0x10;
 
   /// Headers pyatv sends on every transient pairing request.
   static const Map<String, String> pairingHeaders = {
-    'User-Agent': 'AirPlay/320.20',
-    'Connection': 'keep-alive',
-    'X-Apple-HKP': '4',
-    'Content-Type': 'application/octet-stream',
+    "User-Agent": "AirPlay/320.20",
+    "Connection": "keep-alive",
+    "X-Apple-HKP": "4",
+    "Content-Type": "application/octet-stream",
   };
 
   final SocketHttpChannel _channel;
@@ -71,18 +71,18 @@ class AirPlayTransientPairing {
   ///
   /// Throws [AirPlayAuthException] if the receiver rejects the exchange.
   Future<Uint8List> execute() async {
-    CastLogger.info('AirPlay auth: transient pairing (X-Apple-HKP 4)');
+    CastLogger.info("AirPlay auth: transient pairing (X-Apple-HKP 4)");
 
     // pyatv pokes /pair-pin-start first. Receivers that need no PIN answer
     // with an error or nothing useful, so the result is deliberately ignored.
     try {
       await _channel.post(
-        '/pair-pin-start',
+        "/pair-pin-start",
         headers: pairingHeaders,
         timeout: const Duration(seconds: 5),
       );
     } on SocketHttpException catch (e) {
-      CastLogger.debug('AirPlay auth: pair-pin-start ignored ($e)');
+      CastLogger.debug("AirPlay auth: pair-pin-start ignored ($e)");
     }
 
     // -- M1: request transient pairing --
@@ -93,19 +93,19 @@ class AirPlayTransientPairing {
       (Tlv8.tagFlags, [transientPairingFlag]),
     ]);
 
-    final m2 = _decode(await _post(m1), 'M2');
+    final m2 = _decode(await _post(m1), "M2");
 
     final salt = m2[Tlv8.tagSalt];
     final serverPublicKey = m2[Tlv8.tagPublicKey];
     if (salt == null || serverPublicKey == null) {
       throw AirPlayAuthException(
-        'transient pairing M2 is missing salt or public key — '
-        'the receiver may not support transient pairing',
+        "transient pairing M2 is missing salt or public key — "
+        "the receiver may not support transient pairing",
       );
     }
     CastLogger.info(
-      'AirPlay auth: transient M2 (salt ${salt.length}B, '
-      'pubkey ${serverPublicKey.length}B)',
+      "AirPlay auth: transient M2 (salt ${salt.length}B, "
+      "pubkey ${serverPublicKey.length}B)",
     );
 
     // -- M3: SRP proof against the fixed PIN --
@@ -121,31 +121,31 @@ class AirPlayTransientPairing {
       (Tlv8.tagProof, proof),
     ]);
 
-    _decode(await _post(m3), 'M4');
+    _decode(await _post(m3), "M4");
 
     final sharedKey = _srp.sharedKey;
     if (sharedKey == null) {
       throw AirPlayAuthException(
-        'transient pairing completed without an SRP shared secret',
+        "transient pairing completed without an SRP shared secret",
       );
     }
 
     // Transient pairing ends at M4 — there is no M5/M6 and nothing to store.
     CastLogger.info(
-      'AirPlay auth: transient pairing complete (no credentials)',
+      "AirPlay auth: transient pairing complete (no credentials)",
     );
     return sharedKey;
   }
 
   Future<Uint8List> _post(Uint8List body) async {
     final response = await _channel.post(
-      '/pair-setup',
+      "/pair-setup",
       headers: pairingHeaders,
       body: body,
     );
     if (response.statusCode != 200) {
       throw AirPlayAuthException(
-        'transient pair-setup failed with HTTP ${response.statusCode}',
+        "transient pair-setup failed with HTTP ${response.statusCode}",
       );
     }
     return response.body;
@@ -157,13 +157,13 @@ class AirPlayTransientPairing {
       tlv = Tlv8.decode(body);
     } on FormatException catch (e) {
       throw AirPlayAuthException(
-        'transient pairing $step is not valid TLV8: $e',
+        "transient pairing $step is not valid TLV8: $e",
       );
     }
     final error = tlv[Tlv8.tagError];
     if (error != null && error.isNotEmpty) {
       throw AirPlayAuthException(
-        'transient pairing $step error: code ${error.first}',
+        "transient pairing $step error: code ${error.first}",
       );
     }
     return tlv;

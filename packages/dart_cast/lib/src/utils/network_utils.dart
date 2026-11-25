@@ -1,6 +1,6 @@
-import 'dart:io';
+import "dart:io";
 
-import '../utils/logger.dart';
+import "../utils/logger.dart";
 
 /// Network utility methods for casting.
 class NetworkUtils {
@@ -39,14 +39,14 @@ class NetworkUtils {
         for (final addr in allAddresses) {
           if (subnetPrefix(addr.address) == targetPrefix) {
             CastLogger.debug(
-              'NetworkUtils: picked ${addr.address} (same subnet as $targetDeviceIp)',
+              "NetworkUtils: picked ${addr.address} (same subnet as $targetDeviceIp)",
             );
             return addr.address;
           }
         }
         CastLogger.warning(
-          'NetworkUtils: no interface on same subnet as $targetDeviceIp, '
-          'falling back to private IP heuristic',
+          "NetworkUtils: no interface on same subnet as $targetDeviceIp, "
+          "falling back to private IP heuristic",
         );
       }
     }
@@ -55,7 +55,7 @@ class NetworkUtils {
     for (final addr in allAddresses) {
       if (isPrivateAddress(addr.address)) {
         CastLogger.debug(
-          'NetworkUtils: picked ${addr.address} (private address)',
+          "NetworkUtils: picked ${addr.address} (private address)",
         );
         return addr.address;
       }
@@ -63,21 +63,21 @@ class NetworkUtils {
 
     // 3. First non-loopback address
     CastLogger.debug(
-      'NetworkUtils: picked ${allAddresses.first.address} (first available)',
+      "NetworkUtils: picked ${allAddresses.first.address} (first available)",
     );
     return allAddresses.first.address;
   }
 
   /// Returns the /24 subnet prefix (first 3 octets), or null if invalid.
   static String? subnetPrefix(String ip) {
-    final parts = ip.split('.');
+    final parts = ip.split(".");
     if (parts.length != 4) return null;
-    return '${parts[0]}.${parts[1]}.${parts[2]}';
+    return "${parts[0]}.${parts[1]}.${parts[2]}";
   }
 
   /// Returns true if [ip] is an RFC 1918 private address.
   static bool isPrivateAddress(String ip) {
-    final parts = ip.split('.');
+    final parts = ip.split(".");
     if (parts.length != 4) return false;
     final a = int.tryParse(parts[0]);
     final b = int.tryParse(parts[1]);
@@ -101,15 +101,15 @@ class NetworkUtils {
 
   /// Formats a [Duration] as 'HH:MM:SS'.
   static String formatDuration(Duration duration) {
-    final hours = duration.inHours.toString().padLeft(2, '0');
-    final minutes = (duration.inMinutes % 60).toString().padLeft(2, '0');
-    final seconds = (duration.inSeconds % 60).toString().padLeft(2, '0');
-    return '$hours:$minutes:$seconds';
+    final hours = duration.inHours.toString().padLeft(2, "0");
+    final minutes = (duration.inMinutes % 60).toString().padLeft(2, "0");
+    final seconds = (duration.inSeconds % 60).toString().padLeft(2, "0");
+    return "$hours:$minutes:$seconds";
   }
 
   /// Parses a 'HH:MM:SS' string into a [Duration].
   static Duration parseDuration(String formatted) {
-    final parts = formatted.split(':');
+    final parts = formatted.split(":");
     if (parts.length != 3) return Duration.zero;
     return Duration(
       hours: int.tryParse(parts[0]) ?? 0,

@@ -1,7 +1,7 @@
-import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
-import 'dart:typed_data';
+import "dart:async";
+import "dart:convert";
+import "dart:io";
+import "dart:typed_data";
 
 /// A raw HTTP/1.1 response read off a [Socket].
 class SocketHttpResponse {
@@ -21,7 +21,7 @@ class SocketHttpResponse {
   });
 
   @override
-  String toString() => 'SocketHttpResponse($statusCode, ${body.length} bytes)';
+  String toString() => "SocketHttpResponse($statusCode, ${body.length} bytes)";
 }
 
 /// Thrown when a raw-socket HTTP exchange fails.
@@ -35,7 +35,7 @@ class SocketHttpException implements Exception {
   SocketHttpException(this.message, {this.statusCode});
 
   @override
-  String toString() => 'SocketHttpException: $message';
+  String toString() => "SocketHttpException: $message";
 }
 
 /// Speaks plain HTTP/1.1 over an already-connected [Socket].
@@ -81,7 +81,7 @@ class SocketHttpChannel {
       onDone: () {
         _done = true;
         _dataArrived?.completeError(
-          SocketHttpException('Socket closed while awaiting a response'),
+          SocketHttpException("Socket closed while awaiting a response"),
         );
         _dataArrived = null;
       },
@@ -94,7 +94,7 @@ class SocketHttpChannel {
     Map<String, String> headers = const {},
     List<int> body = const [],
     Duration timeout = const Duration(seconds: 30),
-  }) => send('POST', path, headers: headers, body: body, timeout: timeout);
+  }) => send("POST", path, headers: headers, body: body, timeout: timeout);
 
   /// Sends a request and waits for the complete response.
   Future<SocketHttpResponse> send(
@@ -106,14 +106,14 @@ class SocketHttpChannel {
   }) async {
     final request =
         StringBuffer()
-          ..write('$method $path HTTP/1.1\r\n')
-          ..write('Host: $host:$port\r\n');
+          ..write("$method $path HTTP/1.1\r\n")
+          ..write("Host: $host:$port\r\n");
     for (final entry in headers.entries) {
-      request.write('${entry.key}: ${entry.value}\r\n');
+      request.write("${entry.key}: ${entry.value}\r\n");
     }
     request
-      ..write('Content-Length: ${body.length}\r\n')
-      ..write('\r\n');
+      ..write("Content-Length: ${body.length}\r\n")
+      ..write("\r\n");
 
     _socket.add(utf8.encode(request.toString()));
     if (body.isNotEmpty) _socket.add(body);
@@ -142,19 +142,19 @@ class SocketHttpChannel {
       }
 
       if (_done) {
-        throw SocketHttpException('Socket closed while awaiting a response');
+        throw SocketHttpException("Socket closed while awaiting a response");
       }
 
       final remaining = deadline.difference(DateTime.now());
       if (remaining.isNegative || remaining == Duration.zero) {
-        throw SocketHttpException('Timed out awaiting a response');
+        throw SocketHttpException("Timed out awaiting a response");
       }
 
       _dataArrived = Completer<void>();
       await _dataArrived!.future.timeout(
         remaining,
         onTimeout:
-            () => throw SocketHttpException('Timed out awaiting a response'),
+            () => throw SocketHttpException("Timed out awaiting a response"),
       );
     }
   }
@@ -166,25 +166,25 @@ class SocketHttpChannel {
     final headerText = utf8.decode(data.sublist(0, headerEnd));
     final bodyStart = headerEnd + 4;
 
-    final lines = headerText.split('\r\n');
+    final lines = headerText.split("\r\n");
     final statusMatch = RegExp(
-      r'(?:HTTP|RTSP)/\d\.\d\s+(\d+)',
+      r"(?:HTTP|RTSP)/\d\.\d\s+(\d+)",
     ).firstMatch(lines.first);
     if (statusMatch == null) {
-      throw SocketHttpException('Malformed status line: ${lines.first}');
+      throw SocketHttpException("Malformed status line: ${lines.first}");
     }
     final statusCode = int.parse(statusMatch.group(1)!);
 
     final headers = <String, String>{};
     for (final line in lines.skip(1)) {
-      final colon = line.indexOf(':');
+      final colon = line.indexOf(":");
       if (colon > 0) {
         headers[line.substring(0, colon).trim().toLowerCase()] =
             line.substring(colon + 1).trim();
       }
     }
 
-    final contentLength = int.tryParse(headers['content-length'] ?? '');
+    final contentLength = int.tryParse(headers["content-length"] ?? "");
     if (contentLength == null) {
       // No Content-Length: treat the headers as the whole response.
       return (

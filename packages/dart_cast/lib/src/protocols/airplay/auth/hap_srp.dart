@@ -1,10 +1,10 @@
-import 'dart:convert';
-import 'dart:math';
-import 'dart:typed_data';
+import "dart:convert";
+import "dart:math";
+import "dart:typed_data";
 
-import 'package:cryptography/cryptography.dart';
+import "package:cryptography/cryptography.dart";
 
-import 'hap_credentials.dart';
+import "hap_credentials.dart";
 
 /// SRP-6a parameters for HAP (3072-bit prime, SHA-512).
 ///
@@ -12,22 +12,22 @@ import 'hap_credentials.dart';
 class _SrpParams {
   /// 3072-bit safe prime (RFC 5054, Appendix A).
   static final BigInt N = BigInt.parse(
-    'FFFFFFFFFFFFFFFFC90FDAA22168C234C4C6628B80DC1CD1'
-    '29024E088A67CC74020BBEA63B139B22514A08798E3404DD'
-    'EF9519B3CD3A431B302B0A6DF25F14374FE1356D6D51C245'
-    'E485B576625E7EC6F44C42E9A637ED6B0BFF5CB6F406B7ED'
-    'EE386BFB5A899FA5AE9F24117C4B1FE649286651ECE45B3D'
-    'C2007CB8A163BF0598DA48361C55D39A69163FA8FD24CF5F'
-    '83655D23DCA3AD961C62F356208552BB9ED529077096966D'
-    '670C354E4ABC9804F1746C08CA18217C32905E462E36CE3B'
-    'E39E772C180E86039B2783A2EC07A28FB5C55DF06F4C52C9'
-    'DE2BCBF6955817183995497CEA956AE515D2261898FA0510'
-    '15728E5A8AAAC42DAD33170D04507A33A85521ABDF1CBA64'
-    'ECFB850458DBEF0A8AEA71575D060C7DB3970F85A6E1E4C7'
-    'ABF5AE8CDB0933D71E8C94E04A25619DCEE3D2261AD2EE6B'
-    'F12FFA06D98A0864D87602733EC86A64521F2B18177B200C'
-    'BBE117577A615D6C770988C0BAD946E208E24FA074E5AB31'
-    '43DB5BFCE0FD108E4B82D120A93AD2CAFFFFFFFFFFFFFFFF',
+    "FFFFFFFFFFFFFFFFC90FDAA22168C234C4C6628B80DC1CD1"
+    "29024E088A67CC74020BBEA63B139B22514A08798E3404DD"
+    "EF9519B3CD3A431B302B0A6DF25F14374FE1356D6D51C245"
+    "E485B576625E7EC6F44C42E9A637ED6B0BFF5CB6F406B7ED"
+    "EE386BFB5A899FA5AE9F24117C4B1FE649286651ECE45B3D"
+    "C2007CB8A163BF0598DA48361C55D39A69163FA8FD24CF5F"
+    "83655D23DCA3AD961C62F356208552BB9ED529077096966D"
+    "670C354E4ABC9804F1746C08CA18217C32905E462E36CE3B"
+    "E39E772C180E86039B2783A2EC07A28FB5C55DF06F4C52C9"
+    "DE2BCBF6955817183995497CEA956AE515D2261898FA0510"
+    "15728E5A8AAAC42DAD33170D04507A33A85521ABDF1CBA64"
+    "ECFB850458DBEF0A8AEA71575D060C7DB3970F85A6E1E4C7"
+    "ABF5AE8CDB0933D71E8C94E04A25619DCEE3D2261AD2EE6B"
+    "F12FFA06D98A0864D87602733EC86A64521F2B18177B200C"
+    "BBE117577A615D6C770988C0BAD946E208E24FA074E5AB31"
+    "43DB5BFCE0FD108E4B82D120A93AD2CAFFFFFFFFFFFFFFFF",
     radix: 16,
   );
 
@@ -83,7 +83,7 @@ class HapSrp {
 
     // Ensure A mod N != 0
     if (_publicKey! % _SrpParams.N == BigInt.zero) {
-      throw StateError('SRP: invalid client public key (A mod N == 0)');
+      throw StateError("SRP: invalid client public key (A mod N == 0)");
     }
 
     return _bigIntToBytes(_publicKey!, 384);
@@ -102,7 +102,7 @@ class HapSrp {
 
     // B mod N must not be 0
     if (B % _SrpParams.N == BigInt.zero) {
-      throw StateError('SRP: invalid server public key (B mod N == 0)');
+      throw StateError("SRP: invalid server public key (B mod N == 0)");
     }
 
     final A = _publicKey!;
@@ -116,11 +116,11 @@ class HapSrp {
     );
 
     if (u == BigInt.zero) {
-      throw StateError('SRP: scrambling parameter u is zero');
+      throw StateError("SRP: scrambling parameter u is zero");
     }
 
     // Compute x = H(salt | H("Pair-Setup" | ":" | pin))
-    final identityHash = await _hash(utf8.encode('Pair-Setup:$pin'));
+    final identityHash = await _hash(utf8.encode("Pair-Setup:$pin"));
     final x = _bytesToBigInt(await _hash([...salt, ...identityHash]));
 
     // Compute k = H(N | pad(g))
@@ -130,7 +130,7 @@ class HapSrp {
 
     // S = (B - k * g^x mod N)^(a + u * x) mod N
     final gx = g.modPow(x, N);
-    var kgx = (k * gx) % N;
+    final kgx = (k * gx) % N;
     var diff = (B - kgx) % N;
     if (diff < BigInt.zero) diff += N;
 
@@ -154,7 +154,7 @@ class HapSrp {
     final hgInt = _bytesToBigInt(hg);
     final hNxorHg = _bigIntToBytesUnpadded(hNint ^ hgInt);
     final hIdentity = _bigIntToBytesUnpadded(
-      _bytesToBigInt(await _hash(utf8.encode('Pair-Setup'))),
+      _bytesToBigInt(await _hash(utf8.encode("Pair-Setup"))),
     );
 
     final proof = await _hash([
@@ -175,7 +175,7 @@ class HapSrp {
   /// Returns the encrypted data to send in M5.
   Future<Uint8List> step3(String clientId) async {
     if (_sharedSecret == null) {
-      throw StateError('SRP: step2 must be completed before step3');
+      throw StateError("SRP: step2 must be completed before step3");
     }
 
     // Generate an Ed25519 key pair for this pairing
@@ -188,8 +188,8 @@ class HapSrp {
     // iOSDeviceX = HKDF-SHA-512(K, "Pair-Setup-Controller-Sign-Salt", "Pair-Setup-Controller-Sign-Info")
     final signingKey = await _hkdfDerive(
       inputKey: _sharedSecret!,
-      salt: 'Pair-Setup-Controller-Sign-Salt',
-      info: 'Pair-Setup-Controller-Sign-Info',
+      salt: "Pair-Setup-Controller-Sign-Salt",
+      info: "Pair-Setup-Controller-Sign-Info",
       length: 32,
     );
 
@@ -219,13 +219,13 @@ class HapSrp {
     // SessionKey = HKDF-SHA-512(K, "Pair-Setup-Encrypt-Salt", "Pair-Setup-Encrypt-Info")
     final encryptionKey = await _hkdfDerive(
       inputKey: _sharedSecret!,
-      salt: 'Pair-Setup-Encrypt-Salt',
-      info: 'Pair-Setup-Encrypt-Info',
+      salt: "Pair-Setup-Encrypt-Salt",
+      info: "Pair-Setup-Encrypt-Info",
       length: 32,
     );
 
     // Encrypt the sub-TLV with ChaCha20-Poly1305
-    final nonce = padNonce('PS-Msg05');
+    final nonce = padNonce("PS-Msg05");
     final encrypted = await _chachaEncrypt(
       key: encryptionKey,
       nonce: nonce,
@@ -243,19 +243,19 @@ class HapSrp {
     required String clientId,
   }) async {
     if (_sharedSecret == null || _signingKeyPair == null) {
-      throw StateError('SRP: step3 must be completed before step4');
+      throw StateError("SRP: step3 must be completed before step4");
     }
 
     // Derive the decryption key
     final decryptionKey = await _hkdfDerive(
       inputKey: _sharedSecret!,
-      salt: 'Pair-Setup-Encrypt-Salt',
-      info: 'Pair-Setup-Encrypt-Info',
+      salt: "Pair-Setup-Encrypt-Salt",
+      info: "Pair-Setup-Encrypt-Info",
       length: 32,
     );
 
     // Decrypt the server's response
-    final nonce = padNonce('PS-Msg06');
+    final nonce = padNonce("PS-Msg06");
     final decrypted = await _chachaDecrypt(
       key: decryptionKey,
       nonce: nonce,
@@ -271,8 +271,8 @@ class HapSrp {
     // Derive the device signing key
     final deviceSigningKey = await _hkdfDerive(
       inputKey: _sharedSecret!,
-      salt: 'Pair-Setup-Accessory-Sign-Salt',
-      info: 'Pair-Setup-Accessory-Sign-Info',
+      salt: "Pair-Setup-Accessory-Sign-Salt",
+      info: "Pair-Setup-Accessory-Sign-Info",
       length: 32,
     );
 
@@ -293,7 +293,7 @@ class HapSrp {
     final sig = Signature(deviceSignature, publicKey: devicePubKey);
     final valid = await ed25519.verify(deviceInfo, signature: sig);
     if (!valid) {
-      throw StateError('HAP: device signature verification failed');
+      throw StateError("HAP: device signature verification failed");
     }
 
     // Extract our private key bytes
@@ -340,13 +340,13 @@ class HapSrp {
     // Derive the session encryption key for decrypting M2
     final sessionKey = await _hkdfDeriveStatic(
       inputKey: sharedSecretBytes,
-      salt: 'Pair-Verify-Encrypt-Salt',
-      info: 'Pair-Verify-Encrypt-Info',
+      salt: "Pair-Verify-Encrypt-Salt",
+      info: "Pair-Verify-Encrypt-Info",
       length: 32,
     );
 
     // Decrypt M2 challenge
-    final nonce = padNonce('PV-Msg02');
+    final nonce = padNonce("PV-Msg02");
     final decrypted = await _chachaDecryptStatic(
       key: sessionKey,
       nonce: nonce,
@@ -375,7 +375,7 @@ class HapSrp {
     final sig = Signature(deviceSignature, publicKey: devicePubKey);
     final valid = await ed25519.verify(deviceInfo, signature: sig);
     if (!valid) {
-      throw StateError('HAP pair-verify: device signature verification failed');
+      throw StateError("HAP pair-verify: device signature verification failed");
     }
 
     // Build our response
@@ -408,7 +408,7 @@ class HapSrp {
     ]);
 
     // Encrypt response with ChaCha20-Poly1305
-    final responseNonce = padNonce('PV-Msg03');
+    final responseNonce = padNonce("PV-Msg03");
     final encryptedResponse = await _chachaEncryptStatic(
       key: sessionKey,
       nonce: responseNonce,
@@ -499,7 +499,7 @@ class HapSrp {
     required Uint8List ciphertext,
   }) async {
     if (ciphertext.length < 16) {
-      throw StateError('Ciphertext too short for ChaCha20-Poly1305');
+      throw StateError("Ciphertext too short for ChaCha20-Poly1305");
     }
     final algorithm = Chacha20.poly1305Aead();
     final mac = Mac(ciphertext.sublist(ciphertext.length - 16));
@@ -516,7 +516,7 @@ class HapSrp {
   static Uint8List padNonce(String nonceStr) {
     final nonceBytes = utf8.encode(nonceStr);
     if (nonceBytes.length > 12) {
-      throw ArgumentError('Nonce string too long: ${nonceBytes.length} > 12');
+      throw ArgumentError("Nonce string too long: ${nonceBytes.length} > 12");
     }
     final padded = Uint8List(12);
     final offset = 12 - nonceBytes.length;

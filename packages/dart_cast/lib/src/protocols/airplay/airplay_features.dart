@@ -21,7 +21,7 @@ class AirPlayFeatures {
   factory AirPlayFeatures.parse(String features) {
     if (features.isEmpty) return const AirPlayFeatures(0);
     try {
-      final parts = features.split(',');
+      final parts = features.split(",");
       final lower = _parseHex(parts[0].trim());
       final upper = parts.length > 1 ? _parseHex(parts[1].trim()) : 0;
       return AirPlayFeatures((upper << 32) | lower);
@@ -31,7 +31,7 @@ class AirPlayFeatures {
   }
 
   static int _parseHex(String s) {
-    final cleaned = s.replaceFirst(RegExp(r'^0[xX]'), '');
+    final cleaned = s.replaceFirst(RegExp(r"^0[xX]"), "");
     if (cleaned.isEmpty) return 0;
     return int.parse(cleaned, radix: 16);
   }
@@ -85,5 +85,5 @@ class AirPlayFeatures {
 
   @override
   String toString() =>
-      'AirPlayFeatures(0x${rawValue.toRadixString(16)}, video=$supportsVideo, audio=$supportsAudio, screen=$supportsScreen, hap=$requiresHapPairing)';
+      "AirPlayFeatures(0x${rawValue.toRadixString(16)}, video=$supportsVideo, audio=$supportsAudio, screen=$supportsScreen, hap=$requiresHapPairing)";
 }

@@ -1,4 +1,4 @@
-import 'dart:typed_data';
+import "dart:typed_data";
 
 /// TLV8 (Tag-Length-Value with 8-bit length) encoder and decoder.
 ///
@@ -89,7 +89,7 @@ class Tlv8 {
 
     while (offset < data.length) {
       if (offset + 1 >= data.length) {
-        throw FormatException('TLV8: unexpected end of data at offset $offset');
+        throw FormatException("TLV8: unexpected end of data at offset $offset");
       }
 
       final tag = data[offset];
@@ -98,8 +98,8 @@ class Tlv8 {
 
       if (offset + length > data.length) {
         throw FormatException(
-          'TLV8: value overflows data at offset ${offset - 2} '
-          '(tag=$tag, length=$length, remaining=${data.length - offset})',
+          "TLV8: value overflows data at offset ${offset - 2} "
+          "(tag=$tag, length=$length, remaining=${data.length - offset})",
         );
       }
 

@@ -5,11 +5,11 @@
 /// framing them with a 4-byte big-endian length prefix.
 library;
 
-import 'dart:async';
-import 'dart:io';
-import 'dart:typed_data';
+import "dart:async";
+import "dart:io";
+import "dart:typed_data";
 
-import 'package:dart_cast/src/protocols/chromecast/proto/cast_channel.dart';
+import "package:dart_cast/src/protocols/chromecast/proto/cast_channel.dart";
 
 /// Manages a TLS connection to a Chromecast and provides
 /// length-prefixed protobuf message framing.
@@ -125,7 +125,7 @@ class CastV2Channel {
   /// Stream of incoming [CastMessage]s from the device.
   Stream<CastMessage> get messageStream {
     if (_messageController == null) {
-      throw StateError('Not connected. Call connect() first.');
+      throw StateError("Not connected. Call connect() first.");
     }
     return _messageController!.stream;
   }
@@ -138,7 +138,7 @@ class CastV2Channel {
     required String payload,
   }) {
     if (_socket == null) {
-      throw StateError('Not connected. Call connect() first.');
+      throw StateError("Not connected. Call connect() first.");
     }
 
     final message =

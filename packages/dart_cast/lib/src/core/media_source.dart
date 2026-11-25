@@ -1,5 +1,5 @@
-import 'dart:async';
-import 'dart:io';
+import "dart:async";
+import "dart:io";
 
 /// Reads a byte range from a [MediaSource].
 ///
@@ -106,7 +106,7 @@ class MediaSource {
   /// whole payload.
   factory MediaSource.bytes(
     List<int> bytes, {
-    String contentType = 'application/octet-stream',
+    String contentType = "application/octet-stream",
   }) {
     return MediaSource(
       length: bytes.length,
@@ -121,7 +121,7 @@ class MediaSource {
   /// mix files and other sources behind one type.
   static Future<MediaSource> file(
     File file, {
-    String contentType = 'application/octet-stream',
+    String contentType = "application/octet-stream",
   }) async {
     final length = await file.length();
     return MediaSource(
@@ -132,5 +132,5 @@ class MediaSource {
   }
 
   @override
-  String toString() => 'MediaSource($contentType, $length bytes)';
+  String toString() => "MediaSource($contentType, $length bytes)";
 }

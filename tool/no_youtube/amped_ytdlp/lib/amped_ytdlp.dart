@@ -1,8 +1,10 @@
 /// Stand-in for amped_ytdlp: nothing is run.
 library;
 
-typedef LogCallback =
-    void Function(String message, {Map<String, Object?>? metadata});
+typedef LogCallback = void Function(
+  String message, {
+  Map<String, Object?>? metadata,
+});
 
 /// Finds no addresses.
 class YtDlp {

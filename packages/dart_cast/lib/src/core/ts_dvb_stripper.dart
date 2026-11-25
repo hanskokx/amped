@@ -130,5 +130,5 @@ class TsDvbStripper {
 
   @override
   String toString() =>
-      'TsDvbStripper(kept=$packetsKept, dropped=$packetsDropped)';
+      "TsDvbStripper(kept=$packetsKept, dropped=$packetsDropped)";
 }

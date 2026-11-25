@@ -1,8 +1,8 @@
-import 'dart:async';
-import 'dart:io';
-import 'dart:typed_data';
+import "dart:async";
+import "dart:io";
+import "dart:typed_data";
 
-import '../../utils/logger.dart';
+import "../../utils/logger.dart";
 
 /// A minimal UDP timing server for AirPlay 2 playback.
 ///
@@ -59,7 +59,7 @@ class AirPlayTimingServer {
     );
     _socket = socket;
     _subscription = socket.listen(_onEvent);
-    CastLogger.info('AirPlay timing server: listening on UDP ${socket.port}');
+    CastLogger.info("AirPlay timing server: listening on UDP ${socket.port}");
     return socket.port;
   }
 
@@ -72,8 +72,8 @@ class AirPlayTimingServer {
     if (datagram == null) return;
     if (datagram.data.length < packetLength) {
       CastLogger.debug(
-        'AirPlay timing server: ignoring short packet '
-        '(${datagram.data.length}B)',
+        "AirPlay timing server: ignoring short packet "
+        "(${datagram.data.length}B)",
       );
       return;
     }
@@ -82,8 +82,8 @@ class AirPlayTimingServer {
     socket.send(reply, datagram.address, datagram.port);
     _requestCount++;
     CastLogger.debug(
-      'AirPlay timing server: answered request $_requestCount from '
-      '${datagram.address.address}:${datagram.port}',
+      "AirPlay timing server: answered request $_requestCount from "
+      "${datagram.address.address}:${datagram.port}",
     );
   }
 
@@ -132,8 +132,8 @@ class AirPlayTimingServer {
   Future<void> close() async {
     if (_socket == null) return;
     CastLogger.debug(
-      'AirPlay timing server: closing UDP $port '
-      '($_requestCount requests answered)',
+      "AirPlay timing server: closing UDP $port "
+      "($_requestCount requests answered)",
     );
     await _subscription?.cancel();
     _subscription = null;

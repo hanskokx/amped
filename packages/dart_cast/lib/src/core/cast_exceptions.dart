@@ -1,4 +1,4 @@
-import 'cast_device.dart';
+import "cast_device.dart";
 
 /// Base exception for all casting errors.
 class CastException implements Exception {
@@ -14,8 +14,8 @@ class CastException implements Exception {
   @override
   String toString() =>
       cause != null
-          ? 'CastException: $message (cause: $cause)'
-          : 'CastException: $message';
+          ? "CastException: $message (cause: $cause)"
+          : "CastException: $message";
 }
 
 /// Thrown when a device cannot be reached on the network.
@@ -48,7 +48,7 @@ class DiscoveryException extends CastException {
 /// The caller should prompt the user for a PIN, then call
 /// `AirPlaySession.pairSetup(pin)` to complete pairing.
 class NeedsPairingException extends CastException {
-  NeedsPairingException([super.message = 'Device requires HAP pairing (PIN)']);
+  NeedsPairingException([super.message = "Device requires HAP pairing (PIN)"]);
 }
 
 /// Thrown when a device does not support the requested feature.
@@ -70,5 +70,5 @@ class ProtocolException extends CastException {
   ProtocolException(super.message, this.protocol, [super.cause]);
 
   @override
-  String toString() => 'ProtocolException(${protocol.name}): $message';
+  String toString() => "ProtocolException(${protocol.name}): $message";
 }

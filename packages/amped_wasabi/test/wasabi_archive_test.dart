@@ -16,7 +16,7 @@ Uint8List _zip(Map<String, String> files) {
 void main() {
   final skin = _zip({
     "Skin/skin.xml":
-        "<WinampAbstractionLayer><skininfo><name>Cut Short</name>"
+        "<WinampAbstractionLayer><skininfo><name>Cut Short</name> "
         "</skininfo></WinampAbstractionLayer>",
     "Skin/xml/player.xml": "<container id='main'/>" * 40,
   });

@@ -1,9 +1,9 @@
-import 'dart:io';
+import "dart:io";
 
-import 'cast_media.dart';
-import 'media_proxy.dart';
-import 'media_transformer.dart';
-import 'ts_keyframe_scanner.dart';
+import "cast_media.dart";
+import "media_proxy.dart";
+import "media_transformer.dart";
+import "ts_keyframe_scanner.dart";
 
 /// Media transformer that wraps local MPEG-TS files in HLS playlists.
 ///

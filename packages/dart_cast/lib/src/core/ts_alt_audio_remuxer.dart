@@ -39,7 +39,7 @@
 /// segments are typically 100 KB–1 MB so this is cheap enough.
 library;
 
-import 'dart:typed_data';
+import "dart:typed_data";
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -92,9 +92,9 @@ class RemuxedSegment {
 
   @override
   String toString() =>
-      'RemuxedSegment(packets=$packetCount, video=$videoPacketsCopied, '
-      'audio=$audioPacketsCopied, dropped=$packetsDropped, '
-      'bytes=${bytes.length})';
+      "RemuxedSegment(packets=$packetCount, video=$videoPacketsCopied, "
+      "audio=$audioPacketsCopied, dropped=$packetsDropped, "
+      "bytes=${bytes.length})";
 }
 
 // ---------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.2
 
 - In the Amped Modern skin, clicking the lightning bolt in the main window's
   bottom right corner now opens the About window, like the logo in a classic
@@ -15,7 +15,7 @@
   the GitHub issue tracker with your Amped version, system and the latest log
   lines filled in, and puts the whole log on your clipboard to paste in. Nothing
   is sent until you submit the issue.
-- The About window links to the website, https://www.amped-player.com/.
+- The About window links to the website, <https://www.amped-player.com/>.
 - The website now uses the Amped logo as its icon.
 - Linux builds for arm64 (deb, rpm, AppImage and Flatpak), and the Flatpak shows
   its name, author and version in software centers.

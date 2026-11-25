@@ -1,13 +1,13 @@
-import 'dart:convert';
-import 'dart:math';
+import "dart:convert";
+import "dart:math";
 
-import 'package:dart_cast/src/core/cast_exceptions.dart';
-import 'package:dart_cast/src/protocols/airplay/airplay_features.dart';
-import 'package:dart_cast/src/protocols/airplay/auth/binary_plist.dart';
-import 'package:dart_cast/src/protocols/airplay/auth/hap_session.dart';
-import 'package:dart_cast/src/protocols/airplay/plist_codec.dart';
-import 'package:dart_cast/src/protocols/airplay/timing_server.dart';
-import 'package:dart_cast/src/utils/logger.dart';
+import "package:dart_cast/src/core/cast_exceptions.dart";
+import "package:dart_cast/src/protocols/airplay/airplay_features.dart";
+import "package:dart_cast/src/protocols/airplay/auth/binary_plist.dart";
+import "package:dart_cast/src/protocols/airplay/auth/hap_session.dart";
+import "package:dart_cast/src/protocols/airplay/plist_codec.dart";
+import "package:dart_cast/src/protocols/airplay/timing_server.dart";
+import "package:dart_cast/src/utils/logger.dart";
 
 /// Controls AirPlay video playback (play, pause, seek, stop, etc.) over an
 /// existing [HapSession].
@@ -58,18 +58,18 @@ class AirPlayMediaController {
     String url,
     double startPositionFraction,
   ) async {
-    CastLogger.debug('AirPlayMediaController: playV1 url=$url');
+    CastLogger.debug("AirPlayMediaController: playV1 url=$url");
     final body = BinaryPlistEncoder.encode({
-      'Content-Location': url,
-      'Start-Position': startPositionFraction,
-      'X-Apple-Session-ID': session.sessionId,
+      "Content-Location": url,
+      "Start-Position": startPositionFraction,
+      "X-Apple-Session-ID": session.sessionId,
     });
     return session.sendRequest(
-      'POST',
-      '/play',
+      "POST",
+      "/play",
       headers: {
-        'Content-Type': 'application/x-apple-binary-plist',
-        'User-Agent': 'MediaControl/1.0',
+        "Content-Type": "application/x-apple-binary-plist",
+        "User-Agent": "MediaControl/1.0",
       },
       body: body,
     );
@@ -87,16 +87,16 @@ class AirPlayMediaController {
     String url,
     double startPositionFraction,
   ) async {
-    CastLogger.debug('AirPlayMediaController: playV1Text url=$url');
+    CastLogger.debug("AirPlayMediaController: playV1Text url=$url");
     final bodyStr =
-        'Content-Location: $url\nStart-Position: $startPositionFraction\n';
+        "Content-Location: $url\nStart-Position: $startPositionFraction\n";
     return session.sendRequest(
-      'POST',
-      '/play',
+      "POST",
+      "/play",
       headers: {
-        'Content-Type': 'text/parameters',
-        'User-Agent': 'MediaControl/1.0',
-        'X-Apple-Session-ID': session.sessionId,
+        "Content-Type": "text/parameters",
+        "User-Agent": "MediaControl/1.0",
+        "X-Apple-Session-ID": session.sessionId,
       },
       body: utf8.encode(bodyStr),
     );
@@ -115,37 +115,37 @@ class AirPlayMediaController {
     String url,
     double startPositionSeconds,
   ) async {
-    CastLogger.debug('AirPlayMediaController: playV2 url=$url');
+    CastLogger.debug("AirPlayMediaController: playV2 url=$url");
 
     final timingPort = await timingServer.bind();
     await session.setupRtspSession(timingPort: timingPort);
 
     final body = BinaryPlistEncoder.encode({
-      'Content-Location': url,
-      'Start-Position-Seconds': startPositionSeconds,
-      'uuid': _generateUuid(),
-      'streamType': 1,
-      'mediaType': 'file',
-      'mightSupportStorePastisKeyRequests': true,
-      'playbackRestrictions': 0,
-      'volume': 1.0,
-      'rate': 1.0,
-      'SenderMACAddress': 'AA:BB:CC:DD:EE:FF',
-      'model': 'iPhone14,3',
-      'clientBundleID': 'dev.dartcast',
-      'clientProcName': 'dart_cast',
-      'osBuildVersion': '20F66',
+      "Content-Location": url,
+      "Start-Position-Seconds": startPositionSeconds,
+      "uuid": _generateUuid(),
+      "streamType": 1,
+      "mediaType": "file",
+      "mightSupportStorePastisKeyRequests": true,
+      "playbackRestrictions": 0,
+      "volume": 1.0,
+      "rate": 1.0,
+      "SenderMACAddress": "AA:BB:CC:DD:EE:FF",
+      "model": "iPhone14,3",
+      "clientBundleID": "dev.dartcast",
+      "clientProcName": "dart_cast",
+      "osBuildVersion": "20F66",
     });
 
     return session.sendRequest(
-      'POST',
-      '/play',
+      "POST",
+      "/play",
       headers: {
-        'Content-Type': 'application/x-apple-binary-plist',
-        'User-Agent': 'AirPlay/550.10',
-        'X-Apple-ProtocolVersion': '1',
-        'X-Apple-Session-ID': session.sessionId,
-        'X-Apple-Stream-ID': '1',
+        "Content-Type": "application/x-apple-binary-plist",
+        "User-Agent": "AirPlay/550.10",
+        "X-Apple-ProtocolVersion": "1",
+        "X-Apple-Session-ID": session.sessionId,
+        "X-Apple-Stream-ID": "1",
       },
       body: body,
     );
@@ -165,15 +165,15 @@ class AirPlayMediaController {
     if (features.isV2Protocol) {
       if (!features.supportsVideoV2) {
         throw UnsupportedFeatureException(
-          'AirPlay 2 receiver does not advertise video URL playback '
-          '(bit 49 clear, features=$features). It is most likely a '
-          'mirroring-only or audio-only receiver — try Chromecast or DLNA.',
+          "AirPlay 2 receiver does not advertise video URL playback "
+          "(bit 49 clear, features=$features). It is most likely a "
+          "mirroring-only or audio-only receiver — try Chromecast or DLNA.",
         );
       }
-      CastLogger.info('AirPlayMediaController: play via AirPlay 2 (bit 49)');
+      CastLogger.info("AirPlayMediaController: play via AirPlay 2 (bit 49)");
       final resp = await playV2(url, startPositionSeconds);
       CastLogger.debug(
-        'AirPlayMediaController: playV2 response: ${resp.statusCode}',
+        "AirPlayMediaController: playV2 response: ${resp.statusCode}",
       );
       if (resp.statusCode == 404) {
         // A receiver that advertises AirPlay 1 video as well gets one attempt
@@ -184,8 +184,8 @@ class AirPlayMediaController {
         // accepts. Apple TVs and the macOS receiver advertise both versions.
         if (features.supportsVideoV1) {
           CastLogger.info(
-            'AirPlayMediaController: AirPlay 2 /play returned 404 and this '
-            'device also advertises AirPlay 1 video (bit 0) — retrying on V1',
+            "AirPlayMediaController: AirPlay 2 /play returned 404 and this "
+            "device also advertises AirPlay 1 video (bit 0) — retrying on V1",
           );
           return _playV1AfterV2Fallback(url, startPositionSeconds);
         }
@@ -200,16 +200,16 @@ class AirPlayMediaController {
         // media control (feature bit 38) instead, which this package does not
         // speak yet.
         throw UnsupportedFeatureException(
-          'Receiver completed the AirPlay 2 handshake but has no /play '
-          'endpoint (404), and advertises no AirPlay 1 video either. It uses '
-          'AirPlay 2 unified media control, which dart_cast does not '
-          'implement — use Chromecast or DLNA for this device. See '
-          'doc/AIRPLAY.md.',
+          "Receiver completed the AirPlay 2 handshake but has no /play "
+          "endpoint (404), and advertises no AirPlay 1 video either. It uses "
+          "AirPlay 2 unified media control, which dart_cast does not "
+          "implement — use Chromecast or DLNA for this device. See "
+          "doc/AIRPLAY.md.",
         );
       }
       if (resp.statusCode != 200) {
         throw PlaybackException(
-          'Device rejected AirPlay 2 /play: ${resp.statusCode}',
+          "Device rejected AirPlay 2 /play: ${resp.statusCode}",
           statusCode: resp.statusCode,
         );
       }
@@ -219,28 +219,28 @@ class AirPlayMediaController {
 
     if (!features.supportsVideoV1) {
       throw UnsupportedFeatureException(
-        'Device advertises no AirPlay video support '
-        '(bits 0 and 49 clear, features=$features). '
-        'Try Chromecast or DLNA for this device.',
+        "Device advertises no AirPlay video support "
+        "(bits 0 and 49 clear, features=$features). "
+        "Try Chromecast or DLNA for this device.",
       );
     }
 
     if (startPositionSeconds != 0.0) {
       CastLogger.warning(
-        'AirPlayMediaController: AirPlay 1 Start-Position is a 0.0-1.0 '
-        'fraction, not seconds — starting from the beginning instead of '
-        '${startPositionSeconds}s',
+        "AirPlayMediaController: AirPlay 1 Start-Position is a 0.0-1.0 "
+        "fraction, not seconds — starting from the beginning instead of "
+        "${startPositionSeconds}s",
       );
     }
 
-    CastLogger.info('AirPlayMediaController: play via AirPlay 1 (bit 0)');
+    CastLogger.info("AirPlayMediaController: play via AirPlay 1 (bit 0)");
     final resp = await playV1(url, 0.0);
     CastLogger.debug(
-      'AirPlayMediaController: playV1 response: ${resp.statusCode}',
+      "AirPlayMediaController: playV1 response: ${resp.statusCode}",
     );
     if (resp.statusCode != 200) {
       throw PlaybackException(
-        'Device rejected AirPlay 1 /play: ${resp.statusCode}',
+        "Device rejected AirPlay 1 /play: ${resp.statusCode}",
         statusCode: resp.statusCode,
       );
     }
@@ -258,26 +258,26 @@ class AirPlayMediaController {
   ) async {
     if (startPositionSeconds != 0.0) {
       CastLogger.warning(
-        'AirPlayMediaController: AirPlay 1 Start-Position is a 0.0-1.0 '
-        'fraction, not seconds — starting from the beginning instead of '
-        '${startPositionSeconds}s',
+        "AirPlayMediaController: AirPlay 1 Start-Position is a 0.0-1.0 "
+        "fraction, not seconds — starting from the beginning instead of "
+        "${startPositionSeconds}s",
       );
     }
 
     final resp = await playV1(url, 0.0);
     CastLogger.debug(
-      'AirPlayMediaController: V1 fallback response: ${resp.statusCode}',
+      "AirPlayMediaController: V1 fallback response: ${resp.statusCode}",
     );
     if (resp.statusCode != 200) {
       throw PlaybackException(
-        'Device rejected both the AirPlay 2 /play (404) and the AirPlay 1 '
-        '/play (${resp.statusCode}), despite advertising both versions.',
+        "Device rejected both the AirPlay 2 /play (404) and the AirPlay 1 "
+        "/play (${resp.statusCode}), despite advertising both versions.",
         statusCode: resp.statusCode,
       );
     }
 
     _usingV1Fallback = true;
-    CastLogger.info('AirPlayMediaController: AirPlay 1 fallback accepted');
+    CastLogger.info("AirPlayMediaController: AirPlay 1 fallback accepted");
   }
 
   /// Whether playback fell back to AirPlay 1 after a 404 from the V2 `/play`.
@@ -299,45 +299,45 @@ class AirPlayMediaController {
   /// correct the rest of the handshake is. Its failure is fatal; the
   /// `/setProperty` calls are best-effort.
   Future<void> sendPostPlaySequence() async {
-    await _setProperty('isInterestedInDateRange', {'value': true});
-    await _setProperty('actionAtItemEnd', {'value': 0});
+    await _setProperty("isInterestedInDateRange", {"value": true});
+    await _setProperty("actionAtItemEnd", {"value": 0});
 
-    CastLogger.info('AirPlayMediaController: POST /rate?value=1.000000');
+    CastLogger.info("AirPlayMediaController: POST /rate?value=1.000000");
     final rateResp = await session.sendRtspRequest(
-      'POST',
-      '/rate?value=1.000000',
+      "POST",
+      "/rate?value=1.000000",
     );
     if (rateResp.statusCode != 200) {
       throw PlaybackException(
-        'Device rejected /rate after /play: ${rateResp.statusCode}. '
-        'AirPlay 2 playback starts paused without it.',
+        "Device rejected /rate after /play: ${rateResp.statusCode}. "
+        "AirPlay 2 playback starts paused without it.",
         statusCode: rateResp.statusCode,
       );
     }
 
-    const zeroTime = {'flags': 0, 'value': 0, 'epoch': 0, 'timescale': 0};
-    await _setProperty('forwardEndTime', {'value': zeroTime});
-    await _setProperty('reverseEndTime', {'value': zeroTime});
+    const zeroTime = {"flags": 0, "value": 0, "epoch": 0, "timescale": 0};
+    await _setProperty("forwardEndTime", {"value": zeroTime});
+    await _setProperty("reverseEndTime", {"value": zeroTime});
   }
 
   Future<void> _setProperty(String property, Map<String, dynamic> body) async {
     try {
       final resp = await session.sendRtspRequest(
-        'PUT',
-        '/setProperty?$property',
-        headers: {'Content-Type': 'application/x-apple-binary-plist'},
+        "PUT",
+        "/setProperty?$property",
+        headers: {"Content-Type": "application/x-apple-binary-plist"},
         body: BinaryPlistEncoder.encode(body),
       );
       if (resp.statusCode != 200) {
         CastLogger.debug(
-          'AirPlayMediaController: /setProperty?$property returned '
-          '${resp.statusCode} — continuing',
+          "AirPlayMediaController: /setProperty?$property returned "
+          "${resp.statusCode} — continuing",
         );
       }
     } catch (e) {
       CastLogger.debug(
-        'AirPlayMediaController: /setProperty?$property failed: $e — '
-        'continuing',
+        "AirPlayMediaController: /setProperty?$property failed: $e — "
+        "continuing",
       );
     }
   }
@@ -348,30 +348,30 @@ class AirPlayMediaController {
 
   /// Pauses playback by sending `/rate?value=0`.
   Future<void> pause() async {
-    CastLogger.info('AirPlayMediaController: pause');
-    await _sendControl('POST', '/rate', queryParameters: {'value': '0'});
+    CastLogger.info("AirPlayMediaController: pause");
+    await _sendControl("POST", "/rate", queryParameters: {"value": "0"});
   }
 
   /// Resumes playback by sending `/rate?value=1`.
   Future<void> resume() async {
-    CastLogger.info('AirPlayMediaController: resume');
-    await _sendControl('POST', '/rate', queryParameters: {'value': '1'});
+    CastLogger.info("AirPlayMediaController: resume");
+    await _sendControl("POST", "/rate", queryParameters: {"value": "1"});
   }
 
   /// Seeks to [positionSeconds] by sending `/scrub?position=<pos>`.
   Future<void> seek(double positionSeconds) async {
-    CastLogger.info('AirPlayMediaController: seek to $positionSeconds');
+    CastLogger.info("AirPlayMediaController: seek to $positionSeconds");
     await _sendControl(
-      'POST',
-      '/scrub',
-      queryParameters: {'position': '$positionSeconds'},
+      "POST",
+      "/scrub",
+      queryParameters: {"position": "$positionSeconds"},
     );
   }
 
   /// Stops playback by sending `/stop`.
   Future<void> stop() async {
-    CastLogger.info('AirPlayMediaController: stop');
-    await _sendControl('POST', '/stop');
+    CastLogger.info("AirPlayMediaController: stop");
+    await _sendControl("POST", "/stop");
   }
 
   // ---------------------------------------------------------------------------
@@ -383,8 +383,8 @@ class AirPlayMediaController {
   /// AirPlay 2 answers with a binary plist, AirPlay 1 with XML; both are
   /// handled by decoding the raw body against the response `Content-Type`.
   Future<PlaybackInfo> getPlaybackInfo() async {
-    CastLogger.debug('AirPlayMediaController: getPlaybackInfo');
-    final resp = await session.sendRequest('GET', '/playback-info');
+    CastLogger.debug("AirPlayMediaController: getPlaybackInfo");
+    final resp = await session.sendRequest("GET", "/playback-info");
     return PlistCodec.parsePlaybackInfoBytes(
       resp.body,
       contentType: resp.contentType,
@@ -421,21 +421,21 @@ class AirPlayMediaController {
   }) async {
     if (_useRtspControl) {
       final query = _buildQuery(queryParameters);
-      await session.sendRtspRequest(method, '$path$query');
+      await session.sendRtspRequest(method, "$path$query");
       return;
     }
     await session.sendRequest(method, path, queryParameters: queryParameters);
   }
 
   static String _buildQuery(Map<String, String>? queryParameters) {
-    if (queryParameters == null || queryParameters.isEmpty) return '';
+    if (queryParameters == null || queryParameters.isEmpty) return "";
     final encoded = queryParameters.entries
         .map(
           (e) =>
-              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}',
+              "${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}",
         )
-        .join('&');
-    return '?$encoded';
+        .join("&");
+    return "?$encoded";
   }
 
   static final _random = Random.secure();
@@ -444,11 +444,11 @@ class AirPlayMediaController {
     final bytes = List<int>.generate(16, (_) => _random.nextInt(256));
     bytes[6] = (bytes[6] & 0x0F) | 0x40;
     bytes[8] = (bytes[8] & 0x3F) | 0x80;
-    String hex(int b) => b.toRadixString(16).padLeft(2, '0');
-    return '${hex(bytes[0])}${hex(bytes[1])}${hex(bytes[2])}${hex(bytes[3])}'
-        '-${hex(bytes[4])}${hex(bytes[5])}'
-        '-${hex(bytes[6])}${hex(bytes[7])}'
-        '-${hex(bytes[8])}${hex(bytes[9])}'
-        '-${hex(bytes[10])}${hex(bytes[11])}${hex(bytes[12])}${hex(bytes[13])}${hex(bytes[14])}${hex(bytes[15])}';
+    String hex(int b) => b.toRadixString(16).padLeft(2, "0");
+    return "${hex(bytes[0])}${hex(bytes[1])}${hex(bytes[2])}${hex(bytes[3])}"
+        "-${hex(bytes[4])}${hex(bytes[5])}"
+        "-${hex(bytes[6])}${hex(bytes[7])}"
+        "-${hex(bytes[8])}${hex(bytes[9])}"
+        "-${hex(bytes[10])}${hex(bytes[11])}${hex(bytes[12])}${hex(bytes[13])}${hex(bytes[14])}${hex(bytes[15])}";
   }
 }

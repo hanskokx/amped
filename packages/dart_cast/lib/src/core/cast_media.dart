@@ -1,4 +1,4 @@
-import 'media_source.dart';
+import "media_source.dart";
 
 /// Media type for casting.
 enum CastMediaType {
@@ -155,7 +155,7 @@ class CastMedia {
     this.duration,
     this.subtitles = const [],
     this.defaultSubtitle,
-  }) : url = '',
+  }) : url = "",
        isLocalFile = false,
        httpHeaders = const {};
 }

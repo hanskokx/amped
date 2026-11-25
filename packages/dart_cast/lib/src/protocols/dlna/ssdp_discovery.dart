@@ -20,17 +20,17 @@ class SsdpConstants {
   SsdpConstants._();
 
   /// SSDP multicast address.
-  static const String multicastAddress = '239.255.255.250';
+  static const String multicastAddress = "239.255.255.250";
 
   /// SSDP multicast port.
   static const int multicastPort = 1900;
 
   /// Common search target values for discovering DLNA devices.
   static const List<String> searchTargets = [
-    'ssdp:all',
-    'upnp:rootdevice',
-    'urn:schemas-upnp-org:device:MediaRenderer:1',
-    'urn:schemas-upnp-org:service:AVTransport:1',
+    "ssdp:all",
+    "upnp:rootdevice",
+    "urn:schemas-upnp-org:device:MediaRenderer:1",
+    "urn:schemas-upnp-org:service:AVTransport:1",
   ];
 }
 
@@ -43,12 +43,12 @@ class SsdpMessage {
   /// [st] is the search target (e.g., `urn:schemas-upnp-org:device:MediaRenderer:1`).
   /// [mx] is the maximum wait time in seconds before a device must respond.
   static String mSearch(String st, int mx) {
-    return 'M-SEARCH * HTTP/1.1\r\n'
-        'HOST: ${SsdpConstants.multicastAddress}:${SsdpConstants.multicastPort}\r\n'
+    return "M-SEARCH * HTTP/1.1\r\n"
+        "HOST: ${SsdpConstants.multicastAddress}:${SsdpConstants.multicastPort}\r\n"
         'MAN: "ssdp:discover"\r\n'
-        'ST: $st\r\n'
-        'MX: $mx\r\n'
-        '\r\n';
+        "ST: $st\r\n"
+        "MX: $mx\r\n"
+        "\r\n";
   }
 
   /// Parses an SSDP response (HTTP 200 OK or NOTIFY) into an [SsdpResponse].
@@ -58,9 +58,9 @@ class SsdpMessage {
   static SsdpResponse parseResponse(String data) {
     final headers = <String, String>{};
 
-    final lines = data.split(RegExp(r'\r?\n'));
+    final lines = data.split(RegExp(r"\r?\n"));
     for (final line in lines.skip(1)) {
-      final colonIndex = line.indexOf(':');
+      final colonIndex = line.indexOf(":");
       if (colonIndex < 1) continue;
       final key = line.substring(0, colonIndex).trim().toLowerCase();
       final value = line.substring(colonIndex + 1).trim();
@@ -68,9 +68,9 @@ class SsdpMessage {
     }
 
     return SsdpResponse(
-      location: headers['location'],
-      usn: headers['usn'],
-      st: headers['st'],
+      location: headers["location"],
+      usn: headers["usn"],
+      st: headers["st"],
       headers: headers,
     );
   }
@@ -82,7 +82,7 @@ class SsdpMessage {
   /// Returns null if [usn] is null.
   static String? extractUuid(String? usn) {
     if (usn == null) return null;
-    final separatorIndex = usn.indexOf('::');
+    final separatorIndex = usn.indexOf("::");
     if (separatorIndex < 0) return usn;
     return usn.substring(0, separatorIndex);
   }

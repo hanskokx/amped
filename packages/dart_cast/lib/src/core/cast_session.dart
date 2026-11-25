@@ -1,7 +1,7 @@
-import 'dart:async';
+import "dart:async";
 
-import 'cast_device.dart';
-import 'cast_media.dart';
+import "cast_device.dart";
+import "cast_media.dart";
 
 /// Possible states of a cast session.
 enum SessionState {
@@ -85,7 +85,7 @@ class SessionStateMachine {
   void transitionTo(SessionState target) {
     if (_state == target) return; // no-op for same state
     if (!canTransitionTo(target)) {
-      throw StateError('Invalid transition from $_state to $target');
+      throw StateError("Invalid transition from $_state to $target");
     }
     _state = target;
     _controller.add(target);

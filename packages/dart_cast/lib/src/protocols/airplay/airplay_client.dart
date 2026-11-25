@@ -1,8 +1,8 @@
-import 'dart:math';
+import "dart:math";
 
-import 'package:http/http.dart' as http;
+import "package:http/http.dart" as http;
 
-import 'plist_codec.dart';
+import "plist_codec.dart";
 
 /// Low-level HTTP client for AirPlay video casting endpoints.
 ///
@@ -39,8 +39,8 @@ class AirPlayClient {
 
   /// Common headers included in every request.
   Map<String, String> get _headers => {
-    'User-Agent': 'MediaControl/1.0',
-    'X-Apple-Session-ID': _sessionId,
+    "User-Agent": "MediaControl/1.0",
+    "X-Apple-Session-ID": _sessionId,
   };
 
   /// Starts playback of a video URL on the AirPlay device.
@@ -48,37 +48,37 @@ class AirPlayClient {
   /// [url] is the media URL (typically an HLS manifest).
   /// [startPosition] is a fraction from 0.0 to 1.0.
   Future<void> play(String url, {double startPosition = 0.0}) async {
-    final body = 'Content-Location: $url\nStart-Position: $startPosition\n';
+    final body = "Content-Location: $url\nStart-Position: $startPosition\n";
     final response = await _httpClient.post(
-      _uri('/play'),
-      headers: {..._headers, 'Content-Type': 'text/parameters'},
+      _uri("/play"),
+      headers: {..._headers, "Content-Type": "text/parameters"},
       body: body,
     );
-    _checkResponse(response, 'play');
+    _checkResponse(response, "play");
   }
 
   /// Seeks to an absolute position in seconds.
   Future<void> scrub(double positionSeconds) async {
     final response = await _httpClient.post(
-      _uri('/scrub', queryParameters: {'position': '$positionSeconds'}),
+      _uri("/scrub", queryParameters: {"position": "$positionSeconds"}),
       headers: _headers,
     );
-    _checkResponse(response, 'scrub');
+    _checkResponse(response, "scrub");
   }
 
   /// Sets the playback rate (0 = pause, 1 = play).
   Future<void> rate(num value) async {
     final response = await _httpClient.post(
-      _uri('/rate', queryParameters: {'value': '${value.toDouble()}'}),
+      _uri("/rate", queryParameters: {"value": "${value.toDouble()}"}),
       headers: _headers,
     );
-    _checkResponse(response, 'rate');
+    _checkResponse(response, "rate");
   }
 
   /// Stops playback and generates a new session ID.
   Future<void> stop() async {
-    final response = await _httpClient.post(_uri('/stop'), headers: _headers);
-    _checkResponse(response, 'stop');
+    final response = await _httpClient.post(_uri("/stop"), headers: _headers);
+    _checkResponse(response, "stop");
     // Generate a new session ID for the next playback session
     _sessionId = _generateUuid();
   }
@@ -86,20 +86,20 @@ class AirPlayClient {
   /// Gets detailed playback state as a [PlaybackInfo].
   Future<PlaybackInfo> getPlaybackInfo() async {
     final response = await _httpClient.get(
-      _uri('/playback-info'),
+      _uri("/playback-info"),
       headers: _headers,
     );
-    _checkResponse(response, 'playback-info');
+    _checkResponse(response, "playback-info");
     return PlistCodec.parsePlaybackInfo(response.body);
   }
 
   /// Gets device information as a [ServerInfo].
   Future<ServerInfo> getServerInfo() async {
     final response = await _httpClient.get(
-      _uri('/server-info'),
+      _uri("/server-info"),
       headers: _headers,
     );
-    _checkResponse(response, 'server-info');
+    _checkResponse(response, "server-info");
     return PlistCodec.parseServerInfo(response.body);
   }
 
@@ -119,7 +119,7 @@ class AirPlayClient {
 
     // Network failures propagate — those mean the device is unreachable,
     // which is a genuine connect error.
-    for (final path in const ['/info', '/server-info']) {
+    for (final path in const ["/info", "/server-info"]) {
       final response = await _httpClient.get(_uri(path), headers: _headers);
       if (response.statusCode == 403) {
         authRequired = true;
@@ -128,7 +128,7 @@ class AirPlayClient {
       if (response.statusCode != 200) continue;
       final properties = PlistCodec.parsePlist(
         response.bodyBytes,
-        contentType: response.headers['content-type'] ?? '',
+        contentType: response.headers["content-type"] ?? "",
       );
       // An empty 200 tells us nothing about the device, and stopping here
       // would hide a 403 from the endpoint we have not tried yet.
@@ -141,8 +141,8 @@ class AirPlayClient {
 
   /// Gets the current scrub position as (duration, position) in seconds.
   Future<({double duration, double position})> getScrubPosition() async {
-    final response = await _httpClient.get(_uri('/scrub'), headers: _headers);
-    _checkResponse(response, 'scrub');
+    final response = await _httpClient.get(_uri("/scrub"), headers: _headers);
+    _checkResponse(response, "scrub");
     return _parseTextParameters(response.body);
   }
 
@@ -153,7 +153,7 @@ class AirPlayClient {
 
   Uri _uri(String path, {Map<String, String>? queryParameters}) {
     return Uri(
-      scheme: 'http',
+      scheme: "http",
       host: host,
       port: port,
       path: path,
@@ -164,7 +164,7 @@ class AirPlayClient {
   void _checkResponse(http.Response response, String endpoint) {
     if (response.statusCode != 200) {
       throw AirPlayClientException(
-        'AirPlay $endpoint failed with status ${response.statusCode}',
+        "AirPlay $endpoint failed with status ${response.statusCode}",
       );
     }
   }
@@ -175,13 +175,13 @@ class AirPlayClient {
   ) {
     double duration = 0;
     double position = 0;
-    for (final line in body.trim().split('\n')) {
-      final colonIndex = line.indexOf(':');
+    for (final line in body.trim().split("\n")) {
+      final colonIndex = line.indexOf(":");
       if (colonIndex == -1) continue;
       final key = line.substring(0, colonIndex).trim();
       final value = double.tryParse(line.substring(colonIndex + 1).trim()) ?? 0;
-      if (key == 'duration') duration = value;
-      if (key == 'position') position = value;
+      if (key == "duration") duration = value;
+      if (key == "position") position = value;
     }
     return (duration: duration, position: position);
   }
@@ -193,10 +193,10 @@ class AirPlayClient {
     // Set version (4) and variant bits
     bytes[6] = (bytes[6] & 0x0f) | 0x40;
     bytes[8] = (bytes[8] & 0x3f) | 0x80;
-    final hex = bytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
-    return '${hex.substring(0, 8)}-${hex.substring(8, 12)}-'
-        '${hex.substring(12, 16)}-${hex.substring(16, 20)}-'
-        '${hex.substring(20, 32)}';
+    final hex = bytes.map((b) => b.toRadixString(16).padLeft(2, "0")).join();
+    return "${hex.substring(0, 8)}-${hex.substring(8, 12)}-"
+        "${hex.substring(12, 16)}-${hex.substring(16, 20)}-"
+        "${hex.substring(20, 32)}";
   }
 }
 
@@ -209,5 +209,5 @@ class AirPlayClientException implements Exception {
   AirPlayClientException(this.message);
 
   @override
-  String toString() => 'AirPlayClientException: $message';
+  String toString() => "AirPlayClientException: $message";
 }

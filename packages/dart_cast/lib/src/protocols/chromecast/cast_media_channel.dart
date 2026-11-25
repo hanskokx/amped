@@ -5,7 +5,7 @@
 /// subtitle track selection, and status parsing.
 library;
 
-import 'dart:convert';
+import "dart:convert";
 
 /// Represents a subtitle track for Chromecast LOAD commands.
 class CastMediaTrack {
@@ -31,13 +31,13 @@ class CastMediaTrack {
 
   /// Converts to a Chromecast track JSON object.
   Map<String, dynamic> toJson() => {
-    'trackId': trackId,
-    'type': 'TEXT',
-    'subtype': 'SUBTITLES',
-    'trackContentId': url,
-    'trackContentType': 'text/vtt',
-    'name': name,
-    'language': language,
+    "trackId": trackId,
+    "type": "TEXT",
+    "subtype": "SUBTITLES",
+    "trackContentId": url,
+    "trackContentType": "text/vtt",
+    "name": name,
+    "language": language,
   };
 }
 
@@ -79,7 +79,7 @@ class MediaStatusInfo {
 /// Builds and parses messages for Chromecast media control.
 class CastMediaChannel {
   /// Media namespace.
-  static const mediaNamespace = 'urn:x-cast:com.google.cast.media';
+  static const mediaNamespace = "urn:x-cast:com.google.cast.media";
 
   /// Auto-incrementing request ID counter.
   int _requestId = 0;
@@ -105,39 +105,39 @@ class CastMediaChannel {
     double? startPosition,
     List<CastMediaTrack>? subtitles,
     List<int>? activeTrackIds,
-    String streamType = 'BUFFERED',
+    String streamType = "BUFFERED",
   }) {
     final media = <String, dynamic>{
-      'contentId': contentId,
-      'contentType': contentType,
-      'streamType': streamType,
+      "contentId": contentId,
+      "contentType": contentType,
+      "streamType": streamType,
     };
 
     // Metadata
-    final metadata = <String, dynamic>{'metadataType': 0};
-    if (title != null) metadata['title'] = title;
+    final metadata = <String, dynamic>{"metadataType": 0};
+    if (title != null) metadata["title"] = title;
     if (imageUrl != null) {
-      metadata['images'] = [
-        {'url': imageUrl},
+      metadata["images"] = [
+        {"url": imageUrl},
       ];
     }
-    media['metadata'] = metadata;
+    media["metadata"] = metadata;
 
     // Subtitle tracks
     if (subtitles != null && subtitles.isNotEmpty) {
-      media['tracks'] = subtitles.map((t) => t.toJson()).toList();
+      media["tracks"] = subtitles.map((t) => t.toJson()).toList();
     }
 
     final payload = <String, dynamic>{
-      'type': 'LOAD',
-      'requestId': nextRequestId(),
-      'media': media,
-      'autoplay': true,
-      'currentTime': startPosition ?? 0,
+      "type": "LOAD",
+      "requestId": nextRequestId(),
+      "media": media,
+      "autoplay": true,
+      "currentTime": startPosition ?? 0,
     };
 
     if (activeTrackIds != null && activeTrackIds.isNotEmpty) {
-      payload['activeTrackIds'] = activeTrackIds;
+      payload["activeTrackIds"] = activeTrackIds;
     }
 
     return jsonEncode(payload);
@@ -146,65 +146,65 @@ class CastMediaChannel {
   /// Builds a PLAY command.
   String buildPlay(int mediaSessionId) {
     return jsonEncode({
-      'type': 'PLAY',
-      'mediaSessionId': mediaSessionId,
-      'requestId': nextRequestId(),
+      "type": "PLAY",
+      "mediaSessionId": mediaSessionId,
+      "requestId": nextRequestId(),
     });
   }
 
   /// Builds a PAUSE command.
   String buildPause(int mediaSessionId) {
     return jsonEncode({
-      'type': 'PAUSE',
-      'mediaSessionId': mediaSessionId,
-      'requestId': nextRequestId(),
+      "type": "PAUSE",
+      "mediaSessionId": mediaSessionId,
+      "requestId": nextRequestId(),
     });
   }
 
   /// Builds a STOP command (stops media, does not close the app).
   String buildStop(int mediaSessionId) {
     return jsonEncode({
-      'type': 'STOP',
-      'mediaSessionId': mediaSessionId,
-      'requestId': nextRequestId(),
+      "type": "STOP",
+      "mediaSessionId": mediaSessionId,
+      "requestId": nextRequestId(),
     });
   }
 
   /// Builds a SEEK command.
   String buildSeek(int mediaSessionId, double position) {
     return jsonEncode({
-      'type': 'SEEK',
-      'mediaSessionId': mediaSessionId,
-      'currentTime': position,
-      'requestId': nextRequestId(),
+      "type": "SEEK",
+      "mediaSessionId": mediaSessionId,
+      "currentTime": position,
+      "requestId": nextRequestId(),
     });
   }
 
   /// Builds a SET_VOLUME command for the media stream.
   String buildSetVolume(int mediaSessionId, {double? level, bool? muted}) {
     final volume = <String, dynamic>{};
-    if (level != null) volume['level'] = level;
-    if (muted != null) volume['muted'] = muted;
+    if (level != null) volume["level"] = level;
+    if (muted != null) volume["muted"] = muted;
     return jsonEncode({
-      'type': 'SET_VOLUME',
-      'mediaSessionId': mediaSessionId,
-      'volume': volume,
-      'requestId': nextRequestId(),
+      "type": "SET_VOLUME",
+      "mediaSessionId": mediaSessionId,
+      "volume": volume,
+      "requestId": nextRequestId(),
     });
   }
 
   /// Builds a GET_STATUS command.
   String buildGetStatus() {
-    return jsonEncode({'type': 'GET_STATUS', 'requestId': nextRequestId()});
+    return jsonEncode({"type": "GET_STATUS", "requestId": nextRequestId()});
   }
 
   /// Builds an EDIT_TRACKS_INFO command for subtitle switching.
   String buildEditTracksInfo(int mediaSessionId, List<int> activeTrackIds) {
     return jsonEncode({
-      'type': 'EDIT_TRACKS_INFO',
-      'mediaSessionId': mediaSessionId,
-      'activeTrackIds': activeTrackIds,
-      'requestId': nextRequestId(),
+      "type": "EDIT_TRACKS_INFO",
+      "mediaSessionId": mediaSessionId,
+      "activeTrackIds": activeTrackIds,
+      "requestId": nextRequestId(),
     });
   }
 
@@ -216,21 +216,21 @@ class CastMediaChannel {
   ///
   /// Returns null if no status entries are present.
   static MediaStatusInfo? parseMediaStatus(Map<String, dynamic> json) {
-    final statusList = json['status'] as List?;
+    final statusList = json["status"] as List?;
     if (statusList == null || statusList.isEmpty) return null;
 
     final status = statusList[0] as Map<String, dynamic>;
-    final volume = status['volume'] as Map<String, dynamic>?;
-    final media = status['media'] as Map<String, dynamic>?;
+    final volume = status["volume"] as Map<String, dynamic>?;
+    final media = status["media"] as Map<String, dynamic>?;
 
     return MediaStatusInfo(
-      mediaSessionId: status['mediaSessionId'] as int,
-      playerState: status['playerState'] as String,
-      currentTime: (status['currentTime'] as num?)?.toDouble() ?? 0.0,
-      duration: (media?['duration'] as num?)?.toDouble(),
-      volumeLevel: (volume?['level'] as num?)?.toDouble() ?? 1.0,
-      isMuted: (volume?['muted'] as bool?) ?? false,
-      idleReason: status['idleReason'] as String?,
+      mediaSessionId: status["mediaSessionId"] as int,
+      playerState: status["playerState"] as String,
+      currentTime: (status["currentTime"] as num?)?.toDouble() ?? 0.0,
+      duration: (media?["duration"] as num?)?.toDouble(),
+      volumeLevel: (volume?["level"] as num?)?.toDouble() ?? 1.0,
+      isMuted: (volume?["muted"] as bool?) ?? false,
+      idleReason: status["idleReason"] as String?,
     );
   }
 }

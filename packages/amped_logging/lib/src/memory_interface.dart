@@ -34,9 +34,9 @@ class MemoryInterface extends LoggingInterface {
   }) {
     final Object? error = metadata?["error"] ?? extra;
     final String entry = [
-      "${DateTime.now().toIso8601String()} "
-          "${(level ?? Level.debug).name.toUpperCase()} "
-          "${ConsoleInterface.format(message, metadata)}",
+      DateTime.now().toIso8601String(),
+      (level ?? Level.debug).name.toUpperCase(),
+      ConsoleInterface.format(message, metadata),
       if (error != null && metadata?["error"] == null) "$error",
       if (stackTrace != null) "$stackTrace",
     ].join("\n");

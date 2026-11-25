@@ -1,4 +1,4 @@
-import 'dart:typed_data';
+import "dart:typed_data";
 
 /// Persistent credentials produced by HAP pair-setup.
 ///
@@ -31,21 +31,21 @@ class HapCredentials {
 
   /// Serializes credentials to a JSON-compatible map.
   Map<String, dynamic> toJson() => {
-    'clientPrivateKey': _bytesToHex(clientPrivateKey),
-    'clientPublicKey': _bytesToHex(clientPublicKey),
-    'clientId': clientId,
-    'devicePublicKey': _bytesToHex(devicePublicKey),
-    'deviceId': deviceId,
+    "clientPrivateKey": _bytesToHex(clientPrivateKey),
+    "clientPublicKey": _bytesToHex(clientPublicKey),
+    "clientId": clientId,
+    "devicePublicKey": _bytesToHex(devicePublicKey),
+    "deviceId": deviceId,
   };
 
   /// Deserializes credentials from a JSON map.
   factory HapCredentials.fromJson(Map<String, dynamic> json) {
     return HapCredentials(
-      clientPrivateKey: _hexToBytes(json['clientPrivateKey'] as String),
-      clientPublicKey: _hexToBytes(json['clientPublicKey'] as String),
-      clientId: json['clientId'] as String,
-      devicePublicKey: _hexToBytes(json['devicePublicKey'] as String),
-      deviceId: json['deviceId'] as String,
+      clientPrivateKey: _hexToBytes(json["clientPrivateKey"] as String),
+      clientPublicKey: _hexToBytes(json["clientPublicKey"] as String),
+      clientId: json["clientId"] as String,
+      devicePublicKey: _hexToBytes(json["devicePublicKey"] as String),
+      deviceId: json["deviceId"] as String,
     );
   }
 
@@ -57,16 +57,16 @@ class HapCredentials {
       clientId,
       _bytesToHex(devicePublicKey),
       deviceId,
-    ].join('|');
+    ].join("|");
   }
 
   /// Deserializes from a pipe-separated hex string.
   factory HapCredentials.deserialize(String data) {
-    final parts = data.split('|');
+    final parts = data.split("|");
     if (parts.length != 5) {
       throw FormatException(
-        'Invalid HapCredentials format: expected 5 pipe-separated parts, '
-        'got ${parts.length}',
+        "Invalid HapCredentials format: expected 5 pipe-separated parts, "
+        "got ${parts.length}",
       );
     }
     return HapCredentials(
@@ -79,11 +79,11 @@ class HapCredentials {
   }
 
   static String _bytesToHex(List<int> bytes) =>
-      bytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
+      bytes.map((b) => b.toRadixString(16).padLeft(2, "0")).join();
 
   static Uint8List _hexToBytes(String hex) {
     if (hex.length % 2 != 0) {
-      throw FormatException('Invalid hex string length: ${hex.length}');
+      throw FormatException("Invalid hex string length: ${hex.length}");
     }
     final bytes = Uint8List(hex.length ~/ 2);
     for (var i = 0; i < hex.length; i += 2) {
@@ -94,5 +94,5 @@ class HapCredentials {
 
   @override
   String toString() =>
-      'HapCredentials(clientId: $clientId, deviceId: $deviceId)';
+      "HapCredentials(clientId: $clientId, deviceId: $deviceId)";
 }

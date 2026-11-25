@@ -17,16 +17,16 @@ class SubtitleConverter {
   /// Hello world
   /// ```
   static String srtToVtt(String srt) {
-    final lines = srt.split('\n');
-    final vtt = StringBuffer('WEBVTT\n\n');
+    final lines = srt.split("\n");
+    final vtt = StringBuffer("WEBVTT\n\n");
 
     for (final line in lines) {
       // Replace SRT comma timestamps with VTT dot timestamps
       // SRT: 00:00:01,000 --> 00:00:04,000
       // VTT: 00:00:01.000 --> 00:00:04.000
-      if (line.contains(' --> ')) {
-        vtt.writeln(line.replaceAll(',', '.'));
-      } else if (RegExp(r'^\d+$').hasMatch(line.trim())) {
+      if (line.contains(" --> ")) {
+        vtt.writeln(line.replaceAll(",", "."));
+      } else if (RegExp(r"^\d+$").hasMatch(line.trim())) {
         // Skip sequence numbers (SRT has them, VTT doesn't need them)
         continue;
       } else {
@@ -41,7 +41,7 @@ class SubtitleConverter {
   /// Reverses the VTT→SRT transformation: removes WEBVTT header,
   /// replaces dot timestamps with commas, and adds sequence numbers.
   static String vttToSrt(String vtt) {
-    final lines = vtt.split('\n');
+    final lines = vtt.split("\n");
     final srt = StringBuffer();
     int sequence = 1;
     bool headerDone = false;
@@ -51,14 +51,14 @@ class SubtitleConverter {
 
       // Skip WEBVTT header and metadata lines
       if (!headerDone) {
-        if (line.trimLeft().startsWith('WEBVTT')) continue;
-        if (line.startsWith('X-TIMESTAMP-MAP')) continue;
-        if (line.startsWith('NOTE')) continue;
+        if (line.trimLeft().startsWith("WEBVTT")) continue;
+        if (line.startsWith("X-TIMESTAMP-MAP")) continue;
+        if (line.startsWith("NOTE")) continue;
         if (line.trim().isEmpty) continue;
         headerDone = true;
       }
 
-      if (line.contains(' --> ')) {
+      if (line.contains(" --> ")) {
         // Add sequence number before timestamp
         srt.writeln(sequence++);
         // Replace VTT dot timestamps with SRT comma timestamps
@@ -66,14 +66,14 @@ class SubtitleConverter {
         // Also expand MM:SS.mmm to 00:MM:SS,mmm for SRT compatibility.
         srt.writeln(
           line.replaceAllMapped(
-            RegExp(r'(\d{2}:\d{2}:\d{2})\.(\d{3})|(\d{2}:\d{2})\.(\d{3})'),
+            RegExp(r"(\d{2}:\d{2}:\d{2})\.(\d{3})|(\d{2}:\d{2})\.(\d{3})"),
             (m) {
               if (m[1] != null) {
                 // HH:MM:SS.mmm → HH:MM:SS,mmm
-                return '${m[1]},${m[2]}';
+                return "${m[1]},${m[2]}";
               } else {
                 // MM:SS.mmm → 00:MM:SS,mmm
-                return '00:${m[3]},${m[4]}';
+                return "00:${m[3]},${m[4]}";
               }
             },
           ),
@@ -88,8 +88,8 @@ class SubtitleConverter {
   /// Detects if content is SRT format (starts with a number, not WEBVTT).
   static bool isSrt(String content) {
     final trimmed = content.trimLeft();
-    return !trimmed.startsWith('WEBVTT') &&
-        RegExp(r'^\d+\s*\n').hasMatch(trimmed);
+    return !trimmed.startsWith("WEBVTT") &&
+        RegExp(r"^\d+\s*\n").hasMatch(trimmed);
   }
 
   /// Strips `X-TIMESTAMP-MAP` from VTT content.
@@ -101,8 +101,8 @@ class SubtitleConverter {
   /// of sync. Removing it ensures timestamps are used as-is.
   static String stripTimestampMap(String vtt) {
     return vtt.replaceAll(
-      RegExp(r'X-TIMESTAMP-MAP[^\n]*\n?', caseSensitive: false),
-      '',
+      RegExp(r"X-TIMESTAMP-MAP[^\n]*\n?", caseSensitive: false),
+      "",
     );
   }
 
@@ -126,14 +126,14 @@ class SubtitleConverter {
   }) {
     // Parse cues from VTT or SRT
     String normalized = content;
-    bool isVttContent = content.trimLeft().startsWith('WEBVTT');
+    final bool isVttContent = content.trimLeft().startsWith("WEBVTT");
 
     if (!isVttContent && isSrt(content)) {
       // Convert SRT timestamps to VTT-style for uniform parsing
-      normalized = content.replaceAll(',', '.');
+      normalized = content.replaceAll(",", ".");
     }
 
-    final lines = normalized.split('\n');
+    final lines = normalized.split("\n");
     final dialogues = StringBuffer();
     bool headerDone = !isVttContent;
     String? currentTiming;
@@ -142,12 +142,12 @@ class SubtitleConverter {
     void flushCue() {
       if (currentTiming != null && textLines.isNotEmpty) {
         // Parse "HH:MM:SS.mmm --> HH:MM:SS.mmm"
-        final parts = currentTiming!.split(' --> ');
+        final parts = currentTiming!.split(" --> ");
         if (parts.length == 2) {
           final start = _vttTimeToAss(parts[0].trim());
-          final end = _vttTimeToAss(parts[1].trim().split(' ').first);
-          final text = textLines.join('\\N');
-          dialogues.writeln('Dialogue: 0,$start,$end,Default,,0,0,0,,$text');
+          final end = _vttTimeToAss(parts[1].trim().split(" ").first);
+          final text = textLines.join("\\N");
+          dialogues.writeln("Dialogue: 0,$start,$end,Default,,0,0,0,,$text");
         }
       }
       currentTiming = null;
@@ -156,24 +156,24 @@ class SubtitleConverter {
 
     for (final line in lines) {
       if (!headerDone) {
-        if (line.trimLeft().startsWith('WEBVTT')) continue;
-        if (line.startsWith('X-TIMESTAMP-MAP')) continue;
-        if (line.startsWith('NOTE')) continue;
+        if (line.trimLeft().startsWith("WEBVTT")) continue;
+        if (line.startsWith("X-TIMESTAMP-MAP")) continue;
+        if (line.startsWith("NOTE")) continue;
         if (line.trim().isEmpty) continue;
         headerDone = true;
       }
 
-      if (line.contains(' --> ')) {
+      if (line.contains(" --> ")) {
         flushCue();
         currentTiming = line;
       } else if (line.trim().isEmpty) {
         flushCue();
-      } else if (RegExp(r'^\d+$').hasMatch(line.trim())) {
+      } else if (RegExp(r"^\d+$").hasMatch(line.trim())) {
         // Skip SRT sequence numbers
         continue;
       } else {
         // Strip VTT tags like <i>, </i>, <b>, etc.
-        textLines.add(line.replaceAll(RegExp(r'<[^>]+>'), ''));
+        textLines.add(line.replaceAll(RegExp(r"<[^>]+>"), ""));
       }
     }
     flushCue();
@@ -182,7 +182,8 @@ class SubtitleConverter {
     // Colors in ASS are &HAABBGGRR format (hex, reversed RGB)
     // &H00FFFFFF = white, &H00000000 = black
     // BorderStyle: 1 = outline + shadow, 3 = opaque box
-    return '''[Script Info]
+    return """
+[Script Info]
 ScriptType: v4.00+
 PlayResX: 1920
 PlayResY: 1080
@@ -194,13 +195,13 @@ Style: Default,Arial,$fontSize,&H00FFFFFF,&H000000FF,&H00000000,&H80000000,-1,0,
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-$dialogues''';
+$dialogues""";
   }
 
   /// Converts VTT timestamp (HH:MM:SS.mmm or MM:SS.mmm) to ASS format (H:MM:SS.cc).
   static String _vttTimeToAss(String vttTime) {
     // Handle both HH:MM:SS.mmm and MM:SS.mmm
-    final parts = vttTime.split(':');
+    final parts = vttTime.split(":");
     int hours = 0;
     int minutes;
     double seconds;
@@ -228,8 +229,8 @@ $dialogues''';
   /// corresponds to MPEG-TS PTS [mpegTsPts], aligning subtitles with
   /// the video stream.
   static String injectTimestampMap(String vtt, int mpegTsPts) {
-    final header = 'X-TIMESTAMP-MAP=MPEGTS:$mpegTsPts,LOCAL:00:00:00.000';
+    final header = "X-TIMESTAMP-MAP=MPEGTS:$mpegTsPts,LOCAL:00:00:00.000";
     // Insert after WEBVTT header line
-    return vtt.replaceFirst(RegExp(r'(WEBVTT[^\n]*\n)'), '\$1$header\n');
+    return vtt.replaceFirst(RegExp(r"(WEBVTT[^\n]*\n)"), "\$1$header\n");
   }
 }

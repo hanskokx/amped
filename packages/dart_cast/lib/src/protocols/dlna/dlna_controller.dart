@@ -1,17 +1,17 @@
-import 'package:http/http.dart' as http;
+import "package:http/http.dart" as http;
 
-import '../../core/cast_device.dart';
-import '../../core/cast_exceptions.dart';
-import '../../utils/logger.dart';
-import '../../utils/network_utils.dart';
+import "../../core/cast_device.dart";
+import "../../core/cast_exceptions.dart";
+import "../../utils/logger.dart";
+import "../../utils/network_utils.dart";
 
 /// Service type URNs for DLNA SOAP actions.
 class DlnaServiceType {
-  static const avTransport = 'urn:schemas-upnp-org:service:AVTransport:1';
+  static const avTransport = "urn:schemas-upnp-org:service:AVTransport:1";
   static const renderingControl =
-      'urn:schemas-upnp-org:service:RenderingControl:1';
+      "urn:schemas-upnp-org:service:RenderingControl:1";
   static const connectionManager =
-      'urn:schemas-upnp-org:service:ConnectionManager:1';
+      "urn:schemas-upnp-org:service:ConnectionManager:1";
 }
 
 /// Builds SOAP XML envelopes for DLNA/UPnP actions.
@@ -35,12 +35,12 @@ class DlnaSoapBuilder {
     String? subtitleUrl,
     String? subtitleFormat,
     List<({String url, String format})>? subtitleVariants,
-    String protocolInfo = 'http-get:*:video/mp4:*',
+    String protocolInfo = "http-get:*:video/mp4:*",
     String? duration,
     int? size,
   }) {
     final escapedUrl = _escapeXml(url);
-    final escapedTitle = _escapeXml(title ?? 'Media');
+    final escapedTitle = _escapeXml(title ?? "Media");
 
     // Subtitle elements — use multiple vendor-specific approaches for
     // maximum TV compatibility. No DLNA standard exists for external subs.
@@ -50,12 +50,12 @@ class DlnaSoapBuilder {
     final variants =
         subtitleVariants ??
         (subtitleUrl != null
-            ? [(url: subtitleUrl, format: subtitleFormat ?? 'srt')]
+            ? [(url: subtitleUrl, format: subtitleFormat ?? "srt")]
             : <({String url, String format})>[]);
     for (final variant in variants) {
       final escapedSubUrl = _escapeXml(variant.url);
       final subType = variant.format;
-      final subMime = 'text/$subType';
+      final subMime = "text/$subType";
       // Samsung: sec:CaptionInfoEx
       subtitleElements.write(
         '<sec:CaptionInfoEx sec:type="$subType">$escapedSubUrl</sec:CaptionInfoEx>',
@@ -67,30 +67,30 @@ class DlnaSoapBuilder {
     }
 
     // Build optional <res> attributes for duration and size
-    final durationAttr = duration != null ? ' duration="$duration"' : '';
-    final sizeAttr = size != null ? ' size="$size"' : '';
+    final durationAttr = duration != null ? ' duration="$duration"' : "";
+    final sizeAttr = size != null ? ' size="$size"' : "";
 
     final didlLite = _escapeXml(
       '<DIDL-Lite xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"'
       ' xmlns:dc="http://purl.org/dc/elements/1.1/"'
       ' xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/"'
       ' xmlns:sec="http://www.sec.co.kr/"'
-      ' xmlns:pv="http://www.pv.com/pvns/">'
-      '<item id="0" parentID="0" restricted="0">'
-      '<dc:title>$escapedTitle</dc:title>'
-      '<upnp:class>object.item.videoItem</upnp:class>'
+      ' xmlns:pv="http://www.pv.com/pvns/"> '
+      '<item id="0" parentID="0" restricted="0"> '
+      "<dc:title>$escapedTitle</dc:title>"
+      "<upnp:class>object.item.videoItem</upnp:class>"
       '<res protocolInfo="$protocolInfo"$durationAttr$sizeAttr>$escapedUrl</res>'
-      '$subtitleElements'
-      '</item>'
-      '</DIDL-Lite>',
+      "$subtitleElements"
+      "</item>"
+      "</DIDL-Lite>",
     );
 
     return _wrapSoap(
       DlnaServiceType.avTransport,
-      'SetAVTransportURI',
-      '<InstanceID>0</InstanceID>'
-          '<CurrentURI>$escapedUrl</CurrentURI>'
-          '<CurrentURIMetaData>$didlLite</CurrentURIMetaData>',
+      "SetAVTransportURI",
+      "<InstanceID>0</InstanceID>"
+          "<CurrentURI>$escapedUrl</CurrentURI>"
+          "<CurrentURIMetaData>$didlLite</CurrentURIMetaData>",
     );
   }
 
@@ -98,8 +98,8 @@ class DlnaSoapBuilder {
   static String buildPlay() {
     return _wrapSoap(
       DlnaServiceType.avTransport,
-      'Play',
-      '<InstanceID>0</InstanceID><Speed>1</Speed>',
+      "Play",
+      "<InstanceID>0</InstanceID><Speed>1</Speed>",
     );
   }
 
@@ -107,8 +107,8 @@ class DlnaSoapBuilder {
   static String buildPause() {
     return _wrapSoap(
       DlnaServiceType.avTransport,
-      'Pause',
-      '<InstanceID>0</InstanceID>',
+      "Pause",
+      "<InstanceID>0</InstanceID>",
     );
   }
 
@@ -116,8 +116,8 @@ class DlnaSoapBuilder {
   static String buildStop() {
     return _wrapSoap(
       DlnaServiceType.avTransport,
-      'Stop',
-      '<InstanceID>0</InstanceID>',
+      "Stop",
+      "<InstanceID>0</InstanceID>",
     );
   }
 
@@ -126,10 +126,10 @@ class DlnaSoapBuilder {
     final formatted = NetworkUtils.formatDuration(position);
     return _wrapSoap(
       DlnaServiceType.avTransport,
-      'Seek',
-      '<InstanceID>0</InstanceID>'
-          '<Unit>REL_TIME</Unit>'
-          '<Target>$formatted</Target>',
+      "Seek",
+      "<InstanceID>0</InstanceID>"
+          "<Unit>REL_TIME</Unit>"
+          "<Target>$formatted</Target>",
     );
   }
 
@@ -137,8 +137,8 @@ class DlnaSoapBuilder {
   static String buildGetPositionInfo() {
     return _wrapSoap(
       DlnaServiceType.avTransport,
-      'GetPositionInfo',
-      '<InstanceID>0</InstanceID>',
+      "GetPositionInfo",
+      "<InstanceID>0</InstanceID>",
     );
   }
 
@@ -146,8 +146,8 @@ class DlnaSoapBuilder {
   static String buildGetTransportInfo() {
     return _wrapSoap(
       DlnaServiceType.avTransport,
-      'GetTransportInfo',
-      '<InstanceID>0</InstanceID>',
+      "GetTransportInfo",
+      "<InstanceID>0</InstanceID>",
     );
   }
 
@@ -155,10 +155,10 @@ class DlnaSoapBuilder {
   static String buildSetVolume(int volume) {
     return _wrapSoap(
       DlnaServiceType.renderingControl,
-      'SetVolume',
-      '<InstanceID>0</InstanceID>'
-          '<Channel>Master</Channel>'
-          '<DesiredVolume>$volume</DesiredVolume>',
+      "SetVolume",
+      "<InstanceID>0</InstanceID>"
+          "<Channel>Master</Channel>"
+          "<DesiredVolume>$volume</DesiredVolume>",
     );
   }
 
@@ -166,9 +166,9 @@ class DlnaSoapBuilder {
   static String buildGetVolume() {
     return _wrapSoap(
       DlnaServiceType.renderingControl,
-      'GetVolume',
-      '<InstanceID>0</InstanceID>'
-          '<Channel>Master</Channel>',
+      "GetVolume",
+      "<InstanceID>0</InstanceID>"
+          "<Channel>Master</Channel>",
     );
   }
 
@@ -176,28 +176,28 @@ class DlnaSoapBuilder {
   ///
   /// Used to query the device's supported media types.
   static String buildGetProtocolInfo() {
-    return _wrapSoap(DlnaServiceType.connectionManager, 'GetProtocolInfo', '');
+    return _wrapSoap(DlnaServiceType.connectionManager, "GetProtocolInfo", "");
   }
 
   static String _wrapSoap(String serviceType, String action, String body) {
-    return '<?xml version="1.0" encoding="utf-8"?>'
-        '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"'
-        ' s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">'
-        '<s:Body>'
+    return '<?xml version="1.0" encoding="utf-8"?> '
+        '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" '
+        's:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"> '
+        "<s:Body>"
         '<u:$action xmlns:u="$serviceType">'
-        '$body'
-        '</u:$action>'
-        '</s:Body>'
-        '</s:Envelope>';
+        "$body"
+        "</u:$action>"
+        "</s:Body>"
+        "</s:Envelope>";
   }
 
   static String _escapeXml(String input) {
     return input
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&apos;');
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&apos;");
   }
 }
 
@@ -219,8 +219,8 @@ class DlnaSoapParser {
 
   /// Parses a GetPositionInfo response, returning position and duration.
   static PositionInfo parsePositionInfo(String xml) {
-    final relTime = _extractElement(xml, 'RelTime') ?? '00:00:00';
-    final trackDuration = _extractElement(xml, 'TrackDuration') ?? '00:00:00';
+    final relTime = _extractElement(xml, "RelTime") ?? "00:00:00";
+    final trackDuration = _extractElement(xml, "TrackDuration") ?? "00:00:00";
 
     return PositionInfo(
       position: _parseDuration(relTime),
@@ -230,12 +230,12 @@ class DlnaSoapParser {
 
   /// Parses a GetTransportInfo response, returning the transport state string.
   static String parseTransportInfo(String xml) {
-    return _extractElement(xml, 'CurrentTransportState') ?? 'UNKNOWN';
+    return _extractElement(xml, "CurrentTransportState") ?? "UNKNOWN";
   }
 
   /// Parses a GetVolume response, returning the volume as an integer (0-100).
   static int parseVolume(String xml) {
-    final value = _extractElement(xml, 'CurrentVolume') ?? '0';
+    final value = _extractElement(xml, "CurrentVolume") ?? "0";
     return int.tryParse(value) ?? 0;
   }
 
@@ -244,10 +244,10 @@ class DlnaSoapParser {
   /// Extracts the `Sink` field from the response, splits by comma,
   /// and returns the list of protocol info strings.
   static List<String> parseProtocolInfo(String xml) {
-    final sink = _extractElement(xml, 'Sink') ?? '';
+    final sink = _extractElement(xml, "Sink") ?? "";
     if (sink.trim().isEmpty) return [];
     return sink
-        .split(',')
+        .split(",")
         .map((s) => s.trim())
         .where((s) => s.isNotEmpty)
         .toList();
@@ -255,19 +255,19 @@ class DlnaSoapParser {
 
   static String? _extractElement(String xml, String element) {
     final match = RegExp(
-      '<$element>([^<]*)</$element>',
+      "<$element>([^<]*)</$element>",
       caseSensitive: true,
     ).firstMatch(xml);
     return match?.group(1)?.trim();
   }
 
   static Duration _parseDuration(String timeString) {
-    final parts = timeString.split(':');
+    final parts = timeString.split(":");
     if (parts.length != 3) return Duration.zero;
 
     final hours = int.tryParse(parts[0]) ?? 0;
     final minutes = int.tryParse(parts[1]) ?? 0;
-    final seconds = int.tryParse(parts[2].split('.').first) ?? 0;
+    final seconds = int.tryParse(parts[2].split(".").first) ?? 0;
 
     return Duration(hours: hours, minutes: minutes, seconds: seconds);
   }
@@ -306,10 +306,10 @@ class DlnaHttpClient {
     String body,
   ) async {
     // Only log SOAP bodies for non-polling actions to reduce noise
-    if (action != 'GetPositionInfo' &&
-        action != 'GetTransportInfo' &&
-        action != 'GetVolume') {
-      CastLogger.debug('DLNA: SOAP $action request body:\n$body');
+    if (action != "GetPositionInfo" &&
+        action != "GetTransportInfo" &&
+        action != "GetVolume") {
+      CastLogger.debug("DLNA: SOAP $action request body:\n$body");
     }
 
     http.Response response;
@@ -317,18 +317,18 @@ class DlnaHttpClient {
       response = await _post(controlUrl, serviceType, action, body);
     } on http.ClientException catch (e) {
       CastLogger.warning(
-        'DLNA: SOAP $action lost the connection ($e) — retrying once',
+        "DLNA: SOAP $action lost the connection ($e) — retrying once",
       );
       response = await _post(controlUrl, serviceType, action, body);
     }
 
     if (response.statusCode >= 400) {
       CastLogger.error(
-        'DLNA: SOAP $action failed: HTTP ${response.statusCode}',
+        "DLNA: SOAP $action failed: HTTP ${response.statusCode}",
       );
-      CastLogger.debug('DLNA: SOAP error body: ${response.body}');
+      CastLogger.debug("DLNA: SOAP error body: ${response.body}");
       throw ProtocolException(
-        'DLNA SOAP error: HTTP ${response.statusCode}',
+        "DLNA SOAP error: HTTP ${response.statusCode}",
         CastProtocol.dlna,
       );
     }
@@ -346,8 +346,8 @@ class DlnaHttpClient {
         .post(
           Uri.parse(controlUrl),
           headers: {
-            'Content-Type': 'text/xml; charset=utf-8',
-            'SOAPAction': '"$serviceType#$action"',
+            "Content-Type": "text/xml; charset=utf-8",
+            "SOAPAction": '"$serviceType#$action"',
           },
           body: body,
         )
@@ -356,8 +356,8 @@ class DlnaHttpClient {
           onTimeout:
               () =>
                   throw ProtocolException(
-                    'DLNA SOAP $action timed out after '
-                    '${actionTimeout.inSeconds}s',
+                    "DLNA SOAP $action timed out after "
+                    "${actionTimeout.inSeconds}s",
                     CastProtocol.dlna,
                   ),
         );

@@ -1,7 +1,7 @@
-import 'dart:io';
-import 'dart:typed_data';
+import "dart:io";
+import "dart:typed_data";
 
-import '../utils/logger.dart';
+import "../utils/logger.dart";
 
 /// Scans an MPEG-TS file for keyframe (IDR) positions.
 ///
@@ -124,8 +124,8 @@ class TsKeyframeScanner {
     final unique = offsets.toSet().toList()..sort();
 
     CastLogger.debug(
-      'TsKeyframeScanner: found ${unique.length} keyframes in '
-      '${(fileLength / 1024 / 1024).toStringAsFixed(1)}MB file',
+      "TsKeyframeScanner: found ${unique.length} keyframes in "
+      "${(fileLength / 1024 / 1024).toStringAsFixed(1)}MB file",
     );
 
     return unique;
@@ -253,12 +253,12 @@ class TsKeyframeScanner {
                         pts =
                             ((chunk[ptsOffset] >> 1) & 0x07).toUnsigned(64) <<
                                 30 |
-                            (chunk[ptsOffset + 1]).toUnsigned(64) << 22 |
+                            chunk[ptsOffset + 1].toUnsigned(64) << 22 |
                             ((chunk[ptsOffset + 2] >> 1) & 0x7F).toUnsigned(
                                   64,
                                 ) <<
                                 15 |
-                            (chunk[ptsOffset + 3]).toUnsigned(64) << 7 |
+                            chunk[ptsOffset + 3].toUnsigned(64) << 7 |
                             ((chunk[ptsOffset + 4] >> 1) & 0x7F).toUnsigned(64);
                       }
                     }
@@ -304,10 +304,10 @@ class TsKeyframeScanner {
     unique.sort((a, b) => a.offset.compareTo(b.offset));
 
     CastLogger.debug(
-      'TsKeyframeScanner: found ${unique.length} keyframes with PTS in '
-      '${(fileLength / 1024 / 1024).toStringAsFixed(1)}MB file '
-      '(PTS range: ${(unique.first.pts / 90000).toStringAsFixed(3)}s - '
-      '${(unique.last.pts / 90000).toStringAsFixed(3)}s)',
+      "TsKeyframeScanner: found ${unique.length} keyframes with PTS in "
+      "${(fileLength / 1024 / 1024).toStringAsFixed(1)}MB file "
+      "(PTS range: ${(unique.first.pts / 90000).toStringAsFixed(3)}s - "
+      "${(unique.last.pts / 90000).toStringAsFixed(3)}s)",
     );
 
     return unique;
@@ -370,14 +370,14 @@ class TsKeyframeScanner {
 
         final pts =
             ((chunk[ptsOffset] >> 1) & 0x07).toUnsigned(64) << 30 |
-            (chunk[ptsOffset + 1]).toUnsigned(64) << 22 |
+            chunk[ptsOffset + 1].toUnsigned(64) << 22 |
             ((chunk[ptsOffset + 2] >> 1) & 0x7F).toUnsigned(64) << 15 |
-            (chunk[ptsOffset + 3]).toUnsigned(64) << 7 |
+            chunk[ptsOffset + 3].toUnsigned(64) << 7 |
             ((chunk[ptsOffset + 4] >> 1) & 0x7F).toUnsigned(64);
 
         CastLogger.info(
-          'TsKeyframeScanner: first video PTS = $pts '
-          '(${(pts / 90000).toStringAsFixed(3)}s)',
+          "TsKeyframeScanner: first video PTS = $pts "
+          "(${(pts / 90000).toStringAsFixed(3)}s)",
         );
         return pts;
       }
@@ -472,11 +472,11 @@ class TsKeyframeScanner {
         result.setRange(0, 188, patPacket);
         result.setRange(188, 376, pmtPacket);
         CastLogger.info(
-          'TsKeyframeScanner: extracted PAT+PMT (376 bytes, PMT PID=$pmtPid)',
+          "TsKeyframeScanner: extracted PAT+PMT (376 bytes, PMT PID=$pmtPid)",
         );
         return result;
       } else {
-        CastLogger.info('TsKeyframeScanner: extracted PAT only (188 bytes)');
+        CastLogger.info("TsKeyframeScanner: extracted PAT only (188 bytes)");
         return patPacket;
       }
     } finally {
