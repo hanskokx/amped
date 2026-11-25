@@ -4,7 +4,7 @@ import "dart:ui";
 enum AmpedDialog {
   presets(Size(275, 190)),
   preferences(Size(620, 460)),
-  about(Size(400, 300)),
+  about(Size(400, 420)),
   vis(Size(640, 480)),
 
   /// The playing video, filling the screen.

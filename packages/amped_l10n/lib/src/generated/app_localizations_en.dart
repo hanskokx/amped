@@ -1361,6 +1361,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ampedTagline => 'Crank it up.';
 
   @override
+  String get aboutReportBug => 'Report a bug';
+
+  @override
+  String get aboutReportBugNote =>
+      'The issue page is open, with the latest log lines filled in. The whole log is on your clipboard: paste it into the report if it was cut short. Nothing is sent until you submit it there.';
+
+  @override
+  String get aboutReportBugFailed =>
+      'The issue page could not be opened. The log is on your clipboard.';
+
+  @override
   String get macAboutMenu => 'About Amped';
 
   @override

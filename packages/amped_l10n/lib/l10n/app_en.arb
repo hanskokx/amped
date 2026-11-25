@@ -1519,6 +1519,18 @@
   "@ampedTagline": {
     "description": "Tagline shown under the app name in the About dialog."
   },
+  "aboutReportBug": "Report a bug",
+  "@aboutReportBug": {
+    "description": "Button in the About dialog that opens a new issue on the issue tracker, with the log filled in."
+  },
+  "aboutReportBugNote": "The issue page is open, with the latest log lines filled in. The whole log is on your clipboard: paste it into the report if it was cut short. Nothing is sent until you submit it there.",
+  "@aboutReportBugNote": {
+    "description": "Shown in the About dialog after Report a bug, where the log went."
+  },
+  "aboutReportBugFailed": "The issue page could not be opened. The log is on your clipboard.",
+  "@aboutReportBugFailed": {
+    "description": "Shown in the About dialog when the browser did not open for Report a bug."
+  },
   "macAboutMenu": "About Amped",
   "@macAboutMenu": {
     "description": "macOS application menu entry that opens the About dialog."

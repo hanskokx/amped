@@ -2,9 +2,11 @@ import "dart:async";
 
 import "package:amped_classic_skin/amped_classic_skin.dart";
 import "package:amped_l10n/amped_l10n.dart";
+import "package:amped_logging/amped_logging.dart" show AppLogging;
 import "package:amped_wasabi/amped_wasabi.dart" show wasabiLegible;
 import "package:material_ui/material_ui.dart";
 import "package:package_info_plus/package_info_plus.dart";
+import "package:url_launcher/url_launcher.dart";
 
 import "../app/amped_dialog.dart";
 import "../app/amped_shell.dart";
@@ -19,6 +21,7 @@ import "../tags/tag_lookup.dart";
 import "../vis/vis_config_page.dart";
 import "../vis/vis_window.dart";
 import "artwork_page.dart";
+import "bug_report.dart";
 import "edit_metadata_page.dart";
 import "file_info_page.dart";
 import "playlist_search_page.dart";
@@ -278,6 +281,28 @@ class _AboutPage extends StatefulWidget {
 
 class _AboutPageState extends State<_AboutPage> {
   late final Future<PackageInfo> _info = PackageInfo.fromPlatform();
+  String? _reportNote;
+
+  Future<void> _reportBug() async {
+    final localizations = AppLocalizations.of(context);
+    final locale = Localizations.localeOf(context).toLanguageTag();
+    final info = await _info;
+    final opened = await BugReport.open(
+      environment: BugReport.environment(
+        version: info.version,
+        buildNumber: info.buildNumber,
+        commit: _gitCommit,
+        locale: locale,
+      ),
+      logs: AppLogging.recent.text,
+    );
+    if (!mounted) return;
+    setState(() {
+      _reportNote = opened
+          ? localizations.aboutReportBugNote
+          : localizations.aboutReportBugFailed;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -313,6 +338,31 @@ class _AboutPageState extends State<_AboutPage> {
               ),
               const SizedBox(height: 8),
               Text(localizations.ampedTagline),
+              const SizedBox(height: 4),
+              TextButton(
+                onPressed: () => launchUrl(
+                  Uri.parse(BugReport.website),
+                  mode: LaunchMode.externalApplication,
+                ),
+                child: const Text(
+                  "www.amped-player.com",
+                  style: TextStyle(decoration: TextDecoration.underline),
+                ),
+              ),
+              const SizedBox(height: 8),
+              OutlinedButton.icon(
+                onPressed: _reportBug,
+                icon: const Icon(Icons.bug_report_outlined),
+                label: Text(localizations.aboutReportBug),
+              ),
+              if (_reportNote != null) ...[
+                const SizedBox(height: 12),
+                Text(
+                  _reportNote!,
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.bodySmall,
+                ),
+              ],
             ],
           ),
         ),

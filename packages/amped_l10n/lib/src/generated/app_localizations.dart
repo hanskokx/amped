@@ -2272,6 +2272,24 @@ abstract class AppLocalizations {
   /// **'Crank it up.'**
   String get ampedTagline;
 
+  /// Button in the About dialog that opens a new issue on the issue tracker, with the log filled in.
+  ///
+  /// In en, this message translates to:
+  /// **'Report a bug'**
+  String get aboutReportBug;
+
+  /// Shown in the About dialog after Report a bug, where the log went.
+  ///
+  /// In en, this message translates to:
+  /// **'The issue page is open, with the latest log lines filled in. The whole log is on your clipboard: paste it into the report if it was cut short. Nothing is sent until you submit it there.'**
+  String get aboutReportBugNote;
+
+  /// Shown in the About dialog when the browser did not open for Report a bug.
+  ///
+  /// In en, this message translates to:
+  /// **'The issue page could not be opened. The log is on your clipboard.'**
+  String get aboutReportBugFailed;
+
   /// macOS application menu entry that opens the About dialog.
   ///
   /// In en, this message translates to:

@@ -6,4 +6,5 @@ export "package:arcane_framework/arcane_framework.dart"
 
 export "src/app_logging.dart";
 export "src/console_interface.dart";
+export "src/memory_interface.dart";
 export "src/redacting_interceptor.dart";
