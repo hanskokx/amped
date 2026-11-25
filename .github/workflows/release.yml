@@ -89,14 +89,11 @@ jobs:
             build-dir: x64
             inno-arch: x64compatible
             label: x64
-          # Windows ARM is left out until media_kit has an ARM64 ANGLE: its
-          # video plugin does not link without one (the fix was never merged
-          # upstream).
-          # - runner: windows-11-arm
-          #   flutter-arch: arm64
-          #   build-dir: arm64
-          #   inno-arch: arm64
-          #   label: arm64
+          - runner: windows-11-arm
+            flutter-arch: arm64
+            build-dir: arm64
+            inno-arch: arm64
+            label: arm64
     runs-on: ${{ matrix.runner }}
     defaults:
       run:
