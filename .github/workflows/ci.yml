@@ -1,9 +1,18 @@
 name: Tests
 
+# The website has its own workflow; changes to it alone need no tests.
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - website/**
+      - tool/release_json.sh
+      - .github/workflows/website.yml
   pull_request:
+    paths-ignore:
+      - website/**
+      - tool/release_json.sh
+      - .github/workflows/website.yml
 
 jobs:
   test:
