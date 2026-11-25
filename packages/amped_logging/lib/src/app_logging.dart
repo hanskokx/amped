@@ -2,11 +2,15 @@ import "package:arcane_framework/arcane_framework.dart";
 import "package:flutter/foundation.dart";
 
 import "console_interface.dart";
+import "memory_interface.dart";
 import "redacting_interceptor.dart";
 
 /// Configures Arcane's logger for Amped. Messages are logged with
 /// [Arcane.log]; this only sets where they go.
 abstract class AppLogging {
+  /// The latest log events, masked, for a bug report.
+  static final MemoryInterface recent = MemoryInterface();
+
   /// Registers the console and [redactingInterceptor], which masks tokens and
   /// secrets in every event, and routes
   /// `debugPrint` and unhandled errors through [Arcane.log] so what Flutter
@@ -16,6 +20,8 @@ abstract class AppLogging {
     Arcane.logger.reset();
     Arcane.logger.interceptors.add(redactingInterceptor);
     await Arcane.logger.registerInterface(const ConsoleInterface());
+    recent.clear();
+    await Arcane.logger.registerInterface(recent);
     _routeDebugPrint();
   }
 

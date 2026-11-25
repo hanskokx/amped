@@ -301,12 +301,20 @@ jobs:
           ls -l
           flags=""
           if [ "${{ inputs.prerelease }}" = "true" ]; then flags="--prerelease"; fi
-          # The notes are collected by GitHub from the pull requests and
-          # commits since the previous release.
+          # The notes are this version's section of CHANGELOG.md, then what
+          # GitHub collects from the pull requests since the previous release.
+          awk -v v="$version" '
+            /^## / { on = ($2 == v); next }
+            on { print }
+          ' ../CHANGELOG.md > ../notes.md
+          if [ ! -s ../notes.md ]; then
+            echo "::warning::CHANGELOG.md has no section for $version."
+          fi
           gh release create "v$version" ./* $flags \
             --repo "${{ github.repository }}" \
             --target "${{ github.sha }}" \
             --title "Amped $version" \
+            --notes-file ../notes.md \
             --generate-notes
 
   # Deploys the website again, so release.json (made from the latest GitHub
