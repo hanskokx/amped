@@ -209,7 +209,9 @@ class VisHost extends ChangeNotifier implements VisContext {
   /// The picture's area in the skinned window or, when [fullscreen], on
   /// the screen is [w] by [h] pixels.
   void resize(int w, int h, {required bool fullscreen}) {
-    if (w <= 0 || h <= 0) return;
+    // Not a place to draw in, such as a skin's one-pixel placeholder: it
+    // would make the picture one square, and some modules can't draw it.
+    if (w < 2 || h < 2) return;
     if (fullscreen) {
       _screenSize = (w, h);
     } else {

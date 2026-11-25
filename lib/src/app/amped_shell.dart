@@ -244,6 +244,7 @@ class AmpedShell extends ChangeNotifier {
     dialogs: dialogManager,
     dock: dock,
     scripts: () => _scripts,
+    slotsOnly: () => _visInSlotsOnly,
     playerChanged: _onPlayerChanged,
   );
 
@@ -821,7 +822,7 @@ class AmpedShell extends ChangeNotifier {
     },
     // A skin showing it in another window (Amped Modern's drawer) has
     // it instead of its own window.
-    SkinWindow.vis => visualization.windowShows,
+    SkinWindow.vis => visualization.isOpen,
     SkinWindow.albumArt => player.albumArtOpen,
     SkinWindow.notifier => notifications.windowShows(
       skinShown: _notifierShown,
@@ -861,7 +862,12 @@ class AmpedShell extends ChangeNotifier {
   bool _hasOpenWindow(SkinWindow window) =>
       !(window == SkinWindow.eq && skinShowsEq) &&
       !skinEmbeds(window) &&
+      !(window == SkinWindow.vis && _visInSlotsOnly) &&
       isOpen(window);
+
+  /// Whether the modern skin's visualization window is only a placeholder.
+  bool get _visInSlotsOnly =>
+      skin.modern?.container(SkinWindow.vis)?.isPlaceholder ?? false;
 
   bool isShaded(SkinWindow window) => switch (window) {
     SkinWindow.main => player.windowShade,

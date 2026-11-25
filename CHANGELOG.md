@@ -5,6 +5,18 @@
 - The tray icon can now appear when Amped is installed as a Flatpak.
 - The log now says whether the tray icon was set up, to help find out why it's
   missing on some systems.
+- In ClassicPro skins, opening the visualizer now makes a compact player taller
+  so there is room for it, and the visualizer stays in the skin's own tab
+  instead of also opening an invisible window.
+- The visualizer in ClassicPro skins' VIS tab no longer shows a black screen
+  or a single large square.
+- In modern skins that draw their window with click-through artwork, such as
+  ClassicPro's compact strip, clicking the artwork no longer goes through to
+  the window behind.
+- ClassicPro skins' tabs now open their panels in a player that started as the
+  compact strip. Before, only the highlighted tab changed.
+- The ClassicPro Widgets Manager now opens wide enough to read, and lists the
+  widgets.
 - Modern skins' flat color images now show. This fixes skins whose beat
   visualizers, such as D-Reliction's, stayed blank.
 

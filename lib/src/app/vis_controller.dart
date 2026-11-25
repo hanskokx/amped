@@ -14,6 +14,7 @@ class VisController {
     required this.dialogs,
     required this.dock,
     required this._scripts,
+    required this._slotsOnly,
     required this.playerChanged,
   });
 
@@ -21,6 +22,10 @@ class VisController {
   final DialogManager dialogs;
   final DockManager<SkinWindow> dock;
   final WasabiScriptRuntime? Function() _scripts;
+
+  /// Whether the skin has no visualization window of its own, only slots in
+  /// its other windows (ClassicPro's VIS tab).
+  final bool Function() _slotsOnly;
 
   /// The player changed in a way that needs the windows brought up to date.
   final void Function() playerChanged;
@@ -36,7 +41,12 @@ class VisController {
   /// Whether the visualization's own skinned window is the one showing it. A
   /// skin showing it in another window (Amped Modern's drawer) has it
   /// instead of its own window.
-  bool get windowShows => vis.isRunning && !vis.fullscreen && _slots == 0;
+  bool get windowShows =>
+      vis.isRunning && !vis.fullscreen && _slots == 0 && !_slotsOnly();
+
+  /// Whether the visualization counts as open: its own window shows, or,
+  /// for a skin that has only slots for it, the plug-in runs.
+  bool get isOpen => _slotsOnly() ? vis.isRunning : windowShows;
 
   /// The visualization started, stopped or changed mode.
   ///
@@ -77,11 +87,12 @@ class VisController {
   }
 
   /// The slot went away (the drawer closed): a plug-in started for it
-  /// stops; one the user started goes back to its own window.
+  /// stops; one the user started goes back to its own window, or stops too
+  /// when the skin has none.
   void detachSlot() {
     if (_slots == 0) return;
     _slots--;
-    if (_slots == 0 && _startedForSlot) {
+    if (_slots == 0 && (_startedForSlot || _slotsOnly())) {
       _startedForSlot = false;
       vis.stop();
     }
@@ -93,7 +104,9 @@ class VisController {
   /// drawer for it, where a slot then runs it, unless its Detach
   /// Visualizer option gave it a window of its own.
   void setRunning(bool run) {
-    if (run == vis.isRunning) return;
+    // A plug-in running with nowhere to show asks the skin again.
+    final unseen = _slotsOnly() && _slots == 0;
+    if (run == vis.isRunning && !(run && unseen)) return;
     final scripts = _scripts();
     if (scripts != null &&
         scripts.cancelsComponent(wasabiVisGuid, goingVisible: run)) {

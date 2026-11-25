@@ -567,10 +567,53 @@ List<List<Offset>>? wasabiWindowShape(
     for (final companion in companions) ...?wasabiWindowShape(skin, companion),
   ];
   if (rects.isEmpty && over.isEmpty) return null;
+  // Ghost layers let the mouse through to what is under them in the window,
+  // not out of it: what they paint is the window (ClassicPro's compact
+  // player draws its whole body with them).
+  _addGhostArt(skin, layout.root, bounds, bounds, false, rects);
   return [
     for (final r in rects) [r.topLeft, r.topRight, r.bottomRight, r.bottomLeft],
     ...over,
   ];
+}
+
+/// Adds to [rects] the painted pixels of the ghost layers in [group], placed
+/// at [area], within [bounds].
+void _addGhostArt(
+  WasabiSkinData skin,
+  WasabiObject group,
+  Rect area,
+  Rect bounds,
+  bool ghost,
+  List<Rect> rects,
+) {
+  for (final child in group.children) {
+    if (!_paints(child) || child.subtractsRegion) continue;
+    final rect = wasabiObjectRect(child, area.size, skin).shift(area.topLeft);
+    final inGhost = ghost || child.ghost;
+    if (child.tag == "group") {
+      _addGhostArt(skin, child, rect, bounds, inGhost, rects);
+    } else if (child.tag == "layer" && inGhost) {
+      final bitmap = skin.bitmap(child["image"]);
+      if (bitmap == null ||
+          bitmap.size.isEmpty ||
+          !skin.knowsBitmapRegion(bitmap)) {
+        continue;
+      }
+      final painted = skin.bitmapRegion(bitmap) ?? [Offset.zero & bitmap.size];
+      final sx = rect.width / bitmap.size.width;
+      final sy = rect.height / bitmap.size.height;
+      for (final part in painted) {
+        final placed = Rect.fromLTRB(
+          rect.left + part.left * sx,
+          rect.top + part.top * sy,
+          rect.left + part.right * sx,
+          rect.top + part.bottom * sy,
+        ).intersect(bounds);
+        if (placed.width > 0 && placed.height > 0) rects.add(placed);
+      }
+    }
+  }
 }
 
 /// The region of a layout with a shaped background as it is now: the
@@ -1139,6 +1182,7 @@ class _GroupStack extends StatelessWidget {
     "windowholder",
     "componentbucket",
     "group",
+    "grouplist",
     "menu",
   }.contains(tag);
 }
@@ -1428,7 +1472,8 @@ class _ObjectView extends StatelessWidget {
         object: object,
         size: size,
       ),
-      "group" => _GroupBody(group: object, size: size),
+      // A GroupList is a group of the rows scripts add to it.
+      "group" || "grouplist" => _GroupBody(group: object, size: size),
       "menu" => _MenuView(object: object, size: size),
       _ => const SizedBox.shrink(),
     };
