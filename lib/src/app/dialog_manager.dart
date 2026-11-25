@@ -193,7 +193,9 @@ class DialogManager {
       // Skinned dialogs are drawn at the skin's pixel size, like the skinned
       // windows.
       size: dialog.skinned ? sizeOf(dialog) * player.uiScale : dialog.size,
-      constraints: dialog.minSize == null
+      constraints: !dialog.resizable
+          ? BoxConstraints.tight(dialog.size)
+          : dialog.minSize == null
           ? null
           : BoxConstraints(
               minWidth: dialog.minSize!.width,
@@ -224,6 +226,7 @@ class DialogManager {
       native.configure(transparent: true);
     }
     native.setAlwaysOnTop(player.alwaysOnTop);
+    if (!dialog.resizable) native.setResizable(false);
     // Flutter's window constraints aren't enforced on every platform.
     if (dialog.minSize case final least?) native.setMinSize(least);
     _files.acceptDrops(controller, playDropped: false);
@@ -250,6 +253,10 @@ class DialogManager {
             max(saved.width, least.width),
             max(saved.height, least.height),
           );
+    }
+    if (saved != null && !dialog.resizable) {
+      // Where it was left, at the size it has now.
+      saved = saved.topLeft & dialog.size;
     }
     if (saved != null && _onScreen(saved)) {
       native.setFrame(saved);

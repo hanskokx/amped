@@ -11,6 +11,7 @@ export "src/maki/maki_runtime.dart";
 export "src/modern_skin.dart";
 export "src/playlist_info.dart";
 export "src/skin_region.dart";
+export "src/wasabi_about.dart";
 export "src/wasabi_archive.dart";
 export "src/wasabi_color_themes.dart";
 export "src/wasabi_config.dart";

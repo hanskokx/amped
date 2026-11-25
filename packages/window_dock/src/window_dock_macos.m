@@ -273,6 +273,16 @@ void wd_set_min_size(void* handle, double width, double height) {
   window.contentMinSize = NSMakeSize(width, height);
 }
 
+void wd_set_resizable(void* handle, int resizable) {
+  NSWindow* window = (__bridge NSWindow*)handle;
+  if (window == nil) return;
+  if (resizable) {
+    window.styleMask |= NSWindowStyleMaskResizable;
+  } else {
+    window.styleMask &= ~NSWindowStyleMaskResizable;
+  }
+}
+
 void wd_order_above(void* handle, void* other) {
   NSWindow* window = (__bridge NSWindow*)handle;
   NSWindow* below = (__bridge NSWindow*)other;

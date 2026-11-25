@@ -70,6 +70,11 @@ external void wdFocus(Pointer<Void> handle);
 )
 external void wdSetMinSize(Pointer<Void> handle, double width, double height);
 
+@Native<Void Function(Pointer<Void>, Int32)>(
+  symbol: "wd_set_resizable",
+)
+external void wdSetResizable(Pointer<Void> handle, int resizable);
+
 @Native<Void Function(Pointer<Void>, Int32)>(symbol: "wd_set_activatable")
 external void wdSetActivatable(Pointer<Void> handle, int activatable);
 

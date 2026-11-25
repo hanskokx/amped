@@ -68,6 +68,10 @@ abstract class NativeWindow {
   /// window down to. Supported on macOS; a no-op elsewhere for now.
   void setMinSize(Size size);
 
+  /// Whether the user can resize or zoom the window. Supported on macOS; a
+  /// no-op elsewhere, where the window's own size constraints hold it.
+  void setResizable(bool resizable);
+
   /// Covers the whole screen the window is on, above the menu bar or
   /// taskbar (hidden meanwhile), or, with [on] false, goes back to how it
   /// was.
@@ -236,6 +240,10 @@ class _MacOSWindow implements NativeWindow {
       mac.wdSetMinSize(_handle, size.width, size.height);
 
   @override
+  void setResizable(bool resizable) =>
+      mac.wdSetResizable(_handle, resizable ? 1 : 0);
+
+  @override
   void setFullscreen(bool on) => mac.wdSetFullscreen(_handle, on ? 1 : 0);
 
   @override
@@ -317,6 +325,9 @@ class _Win32Window implements NativeWindow {
 
   @override
   void setMinSize(Size size) {}
+
+  @override
+  void setResizable(bool resizable) {}
 
   /// The frame before going fullscreen.
   Rect? _windowed;
@@ -403,6 +414,9 @@ class _LinuxWindow implements NativeWindow {
 
   @override
   void setMinSize(Size size) {}
+
+  @override
+  void setResizable(bool resizable) {}
 
   @override
   void setFullscreen(bool on) => on

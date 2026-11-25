@@ -187,6 +187,21 @@ class WasabiScriptRuntime extends ChangeNotifier {
     }
   }
 
+  /// Runs only the scripts in [layout], a group the app shows on its own
+  /// as [container] (the skin's About panel), in place of [start]: the
+  /// skin's other scripts belong to the runtime running its windows.
+  void startGroup(WasabiContainer container, WasabiLayout layout) {
+    if (_started) return;
+    _started = true;
+    _config._runtime = this;
+    _layouts[layout.root] = (container, layout);
+    _loadIn(layout.root);
+    host.addListener(_onHostChanged);
+    _startSystems(List.of(_systems));
+    _autoPlay(layout.root);
+    layoutResized(layout);
+  }
+
   /// Tells the scripts the user dragged [layout]'s edge to its size now
   /// (`Layout.onUserResize`): a skin's frame then resizes the window it
   /// frames.

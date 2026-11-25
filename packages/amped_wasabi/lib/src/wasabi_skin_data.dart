@@ -624,7 +624,8 @@ class WasabiSkinData {
   }
 
   /// The gamma group of the `<color>` elements that have one, by
-  /// lower-cased id.
+  /// lower-cased id; empty for those that say `gammagroup=""`, which no
+  /// color theme changes.
   final Map<String, String> colorGroups;
 
   /// `<elementalias id target>`: an element id that stands for another
@@ -837,6 +838,8 @@ class WasabiSkinData {
     final own = value == null
         ? null
         : colorGroups[_aliased(value.trim().toLowerCase())];
+    // Amped Modern's About panel keeps its text light in every theme.
+    if (own == "" && _named(group) == null) return color;
     return theme
         .resolve(_named(group) ?? _named(own) ?? defaultGroup)
         .filterColor(color);
@@ -1055,10 +1058,12 @@ class WasabiSkinData {
                 // `colorgroup`, else `gammagroup` (skinelem.cpp).
                 final group =
                     _named(node["colorgroup"]) ?? _named(node["gammagroup"]);
-                if (group == null) {
-                  colorGroups.remove(target);
-                } else {
+                if (group != null) {
                   colorGroups[target] = group;
+                } else if (node["gammagroup"]?.trim() == "") {
+                  colorGroups[target] = "";
+                } else {
+                  colorGroups.remove(target);
                 }
               }
             }
