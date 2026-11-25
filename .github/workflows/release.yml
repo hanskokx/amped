@@ -236,10 +236,18 @@ jobs:
           token: ${{ secrets.INTERNAL_GIT_ACCESS_KEY }}
           ssh-key: ${{ secrets.SSH_KEY }}
       - uses: subosito/flutter-action@v2
+        if: ${{ matrix.flutter-arch == 'x64' }}
         with:
           channel: stable
-          architecture: ${{ matrix.flutter-arch }}
           cache: true
+      # flutter-action finds no Linux arm64 SDK either, so the stable branch
+      # is cloned (it fetches the engine for the machine it runs on).
+      - name: Flutter (arm64)
+        if: ${{ matrix.flutter-arch == 'arm64' }}
+        run: |
+          git clone --depth 1 --branch stable https://github.com/flutter/flutter.git "$RUNNER_TEMP/flutter"
+          echo "$RUNNER_TEMP/flutter/bin" >> "$GITHUB_PATH"
+          "$RUNNER_TEMP/flutter/bin/flutter" --version
       - name: Build packages
         run: |
           sudo apt-get update
