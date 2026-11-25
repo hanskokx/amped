@@ -153,6 +153,7 @@ class VisWorker {
       positionSeconds,
       lengthSeconds,
     ]);
+    if (reply is String) throw StateError(reply);
     if (reply is! List) return null;
     return VisWorkerFrame(
       pixels: (reply[0] as TransferableTypedData).materialize().asUint8List(),
@@ -306,7 +307,14 @@ void _entry(List<Object?> arguments) {
                 spectrumChannels: m[4]! as int,
                 waveformChannels: m[5]! as int,
               );
-        final keepRunning = running.render(frame, target);
+        final bool keepRunning;
+        try {
+          keepRunning = running.render(frame, target);
+        } on Object catch (error) {
+          // Without a reply the host would wait for this frame for good.
+          reply.send("$error");
+          return;
+        }
         reply.send([
           TransferableTypedData.fromList([target.pixels]),
           width,

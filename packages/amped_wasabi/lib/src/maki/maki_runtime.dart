@@ -183,9 +183,13 @@ class WasabiScriptRuntime extends ChangeNotifier {
         (l) => l.id.toLowerCase() == current,
         orElse: () => container.layouts.first,
       );
+      _shownLayouts.add(layout);
       _broadcast("onshowlayout", [wrap(layout.root)]);
     }
   }
+
+  /// The layouts that have been on screen.
+  final Set<WasabiLayout> _shownLayouts = Set.identity();
 
   /// Runs only the scripts in [layout], a group the app shows on its own
   /// as [container] (the skin's About panel), in place of [start]: the
@@ -1492,6 +1496,13 @@ class WasabiScriptRuntime extends ChangeNotifier {
     _broadcast("onhidelayout", [wrap(from.root)]);
     vm.fire(wrapper, "onswitchtolayout", [next]);
     _broadcast("onshowlayout", [next]);
+    // A layout on screen for the first time (the full player, of one that
+    // started windowshaded) shows what is in it: ClassicPro's tabs open
+    // nothing until their area hears `onSetVisible`.
+    if (_shownLayouts.add(to)) {
+      vm.fire(next, "onsetvisible", [true]);
+      _tellVisible(to.root, true);
+    }
   }
 
   /// The answer a popup menu was given, while the handler that opened it

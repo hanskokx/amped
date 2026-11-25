@@ -49,6 +49,7 @@ class _TestModule implements VisModule {
 
   @override
   bool render(VisFrame frame, VisSurface surface) {
+    if (surface.width == 1) throw StateError("too narrow");
     surface.pixels.fillRange(0, surface.pixels.length, 0xFF8040FF);
     return true;
   }
@@ -123,6 +124,30 @@ void main() {
       ),
       isNull,
     );
+  });
+
+  test("a module that fails on a frame is reported, not waited for", () async {
+    final worker = await VisWorker.start(
+      plugins: _testPlugins,
+      pluginId: "test",
+      module: 0,
+      config: null,
+    );
+    await expectLater(
+      worker!.render(
+        left: null,
+        right: null,
+        spectrumChannels: 1,
+        waveformChannels: 1,
+        width: 1,
+        height: 1,
+        title: "",
+        positionSeconds: 0,
+        lengthSeconds: 0,
+      ),
+      throwsStateError,
+    );
+    worker.dispose();
   });
 
   test("an unknown plug-in or module gives no worker", () async {

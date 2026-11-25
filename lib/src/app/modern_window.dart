@@ -54,7 +54,13 @@ class _ModernWindowBody extends StatelessWidget {
       window: window,
       cursor: SkinCursor.normal,
       transparent: true,
-      child: skin == null || container == null || layout == null
+      // A placeholder (a window left from another skin stays, hidden) draws
+      // nothing, so it runs no second copy of what it holds.
+      child:
+          skin == null ||
+              container == null ||
+              layout == null ||
+              container.isPlaceholder
           ? const SizedBox.shrink()
           // The window can be smaller than the layout (its snap
           // adjustments leave out a closed drawer's room), so the layout

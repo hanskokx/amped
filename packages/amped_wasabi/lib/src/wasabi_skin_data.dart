@@ -455,6 +455,13 @@ class WasabiContainer {
   /// A container created on demand for components (not shown at load).
   final bool dynamic;
 
+  /// Whether the container is no window to show: every layout is a single
+  /// pixel (ClassicPro's visualization, which only its main window's holders
+  /// show).
+  bool get isPlaceholder =>
+      layouts.isNotEmpty &&
+      layouts.every((layout) => layout.size.longestSide <= 1);
+
   /// The layout named [id] (case-insensitive), or null.
   WasabiLayout? layout(String id) {
     final key = id.toLowerCase();
@@ -562,6 +569,11 @@ class WasabiSkinData {
   /// load). Null when the bitmap is fully opaque or was not read: its
   /// region is its whole rectangle.
   List<ui.Rect>? bitmapRegion(WasabiBitmap bitmap) => _bitmapRegions[bitmap];
+
+  /// Whether the pixels of [bitmap] were looked at, so that a null
+  /// [bitmapRegion] means all of them have alpha.
+  bool knowsBitmapRegion(WasabiBitmap bitmap) =>
+      _bitmapRegions.containsKey(bitmap);
 
   final _TreeBuilder _builder;
 
@@ -1403,6 +1415,15 @@ class WasabiSkinData {
           root.attributes["w"] = "${defaultSize.width.round()}";
           root.attributes["h"] = "${defaultSize.height.round()}";
         }
+        // A dialog that gives no width (ClassicPro's widgets manager, which
+        // only has a minimum) would open too narrow to read.
+        if (child.children.any((c) => c.tag == "wasabi:standardframe:modal") &&
+            root.optInt("w") == null &&
+            root.optInt("default_w") == null &&
+            root.background == null) {
+          root.attributes["w"] =
+              "${math.max(_dialogWidth, root.optInt("minimum_w") ?? 0)}";
+        }
         final size = _layoutSize(root);
         // A nested container is a script's helper window, sized when the
         // script shows it.
@@ -1418,6 +1439,14 @@ class WasabiSkinData {
         if (background != null) {
           // Objects with `sysregion` add to (or cut from) the shape.
           for (final bitmap in _regionBitmaps(root, bitmaps)) {
+            if (bitmapRegions.containsKey(bitmap)) continue;
+            bitmapRegions[bitmap] = await alphaRects(bitmap);
+          }
+        }
+        // Without a background, the artwork drawn with ghost layers is part
+        // of the window's shape too.
+        if (background == null) {
+          for (final bitmap in _ghostLayerBitmaps(root, bitmaps)) {
             if (bitmapRegions.containsKey(bitmap)) continue;
             bitmapRegions[bitmap] = await alphaRects(bitmap);
           }
@@ -1683,6 +1712,25 @@ class WasabiSkinData {
       yield* _shapedLayerBitmaps(child, bitmaps);
     }
   }
+
+  /// The pictures of the layers under [group] that are ghosts themselves or
+  /// sit in a ghost group.
+  static Iterable<WasabiBitmap> _ghostLayerBitmaps(
+    WasabiObject group,
+    Map<String, WasabiBitmap> bitmaps, {
+    bool ghost = false,
+  }) sync* {
+    for (final child in group.children) {
+      if (child.tag == "layer" && (ghost || child.ghost)) {
+        final bitmap = bitmaps[child["image"]?.toLowerCase()];
+        if (bitmap != null) yield bitmap;
+      }
+      yield* _ghostLayerBitmaps(child, bitmaps, ghost: ghost || child.ghost);
+    }
+  }
+
+  /// How wide a dialog that states no width opens.
+  static const int _dialogWidth = 320;
 
   static ui.Size _layoutSize(WasabiObject layout) {
     final w = layout.optInt("w") ?? layout.optInt("default_w");
@@ -2418,8 +2466,17 @@ class _TreeBuilder {
               !key.startsWith("#"))
             key: value,
       ...def.attributes,
-      ...use,
     };
+    // A use that says `fitparent="1"` fills its parent whatever place and
+    // size the groupdef gives (ClassicPro's player area, whose groupdef is
+    // 100 pixels high: its script makes the window taller when the area has
+    // no room for the component asked for).
+    if (use["fitparent"]?.trim() == "1") {
+      attributes.removeWhere(
+        (key, _) => const {"x", "y", "w", "h"}.contains(key),
+      );
+    }
+    attributes.addAll(use);
     // The groupdef's id names the group unless the use gives it another;
     // an `instanceid` names this one instance (Amped Modern's title bars
     // tell their two streaks apart by it).
