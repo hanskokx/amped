@@ -22,6 +22,10 @@ finish-args:
   - --talk-name=org.freedesktop.secrets
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.kde.StatusNotifierWatcher
+  # The tray library only registers its icon once it owns a name like
+  # org.kde.StatusNotifierItem-<pid>-1. A Flatpak wildcard only covers whole
+  # name elements, so this can't be narrowed to the StatusNotifierItem names.
+  - --own-name=org.kde.*
   - --own-name=org.mpris.MediaPlayer2.amped
 modules:
   - name: amped
