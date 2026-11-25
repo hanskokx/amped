@@ -18,12 +18,14 @@ import "src/app/notification_view.dart";
 import "src/app/skinned_window.dart";
 import "src/app/video_view.dart";
 import "src/dialogs/dialog_windows.dart";
+import "src/library/track_drag_out.dart";
 import "src/platform/file_types.dart";
 import "src/platform/single_instance.dart";
 import "src/player/player_state.dart";
 import "src/player/video_engine.dart";
 import "src/skin/modern_preview_cache.dart";
 import "src/skin/skin_manager.dart";
+import "src/skin/skin_views.dart";
 import "src/vis/vis_window.dart";
 
 Future<void> main(List<String> arguments) => runAmped(arguments);
@@ -115,8 +117,12 @@ class AmpedApp extends StatelessWidget {
                 locale: locale,
                 supportedLocales: AppLocalizations.supportedLocales,
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
-                builder: (context, _) =>
-                    _SkinnedWindowContent(shell: shell, window: window),
+                builder: (context, _) => TrackDropOutline(
+                  dragOut: shell.trackDragOut,
+                  window: window,
+                  color: () => shell.skins.current.classicData.pledit.current,
+                  child: _SkinnedWindowContent(shell: shell, window: window),
+                ),
               ),
             ),
           for (final MapEntry(key: dialog, value: controller)

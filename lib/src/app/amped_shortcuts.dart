@@ -198,8 +198,7 @@ Map<ShortcutActivator, VoidCallback> _globalKeys(AmpedShell shell) {
         shell.toggle(SkinWindow.albumArt),
     _key(LogicalKeyboardKey.keyM, alt: true): shell.minimize,
     _key(LogicalKeyboardKey.keyF, alt: true): shell.showMainMenu,
-    _key(LogicalKeyboardKey.keyS, alt: true): () =>
-        shell.dialogManager.open(AmpedDialog.preferences),
+    _key(LogicalKeyboardKey.keyS, alt: true): shell.openSkinBrowser,
     _key(LogicalKeyboardKey.keyP, control: true): () =>
         shell.dialogManager.open(AmpedDialog.preferences),
     _key(LogicalKeyboardKey.f1, control: true): () =>

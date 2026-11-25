@@ -5,6 +5,7 @@ import "package:amped_wasabi/amped_wasabi.dart";
 import "package:flutter/widgets.dart";
 
 import "../library/library_view.dart";
+import "../library/track_drag_out.dart";
 import "../library/watch_folders.dart";
 
 import "../skin/skin_views.dart";
@@ -134,49 +135,53 @@ class LibraryContent extends StatelessWidget {
         ]),
         builder: (context, _) => OfflineFolders(
           notifier: shell.watchFolders,
-          child: LibraryView(
-            library: shell.library,
-            sections: shell.sources.sections(
-              localLabel: shell.localizations.mlSourceLocal,
-              allVideosLabel: shell.localizations.mlSourceAllVideos,
-              moviesLabel: shell.localizations.mlSourceMovies,
-              showsLabel: shell.localizations.mlSourceShows,
+          child: TrackDragOutScope(
+            dragOut: shell.trackDragOut,
+            child: LibraryView(
+              library: shell.library,
+              sections: shell.sources.sections(
+                localLabel: shell.localizations.mlSourceLocal,
+                allVideosLabel: shell.localizations.mlSourceAllVideos,
+                moviesLabel: shell.localizations.mlSourceMovies,
+                showsLabel: shell.localizations.mlSourceShows,
+              ),
+              colors: _colors(skin),
+              buttonBuilder: _buttonBuilder(),
+              // A modern skin has no scrollbar bitmaps: the list draws its own.
+              skin: shell.skin is! ModernSkin || classicFrame ? skin : null,
+              localizations: shell.localizations,
+              onPlay: (paths) =>
+                  unawaited(shell.files.openPaths(paths, play: true)),
+              onEnqueue: (paths) =>
+                  unawaited(shell.files.openPaths(paths, play: false)),
+              onAddMedia: () => unawaited(shell.libraryActions.addToLibrary()),
+              onPlayAt: (path, at) => unawaited(shell.files.playAt(path, at)),
+              coverLoader: shell.covers.readCoverBytes,
+              onOpenArtwork: shell.requests.showArtwork,
+              settings: shell.libraryViewSettings,
+              onSettingsChanged: shell.saveLibraryViewSettings,
+              playlists: shell.savedPlaylists,
+              playStats: shell.playStats,
+              onSavePlaylist: () => unawaited(
+                shell.libraryActions.saveCurrentPlaylistToLibrary(),
+              ),
+              onNewPlaylist: () =>
+                  unawaited(shell.libraryActions.newSavedPlaylist()),
+              onRemoveFromPlaylist: (id, indices) =>
+                  unawaited(shell.savedPlaylists.removeAt(id, indices)),
+              onMoveInPlaylist: (id, indices, to) =>
+                  unawaited(shell.savedPlaylists.move(id, indices, to)),
+              onDropOnPlaylist: (id, paths) =>
+                  unawaited(shell.libraryActions.addToSavedPlaylist(id, paths)),
+              onImportPlaylists: () =>
+                  unawaited(shell.libraryActions.importPlaylists()),
+              onPlaylistMenu: (id) => shell.showMenu(
+                AmpedMenus.savedPlaylistContext(shell, id),
+                null,
+              ),
+              onContextMenu: (paths) =>
+                  shell.showMenu(AmpedMenus.libraryContext(shell, paths), null),
             ),
-            colors: _colors(skin),
-            buttonBuilder: _buttonBuilder(),
-            // A modern skin has no scrollbar bitmaps: the list draws its own.
-            skin: shell.skin is! ModernSkin || classicFrame ? skin : null,
-            localizations: shell.localizations,
-            onPlay: (paths) =>
-                unawaited(shell.files.openPaths(paths, play: true)),
-            onEnqueue: (paths) =>
-                unawaited(shell.files.openPaths(paths, play: false)),
-            onAddMedia: () => unawaited(shell.libraryActions.addToLibrary()),
-            onPlayAt: (path, at) => unawaited(shell.files.playAt(path, at)),
-            coverLoader: shell.covers.readCoverBytes,
-            onOpenArtwork: shell.requests.showArtwork,
-            settings: shell.libraryViewSettings,
-            onSettingsChanged: shell.saveLibraryViewSettings,
-            playlists: shell.savedPlaylists,
-            playStats: shell.playStats,
-            onSavePlaylist: () =>
-                unawaited(shell.libraryActions.saveCurrentPlaylistToLibrary()),
-            onNewPlaylist: () =>
-                unawaited(shell.libraryActions.newSavedPlaylist()),
-            onRemoveFromPlaylist: (id, indices) =>
-                unawaited(shell.savedPlaylists.removeAt(id, indices)),
-            onMoveInPlaylist: (id, indices, to) =>
-                unawaited(shell.savedPlaylists.move(id, indices, to)),
-            onDropOnPlaylist: (id, paths) =>
-                unawaited(shell.libraryActions.addToSavedPlaylist(id, paths)),
-            onImportPlaylists: () =>
-                unawaited(shell.libraryActions.importPlaylists()),
-            onPlaylistMenu: (id) => shell.showMenu(
-              AmpedMenus.savedPlaylistContext(shell, id),
-              null,
-            ),
-            onContextMenu: (paths) =>
-                shell.showMenu(AmpedMenus.libraryContext(shell, paths), null),
           ),
         ),
       ),

@@ -14,6 +14,7 @@ import "package:amped_wasabi/amped_wasabi.dart"
 import "package:flutter/foundation.dart" show VoidCallback, visibleForTesting;
 import "package:window_dock/window_dock.dart";
 
+import "../features/preferences/preferences_page.dart";
 import "../library/library_source_manager.dart";
 import "../library/playlist_generator.dart";
 import "../main_window/presets_window.dart";
@@ -202,7 +203,7 @@ abstract final class AmpedMenus {
     const NativeMenuItem.separator(),
     NativeMenuItem(
       label: shell.localizations.mlPreferences,
-      onSelected: () => shell.dialogManager.open(AmpedDialog.preferences),
+      onSelected: () => shell.showPreferences(PreferencesPage.mediaLibrary),
     ),
   ];
 
@@ -499,7 +500,7 @@ abstract final class AmpedMenus {
       NativeMenuItem(
         label: shell.localizations.skinBrowser,
         shortcut: "Alt+S",
-        onSelected: () => shell.dialogManager.open(AmpedDialog.preferences),
+        onSelected: shell.openSkinBrowser,
       ),
       NativeMenuItem(
         label: shell.localizations.onlineSkinBrowser,

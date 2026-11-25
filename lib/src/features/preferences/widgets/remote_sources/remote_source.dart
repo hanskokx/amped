@@ -6,6 +6,7 @@ import "package:amped_plex/amped_plex.dart";
 import "package:amped_podcast/amped_podcast.dart";
 import "package:amped_soundcloud/amped_soundcloud.dart";
 import "package:amped_subsonic/amped_subsonic.dart";
+import "package:flutter/services.dart";
 import "package:material_ui/material_ui.dart";
 
 import "../../../../library/library_source_manager.dart";
@@ -13,13 +14,17 @@ import "../../../../library/source_settings.dart";
 import "../../../../remote/browser_sign_in.dart";
 import "../../../../remote/remote_credentials.dart";
 import "../../../remote_source/classes/remote_source_type.dart";
+import "../../../remote_source/widgets/preferences_subpage_header.dart";
+import "../../../remote_source/widgets/source_panel.dart";
+import "../../../remote_source/widgets/source_type_icon.dart";
 
-/// The form that adds a Navidrome/Subsonic server, or edits one. The server
-/// is contacted before it is saved.
+/// The form that adds a remote source, or edits one. The server is contacted
+/// before it is saved.
 class SourceForm extends StatefulWidget {
   const SourceForm({
     required this.sources,
     required this.onDone,
+    this.onBack,
     this.type = RemoteSourceType.navidrome,
     this.editing,
     super.key,
@@ -32,7 +37,12 @@ class SourceForm extends StatefulWidget {
 
   /// What kind of source the form is for.
   final RemoteSourceType type;
+
+  /// Called when the form is saved or cancelled.
   final VoidCallback onDone;
+
+  /// Where the back arrow goes; [onDone] when null.
+  final VoidCallback? onBack;
 
   @override
   State<SourceForm> createState() => _SourceFormState();
@@ -83,7 +93,9 @@ class _SourceFormState extends State<SourceForm> {
   bool get _tokenOnly => _plex || _audiobookshelf || _podcast;
 
   final TextEditingController _term = TextEditingController();
-  List<PodcastSearchResult> _results = const [];
+
+  /// What the last search found; null when there is none to show.
+  List<PodcastSearchResult>? _results;
   bool _searching = false;
 
   Future<void> _search() async {
@@ -111,6 +123,7 @@ class _SourceFormState extends State<SourceForm> {
   }
 
   bool _signingIn = false;
+  bool _plexSignedIn = false;
 
   /// The users of the signed-in Plex Home, and the one to present as.
   List<PlexUser> _plexUsers = const [];
@@ -128,6 +141,7 @@ class _SourceFormState extends State<SourceForm> {
       final result = await widget.sources.signInToPlex();
       if (!mounted) return;
       _password.text = result.token;
+      _plexSignedIn = true;
       _plexUsers = result.users;
       _plexUser = null;
       _plexPin.clear();
@@ -149,13 +163,15 @@ class _SourceFormState extends State<SourceForm> {
     }
   }
 
+  /// Whether the fields that are needed are filled in.
+  bool get _complete =>
+      (_browserSignIn || _server.text.trim().isNotEmpty) &&
+      (_tokenOnly || _user.text.trim().isNotEmpty) &&
+      (widget.editing != null || _podcast || _password.text.isNotEmpty);
+
   Future<void> _save() async {
     final editing = widget.editing;
-    if ((_server.text.trim().isEmpty && !_browserSignIn) ||
-        (!_tokenOnly && _user.text.trim().isEmpty)) {
-      return;
-    }
-    if (editing == null && !_podcast && _password.text.isEmpty) return;
+    if (_busy || !_complete) return;
     setState(() {
       _busy = true;
       _error = null;
@@ -248,238 +264,440 @@ class _SourceFormState extends State<SourceForm> {
     }
   }
 
+  static InputDecoration _decoration(
+    String label, {
+    String? hint,
+    String? helper,
+    Widget? suffix,
+  }) => InputDecoration(
+    labelText: label,
+    hintText: hint,
+    helperText: helper,
+    suffixIcon: suffix,
+    border: const OutlineInputBorder(),
+    isDense: true,
+  );
+
+  static const _gap = SizedBox(height: 12);
+
+  /// The widest the fields get, so that they stay easy to read.
+  static const _maxWidth = 560.0;
+
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
-    final theme = Theme.of(context);
-    return ListView(
-      padding: const EdgeInsets.all(12),
-      children: [
-        Text(
-          _soundCloud
-              ? localizations.libraryAddSoundCloud
-              : _podcast
-              ? localizations.libraryAddPodcast
-              : _audiobookshelf
-              ? localizations.libraryAddAudiobookshelf
-              : _plex
-              ? localizations.libraryAddPlex
-              : _jellyfin
-              ? localizations.libraryAddJellyfin
-              : localizations.libraryAddNavidrome,
-          style: theme.textTheme.titleMedium,
-        ),
-        const SizedBox(height: 12),
-        if (_soundCloud) ...[
-          Text(
-            localizations.librarySoundCloudProOnly,
-            style: theme.textTheme.titleSmall,
+    final editing = widget.editing;
+    return CallbackShortcuts(
+      bindings: {
+        const SingleActivator(LogicalKeyboardKey.escape): () {
+          if (!_busy) widget.onDone();
+        },
+      },
+      child: Column(
+        children: [
+          PreferencesSubpageHeader(
+            title: editing == null
+                ? localizations.libraryAddSourceTitle(
+                    widget.type.title(localizations),
+                  )
+                : localizations.libraryEditSourceTitle(editing.name),
+            leading: SourceTypeIcon(widget.type),
+            onBack: _busy ? null : widget.onBack ?? widget.onDone,
           ),
-          const SizedBox(height: 4),
-          Text(localizations.librarySoundCloudInstructions),
-          const SizedBox(height: 12),
-        ],
-        if (_plex) ...[
-          Align(
-            alignment: Alignment.centerLeft,
-            child: OutlinedButton(
-              onPressed: _signingIn || _busy
-                  ? null
-                  : () => unawaited(_signInWithPlex()),
-              child: Text(
-                _signingIn
-                    ? localizations.librarySourcePlexWaiting
-                    : localizations.librarySourcePlexSignIn,
-              ),
-            ),
-          ),
-          const SizedBox(height: 8),
-          if (_plexUsers.length > 1) ...[
-            DropdownButtonFormField<PlexUser>(
-              initialValue: _plexUser,
-              decoration: InputDecoration(
-                labelText: localizations.librarySourcePlexUser,
-              ),
-              items: [
-                for (final user in _plexUsers)
-                  DropdownMenuItem(value: user, child: Text(user.name)),
-              ],
-              onChanged: _busy
-                  ? null
-                  : (user) => setState(() {
-                      _plexUser = user;
-                      _plexPin.clear();
-                    }),
-            ),
-            if (_plexUser?.protected ?? false)
-              TextField(
-                controller: _plexPin,
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: localizations.librarySourcePlexPin,
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: _maxWidth),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      if (_soundCloud) ..._soundCloudIntro(context),
+                      if (_plex) ..._plexSignInSection(context),
+                      if (_podcast && editing == null)
+                        ..._podcastSearch(context),
+                      ..._fields(context),
+                      _gap,
+                      _options(context),
+                    ],
+                  ),
                 ),
               ),
+            ),
+          ),
+          const Divider(height: 1),
+          _footer(context),
+        ],
+      ),
+    );
+  }
+
+  List<Widget> _soundCloudIntro(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    return [
+      SourcePanel(
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                localizations.librarySoundCloudProOnly,
+                style: theme.textTheme.titleSmall,
+              ),
+              const SizedBox(height: 4),
+              SelectableText(
+                localizations.librarySoundCloudInstructions,
+                style: theme.textTheme.bodySmall,
+              ),
+            ],
+          ),
+        ),
+      ),
+      _gap,
+    ];
+  }
+
+  List<Widget> _plexSignInSection(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    return [
+      Align(
+        alignment: Alignment.centerLeft,
+        child: FilledButton.tonalIcon(
+          onPressed: _signingIn || _busy
+              ? null
+              : () => unawaited(_signInWithPlex()),
+          icon: _signingIn
+              ? const _Spinner()
+              : const Icon(Icons.open_in_new, size: 18),
+          label: Text(
+            _signingIn
+                ? localizations.librarySourcePlexWaiting
+                : localizations.librarySourcePlexSignIn,
+          ),
+        ),
+      ),
+      const SizedBox(height: 8),
+      Text(
+        _plexSignedIn
+            ? localizations.libraryPlexSignedIn
+            : localizations.libraryPlexOrToken,
+        style: theme.textTheme.bodySmall,
+      ),
+      _gap,
+      if (_plexUsers.length > 1) ...[
+        DropdownButtonFormField<PlexUser>(
+          initialValue: _plexUser,
+          decoration: _decoration(localizations.librarySourcePlexUser),
+          items: [
+            for (final user in _plexUsers)
+              DropdownMenuItem(value: user, child: Text(user.name)),
+          ],
+          onChanged: _busy
+              ? null
+              : (user) => setState(() {
+                  _plexUser = user;
+                  _plexPin.clear();
+                }),
+        ),
+        _gap,
+        if (_plexUser?.protected ?? false) ...[
+          TextField(
+            controller: _plexPin,
+            obscureText: true,
+            decoration: _decoration(localizations.librarySourcePlexPin),
+          ),
+          _gap,
+        ],
+      ],
+    ];
+  }
+
+  List<Widget> _podcastSearch(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    final results = _results;
+    return [
+      TextField(
+        controller: _term,
+        autofocus: true,
+        decoration: _decoration(
+          localizations.librarySourcePodcastSearch,
+          hint: localizations.libraryPodcastSearchHint,
+          suffix: _searching
+              ? const Padding(
+                  padding: EdgeInsets.all(12),
+                  child: _Spinner(),
+                )
+              : IconButton(
+                  icon: const Icon(Icons.search),
+                  tooltip: localizations.librarySourcePodcastSearch,
+                  onPressed: () => unawaited(_search()),
+                ),
+        ),
+        onSubmitted: (_) {
+          if (!_searching) unawaited(_search());
+        },
+      ),
+      if (results != null) ...[
+        const SizedBox(height: 8),
+        if (results.isEmpty)
+          Text(localizations.libraryPodcastNoResults)
+        else
+          SourcePanel(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxHeight: 240),
+              child: ListView(
+                shrinkWrap: true,
+                children: [
+                  for (final result in results)
+                    ListTile(
+                      dense: true,
+                      leading: _cover(result.image),
+                      title: Text(result.name),
+                      onTap: () => setState(() {
+                        _server.text = result.feed;
+                        _name.text = result.name;
+                        _results = null;
+                      }),
+                    ),
+                ],
+              ),
+            ),
+          ),
+      ],
+      _gap,
+      Text(
+        localizations.libraryPodcastOrFeed,
+        style: theme.textTheme.bodySmall,
+      ),
+      _gap,
+    ];
+  }
+
+  Widget _cover(String? url) {
+    const placeholder = SizedBox.square(
+      dimension: 40,
+      child: Icon(Icons.podcasts),
+    );
+    return url == null
+        ? placeholder
+        : Image.network(
+            url,
+            width: 40,
+            height: 40,
+            errorBuilder: (context, error, stack) => placeholder,
+          );
+  }
+
+  /// Where the source is and how to sign in to it, then what to call it.
+  List<Widget> _fields(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    final editing = widget.editing != null;
+    return [
+      if (_soundCloud && !editing) ...[
+        CheckboxListTile(
+          contentPadding: EdgeInsets.zero,
+          controlAffinity: ListTileControlAffinity.leading,
+          value: _browserSignIn,
+          title: Text(localizations.librarySoundCloudBrowserSignIn),
+          onChanged: _busy
+              ? null
+              : (value) => setState(() => _browserSignIn = value ?? false),
+        ),
+        if (_browserSignIn)
+          SelectableText(
+            localizations.librarySoundCloudRedirectHint(
+              SoundCloudClient.redirectUriText(),
+            ),
+            style: theme.textTheme.bodySmall,
+          ),
+        _gap,
+      ],
+      if (!_browserSignIn) ...[
+        TextField(
+          controller: _server,
+          // Plex starts with its sign-in button, a new podcast with the
+          // search.
+          autofocus: !_plex && !(_podcast && !editing),
+          autocorrect: false,
+          keyboardType: TextInputType.url,
+          decoration: _decoration(
+            _soundCloud
+                ? localizations.librarySoundCloudProfile
+                : _podcast
+                ? localizations.librarySourceFeedUrl
+                : localizations.librarySourceServer,
+            hint: _soundCloud
+                ? "https://soundcloud.com/artist"
+                : _podcast
+                ? "https://example.com/feed.xml"
+                : _plex
+                ? "http://192.168.1.10:32400"
+                : _jellyfin
+                ? "http://192.168.1.10:8096"
+                : "https://music.example.com",
+          ),
+          textInputAction: TextInputAction.next,
+        ),
+        _gap,
+      ],
+      if (!_tokenOnly) ...[
+        TextField(
+          controller: _user,
+          autocorrect: false,
+          decoration: _decoration(
+            _soundCloud
+                ? localizations.librarySoundCloudClientId
+                : localizations.librarySourceUser,
+          ),
+          textInputAction: TextInputAction.next,
+        ),
+        _gap,
+      ],
+      if (!_podcast) ...[
+        TextField(
+          controller: _password,
+          obscureText: true,
+          decoration: _decoration(
+            _soundCloud
+                ? localizations.librarySoundCloudClientSecret
+                : _audiobookshelf
+                ? localizations.librarySourceApiToken
+                : _plex
+                ? localizations.librarySourceToken
+                : localizations.remoteLoginPassword,
+            helper: !editing
+                ? null
+                : _soundCloud
+                ? localizations.librarySoundCloudSecretKeep
+                : localizations.librarySourcePasswordKeep,
+          ),
+          textInputAction: TextInputAction.next,
+        ),
+        _gap,
+      ],
+      TextField(
+        controller: _name,
+        decoration: _decoration(localizations.librarySourceNameOptional),
+        onSubmitted: (_) => unawaited(_save()),
+      ),
+    ];
+  }
+
+  /// The settings that rarely need changing, closed until asked for.
+  Widget _options(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    final episodes = _podcast || _audiobookshelf;
+    return SourcePanel(
+      child: ExpansionTile(
+        shape: const Border(),
+        collapsedShape: const Border(),
+        title: Text(
+          episodes
+              ? localizations.librarySourceOptions
+              : localizations.librarySourceOptionsRefresh,
+        ),
+        subtitle: Text(
+          _settings.refresh
+              ? localizations.libraryRefreshSummaryOn(
+                  SourceSettingsSection.describe(
+                    localizations,
+                    _settings.refreshEvery,
+                  ),
+                )
+              : localizations.libraryRefreshSummaryOff,
+        ),
+        childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+        children: [
+          SourceSettingsSection(
+            settings: _settings,
+            podcast: episodes,
+            onChanged: (settings) => setState(() => _settings = settings),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Cancel and save, always in view, with why saving failed.
+  Widget _footer(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    final error = _error;
+    return Padding(
+      padding: const EdgeInsets.all(12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if (error != null) ...[
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: theme.colorScheme.errorContainer,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                localizations.librarySourceFailed(error),
+                style: TextStyle(color: theme.colorScheme.onErrorContainer),
+                maxLines: 4,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
             const SizedBox(height: 8),
           ],
-        ],
-        if (_podcast && widget.editing == null) ...[
           Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Expanded(
-                child: TextField(
-                  controller: _term,
-                  decoration: InputDecoration(
-                    labelText: localizations.librarySourcePodcastSearch,
-                  ),
-                  onSubmitted: (_) => unawaited(_search()),
-                ),
+              TextButton(
+                onPressed: _busy ? null : widget.onDone,
+                child: Text(localizations.cancel),
               ),
               const SizedBox(width: 8),
-              OutlinedButton(
-                onPressed: _searching ? null : () => unawaited(_search()),
-                child: Text(
-                  _searching ? "..." : localizations.librarySourcePodcastSearch,
+              Flexible(
+                child: ListenableBuilder(
+                  listenable: Listenable.merge([_server, _user, _password]),
+                  builder: (context, _) => FilledButton.icon(
+                    onPressed: _busy || !_complete
+                        ? null
+                        : () => unawaited(_save()),
+                    icon: _busy ? const _Spinner() : null,
+                    label: Text(
+                      _busy
+                          ? _browserSignIn
+                                ? localizations.librarySourceWaitingForBrowser
+                                : localizations.librarySourceChecking
+                          : widget.editing != null
+                          ? localizations.librarySourceSave
+                          : _podcast
+                          ? localizations.librarySourceSubscribe
+                          : localizations.librarySourceConnect,
+                    ),
+                  ),
                 ),
               ),
             ],
           ),
-          for (final result in _results)
-            ListTile(
-              dense: true,
-              contentPadding: EdgeInsets.zero,
-              leading: result.image == null
-                  ? null
-                  : Image.network(
-                      result.image!,
-                      width: 40,
-                      height: 40,
-                      errorBuilder: (context, error, stack) =>
-                          const SizedBox(width: 40, height: 40),
-                    ),
-              title: Text(result.name),
-              onTap: () => setState(() {
-                _server.text = result.feed;
-                _name.text = result.name;
-                _results = const [];
-              }),
-            ),
-          const SizedBox(height: 8),
         ],
-        TextField(
-          controller: _name,
-          decoration: InputDecoration(
-            labelText: localizations.librarySourceName,
-          ),
-          textInputAction: TextInputAction.next,
-        ),
-        const SizedBox(height: 8),
-        if (_soundCloud && widget.editing == null) ...[
-          CheckboxListTile(
-            contentPadding: EdgeInsets.zero,
-            controlAffinity: ListTileControlAffinity.leading,
-            value: _browserSignIn,
-            title: Text(localizations.librarySoundCloudBrowserSignIn),
-            onChanged: (value) =>
-                setState(() => _browserSignIn = value ?? false),
-          ),
-          if (_browserSignIn)
-            Text(
-              localizations.librarySoundCloudRedirectHint(
-                SoundCloudClient.redirectUriText(),
-              ),
-            ),
-          const SizedBox(height: 8),
-        ],
-        if (!_browserSignIn)
-          TextField(
-            controller: _server,
-            decoration: InputDecoration(
-              labelText: _soundCloud
-                  ? localizations.librarySoundCloudProfile
-                  : _podcast
-                  ? localizations.librarySourceFeedUrl
-                  : "URL",
-              hintText: _soundCloud
-                  ? "https://soundcloud.com/artist"
-                  : _podcast
-                  ? "https://example.com/feed.xml"
-                  : _plex
-                  ? "http://192.168.1.10:32400"
-                  : _jellyfin
-                  ? "http://192.168.1.10:8096"
-                  : "https://music.example.com",
-            ),
-            textInputAction: TextInputAction.next,
-          ),
-        if (!_browserSignIn) const SizedBox(height: 8),
-        if (!_tokenOnly) ...[
-          TextField(
-            controller: _user,
-            decoration: InputDecoration(
-              labelText: _soundCloud
-                  ? localizations.librarySoundCloudClientId
-                  : localizations.remoteLoginUser,
-            ),
-            textInputAction: TextInputAction.next,
-          ),
-          const SizedBox(height: 8),
-        ],
-        if (!_podcast)
-          TextField(
-            controller: _password,
-            obscureText: true,
-            decoration: InputDecoration(
-              labelText: _soundCloud
-                  ? localizations.librarySoundCloudClientSecret
-                  : _audiobookshelf
-                  ? localizations.librarySourceApiToken
-                  : _plex
-                  ? localizations.librarySourceToken
-                  : localizations.remoteLoginPassword,
-              helperText: widget.editing == null
-                  ? null
-                  : _soundCloud
-                  ? localizations.librarySoundCloudSecretKeep
-                  : localizations.librarySourcePasswordKeep,
-            ),
-            onSubmitted: (_) => unawaited(_save()),
-          ),
-        const SizedBox(height: 16),
-        SourceSettingsSection(
-          settings: _settings,
-          podcast: _podcast || _audiobookshelf,
-          onChanged: (settings) => setState(() => _settings = settings),
-        ),
-        if (_error != null) ...[
-          const SizedBox(height: 8),
-          Text(
-            localizations.librarySourceFailed(_error!),
-            style: TextStyle(color: theme.colorScheme.error),
-          ),
-        ],
-        const SizedBox(height: 16),
-        Row(
-          children: [
-            FilledButton(
-              onPressed: _busy ? null : () => unawaited(_save()),
-              child: Text(
-                _busy
-                    ? _browserSignIn
-                          ? localizations.librarySourceWaitingForBrowser
-                          : localizations.librarySourceChecking
-                    : localizations.librarySourceSave,
-              ),
-            ),
-            const SizedBox(width: 8),
-            TextButton(
-              onPressed: _busy ? null : widget.onDone,
-              child: Text(localizations.cancel),
-            ),
-          ],
-        ),
-      ],
+      ),
     );
   }
+}
+
+/// The small turning circle that stands for work being done.
+class _Spinner extends StatelessWidget {
+  const _Spinner();
+
+  @override
+  Widget build(BuildContext context) => const SizedBox.square(
+    dimension: 16,
+    child: CircularProgressIndicator(strokeWidth: 2),
+  );
 }
 
 /// The settings of a source that are not about signing in: whether and how
@@ -553,10 +771,11 @@ class SourceSettingsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          localizations.sourceRefreshTitle,
-          style: theme.textTheme.titleSmall,
-        ),
+        if (podcast)
+          Text(
+            localizations.sourceRefreshTitle,
+            style: theme.textTheme.titleSmall,
+          ),
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
           value: settings.refresh,

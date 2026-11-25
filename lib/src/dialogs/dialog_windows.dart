@@ -2,7 +2,7 @@ import "dart:async";
 
 import "package:amped_classic_skin/amped_classic_skin.dart";
 import "package:amped_l10n/amped_l10n.dart";
-import "package:amped_wasabi/amped_wasabi.dart" show wasabiLegible;
+import "package:amped_skin/amped_skin.dart" show baseSkinName;
 import "package:material_ui/material_ui.dart";
 
 import "../app/amped_dialog.dart";
@@ -19,6 +19,7 @@ import "../vis/vis_config_page.dart";
 import "../vis/vis_window.dart";
 import "about_window.dart";
 import "artwork_page.dart";
+import "dialog_theme.dart";
 import "edit_metadata_page.dart";
 import "file_info_page.dart";
 import "playlist_search_page.dart";
@@ -112,39 +113,17 @@ class DialogWindowContent extends StatelessWidget {
     );
   }
 
-  /// The Material theme of the app's own windows, in the active skin's list
-  /// colors (a classic skin's playlist editor colors), which a modern
-  /// skin's color theme changes.
+  /// [dialogTheme] in the active skin's list colors (a classic skin's
+  /// playlist editor colors), which a modern skin's color theme changes.
   static ThemeData _skinTheme(AmpedShell shell) {
     final colors = LibraryContent.colorsFor(
       shell,
       shell.skins.current.classicData,
     );
-    // The skin's hue on a dark surface: a skin's list can be any
-    // brightness, and the text of these windows is light.
-    final accent = shell.skin.wasabi?.accentColor ?? colors.selectedBg;
-    final hsl = HSLColor.fromColor(colors.normalBg);
-    final background = hsl
-        .withLightness(hsl.lightness.clamp(0.0, 0.16))
-        .withSaturation(hsl.saturation.clamp(0.0, 0.4))
-        .toColor();
-    final base = ColorScheme.fromSeed(
-      seedColor: accent,
-      brightness: Brightness.dark,
-    );
-    // Whatever the skin's colors, text and accents read on the surface.
-    final primary = wasabiLegible(base.primary, background, minContrast: 3);
-    final scheme = base.copyWith(
-      surface: background,
-      onSurface: wasabiLegible(base.onSurface, background),
-      onSurfaceVariant: wasabiLegible(base.onSurfaceVariant, background),
-      primary: primary,
-      onPrimary: wasabiLegible(base.onPrimary, primary),
-    );
-    return ThemeData(
-      brightness: Brightness.dark,
-      colorScheme: scheme,
-      scaffoldBackgroundColor: background,
+    return dialogTheme(
+      background: colors.normalBg,
+      accent: shell.skin.wasabi?.accentColor ?? colors.selectedBg,
+      defaultSkin: shell.skins.active.name == baseSkinName,
     );
   }
 

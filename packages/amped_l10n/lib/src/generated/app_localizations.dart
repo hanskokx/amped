@@ -3703,7 +3703,7 @@ abstract class AppLocalizations {
   /// Prompt on the area where a skin file can be dropped or picked.
   ///
   /// In en, this message translates to:
-  /// **'Drop a .wsz or .wal skin here, or tap to find one'**
+  /// **'Drop a skin archive here, or tap to find one'**
   String get skinDropTarget;
 
   /// Heading of the skin options group in the modern skin settings.
@@ -3873,35 +3873,179 @@ abstract class AppLocalizations {
   /// **'No remote sources added.'**
   String get libraryNoRemoteSources;
 
-  /// Preferences > Library: button that adds a Navidrome or Subsonic server.
+  /// Preferences > Remote sources: explanation under the heading.
   ///
   /// In en, this message translates to:
-  /// **'Add Navidrome/Subsonic...'**
-  String get libraryAddNavidrome;
+  /// **'Music, videos, podcasts and audiobooks from your servers and online accounts. They appear in the Media Library.'**
+  String get libraryRemoteSourcesHint;
 
-  /// Preferences > Library: button that adds a Plex server.
+  /// Preferences > Remote sources: button that opens the list of kinds of source that can be added.
   ///
   /// In en, this message translates to:
-  /// **'Add Plex...'**
-  String get libraryAddPlex;
+  /// **'Add source'**
+  String get libraryAddSource;
 
-  /// Preferences > Library: button that adds a Jellyfin server.
+  /// Preferences > Remote sources: heading of the list of kinds of source.
   ///
   /// In en, this message translates to:
-  /// **'Add Jellyfin...'**
-  String get libraryAddJellyfin;
+  /// **'Choose what to add'**
+  String get libraryChooseSourceType;
 
-  /// Preferences > Library: button that subscribes to a podcast's RSS feed.
+  /// Preferences > Remote sources: heading of the form that adds a source.
   ///
   /// In en, this message translates to:
-  /// **'Add podcast...'**
-  String get libraryAddPodcast;
+  /// **'Add {type}'**
+  String libraryAddSourceTitle(String type);
 
-  /// Preferences > Library: button that adds an Audiobookshelf server.
+  /// Preferences > Remote sources: heading of the form that edits a source.
   ///
   /// In en, this message translates to:
-  /// **'Add Audiobookshelf...'**
-  String get libraryAddAudiobookshelf;
+  /// **'Edit {name}'**
+  String libraryEditSourceTitle(String name);
+
+  /// Preferences > Remote sources: a kind of source.
+  ///
+  /// In en, this message translates to:
+  /// **'Navidrome / Subsonic'**
+  String get libraryTypeNavidrome;
+
+  /// Preferences > Remote sources: a kind of source.
+  ///
+  /// In en, this message translates to:
+  /// **'Podcast'**
+  String get libraryTypePodcast;
+
+  /// Preferences > Remote sources: what a kind of source is.
+  ///
+  /// In en, this message translates to:
+  /// **'Music from your Navidrome or Subsonic server'**
+  String get libraryDescribeNavidrome;
+
+  /// Preferences > Remote sources: what a kind of source is.
+  ///
+  /// In en, this message translates to:
+  /// **'Tracks and likes. Needs SoundCloud Pro'**
+  String get libraryDescribeSoundCloud;
+
+  /// Preferences > Remote sources: what a kind of source is.
+  ///
+  /// In en, this message translates to:
+  /// **'Music and videos from a Plex Media Server'**
+  String get libraryDescribePlex;
+
+  /// Preferences > Remote sources: what a kind of source is.
+  ///
+  /// In en, this message translates to:
+  /// **'Music and videos from a Jellyfin server'**
+  String get libraryDescribeJellyfin;
+
+  /// Preferences > Remote sources: what a kind of source is.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscribe by searching or by RSS feed'**
+  String get libraryDescribePodcast;
+
+  /// Preferences > Remote sources: what a kind of source is.
+  ///
+  /// In en, this message translates to:
+  /// **'Podcasts and audiobooks from your server'**
+  String get libraryDescribeAudiobookshelf;
+
+  /// Preferences > Remote sources: asks before removing a source.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove {name}? Its saved sign-in is forgotten.'**
+  String libraryRemoveConfirm(String name);
+
+  /// Preferences > Remote sources: button that returns to the previous view.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get libraryBack;
+
+  /// Preferences > Remote sources: shown on a source whose tracks are loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get librarySourceLoading;
+
+  /// Preferences > Remote sources: button that checks the server and adds the source.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect'**
+  String get librarySourceConnect;
+
+  /// Preferences > Remote sources: button that adds a podcast.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscribe'**
+  String get librarySourceSubscribe;
+
+  /// Preferences > Remote sources: label of a source's name field.
+  ///
+  /// In en, this message translates to:
+  /// **'Name (optional)'**
+  String get librarySourceNameOptional;
+
+  /// Preferences > Remote sources: hint in the podcast search field.
+  ///
+  /// In en, this message translates to:
+  /// **'Podcast name or topic'**
+  String get libraryPodcastSearchHint;
+
+  /// Preferences > Remote sources: shown when a podcast search finds nothing.
+  ///
+  /// In en, this message translates to:
+  /// **'No podcasts found.'**
+  String get libraryPodcastNoResults;
+
+  /// Preferences > Remote sources: shown between the podcast search and the address field.
+  ///
+  /// In en, this message translates to:
+  /// **'Or enter the feed address yourself:'**
+  String get libraryPodcastOrFeed;
+
+  /// Preferences > Remote sources: shown after signing in at plex.tv.
+  ///
+  /// In en, this message translates to:
+  /// **'Signed in to Plex. Check the server address, then connect.'**
+  String get libraryPlexSignedIn;
+
+  /// Preferences > Remote sources: shown under the Plex sign-in button.
+  ///
+  /// In en, this message translates to:
+  /// **'Or enter the server address and token yourself:'**
+  String get libraryPlexOrToken;
+
+  /// Preferences > Remote sources: heading that opens a source's other settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Background refresh and playback'**
+  String get librarySourceOptions;
+
+  /// Preferences > Remote sources: heading that opens the other settings of a source without episodes.
+  ///
+  /// In en, this message translates to:
+  /// **'Background refresh'**
+  String get librarySourceOptionsRefresh;
+
+  /// Preferences > Remote sources: summary of a source's background refresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Refreshes every {interval}'**
+  String libraryRefreshSummaryOn(String interval);
+
+  /// Preferences > Remote sources: summary when a source is not refreshed in the background.
+  ///
+  /// In en, this message translates to:
+  /// **'Off'**
+  String get libraryRefreshSummaryOff;
+
+  /// Preferences > Remote sources: label of the field for the name to sign in with.
+  ///
+  /// In en, this message translates to:
+  /// **'Username'**
+  String get librarySourceUser;
 
   /// Preferences > Library: label of the field for a podcast's RSS feed address.
   ///
@@ -3998,12 +4142,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not connect: {error}'**
   String librarySourceFailed(String error);
-
-  /// Preferences > Library: button that adds a SoundCloud profile.
-  ///
-  /// In en, this message translates to:
-  /// **'Add SoundCloud...'**
-  String get libraryAddSoundCloud;
 
   /// Preferences > Library: heading of the notice on the SoundCloud form saying the feature needs a SoundCloud Pro subscription.
   ///

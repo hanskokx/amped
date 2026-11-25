@@ -2,6 +2,29 @@
 
 ## 0.1.3
 
+- Tracks can be dragged from the Media Library onto the playlist when they're
+  in separate windows. The window under the pointer is outlined, and letting go
+  adds the tracks to the end of the playlist. Dropping on the main window adds
+  them too, without replacing the playlist.
+- **Skin Browser...**, **Online Skin Browser...**, **Media Library
+  Preferences...** and the visualization's **Select plug-in...** now open
+  Preferences on their own page, also when it's already open. It's no longer
+  closed and opened again, so what you were filling in is kept.
+- The Preferences window can no longer be made so small that its pages break. It
+  also opens larger, so the skin list under **Skins > Installed** has room for
+  the names.
+- With the Amped Classic skin, Preferences and the app's other windows now use
+  the app icon's plum and mauve colors. So do the accents of skins that give no
+  accent color, which could turn these windows pink.
+- Under **Skins > Installed**, the drop area now asks for a skin archive.
+- **Preferences > Remote sources** has a new look. Each source is a card showing
+  its logo and kind, its address and whether it failed to load. **Add source**
+  opens a list that says what each kind of source brings.
+- Removing a remote source now asks first.
+- The forms that add and edit a source keep **Cancel** and the save button in
+  view, and the save button stays unavailable until the needed fields are filled
+  in. Background refresh settings are tucked away until you open them, and
+  <kbd>Esc</kbd> leaves the form.
 - The tray icon can now appear when Amped is installed as a Flatpak.
 - The log now says whether the tray icon was set up, to help find out why it's
   missing on some systems.

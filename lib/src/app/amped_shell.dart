@@ -25,6 +25,7 @@ import "../library/library_view_settings.dart";
 import "../library/media_library.dart";
 import "../library/play_stats.dart";
 import "../library/saved_playlists.dart";
+import "../library/track_drag_out.dart";
 import "../library/watch_folders.dart";
 import "../main_window/presets_window.dart";
 import "../platform/single_instance.dart";
@@ -763,6 +764,24 @@ class AmpedShell extends ChangeNotifier {
     dock.dispose();
     super.dispose();
   }
+
+  // --- Dragging tracks between windows ----------------------------------------
+
+  /// Takes tracks dragged out of the Media Library to the playlist's window,
+  /// or to the main window (where a modern skin may have its playlist).
+  late final TrackDragOut trackDragOut = TrackDragOut(
+    windowAt: () {
+      final pointer = NativeScreen.cursorPosition();
+      for (final window in [SkinWindow.pl, SkinWindow.main]) {
+        if (dock.isVisible(window) &&
+            (dock.rectOf(window)?.contains(pointer) ?? false)) {
+          return window;
+        }
+      }
+      return null;
+    },
+    add: (paths) => unawaited(files.openPaths(paths, play: false)),
+  );
 
   // --- Window state -----------------------------------------------------------
 
@@ -1765,17 +1784,19 @@ class AmpedShell extends ChangeNotifier {
 
   /// Visualization > Select plug-in... (Ctrl+K): Preferences on the
   /// Visualization page.
-  void selectVisPlugin() {
-    preferences.select(PreferencesPage.visualization);
-    dialogManager.close(AmpedDialog.preferences);
-    dialogManager.open(AmpedDialog.preferences);
-  }
+  void selectVisPlugin() => showPreferences(PreferencesPage.visualization);
 
   /// Preferences on Skins > Browser: the online skin browser (the Webamp
   /// skin library). The entry point for the Skins menu.
-  void openOnlineSkinBrowser() {
-    preferences.select(PreferencesPage.skinsOnline);
-    dialogManager.close(AmpedDialog.preferences);
+  void openOnlineSkinBrowser() => showPreferences(PreferencesPage.skinsOnline);
+
+  /// Preferences on Skins > Installed: "Skin Browser..." (Alt+S).
+  void openSkinBrowser() => showPreferences(PreferencesPage.skinsInstalled);
+
+  /// Opens Preferences, or brings it forward, on [page]; null leaves it on
+  /// the page it was last on.
+  void showPreferences([PreferencesPage? page]) {
+    if (page != null) preferences.select(page);
     dialogManager.open(AmpedDialog.preferences);
   }
 
