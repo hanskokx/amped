@@ -2645,7 +2645,7 @@
   "@skinComments": {
     "description": "Heading of the panel with the comments a skin's author wrote, below the skin preview."
   },
-  "skinDropTarget": "Drop a .wsz or .wal skin here, or tap to find one",
+  "skinDropTarget": "Drop a skin archive here, or tap to find one",
   "@skinDropTarget": {
     "description": "Prompt on the area where a skin file can be dropped or picked."
   },
@@ -2780,25 +2780,133 @@
   "@libraryNoRemoteSources": {
     "description": "Preferences > Library: shown when no server was added."
   },
-  "libraryAddNavidrome": "Add Navidrome/Subsonic...",
-  "@libraryAddNavidrome": {
-    "description": "Preferences > Library: button that adds a Navidrome or Subsonic server."
+  "libraryRemoteSourcesHint": "Music, videos, podcasts and audiobooks from your servers and online accounts. They appear in the Media Library.",
+  "@libraryRemoteSourcesHint": {
+    "description": "Preferences > Remote sources: explanation under the heading."
   },
-  "libraryAddPlex": "Add Plex...",
-  "@libraryAddPlex": {
-    "description": "Preferences > Library: button that adds a Plex server."
+  "libraryAddSource": "Add source",
+  "@libraryAddSource": {
+    "description": "Preferences > Remote sources: button that opens the list of kinds of source that can be added."
   },
-  "libraryAddJellyfin": "Add Jellyfin...",
-  "@libraryAddJellyfin": {
-    "description": "Preferences > Library: button that adds a Jellyfin server."
+  "libraryChooseSourceType": "Choose what to add",
+  "@libraryChooseSourceType": {
+    "description": "Preferences > Remote sources: heading of the list of kinds of source."
   },
-  "libraryAddPodcast": "Add podcast...",
-  "@libraryAddPodcast": {
-    "description": "Preferences > Library: button that subscribes to a podcast's RSS feed."
+  "libraryAddSourceTitle": "Add {type}",
+  "@libraryAddSourceTitle": {
+    "description": "Preferences > Remote sources: heading of the form that adds a source.",
+    "placeholders": {
+      "type": {"type": "String", "example": "Jellyfin"}
+    }
   },
-  "libraryAddAudiobookshelf": "Add Audiobookshelf...",
-  "@libraryAddAudiobookshelf": {
-    "description": "Preferences > Library: button that adds an Audiobookshelf server."
+  "libraryEditSourceTitle": "Edit {name}",
+  "@libraryEditSourceTitle": {
+    "description": "Preferences > Remote sources: heading of the form that edits a source.",
+    "placeholders": {
+      "name": {"type": "String", "example": "Home server"}
+    }
+  },
+  "libraryTypeNavidrome": "Navidrome / Subsonic",
+  "@libraryTypeNavidrome": {
+    "description": "Preferences > Remote sources: a kind of source."
+  },
+  "libraryTypePodcast": "Podcast",
+  "@libraryTypePodcast": {
+    "description": "Preferences > Remote sources: a kind of source."
+  },
+  "libraryDescribeNavidrome": "Music from your Navidrome or Subsonic server",
+  "@libraryDescribeNavidrome": {
+    "description": "Preferences > Remote sources: what a kind of source is."
+  },
+  "libraryDescribeSoundCloud": "Tracks and likes. Needs SoundCloud Pro",
+  "@libraryDescribeSoundCloud": {
+    "description": "Preferences > Remote sources: what a kind of source is."
+  },
+  "libraryDescribePlex": "Music and videos from a Plex Media Server",
+  "@libraryDescribePlex": {
+    "description": "Preferences > Remote sources: what a kind of source is."
+  },
+  "libraryDescribeJellyfin": "Music and videos from a Jellyfin server",
+  "@libraryDescribeJellyfin": {
+    "description": "Preferences > Remote sources: what a kind of source is."
+  },
+  "libraryDescribePodcast": "Subscribe by searching or by RSS feed",
+  "@libraryDescribePodcast": {
+    "description": "Preferences > Remote sources: what a kind of source is."
+  },
+  "libraryDescribeAudiobookshelf": "Podcasts and audiobooks from your server",
+  "@libraryDescribeAudiobookshelf": {
+    "description": "Preferences > Remote sources: what a kind of source is."
+  },
+  "libraryRemoveConfirm": "Remove {name}? Its saved sign-in is forgotten.",
+  "@libraryRemoveConfirm": {
+    "description": "Preferences > Remote sources: asks before removing a source.",
+    "placeholders": {
+      "name": {"type": "String", "example": "Home server"}
+    }
+  },
+  "libraryBack": "Back",
+  "@libraryBack": {
+    "description": "Preferences > Remote sources: button that returns to the previous view."
+  },
+  "librarySourceLoading": "Loading...",
+  "@librarySourceLoading": {
+    "description": "Preferences > Remote sources: shown on a source whose tracks are loading."
+  },
+  "librarySourceConnect": "Connect",
+  "@librarySourceConnect": {
+    "description": "Preferences > Remote sources: button that checks the server and adds the source."
+  },
+  "librarySourceSubscribe": "Subscribe",
+  "@librarySourceSubscribe": {
+    "description": "Preferences > Remote sources: button that adds a podcast."
+  },
+  "librarySourceNameOptional": "Name (optional)",
+  "@librarySourceNameOptional": {
+    "description": "Preferences > Remote sources: label of a source's name field."
+  },
+  "libraryPodcastSearchHint": "Podcast name or topic",
+  "@libraryPodcastSearchHint": {
+    "description": "Preferences > Remote sources: hint in the podcast search field."
+  },
+  "libraryPodcastNoResults": "No podcasts found.",
+  "@libraryPodcastNoResults": {
+    "description": "Preferences > Remote sources: shown when a podcast search finds nothing."
+  },
+  "libraryPodcastOrFeed": "Or enter the feed address yourself:",
+  "@libraryPodcastOrFeed": {
+    "description": "Preferences > Remote sources: shown between the podcast search and the address field."
+  },
+  "libraryPlexSignedIn": "Signed in to Plex. Check the server address, then connect.",
+  "@libraryPlexSignedIn": {
+    "description": "Preferences > Remote sources: shown after signing in at plex.tv."
+  },
+  "libraryPlexOrToken": "Or enter the server address and token yourself:",
+  "@libraryPlexOrToken": {
+    "description": "Preferences > Remote sources: shown under the Plex sign-in button."
+  },
+  "librarySourceOptions": "Background refresh and playback",
+  "@librarySourceOptions": {
+    "description": "Preferences > Remote sources: heading that opens a source's other settings."
+  },
+  "librarySourceOptionsRefresh": "Background refresh",
+  "@librarySourceOptionsRefresh": {
+    "description": "Preferences > Remote sources: heading that opens the other settings of a source without episodes."
+  },
+  "libraryRefreshSummaryOn": "Refreshes every {interval}",
+  "@libraryRefreshSummaryOn": {
+    "description": "Preferences > Remote sources: summary of a source's background refresh.",
+    "placeholders": {
+      "interval": {"type": "String", "example": "15 minutes"}
+    }
+  },
+  "libraryRefreshSummaryOff": "Off",
+  "@libraryRefreshSummaryOff": {
+    "description": "Preferences > Remote sources: summary when a source is not refreshed in the background."
+  },
+  "librarySourceUser": "Username",
+  "@librarySourceUser": {
+    "description": "Preferences > Remote sources: label of the field for the name to sign in with."
   },
   "librarySourceFeedUrl": "RSS feed URL",
   "@librarySourceFeedUrl": {
@@ -2866,10 +2974,6 @@
     "placeholders": {
       "error": {"type": "String", "example": "Wrong username or password."}
     }
-  },
-  "libraryAddSoundCloud": "Add SoundCloud...",
-  "@libraryAddSoundCloud": {
-    "description": "Preferences > Library: button that adds a SoundCloud profile."
   },
   "librarySoundCloudProOnly": "SoundCloud Pro subscribers only",
   "@librarySoundCloudProOnly": {

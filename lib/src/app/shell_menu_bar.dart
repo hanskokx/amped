@@ -60,6 +60,8 @@ class ShellMenuBar {
         for (final info in shell.skins.skins) {
           if (info.name == name) await shell.skins.apply(info);
         }
+      case "skinBrowser":
+        shell.openSkinBrowser();
       case "onlineSkinBrowser":
         shell.openOnlineSkinBrowser();
       case "selectColorTheme":

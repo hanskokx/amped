@@ -583,7 +583,7 @@ class AppDelegate: FlutterAppDelegate, UNUserNotificationCenterDelegate {
     
     // Skins Submenu
     let skinsMenu = NSMenu(title: menuLabel("skins"))
-    let skinBrowser = NSMenuItem(title: menuLabel("skinBrowser"), action: #selector(showPreferences), keyEquivalent: "")
+    let skinBrowser = NSMenuItem(title: menuLabel("skinBrowser"), action: #selector(showSkinBrowser(_:)), keyEquivalent: "")
     skinBrowser.target = self
     skinsMenu.addItem(skinBrowser)
     skinsMenu.addItem(NSMenuItem.separator())
@@ -821,7 +821,7 @@ class AppDelegate: FlutterAppDelegate, UNUserNotificationCenterDelegate {
     selectSkin: Selector
   ) {
     let browser = NSMenuItem(
-      title: menuLabel("skinBrowser"), action: #selector(showPreferences),
+      title: menuLabel("skinBrowser"), action: #selector(showSkinBrowser(_:)),
       keyEquivalent: shortcut ? "s" : "")
     if shortcut { browser.keyEquivalentModifierMask = [.option] }
     browser.target = self
@@ -862,6 +862,10 @@ class AppDelegate: FlutterAppDelegate, UNUserNotificationCenterDelegate {
     let parent = NSMenuItem(title: menuLabel("colorThemes"), action: nil, keyEquivalent: "")
     parent.submenu = submenu
     menu.addItem(parent)
+  }
+
+  @objc func showSkinBrowser(_ sender: NSMenuItem) {
+    send("skinBrowser")
   }
 
   @objc func showOnlineSkinBrowser(_ sender: NSMenuItem) {

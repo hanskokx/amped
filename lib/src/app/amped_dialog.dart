@@ -3,7 +3,11 @@ import "dart:ui";
 /// The non-skinned dialog windows (native frame).
 enum AmpedDialog {
   presets(Size(275, 190)),
-  preferences(Size(620, 460)),
+
+  /// Wide enough for Skins > Installed: beside the page tree (200) and the
+  /// skin preview (300), the list needs room for a skin's name while its
+  /// removal is being confirmed.
+  preferences(Size(860, 560)),
 
   /// Tall enough for its tabs and the bug report's note: it can't be
   /// resized.
@@ -50,9 +54,9 @@ enum AmpedDialog {
   bool get resizable => this != about;
 
   /// The least size the user can resize the window to, for the dialogs
-  /// whose forms stop fitting below it; null where any size will do.
+  /// whose layouts stop fitting below it; null where any size will do.
   Size? get minSize => switch (this) {
-    fileInfo || editMetadata => size,
+    preferences || fileInfo || editMetadata => size,
     _ => null,
   };
 }

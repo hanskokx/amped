@@ -17,6 +17,7 @@ import "media_library.dart";
 import "play_stats.dart";
 import "saved_playlists.dart";
 import "source_settings.dart";
+import "track_drag_out.dart";
 import "watch_folders.dart";
 
 ImageProvider _networkImage(String url) => NetworkImage(url);
@@ -6783,12 +6784,24 @@ class _TrackItem extends StatelessWidget {
               ),
             ],
           );
+    // For dragging the row to another window: the playlist's.
+    final dragOut = TrackDragOutScope.of(context);
+    final view = View.of(context);
+    final viewArea = Offset.zero & view.physicalSize / view.devicePixelRatio;
+    final data = drag();
     return DragTarget<_TrackDrag>(
       onWillAcceptWithDetails: (details) => onDropped != null,
       onAcceptWithDetails: (details) => onDropped?.call(details.data),
       builder: (context, candidates, _) => Draggable<_TrackDrag>(
-        data: drag(),
+        data: data,
         maxSimultaneousDrags: 1,
+        onDragStarted: () => dragOut?.started(data.paths),
+        onDragUpdate: (details) => dragOut?.moved(
+          outside: !viewArea.contains(details.globalPosition),
+        ),
+        onDragCompleted: () => dragOut?.ended(),
+        // Also called when the row has gone since the drag began.
+        onDraggableCanceled: (_, _) => dragOut?.released(),
         feedback: DefaultTextStyle.merge(
           style: TextStyle(color: colors.current, fontSize: 11),
           child: ColoredBox(

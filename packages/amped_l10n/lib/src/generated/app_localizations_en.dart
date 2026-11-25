@@ -2188,8 +2188,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get skinComments => 'Comments';
 
   @override
-  String get skinDropTarget =>
-      'Drop a .wsz or .wal skin here, or tap to find one';
+  String get skinDropTarget => 'Drop a skin archive here, or tap to find one';
 
   @override
   String get modernSettingsOptions => 'Options';
@@ -2287,19 +2286,106 @@ class AppLocalizationsEn extends AppLocalizations {
   String get libraryNoRemoteSources => 'No remote sources added.';
 
   @override
-  String get libraryAddNavidrome => 'Add Navidrome/Subsonic...';
+  String get libraryRemoteSourcesHint =>
+      'Music, videos, podcasts and audiobooks from your servers and online accounts. They appear in the Media Library.';
 
   @override
-  String get libraryAddPlex => 'Add Plex...';
+  String get libraryAddSource => 'Add source';
 
   @override
-  String get libraryAddJellyfin => 'Add Jellyfin...';
+  String get libraryChooseSourceType => 'Choose what to add';
 
   @override
-  String get libraryAddPodcast => 'Add podcast...';
+  String libraryAddSourceTitle(String type) {
+    return 'Add $type';
+  }
 
   @override
-  String get libraryAddAudiobookshelf => 'Add Audiobookshelf...';
+  String libraryEditSourceTitle(String name) {
+    return 'Edit $name';
+  }
+
+  @override
+  String get libraryTypeNavidrome => 'Navidrome / Subsonic';
+
+  @override
+  String get libraryTypePodcast => 'Podcast';
+
+  @override
+  String get libraryDescribeNavidrome =>
+      'Music from your Navidrome or Subsonic server';
+
+  @override
+  String get libraryDescribeSoundCloud =>
+      'Tracks and likes. Needs SoundCloud Pro';
+
+  @override
+  String get libraryDescribePlex => 'Music and videos from a Plex Media Server';
+
+  @override
+  String get libraryDescribeJellyfin =>
+      'Music and videos from a Jellyfin server';
+
+  @override
+  String get libraryDescribePodcast => 'Subscribe by searching or by RSS feed';
+
+  @override
+  String get libraryDescribeAudiobookshelf =>
+      'Podcasts and audiobooks from your server';
+
+  @override
+  String libraryRemoveConfirm(String name) {
+    return 'Remove $name? Its saved sign-in is forgotten.';
+  }
+
+  @override
+  String get libraryBack => 'Back';
+
+  @override
+  String get librarySourceLoading => 'Loading...';
+
+  @override
+  String get librarySourceConnect => 'Connect';
+
+  @override
+  String get librarySourceSubscribe => 'Subscribe';
+
+  @override
+  String get librarySourceNameOptional => 'Name (optional)';
+
+  @override
+  String get libraryPodcastSearchHint => 'Podcast name or topic';
+
+  @override
+  String get libraryPodcastNoResults => 'No podcasts found.';
+
+  @override
+  String get libraryPodcastOrFeed => 'Or enter the feed address yourself:';
+
+  @override
+  String get libraryPlexSignedIn =>
+      'Signed in to Plex. Check the server address, then connect.';
+
+  @override
+  String get libraryPlexOrToken =>
+      'Or enter the server address and token yourself:';
+
+  @override
+  String get librarySourceOptions => 'Background refresh and playback';
+
+  @override
+  String get librarySourceOptionsRefresh => 'Background refresh';
+
+  @override
+  String libraryRefreshSummaryOn(String interval) {
+    return 'Refreshes every $interval';
+  }
+
+  @override
+  String get libraryRefreshSummaryOff => 'Off';
+
+  @override
+  String get librarySourceUser => 'Username';
 
   @override
   String get librarySourceFeedUrl => 'RSS feed URL';
@@ -2351,9 +2437,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String librarySourceFailed(String error) {
     return 'Could not connect: $error';
   }
-
-  @override
-  String get libraryAddSoundCloud => 'Add SoundCloud...';
 
   @override
   String get librarySoundCloudProOnly => 'SoundCloud Pro subscribers only';

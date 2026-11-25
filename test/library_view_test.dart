@@ -5,9 +5,11 @@ import "dart:ui" as ui;
 import "package:amped/src/library/library_sources.dart";
 import "package:amped/src/library/library_view.dart";
 import "package:amped/src/library/media_library.dart";
+import "package:amped/src/library/track_drag_out.dart";
 import "package:amped/src/player/tag_cache.dart";
 import "package:amped_classic_skin/amped_classic_skin.dart";
 import "package:amped_l10n/amped_l10n.dart";
+import "package:amped_skin/amped_skin.dart";
 import "package:flutter/gestures.dart";
 import "package:flutter/rendering.dart";
 import "package:flutter/services.dart";
@@ -67,6 +69,75 @@ void main() {
       ),
     ),
   );
+
+  group("dragging a track out of the library", () {
+    late List<List<String>> added;
+    SkinWindow? under;
+    late TrackDragOut dragOut;
+
+    setUp(() {
+      added = [];
+      under = SkinWindow.pl;
+      dragOut = TrackDragOut(windowAt: () => under, add: added.add);
+    });
+
+    /// A library with one track, whose row is dragged to [to] and let go.
+    /// Gives the window shown as the target just before.
+    Future<SkinWindow?> drag(WidgetTester tester, Offset to) async {
+      final dir = Directory.systemTemp.createTempSync("library_view_test");
+      addTearDown(() => dir.deleteSync(recursive: true));
+      File("${dir.path}/one.mp3").writeAsStringSync("x");
+      final library = MediaLibrary(
+        readTags: (files) async => [
+          for (final f in files) TrackTags(f, title: "Song"),
+        ],
+      );
+      await tester.runAsync(() => library.add([dir.path]));
+      await tester.pumpWidget(
+        TrackDragOutScope(dragOut: dragOut, child: host(library)),
+      );
+      final gesture = await tester.startGesture(
+        tester.getCenter(find.text("Song")),
+        kind: PointerDeviceKind.mouse,
+      );
+      await gesture.moveBy(const Offset(0, 30));
+      await tester.pump();
+      await gesture.moveTo(to);
+      await tester.pump();
+      final over = dragOut.over.value;
+      await gesture.up();
+      // Past the row's wait for a double click.
+      await tester.pump(const Duration(seconds: 1));
+      return over;
+    }
+
+    // Beyond the right edge of the 800 by 600 test window.
+    const outside = Offset(1200, 100);
+
+    testWidgets("onto the playlist's window adds it", (tester) async {
+      expect(await drag(tester, outside), SkinWindow.pl);
+
+      expect(added.single.single, endsWith("one.mp3"));
+      expect(dragOut.over.value, isNull);
+    });
+
+    testWidgets("to where no window takes it adds nothing", (tester) async {
+      under = null;
+
+      expect(await drag(tester, outside), isNull);
+
+      expect(added, isEmpty);
+    });
+
+    testWidgets("and letting go inside the library adds nothing", (
+      tester,
+    ) async {
+      // Though another window lies under that spot, behind the library's.
+      expect(await drag(tester, const Offset(500, 500)), isNull);
+
+      expect(added, isEmpty);
+    });
+  });
 
   testWidgets("says so when the library is empty", (tester) async {
     await tester.pumpWidget(host(MediaLibrary()));
