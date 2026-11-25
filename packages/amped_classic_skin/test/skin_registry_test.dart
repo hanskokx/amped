@@ -25,8 +25,21 @@ void main() {
 
   test("empty registry lists only the bundled base skin", () async {
     final registry = await SkinRegistry.load(tempDir);
-    expect(registry.skins.map((s) => s.name), ["Base"]);
+    expect(registry.skins.map((s) => s.name), ["Amped Classic"]);
     expect(registry.skins.first.isBundled, isTrue);
+  });
+
+  test("an import named like the base skin leaves the base listed", () async {
+    final registry = await SkinRegistry.load(tempDir);
+    final bytes = File(
+      "../../assets/skins/Amped-Classic.wsz",
+    ).readAsBytesSync();
+    final info = await registry.importArchive(
+      bytes,
+      fileName: "Amped Classic.wsz",
+    );
+    expect(info.name, "Amped Classic (2)");
+    expect(registry.byName("Amped Classic")!.isBundled, isTrue);
   });
 
   test("a zip that is not a skin is refused and installs nothing", () async {
@@ -44,7 +57,7 @@ void main() {
         throwsFormatException,
       );
     }
-    expect(registry.skins.map((s) => s.name), ["Base"]);
+    expect(registry.skins.map((s) => s.name), ["Amped Classic"]);
     expect(tempDir.listSync(), isEmpty);
   });
 
@@ -60,7 +73,7 @@ void main() {
       final registry = await SkinRegistry.load(tempDir);
       expect(
         registry.skins.map((s) => s.name).toSet(),
-        {"Base", "Plain Folder", "Resin"},
+        {"Amped Classic", "Plain Folder", "Resin"},
       );
     },
   );

@@ -5,7 +5,10 @@ import "skin_format.dart";
 import "skin_info.dart";
 
 /// The name of the built-in base skin in [skins].
-const String baseSkinName = "Base";
+const String baseSkinName = "Amped Classic";
+
+/// What [baseSkinName] used to be, which a saved choice of skin may still say.
+const String legacyBaseSkinName = "Base";
 
 /// Indexes the installed skins in a directory.
 ///

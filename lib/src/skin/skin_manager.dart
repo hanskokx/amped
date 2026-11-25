@@ -104,7 +104,12 @@ class SkinManager extends ChangeNotifier {
     await _installBuiltIn(registry, skins, defaultFormats);
 
     final saved = await PlayerState.loadActiveSkin();
-    final savedInfo = saved == null ? null : registry.byName(saved);
+    final savedInfo = saved == null
+        ? null
+        : registry.byName(saved) ??
+              (saved == legacyBaseSkinName
+                  ? registry.byName(baseSkinName)
+                  : null);
 
     SkinInfo? defaultSkin;
     for (final name in skins.keys) {

@@ -8,7 +8,7 @@ void main() {
 
   test("loadBaseSkin decodes every bundled bitmap", () async {
     final skin = await loadBaseSkin();
-    expect(skin.name, "Base");
+    expect(skin.name, "Amped Classic");
     for (final name in bundledSkinFiles) {
       final image = skin.image(name);
       expect(image, isNotNull, reason: "$name should be loaded");

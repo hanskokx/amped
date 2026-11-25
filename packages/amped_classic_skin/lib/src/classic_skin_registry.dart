@@ -54,8 +54,10 @@ extension ClassicSkinRegistry on SkinRegistry {
     if (!isSkinArchive(contents.archive, formats: formats)) {
       throw const FormatException("Not a skin");
     }
-    final resolvedName =
+    var resolvedName =
         name ?? contents.displayName ?? _labelFromFileName(fileName);
+    // An import never takes the bundled base skin's place in the list.
+    if (resolvedName == baseSkinName) resolvedName = "$resolvedName (2)";
     return installFolder(
       resolvedName,
       (target) => extractSkinFiles(
