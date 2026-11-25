@@ -32,8 +32,14 @@ fpm_package() {
     --package "$package" "$@" opt usr
 }
 
-fpm_package deb "$out/amped_${version}-${iteration}_amd64.deb" \
+case $(uname -m) in
+  x86_64) deb_arch=amd64; rpm_arch=x86_64 ;;
+  aarch64) deb_arch=arm64; rpm_arch=aarch64 ;;
+  *) echo "unsupported machine: $(uname -m)" >&2; exit 1 ;;
+esac
+
+fpm_package deb "$out/amped_${version}-${iteration}_${deb_arch}.deb" \
   -d libgtk-3-0 -d libsecret-1-0 -d "libmpv2 | libmpv1" \
   -d libayatana-appindicator3-1
-fpm_package rpm "$out/amped-${version}-${iteration}.x86_64.rpm" \
+fpm_package rpm "$out/amped-${version}-${iteration}.${rpm_arch}.rpm" \
   -d gtk3 -d libsecret -d mpv-libs -d libayatana-appindicator-gtk3

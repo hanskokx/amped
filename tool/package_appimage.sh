@@ -13,9 +13,9 @@ tools=$(mktemp -d)
 trap 'rm -rf "$tools"' EXIT
 
 base=https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous
-curl -fsSL -o "$tools/linuxdeploy" "$base/linuxdeploy-x86_64.AppImage"
+curl -fsSL -o "$tools/linuxdeploy" "$base/linuxdeploy-$(uname -m).AppImage"
 curl -fsSL -o "$tools/linuxdeploy-plugin-appimage" \
-  https://github.com/linuxdeploy/linuxdeploy-plugin-appimage/releases/download/continuous/linuxdeploy-plugin-appimage-x86_64.AppImage
+  https://github.com/linuxdeploy/linuxdeploy-plugin-appimage/releases/download/continuous/linuxdeploy-plugin-appimage-$(uname -m).AppImage
 chmod +x "$tools/linuxdeploy" "$tools/linuxdeploy-plugin-appimage"
 
 mkdir -p "$out"
@@ -31,7 +31,7 @@ mpv=$(ldconfig -p | awk '/libmpv\.so\.[0-9]+ /{print $NF; exit}')
 export APPIMAGE_EXTRACT_AND_RUN=1
 export PATH="$tools:$PATH"
 export LINUXDEPLOY_OUTPUT_VERSION="$version"
-export ARCH=x86_64
+export ARCH=$(uname -m)
 (cd "$out" && "$tools/linuxdeploy" --appdir AppDir \
   --executable AppDir/usr/bin/amped \
   --library "$mpv" \

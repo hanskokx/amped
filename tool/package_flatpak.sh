@@ -11,10 +11,16 @@ work=$(mktemp -d)
 trap 'rm -rf "$work"' EXIT
 cp -R "$out/AppDir" "$work/AppDir"
 cp "$here/linux/flatpak/org.hadak.amped.yml" "$work/"
+# The metadata the software centers show: name, author, version, icon.
+sed -e "s/@VERSION@/$version/" -e "s/@DATE@/$(date -u +%Y-%m-%d)/" \
+  "$here/linux/flatpak/org.hadak.amped.metainfo.xml" > "$work/org.hadak.amped.metainfo.xml"
 cp "$here/linux/org.hadak.amped.desktop" "$here/linux/org.hadak.amped.png" "$work/"
 
 flatpak remote-add --user --if-not-exists flathub \
   https://dl.flathub.org/repo/flathub.flatpakrepo
 (cd "$work" && flatpak-builder --user --force-clean \
   --install-deps-from=flathub --repo=repo build org.hadak.amped.yml)
-flatpak build-bundle "$work/repo" "$out/Amped-$version-x86_64.flatpak" org.hadak.amped
+# --runtime-repo lets an install of the bundle fetch the GNOME runtime itself.
+flatpak build-bundle \
+  --runtime-repo=https://dl.flathub.org/repo/flathub.flatpakrepo \
+  "$work/repo" "$out/Amped-$version-$(uname -m).flatpak" org.hadak.amped stable

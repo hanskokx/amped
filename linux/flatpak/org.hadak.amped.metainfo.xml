@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>org.hadak.amped</id>
+  <name>Amped</name>
+  <summary>Crank it up.</summary>
+  <developer id="org.hadak">
+    <name>Hans Kokx</name>
+  </developer>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-proprietary</project_license>
+  <description>
+    <p>Amped is a desktop music player. It plays your files, streams and network
+    shares, and the libraries of Plex, Jellyfin, Subsonic, SoundCloud,
+    Audiobookshelf and podcasts, and it wears classic, Audacious, Bamp and
+    modern skins.</p>
+  </description>
+  <launchable type="desktop-id">org.hadak.amped.desktop</launchable>
+  <url type="homepage">https://www.amped-player.com</url>
+  <url type="bugtracker">https://github.com/hanskokx/amped/issues</url>
+  <provides>
+    <binary>amped</binary>
+  </provides>
+  <content_rating type="oars-1.1"/>
+  <releases>
+    <release version="@VERSION@" date="@DATE@"/>
+  </releases>
+</component>

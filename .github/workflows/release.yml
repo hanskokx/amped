@@ -218,7 +218,17 @@ jobs:
 
   linux:
     needs: [version, test]
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-latest
+            flutter-arch: x64
+            label: x64
+          - runner: ubuntu-24.04-arm
+            flutter-arch: arm64
+            label: arm64
+    runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/hadak-git
@@ -228,6 +238,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
+          architecture: ${{ matrix.flutter-arch }}
           cache: true
       - name: Build packages
         run: |
@@ -251,17 +262,17 @@ jobs:
           tool/package_linux.sh \
             ${{ needs.version.outputs.version }} \
             ${{ needs.version.outputs.build }} \
-            build/linux/x64/release/bundle dist
+            build/linux/${{ matrix.label }}/release/bundle dist
       - name: AppImage
         run: |
           tool/package_appimage.sh \
             ${{ needs.version.outputs.version }} \
-            build/linux/x64/release/bundle dist
+            build/linux/${{ matrix.label }}/release/bundle dist
       - name: Flatpak
         run: tool/package_flatpak.sh ${{ needs.version.outputs.version }} dist
       - uses: actions/upload-artifact@v4
         with:
-          name: linux
+          name: linux-${{ matrix.label }}
           path: |
             dist/*.deb
             dist/*.rpm
