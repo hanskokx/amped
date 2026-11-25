@@ -1,5 +1,6 @@
 import "dart:io";
 
+import "package:amped_logging/amped_logging.dart";
 import "package:tray_manager/tray_manager.dart" as tray;
 import "package:window_dock/window_dock.dart";
 
@@ -15,7 +16,10 @@ class SystemTrayMenu {
 
   void initialize(List<NativeMenuItem> definitions) {
     final icon = tray.TrayIcon.create();
-    if (icon == null) return;
+    if (icon == null) {
+      _log("The system could not create a tray icon", level: Level.warning);
+      return;
+    }
     _icon = icon;
 
     final iconImage = tray.ImageAsset.fromAsset(
@@ -24,18 +28,42 @@ class SystemTrayMenu {
     if (iconImage != null) {
       icon.icon = iconImage;
       _iconImage = iconImage;
+    } else {
+      _log("The tray icon image did not load", level: Level.warning);
     }
     icon.setTooltip("Amped");
 
-    if (!_buildMenu(icon, definitions)) return;
+    if (!_buildMenu(icon, definitions)) {
+      _log("The tray menu could not be created", level: Level.warning);
+      return;
+    }
     icon.setContextMenuTrigger(
       Platform.isMacOS
           ? tray.ContextMenuTrigger.clicked
           : tray.ContextMenuTrigger.rightClicked,
     );
-    icon.setVisible(true);
+    // On Windows this is false when the taskbar did not accept the icon, and
+    // the bounds are all zero when it cannot say where the icon is. Linux
+    // registers with the panel later and never reports bounds.
+    final shown = icon.setVisible(true);
+    final bounds = icon.getBounds();
+    _log(
+      "Tray icon set up",
+      metadata: {
+        "shown": shown,
+        "bounds":
+            "${bounds.x}, ${bounds.y}, ${bounds.width} x ${bounds.height}",
+      },
+      level: shown ? Level.info : Level.warning,
+    );
     _trayListenerId = icon.addListener((_) {});
   }
+
+  static void _log(
+    String message, {
+    required Level level,
+    Map<String, Object?>? metadata,
+  }) => Arcane.log(message, level: level, metadata: metadata, module: "Tray");
 
   /// Builds the context menu of [icon] from [definitions].
   bool _buildMenu(tray.TrayIcon icon, List<NativeMenuItem> definitions) {
