@@ -73,6 +73,20 @@ void main() {
     expect(info?.version, "1.5.0");
   });
 
+  test(
+    "reads the site's release.json: page as the link, body as the notes",
+    () {
+      final info = UpdateInfo.parse({
+        "version": "1.2.0",
+        "notes": "https://github.com/hanskokx/amped/releases/tag/v1.2.0",
+        "body": "## Fixes\n- A",
+        "assets": [],
+      }, platform: "macos");
+      expect(info?.notes, "## Fixes\n- A");
+      expect(info?.downloadUrl.toString(), endsWith("/tag/v1.2.0"));
+    },
+  );
+
   test("reads desktop_updater release notes", () {
     final info = UpdateInfo.parse({
       "version": "1.0.0+7",

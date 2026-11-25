@@ -49,7 +49,6 @@ import "cover_art.dart";
 import "dialog_manager.dart";
 import "dialog_requests.dart";
 
-
 import "episode_click_action.dart";
 import "file_actions.dart";
 import "library_actions.dart";

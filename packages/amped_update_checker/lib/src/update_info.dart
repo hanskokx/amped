@@ -54,7 +54,13 @@ class UpdateInfo {
     if (version.isEmpty) return null;
     final build =
         json["buildNumber"] ?? (plus < 0 ? null : raw.substring(plus + 1));
-    final url = json["url"] ?? json["downloadUrl"];
+    // The site's release.json gives the release's page as `notes` and its
+    // text as `body`.
+    final page = json["notes"];
+    final url =
+        json["url"] ??
+        json["downloadUrl"] ??
+        (page is String && page.startsWith("http") ? page : null);
     return UpdateInfo(
       version: version,
       buildNumber: build is int ? build : int.tryParse("${build ?? ""}"),
@@ -64,9 +70,13 @@ class UpdateInfo {
   }
 
   static String _notes(Map json) {
-    for (final key in const ["notes", "releaseNotes", "changes"]) {
+    for (final key in const ["body", "notes", "releaseNotes", "changes"]) {
       final value = json[key];
-      if (value is String) return value.trim();
+      if (value is String) {
+        // A link to the release's page is not its notes.
+        if (key == "notes" && value.startsWith("http")) continue;
+        return value.trim();
+      }
       if (value is List) return _lines(value);
     }
     final data = json["data"];
