@@ -93,43 +93,44 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-# media_kit at the head of upstream pull request #1436 (Windows ARM64 ANGLE and
-# libmpv 0.42). Switch back to the released packages once it is released.
+# media_kit at the head of upstream pull request #1481 (Windows video rendered
+# straight to D3D11 textures, libmpv 0.42; #1436 was folded into it). Switch
+# back to the released packages once it is released.
 dependency_overrides:
   media_kit:
     git:
       url: https://github.com/media-kit/media-kit
-      ref: 99ba8550be8a934fe3d3b57c94638f922c63f4d2
+      ref: 7d27e41f17d7d6917a12a9779a4ed6623155ef41
       path: media_kit
   media_kit_video:
     git:
       url: https://github.com/media-kit/media-kit
-      ref: 99ba8550be8a934fe3d3b57c94638f922c63f4d2
+      ref: 7d27e41f17d7d6917a12a9779a4ed6623155ef41
       path: media_kit_video
   media_kit_libs_android_video:
     git:
       url: https://github.com/media-kit/media-kit
-      ref: 99ba8550be8a934fe3d3b57c94638f922c63f4d2
+      ref: 7d27e41f17d7d6917a12a9779a4ed6623155ef41
       path: libs/android/media_kit_libs_android_video
   media_kit_libs_ios_video:
     git:
       url: https://github.com/media-kit/media-kit
-      ref: 99ba8550be8a934fe3d3b57c94638f922c63f4d2
+      ref: 7d27e41f17d7d6917a12a9779a4ed6623155ef41
       path: libs/ios/media_kit_libs_ios_video
   media_kit_libs_linux:
     git:
       url: https://github.com/media-kit/media-kit
-      ref: 99ba8550be8a934fe3d3b57c94638f922c63f4d2
+      ref: 7d27e41f17d7d6917a12a9779a4ed6623155ef41
       path: libs/linux/media_kit_libs_linux
   media_kit_libs_macos_video:
     git:
       url: https://github.com/media-kit/media-kit
-      ref: 99ba8550be8a934fe3d3b57c94638f922c63f4d2
+      ref: 7d27e41f17d7d6917a12a9779a4ed6623155ef41
       path: libs/macos/media_kit_libs_macos_video
   media_kit_libs_windows_video:
     git:
       url: https://github.com/media-kit/media-kit
-      ref: 99ba8550be8a934fe3d3b57c94638f922c63f4d2
+      ref: 7d27e41f17d7d6917a12a9779a4ed6623155ef41
       path: libs/windows/media_kit_libs_windows_video
 
 flutter:
