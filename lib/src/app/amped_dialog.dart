@@ -4,7 +4,10 @@ import "dart:ui";
 enum AmpedDialog {
   presets(Size(275, 190)),
   preferences(Size(620, 460)),
-  about(Size(400, 420)),
+
+  /// Tall enough for its tabs and the bug report's note: it can't be
+  /// resized.
+  about(Size(400, 520)),
   vis(Size(640, 480)),
 
   /// The playing video, filling the screen.
@@ -41,6 +44,10 @@ enum AmpedDialog {
       this == presets || this == searchPlaylist || this == artwork;
 
   final Size size;
+
+  /// Whether the user can resize the window. One that can't always opens at
+  /// [size].
+  bool get resizable => this != about;
 
   /// The least size the user can resize the window to, for the dialogs
   /// whose forms stop fitting below it; null where any size will do.
