@@ -369,8 +369,8 @@ class ShellWasabiHost implements WasabiHost {
           shell.dialogManager.open(AmpedDialog.preferences);
           return;
         }
-        // Winamp's lightning bolt (Amped Modern's bottom right logo): the
-        // same as a click on the classic main window's logo.
+        // The lightning bolt (Amped Modern's bottom right logo): the same as a
+        // click on the classic main window's logo.
         if ((action.param ?? "").toLowerCase().contains(
           "d6201408-476a-4308-bf1b-7baca1124b12",
         )) {

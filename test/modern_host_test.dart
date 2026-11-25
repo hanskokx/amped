@@ -45,7 +45,7 @@ final class _FakeSkin extends Skin {
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  test("Amped Modern's logo opens the About dialog, as in Winamp", () {
+  test("Amped Modern's logo opens the About dialog", () {
     final shell = _FakeShell();
     ShellWasabiHost(shell).runAction(
       const WasabiAction(

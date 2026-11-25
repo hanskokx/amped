@@ -3,7 +3,8 @@
 ## Unreleased
 
 - In the Amped Modern skin, clicking the lightning bolt in the main window's
-  bottom right corner now opens the About window, as it did in Winamp.
+  bottom right corner now opens the About window, like the logo in a classic
+  skin.
 - With a modern skin that has a panel about itself, like Amped Modern's
   animated credits, the About window shows it on a **Skin** tab.
 - The About window has a fixed size that fits everything in it.
